@@ -5,7 +5,7 @@ Here you can find everything related to Project Tech from the HVA.
 This project is about all about  web development from frontend to the backend. During this project we are going to make a backend project with the help of Node.
 
 ## What can i find in this README?
-This README is mainly used for table of contents. You can find the detail of what i have done each week in the dedicated folders of this repository (The week is documented in the README of the dedicated folder). And the product itself can be find in the app directory.
+This README is mainly used for table of contents. You can find the detail of what i have done each week in the dedicated folders in the Logs folder (The week is documented in the README of the dedicated week folder). And the product itself can be find in the app directory.
 
 ## Table of contents
 * [App](http://google.com)
