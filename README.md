@@ -8,7 +8,7 @@ This project is about all about  web development from frontend to the backend. D
 This README is mainly used for table of contents. You can find the detail of what i have done each week in the dedicated folders of this repository (The week is documented in the README of the dedicated folder). And the product itself can be find in the app directory.
 
 ## Table of contents
-* (App)[http://google.com]
-* (Week 1)[http://google.com]
-* (Week 2)[http://google.com]
-* (Week 3)[http://google.com]
+* [App](http://google.com)
+* [Week 1](http://google.com)
+* [Week 2](http://google.com)
+* [Week 3](http://google.com)
