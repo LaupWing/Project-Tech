@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/LaupWing/Project-Tech/issues"
   },
-  "homepage": "https://github.com/LaupWing/Project-Tech#readme"
+  "homepage": "https://github.com/LaupWing/Project-Tech#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
