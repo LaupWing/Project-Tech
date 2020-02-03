@@ -5,5 +5,8 @@ router
     .get('/', (req,res)=>{
         res.send('test')
     })
+    .get('/test', (req,res)=>{
+        res.render('test',{title:'hi', message: 'test'})
+    })
 
 module.exports = router
