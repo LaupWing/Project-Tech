@@ -4,7 +4,7 @@
   "description": "Project Tech full stack website",
   "main": "App/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon App/index.js",
     "watchLog": "nodemon lazyme.js"
   },
   "repository": {
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/LaupWing/Project-Tech#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
