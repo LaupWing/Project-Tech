@@ -4,7 +4,7 @@
   "description": "Project Tech full stack website",
   "main": "App/index.js",
   "scripts": {
-    "dev": "nodemon App/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon App/index.js",
     "watchLog": "nodemon lazyme.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
+    "env-cmd": "^10.0.1",
     "nodemon": "^2.0.2"
   }
 }
