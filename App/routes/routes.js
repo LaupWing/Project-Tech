@@ -5,17 +5,31 @@ router
     .get('/', (req,res)=>{
         res.render('matchmaking', {
             title: 'Matchmaking',
-            headTitle: 'Date:Matchmaking'
+            meta: {
+                title:'Dating:Matchmaking'
+            }
         })
     })
     .get('/user', (req,res)=>{
-        res.render('user')
+        res.render('user',{
+            meta:{
+                title: 'Dating:User'
+            }
+        })
     })
     .get('/messages', (req,res)=>{
-        res.render('messages')
+        res.render('messages',{
+            meta:{
+                title: 'Dating:Messages'
+            }
+        })
     })
     .get('/auth', (req,res)=>{
-        res.render('auth')
+        res.render('auth',{
+            meta:{
+                title: 'Dating:Auth'
+            }
+        })
     })
     .post('/auth', (req,res)=>{
         res.render('auth')
