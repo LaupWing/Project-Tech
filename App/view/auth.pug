@@ -1,5 +1,9 @@
-html
-  head
-    title= title
-  body
-    h1= message
+extends layout
+
+block content
+    h1 #{title}
+    form(method="POST" action="/auth")
+        input(type="text" placeholder="username" name="username")
+        input(type="password" placeholder="password123" name="password1")
+        input(type="password" placeholder="password123" name="password2")
+        button(type="submit")   submit

@@ -12,6 +12,7 @@ const app = express()
 const port = process.env.PORT
 
 app
+    .use(express.urlencoded({extended:false}))
     .use(cors())
     .use(bodyParser.json({limit: '50mb'}))
     .use('/static',express.static(path.join(__dirname, 'public')))

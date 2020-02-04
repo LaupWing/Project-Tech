@@ -26,13 +26,16 @@ router
     })
     .get('/auth', (req,res)=>{
         res.render('auth',{
+            title: 'Authenticate',
             meta:{
-                title: 'Dating:Auth'
+                title: `Dating:Auth`
             }
         })
     })
     .post('/auth', (req,res)=>{
-        res.render('auth')
+        console.log(req.body)
+        console.log('post')
+        res.send('sended')
     })
 
 module.exports = router
