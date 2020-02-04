@@ -4,6 +4,7 @@ const User = require('../models/user')
 
 router
     .get('/', (req,res)=>{
+        console.log(req.headers)
         res.render('matchmaking', {
             title: 'Matchmaking',
             meta: {
@@ -42,6 +43,7 @@ router
             name,
             minAge,
             maxAge} = req.body
+        // This below is check on the client side but just to be save
         if(passwordCheck!==password){    
             return res.redirect('/auth')
         }
@@ -55,8 +57,10 @@ router
         })
         try{
             await user.save()
-            console.log(user)
+            await user.generateAuthToken()
+            res.send('postted')
         }catch(e){
+            console.log(e)
             res.status(400).send(e)
         }
     })
