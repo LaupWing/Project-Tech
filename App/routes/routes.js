@@ -3,10 +3,13 @@ const router = new express.Router()
 
 router
     .get('/', (req,res)=>{
-        res.send('test')
+        res.render('matchmaking')
     })
-    .get('/test', (req,res)=>{
-        res.render('test',{title:'hi', message: 'test'})
+    .get('/user', (req,res)=>{
+        res.render('user')
     })
+   .post('/auth', (req,res)=>{
+       res.render('auth')
+   })
 
 module.exports = router
