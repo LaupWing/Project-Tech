@@ -1,5 +1,6 @@
 const express = require('express')
 const router = new express.Router()
+const User = require('../models/user')
 
 router
     .get('/', (req,res)=>{
@@ -32,15 +33,32 @@ router
             }
         })
     })
-    .post('/auth', (req,res)=>{
+    .post('/auth', async (req,res)=>{
         const {
             email,
             password,
+            passwordCheck,
             age,
-            min,
-            max} = req.body
-        console.log({email, password,age,min,max})
-        res.send('sended')
+            name,
+            minAge,
+            maxAge} = req.body
+        if(passwordCheck!==password){    
+            return res.redirect('/auth')
+        }
+        const user = new User({
+            email,
+            password,
+            age,
+            minAge,
+            maxAge,
+            name
+        })
+        try{
+            await user.save()
+            console.log(user)
+        }catch(e){
+            res.status(400).send(e)
+        }
     })
 
 module.exports = router

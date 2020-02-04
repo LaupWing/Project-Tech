@@ -4,9 +4,10 @@ block content
     h1 #{title}
     form(method="POST" action="/auth")
         input(type="email" placeholder="email" name="email")
+        input(type="text" placeholder="your name" name="name")
         input(type="password" placeholder="password123" name="password")
         input(type="password" placeholder="password123" name="passwordCheck")
         input(type="number" name="age")
-        input(type="range" min="18" max="100" value="1" name="min")
-        input(type="range" min="18" max="100" value="1" name="max")
+        input(type="range" min="18" max="100" value="1" name="minAge")
+        input(type="range" min="18" max="100" value="1" name="maxAge")
         button(type="submit")   submit
