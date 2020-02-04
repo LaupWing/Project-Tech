@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
 
-// Own packages
+// Own files
 require('./db/mongoose') // initialize the db connection 
 const routes = require('./routes/routes')
 
