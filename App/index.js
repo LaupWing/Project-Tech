@@ -6,13 +6,13 @@ const path = require('path')
 
 const routes = require('./routes/routes') 
 const app = express()
-const port = process.env.PORT || 1333
+const port = process.env.PORT
 
 app
     .use(cors())
-    .use(bodyParser.json({limt: '50mb'}))
+    .use(bodyParser.json({limit: '50mb'}))
     .use('/static',express.static(path.join(__dirname, 'public')))
     .use(routes)
     .set('view engine', 'pug')
     .set('views', path.join(__dirname,'view'))
-    .listen(port, ()=>console.log(`Server is listening to port${port}`))
+    .listen(port, ()=>console.log(`Server is listening to port ${port}`))
