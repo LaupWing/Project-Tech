@@ -33,8 +33,13 @@ router
         })
     })
     .post('/auth', (req,res)=>{
-        console.log(req.body)
-        console.log('post')
+        const {
+            email,
+            password,
+            age,
+            min,
+            max} = req.body
+        console.log({email, password,age,min,max})
         res.send('sended')
     })
 
