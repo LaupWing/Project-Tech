@@ -51,6 +51,15 @@ nav ul{
 nav ul.active-list{
     flex-grow: 1;
 }
+nav li.logout-btn{
+    padding: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--main-color);
+    text-transform: uppercase;
+    background: var(--blue);
+    cursor: pointer;
+}
 nav ul li{
     width: 50%;
     padding: 10px;
@@ -100,3 +109,4 @@ main ul li:hover{
     background: var(--main-color);
     color: var(--purp);
 }
+

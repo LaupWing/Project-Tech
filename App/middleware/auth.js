@@ -23,7 +23,8 @@ const auth = async (req,res,next)=>{
         next()
     }
     catch(e){
-        res.redirect('/login')
+        // res.redirect('/login')
+        res.render('test')
     }
 }
 
