@@ -3,11 +3,6 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
-const imgur = require('imgur')
-imgur.uploadFile(__dirname+'/public/assets/testimg.jpg')
-    .then(json=>console.log(json.data.link))
-    .catch(e=>console.log(e))
-
 
 // Own files
 require('./db/mongoose') // initialize the db connection 

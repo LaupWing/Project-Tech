@@ -3,6 +3,19 @@ const router = new express.Router()
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const coockieCheck = require('../middleware/cookieCheck')
+const multer = require('multer')
+const imgur = require('imgur')
+const upload = multer({
+    limits:{
+        fileSize: 1000000
+    },
+    fileFilter(req,file,cb){
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
+            return cb(new Error('Please upload an image'))
+        }
+        cb(undefined, true)
+    }
+})
 
 router
     .get('/',auth, (req,res)=>{
@@ -47,7 +60,7 @@ router
             script: 'signup.js'
         })
     })
-    .post('/signup', async (req,res)=>{
+    .post('/signup',upload.single('image'), async (req,res)=>{
         const {
             email,
             password,
@@ -60,6 +73,12 @@ router
         if(passwordCheck!==password){    
             return res.redirect('/auth')
         }
+        const base64data = new Buffer(req.file.buffer).toString('base64')
+        console.log(base64data)
+        imgur.uploadBase64(base64data)
+            .then(json=>console.log(json.data.link))
+            .catch(e=>console.log(e))
+
         const user = new User({
             email,
             password,

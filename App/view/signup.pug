@@ -3,8 +3,9 @@ extends layout
 block content
     main
         h2 #{title}
-        form(method="POST" action="/signup")
+        form(method="POST" action="/signup" enctype="multipart/form-data")
             input(type="email" placeholder="email" name="email")
+            input(type="file" name="image" accept="image/png, image/jpeg")
             input(type="text" placeholder="your name" name="name")
             input(type="password" placeholder="password123" name="password")
             input(type="password" placeholder="password123" name="passwordCheck")
