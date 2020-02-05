@@ -55,6 +55,16 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
+    images:[{
+        url:{
+            type: String,
+            required: true
+        },
+        mainPicture:{
+            type: Boolean,
+            required: true
+        }
+    }],
 })
 
 userSchema.methods.generateAuthToken = async function(){

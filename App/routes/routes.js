@@ -73,19 +73,28 @@ router
         if(passwordCheck!==password){    
             return res.redirect('/auth')
         }
-        const base64data = new Buffer(req.file.buffer).toString('base64')
-        console.log(base64data)
-        imgur.uploadBase64(base64data)
-            .then(json=>console.log(json.data.link))
-            .catch(e=>console.log(e))
-
+        const base64data = new Buffer.from(req.file.buffer).toString('base64')
+        let image=null
+        try{
+            const res = await imgur.uploadBase64(base64data)
+            image = res.data.link
+        }catch(e){
+            image = base64data
+        }
+        
         const user = new User({
             email,
             password,
             age,
             minAge,
             maxAge,
-            name
+            name,
+            images:[
+                {
+                    url: image,
+                    mainPicture: true
+                }
+            ]
         })
         try{
             await user.save()
