@@ -1,4 +1,5 @@
 @import url("/static/styles/main.css");
+
 body{
     background: var(--main-color);
     display: flex;

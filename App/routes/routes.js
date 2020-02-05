@@ -40,7 +40,8 @@ router
             meta:{
                 title: `Dating:Auth`
             },
-            styling: 'auth.css'
+            styling: 'auth.css',
+            script: 'signup.js'
         })
     })
     .post('/signup', async (req,res)=>{

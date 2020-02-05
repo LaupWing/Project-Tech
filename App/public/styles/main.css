@@ -20,3 +20,8 @@ button{
     border: none;
     cursor: pointer;
 }
+footer{
+    position: fixed;
+    bottom: 0;
+    opacity: .5;
+}
