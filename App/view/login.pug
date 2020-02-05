@@ -3,7 +3,7 @@ extends layout
 block content
     main
         h2 #{title}
-        form(method="POST" action="/auth")
+        form(method="POST" action="/login")
             input(type="email" placeholder="email" name="email")
             input(type="password" placeholder="password123" name="password")
             button(type="submit")   submit

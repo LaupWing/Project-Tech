@@ -52,6 +52,22 @@ router
             script: 'signup.js'
         })
     })
+    .post('/login', async (req,res)=>{
+        try{
+            const user = await User.findByCredentials(
+                req.body.email,
+                req.body.password
+            )
+            const token = await user.generateAuthToken()
+            res.cookie('dating_token',token,{
+                httpOnly:true,
+                maxAge: (24*7) * 60 * 60 * 1000 // 7 days in miliseconds because it is in miliseconds
+            })
+            res.redirect('/')
+        }catch(e){
+            res.status(400).send()
+        }
+    })
     .post('/signup',upload.single('image'), async (req,res)=>{
         const {
             email,
@@ -101,6 +117,7 @@ router
         }
     })
     .post('/logout', auth, async (req,res)=>{
+        console.log('loggin out')
         try{
             req.user.tokens = req.user.tokens.filter(token=>token.token !== req.token)
             await req.user.save()
