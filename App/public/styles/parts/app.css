@@ -110,3 +110,7 @@ main ul li:hover{
     color: var(--purp);
 }
 
+footer{
+    text-align: right;
+    padding-right: 10px;
+}
