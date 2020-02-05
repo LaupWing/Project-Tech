@@ -58,7 +58,8 @@ router
             await user.save()
             const token = await user.generateAuthToken()
             res.cookie('dating_token',token,{
-                httpOnly:true
+                httpOnly:true,
+                maxAge: (24*7) * 60 * 60 * 1000 // 7 days in miliseconds because it is in miliseconds
             })
             res.send('postted')
         }catch(e){
