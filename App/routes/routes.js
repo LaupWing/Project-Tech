@@ -39,7 +39,8 @@ router
             title: 'Authenticate',
             meta:{
                 title: `Dating:Auth`
-            }
+            },
+            styling: 'auth.css'
         })
     })
     .post('/signup', async (req,res)=>{

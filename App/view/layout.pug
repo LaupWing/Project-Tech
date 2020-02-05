@@ -3,10 +3,8 @@ html
     head
         title #{meta.title}
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet" type="text/css" href="/static/styles/main.css")
+        link(rel="stylesheet" type="text/css" href=`/static/styles/parts/`+styling)
     body
         block content
-        br
-        hr
         footer
             p Copyright &copy; 2020

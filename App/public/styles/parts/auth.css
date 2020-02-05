@@ -1,0 +1,4 @@
+@import url("/static/styles/main.css");
+body{
+    background: var(--main-gradientColor);
+}
