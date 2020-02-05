@@ -33,7 +33,6 @@ router
         })
     })
     .get('/login', (req,res)=>{
-        console.log('redirected login')
         res.render('login',{
             title: 'Login',
             meta:{
@@ -101,11 +100,16 @@ router
             res.redirect('/login')
         }
     })
-    .post('/logout', auth, (req,res)=>{
-        console.log('redirecting...')
-        res
-            .clearCookie('dating_token')
-            .redirect('/login')
+    .post('/logout', auth, async (req,res)=>{
+        try{
+            req.user.tokens = req.user.tokens.filter(token=>token.token !== req.token)
+            await req.user.save()
+            res
+                .clearCookie('dating_token')
+                .redirect('/login')
+        }catch(e){
+            res.status(500).send(e)
+        }
     })
 
 module.exports = router
