@@ -31,7 +31,9 @@ router
             title: 'Login',
             meta:{
                 title: `Dating:Login`
-            }
+            },
+            styling: 'auth.css',
+            script: 'signup.js'
         })
     })
     .get('/signup', (req,res)=>{
@@ -74,7 +76,7 @@ router
             })
             res.send('postted')
         }catch(e){
-            res.status(400).send(e)
+            res.redirect('/login')
         }
     })
 

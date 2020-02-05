@@ -21,9 +21,7 @@ const auth = async (req,res,next)=>{
         next()
     }
     catch(e){
-        console.log('please auth')
-        // {error: 'Please Authenticate properly by using the right the force'}
-        res.status(400).send()
+        res.redirect('/login')
     }
 }
 
