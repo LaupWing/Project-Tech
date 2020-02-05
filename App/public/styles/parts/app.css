@@ -18,7 +18,7 @@ nav .profile{
     display: flex;
     align-items: center;
     background: var(--purp);
-    padding: 15px 10px;
+    padding: 10px 10px;
     transition: all .5s;
     cursor: pointer;
 }
@@ -32,8 +32,8 @@ nav .profile h2{
     user-select: none;
 }
 nav .profile .img-container{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 100px;
     overflow: hidden;
     display: flex;
@@ -42,5 +42,28 @@ nav .profile .img-container{
     background: var(--main-color);
 }
 nav .profile img{
-    width: 80%;
+    width: 100%;
+}
+nav ul{
+    display: flex;
+    width: 100%;
+}
+nav ul li{
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--purp);
+    transition: all .25s;
+}
+nav ul li:hover{
+    background: var(--purp);
+    color: var(--main-color);
+    opacity: .5;
+}
+nav ul li.active,
+nav ul li.active:hover{
+    background: var(--purp);
+    color: var(--main-color);
+    opacity: 1;
 }

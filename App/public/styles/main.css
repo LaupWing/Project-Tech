@@ -8,6 +8,7 @@
     --purp: #c779d0;
     --blue: #4bc0c8;
     --main-fontColor: black;
+    font-family: 'Open Sans', sans-serif;
 }
 body{
     background-repeat: no-repeat;
@@ -17,6 +18,9 @@ body{
 a{
     text-decoration: none;
     color: var(--main-fontColor);
+}
+li{
+    list-style: none;
 }
 input,
 button{
