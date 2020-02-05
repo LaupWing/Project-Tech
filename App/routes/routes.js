@@ -1,10 +1,9 @@
 const express = require('express')
 const router = new express.Router()
 const User = require('../models/user')
-
+const auth = require('../middleware/auth')
 router
-    .get('/', (req,res)=>{
-        console.log(req.headers)
+    .get('/',auth, (req,res)=>{
         res.render('matchmaking', {
             title: 'Matchmaking',
             meta: {
@@ -57,10 +56,12 @@ router
         })
         try{
             await user.save()
-            await user.generateAuthToken()
+            const token = await user.generateAuthToken()
+            res.cookie('dating_token',token,{
+                httpOnly:true
+            })
             res.send('postted')
         }catch(e){
-            console.log(e)
             res.status(400).send(e)
         }
     })
