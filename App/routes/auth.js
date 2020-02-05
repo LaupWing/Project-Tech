@@ -33,13 +33,6 @@ router
             }
         })
     })
-    .get('/messages', (req,res)=>{
-        res.render('messages',{
-            meta:{
-                title: 'Dating:Messages'
-            }
-        })
-    })
     .get('/login', coockieCheck, (req,res)=>{
         res.render('login',{
             title: 'Login',

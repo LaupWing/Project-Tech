@@ -31,4 +31,6 @@ footer{
     position: fixed;
     bottom: 0;
     opacity: .5;
+    width: 100%;
+    text-align: center;
 }
