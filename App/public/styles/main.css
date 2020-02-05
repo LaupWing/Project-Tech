@@ -6,11 +6,16 @@
     --main-gradientColor: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);
     --highlight-color: rgba(0,0,0,.2);
     --purp: #c779d0;
+    --main-fontColor: black;
 }
 body{
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: var(--main-fontColor);
 }
 input,
 button{

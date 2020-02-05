@@ -1,13 +1,14 @@
 extends layout
 
 block content
-    h2 #{title}
-    form(method="POST" action="/auth")
-        input(type="email" placeholder="email" name="email")
-        input(type="text" placeholder="your name" name="name")
-        input(type="password" placeholder="password123" name="password")
-        input(type="password" placeholder="password123" name="passwordCheck")
-        input(type="number" name="age" min="18" value="18")
-        input(type="range" min="18" max="100" value="18" name="minAge")
-        input(type="range" min="18" max="100" value="18" name="maxAge")
-        button(type="submit")   submit
+    main
+        h2 #{title}
+        form(method="POST" action="/auth")
+            input(type="email" placeholder="email" name="email")
+            input(type="text" placeholder="your name" name="name")
+            input(type="password" placeholder="password123" name="password")
+            input(type="password" placeholder="password123" name="passwordCheck")
+            input(type="number" name="age" min="18" value="18")
+            input(type="range" min="18" max="100" value="18" name="minAge")
+            input(type="range" min="18" max="100" value="18" name="maxAge")
+            button(type="submit")   submit
