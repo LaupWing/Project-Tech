@@ -6,6 +6,8 @@ class logoutBtn{
     loggingout(e){
         fetch('http://localhost:3000/logout', {
             method: 'POST'
+        }).then(res=>{
+            window.location.href = res.url
         })
     }
 }

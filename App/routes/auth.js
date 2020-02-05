@@ -2,7 +2,6 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user')
 const auth = require('../middleware/auth')
-const coockieCheck = require('../middleware/cookieCheck')
 const multer = require('multer')
 const imgur = require('imgur')
 const upload = multer({
@@ -33,7 +32,8 @@ router
             }
         })
     })
-    .get('/login', coockieCheck, (req,res)=>{
+    .get('/login', (req,res)=>{
+        console.log('redirected login')
         res.render('login',{
             title: 'Login',
             meta:{
@@ -43,7 +43,7 @@ router
             script: 'signup.js'
         })
     })
-    .get('/signup', coockieCheck, (req,res)=>{
+    .get('/signup', (req,res)=>{
         res.render('signup',{
             title: 'Signup',
             meta:{
@@ -100,6 +100,12 @@ router
         }catch(e){
             res.redirect('/login')
         }
+    })
+    .post('/logout', auth, (req,res)=>{
+        console.log('redirecting...')
+        res
+            .clearCookie('dating_token')
+            .redirect('/login')
     })
 
 module.exports = router

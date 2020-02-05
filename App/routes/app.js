@@ -24,10 +24,4 @@ router
     .get('/matching', auth, (req,res)=>{
         
     })
-    .post('/logout', auth, (req,res)=>{
-        res.cookie('dating_token','',{
-            expires: new DataCue(0)
-        })
-        res.redirect('/')
-    })
 module.exports = router
