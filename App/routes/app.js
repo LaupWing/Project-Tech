@@ -17,7 +17,11 @@ router
                 minAge: req.user.minAge,
                 maxAge: req.user.maxAge,
                 age: req.user.age,
-            }
+            },
+            script: 'app.js'
         })
+    })
+    .get('/matching', auth, (req,res)=>{
+        console.log(req.user)
     })
 module.exports = router
