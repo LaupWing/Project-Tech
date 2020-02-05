@@ -1,6 +1,7 @@
 @import url("/static/styles/main.css");
 body{
     background: var(--main-gradientColor);
+    display: flex;
 }
 nav{
     width: 50%;
@@ -21,9 +22,6 @@ nav .profile{
     padding: 10px 10px;
     transition: all .5s;
     cursor: pointer;
-}
-nav .profile:hover{
-    background: var(--blue);
 }
 nav .profile h2{
     flex-grow: 1;
@@ -56,7 +54,8 @@ nav ul li{
     color: var(--purp);
     transition: all .25s;
 }
-nav ul li:hover{
+nav ul li:hover,
+nav .profile:hover{
     background: var(--purp);
     color: var(--main-color);
     opacity: .5;
@@ -66,4 +65,12 @@ nav ul li.active:hover{
     background: var(--purp);
     color: var(--main-color);
     opacity: 1;
+}
+main{
+    flex-grow: 1;
+}
+main ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
