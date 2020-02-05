@@ -22,6 +22,6 @@ router
         })
     })
     .get('/matching', auth, (req,res)=>{
-        console.log(req.user)
+        
     })
 module.exports = router
