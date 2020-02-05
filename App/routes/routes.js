@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+
 router
     .get('/',auth, (req,res)=>{
         res.render('matchmaking', {
@@ -25,15 +26,23 @@ router
             }
         })
     })
-    .get('/auth', (req,res)=>{
-        res.render('auth',{
+    .get('/login', (req,res)=>{
+        res.render('login',{
+            title: 'Login',
+            meta:{
+                title: `Dating:Login`
+            }
+        })
+    })
+    .get('/signup', (req,res)=>{
+        res.render('signup',{
             title: 'Authenticate',
             meta:{
                 title: `Dating:Auth`
             }
         })
     })
-    .post('/auth', async (req,res)=>{
+    .post('/signup', async (req,res)=>{
         const {
             email,
             password,
