@@ -36,9 +36,9 @@ router
     })
     .get('/signup', (req,res)=>{
         res.render('signup',{
-            title: 'Authenticate',
+            title: 'Signup',
             meta:{
-                title: `Dating:Auth`
+                title: `Dating:Signup`
             },
             styling: 'auth.css',
             script: 'signup.js'
