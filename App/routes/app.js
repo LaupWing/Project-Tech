@@ -4,10 +4,11 @@ const auth = require('../middleware/auth')
 
 router
     .get('/',auth, (req,res)=>{
-        res.render('matchmaking', {
-            title: 'Matchmaking',
+        console.log(req.user)
+        res.render('app', {
+            title: 'App',
             meta: {
-                title:'Dating:Matchmaking'
+                title:'Dating:App'
             },
             styling: 'app.css'
         })
