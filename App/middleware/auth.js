@@ -17,6 +17,8 @@ const auth = async (req,res,next)=>{
             throw new Error()
         }
         req.user = user
+        delete req.user.password
+        delete req.user.tokens
         req.token = token
         next()
     }

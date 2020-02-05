@@ -13,3 +13,34 @@ nav h1{
     opacity: .5;
     padding: 10px;
 } 
+nav .profile{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: var(--purp);
+    padding: 15px 10px;
+    transition: all .5s;
+    cursor: pointer;
+}
+nav .profile:hover{
+    background: var(--blue);
+}
+nav .profile h2{
+    flex-grow: 1;
+    text-align: center;
+    color: var(--main-color);
+    user-select: none;
+}
+nav .profile .img-container{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-color);
+}
+nav .profile img{
+    width: 80%;
+}

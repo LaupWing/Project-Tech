@@ -4,13 +4,20 @@ const auth = require('../middleware/auth')
 
 router
     .get('/',auth, (req,res)=>{
-        console.log(req.user)
         res.render('app', {
             title: 'App',
             meta: {
                 title:'Dating:App'
             },
-            styling: 'app.css'
+            styling: 'app.css',
+            user:{
+                images:req.user.images,
+                name: req.user.name,
+                email: req.user.email,
+                minAge: req.user.minAge,
+                maxAge: req.user.maxAge,
+                age: req.user.age,
+            }
         })
     })
 module.exports = router

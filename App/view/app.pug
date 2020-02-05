@@ -4,3 +4,7 @@ block content
     nav 
         h1  LOGO
         .profile
+            - const profilePic = user.images.find(img=>img.mainPicture) 
+            .img-container
+                img(src=profilePic.url)
+            h2   #{user.name}

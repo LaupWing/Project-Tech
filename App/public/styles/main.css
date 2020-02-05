@@ -6,6 +6,7 @@
     --main-gradientColor: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);
     --highlight-color: rgba(0,0,0,.2);
     --purp: #c779d0;
+    --blue: #4bc0c8;
     --main-fontColor: black;
 }
 body{
