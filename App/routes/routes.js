@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+const coockieCheck = require('../middleware/cookieCheck')
 
 router
     .get('/',auth, (req,res)=>{
@@ -26,7 +27,7 @@ router
             }
         })
     })
-    .get('/login', (req,res)=>{
+    .get('/login', coockieCheck, (req,res)=>{
         res.render('login',{
             title: 'Login',
             meta:{
@@ -36,7 +37,7 @@ router
             script: 'signup.js'
         })
     })
-    .get('/signup', (req,res)=>{
+    .get('/signup', coockieCheck, (req,res)=>{
         res.render('signup',{
             title: 'Signup',
             meta:{
@@ -74,7 +75,7 @@ router
                 httpOnly:true,
                 maxAge: (24*7) * 60 * 60 * 1000 // 7 days in miliseconds because it is in miliseconds
             })
-            res.send('postted')
+            res.redirect('/')
         }catch(e){
             res.redirect('/login')
         }
