@@ -65,6 +65,22 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
+    seen:[{
+        userId:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        },
+        status:{
+            type: String,
+            enum: ['pending', 'denied', 'accepted'],
+            required:true
+        },
+        clicked:{
+            type: Boolean,
+            default: false,
+            required:true
+        },
+    }]
 })
 
 userSchema.methods.generateAuthToken = async function(){
