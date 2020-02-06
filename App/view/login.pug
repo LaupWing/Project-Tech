@@ -7,6 +7,8 @@ block content
             input(type="email" placeholder="email" name="email")
             input(type="password" placeholder="password123" name="password")
             button(type="submit")   submit
+            if(error)
+                p.error #{error}
         a(href="/signup")   New User?
             span    Signup
             |  here

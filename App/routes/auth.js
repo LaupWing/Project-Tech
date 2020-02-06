@@ -65,7 +65,15 @@ router
             })
             res.redirect('/')
         }catch(e){
-            res.status(400).send()
+            res.render('login',{
+                title: 'Login',
+                meta:{
+                    title: `Dating:Login`
+                },
+                styling: 'auth.css',
+                script: 'signup.js',
+                error: 'Invalid password/email'
+            })
         }
     })
     .post('/signup',upload.single('image'), async (req,res)=>{

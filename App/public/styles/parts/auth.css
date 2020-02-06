@@ -49,3 +49,8 @@ form button{
     background: var(--main-gradientColor);
     color: var(--main-color);
 }
+
+p.error{
+    color: red;
+    font-size: .5rem;
+}
