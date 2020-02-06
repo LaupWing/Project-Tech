@@ -6,7 +6,10 @@ const filterByNeeds = require('./utils/filterByNeeds')
 router
     .get('/',auth, async (req,res)=>{
         const filterForUser = await filterByNeeds(req.user)
-        console.log(filterForUser)
+        const io = req.app.get('socketio')
+        io.on('connection',(socket)=>{
+            console.log(socket.id)
+        })
         res.render('app', {
             title: 'App',
             meta: {
