@@ -1,9 +1,12 @@
 const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
+const filterByNeeds = require('./utils/filterByNeeds')
 
 router
-    .get('/',auth, (req,res)=>{
+    .get('/',auth, async (req,res)=>{
+        const filterForUser = await filterByNeeds(req.user)
+        console.log(filterForUser)
         res.render('app', {
             title: 'App',
             meta: {
