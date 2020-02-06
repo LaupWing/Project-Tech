@@ -7,7 +7,7 @@ body{
     flex-direction: column;
 }
 main{
-    margin-top: 30%;
+    margin-top: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
