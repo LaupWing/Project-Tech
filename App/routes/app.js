@@ -31,12 +31,22 @@ router
             })
 
             socket.on('denied match',async ()=>{
+                const currenrMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
+                const statusChecker = ()=>{
+                    if(currenrMatchingUser.okList.some(okUser=>okUser.userId.equals(req.user._id))){
+                        return 'accepted'
+                    }else if(currenrMatchingUser.notOkList.some(okUser=>okUser.userId.equals(req.user._id))){
+                        return 'denied'
+                    }else{
+                        return 'pending'
+                    }
+                }
                 console.log(socket.id, 'denied')
-                console.log(activeUsers[`user_${socket.id}`].currentMatching)
+                console.log(currenrMatchingUser)
                 console.log(req.user)
                 req.user.seen = req.user.seen.concat({
-                    userId: activeUsers[`user_${socket.id}`].currentMatching._id,
-                    status: 'pending'
+                    userId: currenrMatchingUser._id,
+                    status: statusChecker()
                 })
                 await req.user.save()
                 console.log(req.user)
