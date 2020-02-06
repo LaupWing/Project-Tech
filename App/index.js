@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
+const http = require('http')
 
 // Own files
 require('./db/mongoose') // initialize the db connection 
@@ -10,6 +11,7 @@ const authRoutes = require('./routes/auth')
 const appRoutes = require('./routes/app')
 
 const app = express()
+const server = http.createServer(app)
 const port = process.env.PORT
 
 app
@@ -21,4 +23,5 @@ app
     .use(authRoutes)
     .set('view engine', 'pug')
     .set('views', path.join(__dirname,'view'))
-    .listen(port, ()=>console.log(`Server is listening to port ${port}`))
+
+server.listen(port, ()=>console.log(`Server is listening to port ${port}`))
