@@ -3,12 +3,20 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const filterByNeeds = require('./utils/filterByNeeds')
 
+const activeUsers ={}
+
 router
     .get('/',auth, async (req,res)=>{
         const filterForUser = await filterByNeeds(req.user)
         const io = req.app.get('socketio')
         io.on('connection',(socket)=>{
-            console.log(socket.id)
+            socket.removeAllListeners()
+
+            activeUsers[`user_${socket.id}`] ={}
+            
+            socket.on('disconnect', ()=>{
+                delete activeUsers[`user_${socket.id}`]
+            })
         })
         res.render('app', {
             title: 'App',
@@ -26,8 +34,5 @@ router
             },
             script: 'app.js'
         })
-    })
-    .get('/matching', auth, (req,res)=>{
-        
     })
 module.exports = router
