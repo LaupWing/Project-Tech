@@ -5,8 +5,8 @@ class getMatch{
         socket.emit('get match')
         socket.on('sending match', this.renderMatch.bind(this))
         this.card = document.getElementById("card");
-        this.card.querySelector('button.yes').addEventListener('click', this.accepted)
-        this.card.querySelector('button.no').addEventListener('click', this.denied)
+        this.card.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
+        this.card.querySelector('button.no').addEventListener('click', this.denied.bind(this))
     }
     renderMatch(person){
         const h2 = this.card.querySelector('h2')
@@ -16,11 +16,11 @@ class getMatch{
         this.card.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
     }
     denied(){
-        if(this.card.querySelector('.age').textContent === 'infinite')  return
+        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('NOBODY WANTS YOU')
         socket.emit('denied match')
     }
     accepted(){
-        if(this.card.querySelector('.age').textContent === 'infinite')  return
+        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('NOBODY WANTS YOU')
         socket.emit('accepted match')
     }
 }
