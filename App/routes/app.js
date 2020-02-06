@@ -2,8 +2,6 @@ const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 const filterByNeeds = require('./utils/filterByNeeds')
-const bcrypt = require('bcrypt')
-
 const activeUsers ={}
 
 router
@@ -32,9 +30,16 @@ router
                 })
             })
 
-            socket.on('denied match',()=>{
+            socket.on('denied match',async ()=>{
                 console.log(socket.id, 'denied')
-                console.log(activeUsers[`user_${socket.id}`])
+                console.log(activeUsers[`user_${socket.id}`].currentMatching)
+                console.log(req.user)
+                req.user.seen = req.user.seen.concat({
+                    userId: activeUsers[`user_${socket.id}`].currentMatching._id,
+                    status: 'pending'
+                })
+                await req.user.save()
+                console.log(req.user)
             })
 
             socket.on('accepted match',()=>{
