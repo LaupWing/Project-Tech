@@ -8,15 +8,20 @@ const activeUsers ={}
 router
     .get('/',auth, async (req,res)=>{
         const filterForUser = await filterByNeeds(req.user)
-            .filter(user=>!req.user.seen.some(seen=>seen.userId===user._id))
+        
         const io = req.app.get('socketio')
         io.on('connection',(socket)=>{
             socket.removeAllListeners()
-
-            activeUsers[`user_${socket.id}`] ={
-                canBeAMatch: filterForUser
+            
+            if(!activeUsers[`user_${socket.id}`]){
+                activeUsers[`user_${socket.id}`] ={
+                    canBeAMatch: filterForUser
+                }
             }
             console.log(activeUsers[`user_${socket.id}`].canBeAMatch)
+            socket.on('get match', ()=>{
+                socket.emit('sending match', activeUsers[`user_${socket.id}`].canBeAMatch)
+            })
             socket.on('disconnect', ()=>{
                 delete activeUsers[`user_${socket.id}`]
             })
