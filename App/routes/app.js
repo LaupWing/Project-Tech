@@ -31,7 +31,17 @@ router
                     age: match.age,
                 })
             })
-            
+
+            socket.on('denied match',()=>{
+                console.log(socket.id, 'denied')
+                console.log(activeUsers[`user_${socket.id}`])
+            })
+
+            socket.on('accepted match',()=>{
+                console.log(socket.id, 'accepted')
+                console.log(activeUsers[`user_${socket.id}`])
+            })
+
             socket.on('disconnect', ()=>{
                 delete activeUsers[`user_${socket.id}`]
             })
