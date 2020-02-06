@@ -24,12 +24,10 @@ router
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
                 
-                const encryptedId =  await bcrypt.hash(match._id.toString(), 8)
                 socket.emit('sending match', {
                     name: match.name,
                     images: match.images,
                     age: match.age,
-                    _id: `_${encryptedId}`
                 })
             })
             socket.on('disconnect', ()=>{

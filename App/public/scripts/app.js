@@ -7,12 +7,13 @@ class getMatch{
     }
     renderMatch(person){
         const card = document.getElementById("card");
-        while (card.firstChild) {
-            card.firstChild.remove();
-        }
-        const img = document.createElement('img')
-        img.src = person.images.find(i=>i.mainPicture).url
-        card.appendChild(img)
+        const img = card.querySelector('img')
+        const h2 = card.querySelector('h2')
+        const age = card.querySelector('.age')
+        h2.textContent = person.name
+        age.textContent = person.age
+        // img.src = person.images.find(i=>i.mainPicture).url
+
     }
 }
 

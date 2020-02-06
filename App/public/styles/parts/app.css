@@ -119,11 +119,51 @@ main ul li:hover{
 }
 #card{
     width: 80vw;
-    max-width: 500px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    --profile: url(../../assets/person.png);
 }
 
-#card img{
+#card .img-container{
     width: 100%;
+    height: 60vh;
+    max-height: 350px;
+    background-image: var(--profile);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#card h2{
+    background: var(--main-color);
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    color: var(--purp);
+}
+#card p{
+    padding: 10px;
+    width: 100%;
+    background-color: var(--main-color);
+}
+
+#card button{
+    width: 50%;
+    color: var(--main-color);
+    font-weight: bold;
+    padding: 20px;
+}
+
+#card button.yes{
+    background: var(--green);
+    border-radius: 0 0 10px 0;
+}
+#card button.no{
+    background: var(--red);
+    border-radius: 0 0 0 10px;
+}
+
+#card p span:first-of-type{
+    font-weight: bold;
 }
 footer{
     text-align: right;
