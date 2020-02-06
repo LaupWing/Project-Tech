@@ -16,20 +16,22 @@ router
 
             if(!activeUsers[`user_${socket.id}`]){
                 activeUsers[`user_${socket.id}`] ={
-                    canBeAMatch: filterForUser
+                    canBeAMatch: filterForUser,
+                    currentMatching: null
                 }
             }
             
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
-                
+                activeUsers[`user_${socket.id}`].currentMatching = match
                 socket.emit('sending match', {
                     name: match.name,
                     images: match.images,
                     age: match.age,
                 })
             })
+            
             socket.on('disconnect', ()=>{
                 delete activeUsers[`user_${socket.id}`]
             })

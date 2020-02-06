@@ -80,6 +80,18 @@ const userSchema = new mongoose.Schema({
             default: false,
             required:true
         },
+    }],
+    okList:[{
+        userId:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        }
+    }],
+    notOkList:[{
+        userId:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     }]
 })
 
