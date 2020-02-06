@@ -16,9 +16,11 @@ class getMatch{
         this.card.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
     }
     denied(){
+        if(this.card.querySelector('.age').textContent === 'infinite')  return
         socket.emit('denied match')
     }
     accepted(){
+        if(this.card.querySelector('.age').textContent === 'infinite')  return
         socket.emit('accepted match')
     }
 }

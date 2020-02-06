@@ -22,12 +22,23 @@ router
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
-                activeUsers[`user_${socket.id}`].currentMatching = match
-                socket.emit('sending match', {
-                    name: match.name,
-                    images: match.images,
-                    age: match.age,
-                })
+                if(match){
+                    activeUsers[`user_${socket.id}`].currentMatching = match
+                    socket.emit('sending match', {
+                        name: match.name,
+                        images: match.images,
+                        age: match.age,
+                    })
+                }else{
+                    socket.emit('sending match', {
+                        name: 'i have nobody',
+                        images: [{
+                            url:'https://i.ytimg.com/vi/6EEW-9NDM5k/maxresdefault.jpg',
+                            mainPicture:true
+                        }],
+                        age: 'infinite',
+                    })
+                }
             })
 
             socket.on('denied match',async ()=>{
