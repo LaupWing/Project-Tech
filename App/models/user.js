@@ -66,6 +66,7 @@ const userSchema = new mongoose.Schema({
         }
     }],
     seen:[{
+        _id:false,
         userId:{
             type: mongoose.Schema.Types.ObjectId,
             required: true
@@ -82,12 +83,14 @@ const userSchema = new mongoose.Schema({
         },
     }],
     okList:[{
+        _id:false,
         userId:{
             type: mongoose.Schema.Types.ObjectId,
             required: true
         }
     }],
     notOkList:[{
+        _id:false,
         userId:{
             type: mongoose.Schema.Types.ObjectId,
             required: true
