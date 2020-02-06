@@ -82,6 +82,8 @@ nav ul li.active:hover{
 }
 main{
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 main ul{
     margin-top: 2%;
@@ -109,7 +111,20 @@ main ul li:hover{
     background: var(--main-color);
     color: var(--purp);
 }
+.card-container{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#card{
+    width: 80vw;
+    max-width: 500px;
+}
 
+#card img{
+    width: 100%;
+}
 footer{
     text-align: right;
     padding-right: 10px;
