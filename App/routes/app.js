@@ -5,14 +5,14 @@ const filterByNeeds = require('./utils/filterByNeeds')
 const activeUsers ={}
 
 router
-    .get('/',auth, async (req,res)=>{
-        const filterForUser = await filterByNeeds(req)
+    .get('/',auth, (req,res)=>{
         
         const io = req.app.get('socketio')
-        io.on('connection',(socket)=>{
+        io.on('connection',async (socket)=>{
             socket.removeAllListeners()
 
             if(!activeUsers[`user_${socket.id}`]){
+                const filterForUser = await filterByNeeds(req)
                 activeUsers[`user_${socket.id}`] ={
                     canBeAMatch: filterForUser,
                     currentMatching: null
@@ -43,6 +43,22 @@ router
 
             socket.on('denied match',async ()=>{
                 const currenrMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
+                console.log(socket.id, 'denied')
+                console.log(currenrMatchingUser)
+                console.log(req.user)
+                req.user.seen = req.user.seen.concat({
+                    userId: currenrMatchingUser._id,
+                    status: 'denied'
+                })
+                req.user.notOkList = req.user.notOkList.concat({
+                    userId: currenrMatchingUser._id
+                }) 
+                await req.user.save()
+                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
+                console.log(req.user)
+            })
+            
+            socket.on('accepted match',async()=>{
                 const statusChecker = ()=>{
                     if(currenrMatchingUser.okList.some(okUser=>okUser.userId.equals(req.user._id))){
                         return 'accepted'
@@ -51,19 +67,17 @@ router
                     }else{
                         return 'pending'
                     }
+                    
                 }
-                console.log(socket.id, 'denied')
-                console.log(currenrMatchingUser)
-                console.log(req.user)
                 req.user.seen = req.user.seen.concat({
                     userId: currenrMatchingUser._id,
                     status: statusChecker()
                 })
+                req.user.okList = req.user.notOkList.concat({
+                    userId: currenrMatchingUser._id
+                }) 
                 await req.user.save()
-                console.log(req.user)
-            })
-
-            socket.on('accepted match',()=>{
+                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
                 console.log(socket.id, 'accepted')
                 console.log(activeUsers[`user_${socket.id}`])
             })
