@@ -7,6 +7,10 @@ This project is about all about  web development from frontend to the backend. D
 ## What can i find in this README?
 This README is mainly used for table of contents. You can find the detail of what i have done each week in the dedicated folders in the Logs folder (The week is documented in the README of the dedicated week folder). And the product itself can be find in the app directory.
 
+## Todo
+- [ ] When user accept or denied it needs to be updated for every user at that moment in the socket
+
+
 ## Table of contents
 * [App](http://google.com)
 * [Week 1](http://google.com)
