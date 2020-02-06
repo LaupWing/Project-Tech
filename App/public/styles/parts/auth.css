@@ -52,5 +52,6 @@ form button{
 
 p.error{
     color: red;
-    font-size: .5rem;
+    margin: 10px 0;
+    font-size: 0.8rem;
 }

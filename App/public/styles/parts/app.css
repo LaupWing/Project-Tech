@@ -51,7 +51,7 @@ nav ul{
 nav ul.active-list{
     flex-grow: 1;
 }
-nav li.logout-btn{
+nav a.logout-btn{
     padding: 10px;
     font-size: 1.3rem;
     text-align: center;
