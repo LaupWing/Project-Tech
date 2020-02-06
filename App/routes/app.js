@@ -7,12 +7,12 @@ const activeUsers ={}
 
 router
     .get('/',auth, async (req,res)=>{
-        const filterForUser = await filterByNeeds(req.user)
+        const filterForUser = await filterByNeeds(req)
         
         const io = req.app.get('socketio')
         io.on('connection',(socket)=>{
             socket.removeAllListeners()
-            
+
             if(!activeUsers[`user_${socket.id}`]){
                 activeUsers[`user_${socket.id}`] ={
                     canBeAMatch: filterForUser
