@@ -6,5 +6,9 @@ module.exports = async (req)=>{
         .where('minAge').lte(req.user.age)
         .where('maxAge').gte(req.user.age)
 
-    return dbFiltered.filter(user=>!req.user.seen.some(seen=>seen.userId.equals(user._id)) && !req.user._id.equals(user._id))
+    return dbFiltered
+        .filter(user=>
+            !req.user.seen.some(seen=>seen.userId.equals(user._id)) 
+            && !req.user._id.equals(user._id)
+        )
 }

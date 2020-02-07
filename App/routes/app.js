@@ -50,7 +50,7 @@ router
                     userId: currenrMatchingUser._id,
                     status: 'denied'
                 })
-                req.user.notOkList = req.user.notOkList.concat({
+                req.user.deniedList = req.user.deniedList.concat({
                     userId: currenrMatchingUser._id
                 }) 
                 await req.user.save()
@@ -60,9 +60,9 @@ router
             
             socket.on('accepted match',async()=>{
                 const statusChecker = ()=>{
-                    if(currenrMatchingUser.okList.some(okUser=>okUser.userId.equals(req.user._id))){
+                    if(currenrMatchingUser.acceptedList.some(user=>user.userId.equals(req.user._id))){
                         return 'accepted'
-                    }else if(currenrMatchingUser.notOkList.some(okUser=>okUser.userId.equals(req.user._id))){
+                    }else if(currenrMatchingUser.deniedList.some(user=>user.userId.equals(req.user._id))){
                         return 'denied'
                     }else{
                         return 'pending'
@@ -73,7 +73,7 @@ router
                     userId: currenrMatchingUser._id,
                     status: statusChecker()
                 })
-                req.user.okList = req.user.notOkList.concat({
+                req.user.acceptedList = req.user.deniedList.concat({
                     userId: currenrMatchingUser._id
                 }) 
                 await req.user.save()

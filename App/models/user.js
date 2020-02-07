@@ -82,14 +82,14 @@ const userSchema = new mongoose.Schema({
             required:true
         },
     }],
-    okList:[{
+    deniedList:[{
         _id:false,
         userId:{
             type: mongoose.Schema.Types.ObjectId,
             required: true
         }
     }],
-    notOkList:[{
+    acceptedList:[{
         _id:false,
         userId:{
             type: mongoose.Schema.Types.ObjectId,
