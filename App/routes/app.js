@@ -51,23 +51,10 @@ router
             socket.on('denied match',async ()=>{
                 const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
                 
-                req.user.seen = req.user.seen.concat({
-                    userId: currentMatchingUser._id,
-                    status: 'denied'
-                })
-                req.user.deniedList = req.user.deniedList.concat({
-                    userId: currentMatchingUser._id
-                }) 
-                await req.user.save()
+                await updateUserDenied(req, currentMatchingUser)
+                await updateMatchingUser(req, currentMatchingUser, 'denied')
 
-                const matchingUser = await User.findById(currentMatchingUser._id)
-                console.log(matchingUser)
-                console.log(matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id)))
-                if(matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))){
-                    console.log('got it')
-                }
-                // activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
-                // console.log(req.user)
+                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
             })
             
             socket.on('accepted match',async()=>{
