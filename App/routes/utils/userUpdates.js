@@ -36,10 +36,14 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
     await user.save()
 }
 
-const updateMatchingUser = async (req, currentMatchingUser)=>{
+const updateMatchingUser = async (req, currentMatchingUser, status)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
-    
-    if(matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))>0){
+    const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))
+    if(indexSeen>=0){
+        if(matchingUser.seen[indexSeen].status === 'denied'){
+            return
+        }
+        matchingUser.seen[indexSeen].status = status
         matchingUser.save()
     }
 }

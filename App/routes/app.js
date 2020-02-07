@@ -2,12 +2,12 @@ const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 const filterByNeeds = require('./utils/filterByNeeds')
-const activeUsers ={}
-const User = require('../models/user')
 const {
     updateUserStatusCheck,
     updateUserDenied,
     updateMatchingUser} = require('./utils/userUpdates')
+    
+const activeUsers ={}
 
 router
     .get('/',auth, (req,res)=>{
@@ -45,7 +45,6 @@ router
                     })
                 }
             })
-            // Need to update for the matching user also
             // Need realtime update to
 
             socket.on('denied match',async ()=>{
@@ -58,27 +57,12 @@ router
             })
             
             socket.on('accepted match',async()=>{
-                const statusChecker = ()=>{
-                    if(currentMatchingUser.acceptedList.find(user=>user.userId.equals(req.user._id))){
-                        return 'accepted'
-                    }else if(currentMatchingUser.deniedList.find(user=>user.userId.equals(req.user._id))){
-                        return 'denied'
-                    }else{
-                        return 'pending'
-                    }
-                    
-                }
-                req.user.seen = req.user.seen.concat({
-                    userId: currentMatchingUser._id,
-                    status: statusChecker()
-                })
-                req.user.acceptedList = req.user.acceptedList.concat({
-                    userId: currentMatchingUser._id
-                }) 
-                await req.user.save()
+                const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
+
+                await updateUserStatusCheck(req, currentMatchingUser)
+                await updateMatchingUser(req, currentMatchingUser, 'accepted')
+
                 activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
-                console.log(socket.id, 'accepted')
-                console.log(activeUsers[`user_${socket.id}`])
             })
 
             socket.on('disconnect', ()=>{
