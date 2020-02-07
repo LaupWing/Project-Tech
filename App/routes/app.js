@@ -9,8 +9,7 @@ router
         
         const io = req.app.get('socketio')
         io.on('connection',async (socket)=>{
-            socket.removeAllListeners()
-
+            
             if(!activeUsers[`user_${socket.id}`]){
                 const filterForUser = await filterByNeeds(req)
                 activeUsers[`user_${socket.id}`] ={
@@ -19,6 +18,7 @@ router
                 }
             }
             
+            socket.removeAllListeners()
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
@@ -42,20 +42,21 @@ router
             })
 
             socket.on('denied match',async ()=>{
-                const currenrMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-                console.log(socket.id, 'denied')
-                console.log(currenrMatchingUser)
-                console.log(req.user)
-                req.user.seen = req.user.seen.concat({
-                    userId: currenrMatchingUser._id,
-                    status: 'denied'
-                })
-                req.user.deniedList = req.user.deniedList.concat({
-                    userId: currenrMatchingUser._id
-                }) 
-                await req.user.save()
-                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
-                console.log(req.user)
+                // const currenrMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
+                // console.log(socket.id, 'denied')
+                // console.log(currenrMatchingUser)
+                // console.log(req.user)
+                // req.user.seen = req.user.seen.concat({
+                //     userId: currenrMatchingUser._id,
+                //     status: 'denied'
+                // })
+                // req.user.deniedList = req.user.deniedList.concat({
+                //     userId: currenrMatchingUser._id
+                // }) 
+                // await req.user.save()
+                // activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
+                // console.log(req.user)
+                console.log('test')
             })
             
             socket.on('accepted match',async()=>{
