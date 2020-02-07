@@ -4,6 +4,11 @@ const auth = require('../middleware/auth')
 const filterByNeeds = require('./utils/filterByNeeds')
 const activeUsers ={}
 const User = require('../models/user')
+const {
+    updateUserStatusCheck,
+    updateUserDenied,
+    updateMatchingUser} = require('./utils/userUpdates')
+
 router
     .get('/',auth, (req,res)=>{
         
@@ -45,9 +50,7 @@ router
 
             socket.on('denied match',async ()=>{
                 const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-                // console.log(socket.id, 'denied')
-                // console.log(currentMatchingUser)
-                // console.log(req.user)
+                
                 req.user.seen = req.user.seen.concat({
                     userId: currentMatchingUser._id,
                     status: 'denied'

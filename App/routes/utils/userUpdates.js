@@ -1,6 +1,6 @@
 const User = require('../../models/user')
 
-const updateUserStatusCheck =(req)=>{
+const updateUserStatusCheck =async(req, currentMatchingUser)=>{
     const {user} = req
 
     const statusChecker = ()=>{
@@ -24,7 +24,7 @@ const updateUserStatusCheck =(req)=>{
     await user.save()
 }
 
-const updateUserDenied =(req)=>{
+const updateUserDenied =async (req, currentMatchingUser)=>{
     const {user} = req
     user.seen = user.seen.concat({
         userId: currentMatchingUser._id,
@@ -36,7 +36,16 @@ const updateUserDenied =(req)=>{
     await user.save()
 }
 
+const updateMatchingUser = async (currentMatchingUser)=>{
+    const matchingUser = await User.findById(currentMatchingUser._id)
+    
+    if(matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))>0){
+        matchingUser.save()
+    }
+}
+
 module.exports ={
     updateUserStatusCheck,
-    updateUserDenied
+    updateUserDenied,
+    updateMatchingUser
 }
