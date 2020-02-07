@@ -2,6 +2,7 @@ const socket = io()
 
 class getMatch{
     constructor(){
+        socket.removeAllListeners()
         socket.emit('get match')
         socket.on('sending match', this.renderMatch.bind(this))
         this.card = document.getElementById("card");
