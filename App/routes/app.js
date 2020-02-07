@@ -24,6 +24,7 @@ router
             }
             
             socket.removeAllListeners()
+            console.log('connected', socket.id)
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
@@ -66,6 +67,10 @@ router
             })
 
             socket.on('disconnect', ()=>{
+                socket.removeAllListeners('denied match');
+                socket.removeAllListeners('get match');
+                socket.removeAllListeners('accepted match');
+                io.removeAllListeners('connection');
                 delete activeUsers[`user_${socket.id}`]
             })
         })
