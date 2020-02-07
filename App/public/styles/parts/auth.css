@@ -20,12 +20,16 @@ h2{
     font-size: 2rem;
 }
 form{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     margin-top: 40px;
     margin-bottom: 20px;
+    width: 250px;
 }
 a{
     align-self: flex-end;
@@ -38,7 +42,7 @@ a span{
 form input{
     border: none;
     padding: 8px 10px;
-    width: 250px;
+    width: 100%;
     margin-bottom: 30px;
     border-bottom: var(--highlight-color) solid 1px;
 }
@@ -54,4 +58,67 @@ p.error{
     color: red;
     margin: 10px 0;
     font-size: 0.8rem;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    grid-row: 1;
+    grid-column: 1;
+    opacity: 0;
+    pointer-events: none;
+}
+.field.visible{
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.buttons-container{
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1;
+}
+
+.buttons-container .buttons{
+    display: flex;
+}
+.buttons-container > button:first-of-type,
+.buttons-container .buttons{
+    opacity: 0;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.buttons-container > button.visible:first-of-type,
+.buttons-container .buttons.visible{
+    opacity: 1;
+}
+.buttons-container button{
+    background: var(--main-color);
+}
+.buttons-container .buttons button:last-of-type{
+    background: var(--main-gradientColor);
+}
+.buttons-container .buttons button:first-of-type{
+    display: flex;
+    align-items: center;
+    background-clip: padding-box; 
+    border: solid 5px transparent; 
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    color: black;
+}
+
+.buttons-container .buttons button:first-of-type::before{
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -5px;
+    border-radius: inherit; 
+    background: var(--main-gradientColor);
 }

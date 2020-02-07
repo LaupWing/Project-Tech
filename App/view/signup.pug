@@ -4,12 +4,19 @@ block content
     main
         h2 #{title}
         form(method="POST" action="/signup" enctype="multipart/form-data")
-            input(type="email" placeholder="email" name="email")
-            input(type="file" name="image" accept="image/png, image/jpeg")
-            input(type="text" placeholder="your name" name="name")
-            input(type="password" placeholder="password123" name="password")
-            input(type="password" placeholder="password123" name="passwordCheck")
-            input(type="number" name="age" min="18" value="18" onKeyDown="return false")
-            input(type="range" min="18" max="100" value="18" name="minAge")
-            input(type="range" min="18" max="100" value="18" name="maxAge")
-            button(type="submit")   submit
+            .field
+                input(type="email" placeholder="email" name="email")
+                input(type="password" placeholder="password123" name="password")
+                input(type="password" placeholder="password123" name="passwordCheck")
+            .field.visible
+                input(type="file" name="image" accept="image/png, image/jpeg")
+                input(type="text" placeholder="your name" name="name")
+            .field
+                input(type="number" name="age" min="18" value="18" onKeyDown="return false")
+                input(type="range" min="18" max="100" value="18" name="minAge")
+                input(type="range" min="18" max="100" value="18" name="maxAge")
+            .buttons-container
+                button(type="submit")   submit
+                .buttons.visible
+                    button(type="button" class="back")   back
+                    button(type="button" class="next")   next
