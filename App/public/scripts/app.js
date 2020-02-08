@@ -76,10 +76,16 @@ class checkMatches{
 
 class showDetails{
     constructor(){
-        socket.on('user detail', this.gotUserDetail)
+        socket.on('user detail', this.gotUserDetail.bind(this))
+        this.mainNav = document.querySelector('.main-nav')
     }
     gotUserDetail(user){
         console.log(user)
+        this.setActiveLink()
+    }
+    setActiveLink(){
+        this.mainNav.querySelectorAll('li').forEach(li=>li.classList.remove('active'))
+        this.mainNav.querySelector('.info').classList.add('active')
     }
 }
 
