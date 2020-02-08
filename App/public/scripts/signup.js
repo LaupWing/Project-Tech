@@ -58,9 +58,24 @@ class nextSection{
     }
 }
 
+class slider{
+    constructor(){
+        this.minAge = document.querySelector('input[name="minAge"]')
+        this.maxAge = document.querySelector('input[name="maxAge"]')
+
+        this.minAge.addEventListener('input', this.changeVal)
+        this.maxAge.addEventListener('input', this.changeVal)
+    }
+    changeVal(e){
+        const display = e.target.parentElement.querySelector('p span')
+        display.textContent = e.target.value
+    }
+}
+
 const init = ()=>{
     new imageLoader()
     new nextSection()
+    new slider()
 }
 
 init()
