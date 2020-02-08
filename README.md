@@ -9,7 +9,7 @@ This README is mainly used for table of contents. You can find the detail of wha
 
 ## Todo
 - [ ] When user accept or denied it needs to be updated for every user at that moment in the socket
-- [ ] Change the button panel classname to correspond with the panel container itself
+- [x] Change the button panel classname to correspond with the panel container itself
 
 
 ## Table of contents
