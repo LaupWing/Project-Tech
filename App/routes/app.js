@@ -43,7 +43,7 @@ router
                             images: user.images,
                             gender: user.gender,
                             clicked,
-                            generatedId
+                            id: generatedId
                         }
                     })
                 activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
@@ -54,6 +54,11 @@ router
             
             console.log('connected', socket.id)
             sendMatches()
+            socket.on('show detail', (id)=>{
+                const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
+                delete user.clicked
+                socket.emit('user detail', user)
+            })
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
@@ -102,6 +107,7 @@ router
                 socket.removeAllListeners('denied match');
                 socket.removeAllListeners('get match');
                 socket.removeAllListeners('accepted match');
+                socket.removeAllListeners('show detail');
                 io.removeAllListeners('connection');
                 delete activeUsers[`user_${socket.id}`]
             })

@@ -43,7 +43,7 @@ class checkMatches{
             const img = document.createElement('img')
             const info = document.createElement('div')
 
-            li.id = match.generatedId
+            li.id = match.id
             info.className = 'info'
             li.className  = match.clicked ?  'match not-opened' : 'match'
             pname.className  = 'name'
@@ -74,9 +74,19 @@ class checkMatches{
     }
 }
 
+class showDetails{
+    constructor(){
+        socket.on('user detail', this.gotUserDetail)
+    }
+    gotUserDetail(user){
+        console.log(user)
+    }
+}
+
 const init = ()=>{
     new getMatch()
     new checkMatches()
+    new showDetails()
 }
 
 init()
