@@ -122,6 +122,7 @@ p.error{
 
 .field.image input{
     margin: 0;
+    margin-bottom: 20px;
 }
 
 .field.image img{
@@ -155,6 +156,9 @@ p.error{
     position: absolute;
     top: 0;
     left: 0;
+}
+.buttons-container .buttons button:disabled{
+    opacity: .3;
 }
 .buttons-container .buttons button:last-of-type,
 .buttons-container > button:first-of-type{

@@ -25,6 +25,7 @@ class nextSection{
 
         this.nextBtn.addEventListener('click', this.next.bind(this))
         this.backBtn.addEventListener('click', this.back.bind(this))
+        this.disableButton()
     }
     next(){
         const done = document.querySelectorAll('.done')
@@ -33,6 +34,7 @@ class nextSection{
             fields[done.length+1].classList.add('visible')
             fields[done.length].removeEventListener('transitionend', ended)
             this.updateCurrent()
+            this.disableButton()
         }
 
         fields[done.length].addEventListener('transitionend', ended)
@@ -45,6 +47,7 @@ class nextSection{
             fields[done.length-1].classList.remove('done')
             fields[done.length].removeEventListener('transitionend', ended)
             this.updateCurrent()
+            this.disableButton()
         }
         if(done.length === 0){
             return
@@ -54,7 +57,41 @@ class nextSection{
     }
     updateCurrent(){
         const done = document.querySelectorAll('.done')
-        this.currentStep.textContent = ` ${done.length+1}/5`
+        this.currentStep.textContent = ` ${done.length+1}/4`
+    }
+    disableButton(){
+        const done = document.querySelectorAll('.done')
+        const fields = document.querySelectorAll('.field')
+        
+        if(done.length === 0){
+            this.backBtn.disabled = true
+        }
+        if(done.length > 0){
+            this.backBtn.disabled = false
+        }
+        if((done.length+1) === fields.length){
+            this.nextBtn.disabled = true
+        }
+        if((done.length+1) < fields.length){
+            this.nextBtn.disabled = false
+        }
+    }
+}
+
+class EnableSubmit{
+    constructor(){
+        this.submit = document.querySelector('button[type="submit"]')
+        this.inputs = document.querySelectorAll('input')
+        this.inputs.forEach(input=>input.addEventListener('input', this.userInput.bind(this)))
+        document.querySelector('button.next').addEventListener('click', this.userInput.bind(this))
+    }
+    userInput(){
+        const done = document.querySelectorAll('.done')
+        const fields = document.querySelectorAll('.field')
+        const empty = Array.from(this.inputs).some(input=>input.value === '')
+        if((done.length+1) === fields.length && !empty){
+            this.submit.disabled = false
+        }
     }
 }
 
@@ -72,10 +109,36 @@ class slider{
     }
 }
 
+class autoAdjust{
+    constructor(){
+        this.ageInput = document.querySelector('input[name="age"]')
+        this.ageInput.addEventListener('change', this.changeVal)
+    }
+    changeVal(e){
+        const threshhold = Math.round(Number(e.target.value)*0.15)
+        const minAge = document.querySelector('input[name="minAge"]')
+        const maxAge = document.querySelector('input[name="maxAge"]')
+
+        const changeMinAge = Number(e.target.value) -threshhold
+        const changeMaxAge = Number(e.target.value) + threshhold
+
+        const minAgeDisplay = document.querySelector('.minAge p span')
+        const maxAgeDisplay = document.querySelector('.maxAge p span')
+        
+        minAge.value = changeMinAge<18 ? 18 : changeMinAge
+        maxAge.value = changeMaxAge<18 ? 18 : changeMaxAge
+        
+        minAgeDisplay.textContent = changeMinAge<18 ? 18 : changeMinAge
+        maxAgeDisplay.textContent = changeMaxAge<18 ? 18 : changeMaxAge
+    }
+}
+
 const init = ()=>{
     new imageLoader()
     new nextSection()
     new slider()
+    new EnableSubmit()
+    new autoAdjust()
 }
 
 init()
