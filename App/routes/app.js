@@ -69,7 +69,7 @@ router
                     }
                     return u
                 })
-                // await req.user.save()
+                await req.user.save()
                 sendMatches()
                 delete user.clicked
                 socket.emit('user detail', user)
