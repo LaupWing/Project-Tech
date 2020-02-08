@@ -20,10 +20,6 @@ h2{
     font-size: 2rem;
 }
 form{
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -38,10 +34,18 @@ a{
 a span{
     color: var(--purp);
 }
-input[type="file"]{
+input[type="file"], input[type="range"]{
     border: none;
 }
+input[type="radio"]{
+    display: none;
+}
 
+form svg{
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+}
 form input{
     border: none;
     padding: 8px 10px;
@@ -50,8 +54,38 @@ form input{
     border-bottom: var(--highlight-color) solid 1px;
 }
 
+form .gender{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+form .gender label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: .1;
+    border: 2px solid var(--purp);
+    color: var(--purp);
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all .5s;
+}
+form .gender label > svg path{
+    fill: var(--purp);
+}
+
+form .gender input[type="radio"]:checked+label{
+    opacity: 1;
+}
+form .gender label:hover{
+    opacity: .4;
+
+}
+
 form button{
-    margin-top: 20px;
     width: 100%;
     background: var(--main-gradientColor);
     color: var(--main-color);
@@ -105,24 +139,25 @@ p.error{
 .buttons-container .buttons{
     display: flex;
 }
-.buttons-container > button:first-of-type,
-.buttons-container .buttons{
-    opacity: 0;
-    grid-row: 1;
-    grid-column: 1;
-    pointer-events: none;
-}
 
-.buttons-container > button.visible:first-of-type,
-.buttons-container .buttons.visible{
-    pointer-events: initial;
-    opacity: 1;
-}
 .buttons-container button{
     background: var(--main-color);
 }
+.buttons-container > button:first-of-type{
+    margin-top: 10px;
+    position: relative;
+}
+.buttons-container > button:first-of-type:disabled::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .buttons-container .buttons button:last-of-type,
-.buttons-container > button.visible:first-of-type{
+.buttons-container > button:first-of-type{
     background: var(--main-gradientColor);
 }
 .buttons-container .buttons button:first-of-type{
@@ -144,4 +179,35 @@ p.error{
     margin: -5px;
     border-radius: inherit; 
     background: var(--main-gradientColor);
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
 }
