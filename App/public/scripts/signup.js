@@ -37,7 +37,17 @@ class nextSection{
         fields[done.length].classList.add('done')
     }
     back(){
-        console.log('back')
+        const done = document.querySelectorAll('.done')
+        const fields = document.querySelectorAll('.field')
+        const ended = ()=>{
+            fields[done.length-1].classList.remove('done')
+            fields[done.length].removeEventListener('transitionend', ended)
+        }
+        if(done.length === 0){
+            return
+        }
+        fields[done.length].addEventListener('transitionend', ended)
+        fields[done.length].classList.remove('visible')
     }
 }
 
