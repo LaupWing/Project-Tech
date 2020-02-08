@@ -27,7 +27,6 @@ class getMatch{
         socket.emit('accepted match')
     }
 }
-
 class checkMatches{
     constructor(){
         socket.on('send matchesList', this.renderList.bind(this))

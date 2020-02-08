@@ -6,7 +6,7 @@ html
         link(rel="stylesheet" type="text/css" href=`/static/styles/parts/${styling}`)
         link(href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet")
         if(script)
-            script(defer src=`/static/scripts/${script}`)
+            script(defer type="module" src=`/static/scripts/${script}`)
     body
         block content
         footer
