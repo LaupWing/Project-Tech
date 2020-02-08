@@ -73,8 +73,8 @@ p.error{
     grid-column: 1;
     opacity: 0;
     pointer-events: none;
-    transform: translate(100%,0);
-    transform: all .5s;
+    transform: translate(50%,0);
+    transition: all .5s;
 }
 .field.visible{
     opacity: 1;
@@ -83,7 +83,7 @@ p.error{
 }
 .field.visible.done{
     opacity: 0;
-    transform: translate(-100%,0);
+    transform: translate(-50%,0);
 }
 
 .field.image input{
@@ -110,10 +110,12 @@ p.error{
     opacity: 0;
     grid-row: 1;
     grid-column: 1;
+    pointer-events: none;
 }
 
 .buttons-container > button.visible:first-of-type,
 .buttons-container .buttons.visible{
+    pointer-events: initial;
     opacity: 1;
 }
 .buttons-container button{
