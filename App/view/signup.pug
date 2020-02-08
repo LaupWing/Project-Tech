@@ -4,13 +4,14 @@ block content
     main
         h2 #{title}
         form(method="POST" action="/signup" enctype="multipart/form-data")
-            .field
-                input(type="email" placeholder="email" name="email")
-                input(type="password" placeholder="password123" name="password")
-                input(type="password" placeholder="password123" name="passwordCheck")
             .field.visible
+                input(type="email" placeholder="Email" name="email")
+                input(type="password" placeholder="Password" name="password")
+                input(type="password" placeholder="Confirm password" name="passwordCheck")
+                input(type="text" placeholder="Your Name" name="name")
+            .field.image
+                img()
                 input(type="file" name="image" accept="image/png, image/jpeg")
-                input(type="text" placeholder="your name" name="name")
             .field
                 input(type="number" name="age" min="18" value="18" onKeyDown="return false")
                 input(type="range" min="18" max="100" value="18" name="minAge")
