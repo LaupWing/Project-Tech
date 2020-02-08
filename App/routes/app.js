@@ -49,7 +49,7 @@ router
                 }
             })
             // Need realtime update to
-
+            console.log(req.user)
             socket.on('denied match',async ()=>{
                 const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
                 
