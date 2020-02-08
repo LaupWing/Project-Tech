@@ -8,12 +8,36 @@ const {
     updateMatchingUser} = require('./utils/userUpdates')
     
 const activeUsers ={}
+const User = require('../models/user')
 
 router
     .get('/',auth, (req,res)=>{
         
         const io = req.app.get('socketio')
+
+        
         io.on('connection',async (socket)=>{
+            const sendMatches = async()=>{
+                const onlyMatches = req.user.seen
+                    .filter(seen=>seen.status==='accepted')
+                    
+                const promisses = onlyMatches.map((user)=>{
+                    return User.findById(user.userId)
+                })
+                const userList = await Promise.all(promisses)
+                const reconstructed = userList
+                    .map(user=>{
+                        const clicked = onlyMatches.find(match=>match.userId.equals(user._id))
+                        return {
+                            name: user.name,
+                            age: user.age,
+                            images: user.images,
+                            gender: user.gender,
+                            clicked
+                        }
+                    })
+                socket.emit('send matchesList', reconstructed)
+            }
             
             if(!activeUsers[`user_${socket.id}`]){
                 const filterForUser = await filterByNeeds(req)
@@ -23,8 +47,8 @@ router
                 }
             }
             
-            socket.removeAllListeners()
             console.log('connected', socket.id)
+            sendMatches()
             socket.on('get match', async ()=>{
                 const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
                 const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
@@ -49,7 +73,6 @@ router
                 }
             })
             // Need realtime update to
-            console.log(req.user)
             socket.on('denied match',async ()=>{
                 const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
                 
@@ -66,8 +89,10 @@ router
                 await updateMatchingUser(req, currentMatchingUser, 'accepted')
 
                 activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
-            })
 
+                sendMatches()
+            })
+            
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match');
                 socket.removeAllListeners('get match');

@@ -50,7 +50,27 @@ nav ul{
 }
 nav ul.active-list{
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
 }
+nav ul.active-list li{
+    padding: 10px;
+}
+
+/* Matches */
+nav ul.active-list li.match.not-opened{
+    padding: 15px 10px;
+    background: var(--main-color);
+    border-right: var(--purp) 8px solid;
+}
+nav ul.active-list li.match p.name{
+    font-weight: bold;
+}
+nav ul.active-list li.match p.message{
+    opacity: .5;
+}
+
 nav a.logout-btn{
     padding: 10px;
     font-size: 1.3rem;
@@ -60,7 +80,7 @@ nav a.logout-btn{
     background: var(--blue);
     cursor: pointer;
 }
-nav ul li{
+nav ul.menu li{
     width: 50%;
     padding: 10px;
     text-align: center;
@@ -68,7 +88,7 @@ nav ul li{
     color: var(--purp);
     transition: all .25s;
 }
-nav ul li:hover,
+nav ul.menu li:hover,
 nav .profile:hover{
     background: var(--purp);
     color: var(--main-color);

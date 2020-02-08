@@ -28,8 +28,42 @@ class getMatch{
     }
 }
 
+class checkMatches{
+    constructor(){
+        socket.on('send matchesList', this.renderList.bind(this))
+        this.matchesList = document.querySelector('.active-list')
+    }
+    renderList(list){
+        this.removeChilds()
+        list.forEach(match=>{
+            const li = document.createElement('li')
+            const pname = document.createElement('p')
+            const pmsg = document.createElement('p')
+            li.className  = match.clicked ?  'match not-opened' : 'match'
+            pname.className  = 'name'
+            pmsg.className  = 'message'
+
+            pname.textContent = match.name
+            pmsg.textContent = match.clicked ? 'You got a new match!' : 'Click for more info'
+
+            li.appendChild(pname)
+            li.appendChild(pmsg)
+
+            this.matchesList.insertAdjacentElement('afterbegin', li)
+
+        })
+    }
+    removeChilds(){
+        const parent = this.matchesList
+        while (parent.firstChild) {
+            parent.firstChild.remove()
+        }
+    }
+}
+
 const init = ()=>{
     new getMatch()
+    new checkMatches()
 }
 
 init()
