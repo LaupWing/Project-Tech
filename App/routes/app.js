@@ -34,6 +34,7 @@ router
                         name: match.name,
                         images: match.images,
                         age: match.age,
+                        gender: match.gender
                     })
                 }else{
                     socket.emit('sending match', {
@@ -43,6 +44,7 @@ router
                             mainPicture:true
                         }],
                         age: 'infinite',
+                        gender: 'unknown'
                     })
                 }
             })
