@@ -84,6 +84,7 @@ router
             age,
             name,
             minAge,
+            gender,
             maxAge} = req.body
         // This below is check on the client side but just to be save
         if(passwordCheck!==password){    
@@ -105,6 +106,7 @@ router
             minAge,
             maxAge,
             name,
+            gender,
             images:[
                 {
                     url: image,
