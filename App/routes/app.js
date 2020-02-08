@@ -17,6 +17,14 @@ router
 
         
         io.on('connection',async (socket)=>{
+            if(!activeUsers[`user_${socket.id}`]){
+                const filterForUser = await filterByNeeds(req)
+                activeUsers[`user_${socket.id}`] ={
+                    canBeAMatch: filterForUser,
+                    currentMatching: null,
+                    matchedUsers: null
+                }
+            }
             const sendMatches = async()=>{
                 const onlyMatches = req.user.seen
                     .filter(seen=>seen.status==='accepted')
@@ -28,24 +36,21 @@ router
                 const reconstructed = userList
                     .map(user=>{
                         const clicked = onlyMatches.find(match=>match.userId.equals(user._id))
+                        const generatedId = `random_${Math.random()}`
                         return {
                             name: user.name,
                             age: user.age,
                             images: user.images,
                             gender: user.gender,
-                            clicked
+                            clicked,
+                            generatedId
                         }
                     })
+                activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
                 socket.emit('send matchesList', reconstructed)
             }
             
-            if(!activeUsers[`user_${socket.id}`]){
-                const filterForUser = await filterByNeeds(req)
-                activeUsers[`user_${socket.id}`] ={
-                    canBeAMatch: filterForUser,
-                    currentMatching: null
-                }
-            }
+            
             
             console.log('connected', socket.id)
             sendMatches()

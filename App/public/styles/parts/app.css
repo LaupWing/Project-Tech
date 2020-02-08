@@ -55,20 +55,34 @@ nav ul.active-list{
     background-color: #eee;
 }
 nav ul.active-list li{
-    padding: 10px;
+    padding: 20px 10px;
+    border-top: solid 1px rgba(0,0,0,.1);
+    border-bottom: solid 1px rgba(0,0,0,.1);
+    display: flex;
+    cursor: pointer;
 }
-
+nav ul.active-list li img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 /* Matches */
 nav ul.active-list li.match.not-opened{
-    padding: 20px 10px;
     background: var(--main-color);
-    border-right: var(--purp) 8px solid;
+    border-right: var(--orange) 8px solid;
 }
 nav ul.active-list li.match p.name{
     font-weight: bold;
 }
 nav ul.active-list li.match p.message{
     opacity: .5;
+}
+
+nav .newMatches{
+    font-weight: bold;
+    color: var(--orange);
 }
 
 nav a.logout-btn{

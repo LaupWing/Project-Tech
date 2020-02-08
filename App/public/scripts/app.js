@@ -40,20 +40,31 @@ class checkMatches{
             const li = document.createElement('li')
             const pname = document.createElement('p')
             const pmsg = document.createElement('p')
+            const img = document.createElement('img')
+            const info = document.createElement('div')
+
+            li.id = match.generatedId
+            info.className = 'info'
             li.className  = match.clicked ?  'match not-opened' : 'match'
             pname.className  = 'name'
             pmsg.className  = 'message'
+            img.src = match.images.find(img=>img.mainPicture).url
 
             pname.textContent = match.name
             pmsg.textContent = match.clicked ? 'You got a new match!' : 'Click for more info'
 
-            li.appendChild(pname)
-            li.appendChild(pmsg)
-
+            info.appendChild(pname)
+            info.appendChild(pmsg)
+            li.appendChild(img)
+            li.appendChild(info)
+            li.addEventListener('click', this.showDetailOfUser)
             this.matchesList.insertAdjacentElement('afterbegin', li)
         })
         const newMatchesLength = list.map(match=>!match.clicked).length
         this.totalNewmatches.textContent = newMatchesLength !== 0 ? ` (${newMatchesLength})` : ''
+    }
+    showDetailOfUser(){
+        socket.emit('show detail', this.id)
     }
     removeChilds(){
         const parent = this.matchesList

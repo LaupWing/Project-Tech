@@ -109,9 +109,9 @@ p.error{
     opacity: 0;
     pointer-events: none;
     transform: translate(50%,0);
-    transition: all .5s;
 }
 .field.visible{
+    transition: all .5s;
     opacity: 1;
     pointer-events: initial;
     transform: translate(0,0);
