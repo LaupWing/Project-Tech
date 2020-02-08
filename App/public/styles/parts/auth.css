@@ -5,6 +5,7 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
 main{
     margin-top: 30vh;
@@ -228,4 +229,16 @@ p.error{
     height: 25px;
     background: var(--purp);
     cursor: pointer;
+}
+
+@media only screen and (max-width: 550px) {
+    form {
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-height: 1000px) {
+    main {
+        margin-top: 15vh;
+    }
 }

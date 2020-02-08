@@ -82,14 +82,21 @@ class EnableSubmit{
     constructor(){
         this.submit = document.querySelector('button[type="submit"]')
         this.inputs = document.querySelectorAll('input')
+        this.radioBtns = document.querySelectorAll('input[type="radio"]')
         this.inputs.forEach(input=>input.addEventListener('input', this.userInput.bind(this)))
         document.querySelector('button.next').addEventListener('click', this.userInput.bind(this))
+        this.reachedEnd = false
     }
     userInput(){
         const done = document.querySelectorAll('.done')
         const fields = document.querySelectorAll('.field')
         const empty = Array.from(this.inputs).some(input=>input.value === '')
-        if((done.length+1) === fields.length && !empty){
+        const noneChecked = Array.from(this.radioBtns).every(radio=>!radio.checked)
+        
+        if((done.length+1) === fields.length){
+            this.reachedEnd = true
+        }
+        if(this.reachedEnd && !empty && !noneChecked){
             this.submit.disabled = false
         }
     }
