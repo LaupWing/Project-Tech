@@ -9,6 +9,9 @@ This README is mainly used for table of contents. You can find the detail of wha
 
 ## Todo
 - [ ] When user accept or denied it needs to be updated for every user at that moment in the socket
+- [ ] Split up cliend side javascript
+- [ ] Split up server side javascript
+- [ ] Render files seperate (client side)
 - [x] Change the button panel classname to correspond with the panel container itself
 
 

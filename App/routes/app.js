@@ -14,7 +14,6 @@ router
     .get('/',auth, (req,res)=>{
         
         const io = req.app.get('socketio')
-
         
         io.on('connection',async (socket)=>{
             if(!activeUsers[`user_${socket.id}`]){
