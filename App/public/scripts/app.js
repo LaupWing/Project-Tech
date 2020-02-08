@@ -5,7 +5,7 @@ class getMatch{
         socket.removeAllListeners()
         socket.emit('get match')
         socket.on('sending match', this.renderMatch.bind(this))
-        this.card = document.getElementById("card");
+        this.card = document.getElementById("matching");
         this.card.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
         this.card.querySelector('button.no').addEventListener('click', this.denied.bind(this))
     }

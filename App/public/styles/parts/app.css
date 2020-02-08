@@ -152,7 +152,7 @@ main ul li:hover{
     grid-template-rows: 1fr;
     overflow: hidden;
 }
-#card{
+#matching{
     width: 80vw;
     max-width: 400px;
     grid-row: 1;
@@ -164,7 +164,7 @@ main ul li:hover{
     transition: .5s all;
 }
 
-#card .img-container{
+#matching .img-container{
     width: 100%;
     height: 60vh;
     max-height: 350px;
@@ -173,39 +173,39 @@ main ul li:hover{
     background-repeat: no-repeat;
     background-size: cover;
 }
-#card h2{
+#matching h2{
     background: var(--main-color);
     padding: 10px;
     border-radius: 10px 10px 0 0;
     color: var(--purp);
 }
-#card p{
+#matching p{
     padding: 10px;
     width: 100%;
     background-color: var(--main-color);
 }
 
-#card button{
+#matching button{
     width: 50%;
     color: var(--main-color);
     font-weight: bold;
     padding: 20px;
 }
 
-#card button.yes{
+#matching button.yes{
     background: var(--green);
     border-radius: 0 0 10px 0;
 }
-#card button.no{
+#matching button.no{
     background: var(--red);
     border-radius: 0 0 0 10px;
 }
 
-#card p span:first-of-type{
+#matching p span:first-of-type{
     font-weight: bold;
 }
 
-#detail{
+#info{
     width: 600px;
     height: 700px;
     background: var(--main-color);
@@ -218,21 +218,21 @@ main ul li:hover{
     display: flex;
     flex-direction: column;
 }
-#detail h2{
+#info h2{
     padding: 15px;
     background: var(--orange);
     color: var(--main-color);
 }
-#detail img{
+#info img{
     width: 100%;
     height: 70%;
     object-fit: cover;
 }
-#detail.hidden{
+#info.hidden{
     opacity: 0;
     transform: translate(100%,0);
 }
-#detail button{
+#info button{
     margin-top: auto;
     padding: 10px;
     color: var(--blue);
@@ -242,7 +242,7 @@ main ul li:hover{
     font-size: 1.3rem;
     background: transparent;
 }
-#card.hidden{
+#matching.hidden{
     opacity: 0;
     transform: translate(-100%,0);
 }
