@@ -50,7 +50,7 @@ class checkMatches{
             img.src = match.images.find(img=>img.mainPicture).url
 
             pname.textContent = match.name
-            pmsg.textContent = match.clicked ? 'You got a new match!' : 'Click for more info'
+            pmsg.textContent = !match.clicked ? 'You got a new match!' : 'Click for more info'
 
             info.appendChild(pname)
             info.appendChild(pmsg)
@@ -105,10 +105,26 @@ class showDetails{
     }
 }
 
+class switchPanel{
+    constructor(){
+        this.mainNav = document.querySelector('.main-nav')
+        this.cardContainer = document.querySelector('.card-container')
+        this.panels = document.querySelectorAll('.card-container > div')
+
+        this.items = this.mainNav.querySelectorAll('li')
+        this.items.forEach(item=>item.addEventListener('click', this.switch.bind(this)))
+    }
+
+    switch(event){
+        const panel = event.target.classList[0]
+    }
+}
+
 const init = ()=>{
     new getMatch()
     new checkMatches()
     new showDetails()
+    new switchPanel()
 }
 
 init()
