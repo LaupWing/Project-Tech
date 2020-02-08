@@ -19,11 +19,11 @@ class getMatch{
         this.card.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
     }
     denied(){
-        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('NOBODY WANTS YOU')
+        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
         socket.emit('denied match')
     }
     accepted(){
-        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('NOBODY WANTS YOU')
+        if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
         socket.emit('accepted match')
     }
 }
@@ -78,7 +78,7 @@ class showDetails{
         socket.on('user detail', this.gotUserDetail.bind(this))
         this.mainNav = document.querySelector('.main-nav')
         this.panels = document.querySelectorAll('.card-container > div')
-        this.detailPanel = document.querySelector('#detail')
+        this.detailPanel = document.querySelector('#info')
     }
     gotUserDetail(user){
         this.setActiveLinkAndPanel()
@@ -89,7 +89,7 @@ class showDetails{
         this.mainNav.querySelector('.info').classList.add('active')
         
         this.panels.forEach(panel=>panel.classList.remove('hidden'))
-        document.querySelector('#card').classList.add('hidden')
+        document.querySelector('#matching').classList.add('hidden')
     }
     renderDetail(user){
         const h2 = this.detailPanel.querySelector('h2')
@@ -117,6 +117,17 @@ class switchPanel{
 
     switch(event){
         const panel = event.target.classList[0]
+
+        this.items.forEach(item=>item.classList.remove('active'))
+        event.target.classList.add('active')
+        this.panels.forEach(p=>{
+            if(p.id !== panel){
+                p.classList.add('hidden')
+            }else{
+                p.classList.remove('hidden')
+            }
+        })
+        console.log(document.querySelector(`#${panel}`))
     }
 }
 
