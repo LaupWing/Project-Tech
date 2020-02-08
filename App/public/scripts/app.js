@@ -32,6 +32,7 @@ class checkMatches{
     constructor(){
         socket.on('send matchesList', this.renderList.bind(this))
         this.matchesList = document.querySelector('.active-list')
+        this.totalNewmatches = document.querySelector('.newMatches')
     }
     renderList(list){
         this.removeChilds()
@@ -50,8 +51,9 @@ class checkMatches{
             li.appendChild(pmsg)
 
             this.matchesList.insertAdjacentElement('afterbegin', li)
-
         })
+        const newMatchesLength = list.map(match=>!match.clicked).length
+        this.totalNewmatches.textContent = newMatchesLength !== 0 ? ` (${newMatchesLength})` : ''
     }
     removeChilds(){
         const parent = this.matchesList
