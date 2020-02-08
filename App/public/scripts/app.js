@@ -42,10 +42,9 @@ class checkMatches{
             const pmsg = document.createElement('p')
             const img = document.createElement('img')
             const info = document.createElement('div')
-
             li.id = match.id
             info.className = 'info'
-            li.className  = match.clicked ?  'match not-opened' : 'match'
+            li.className  = match.clicked ?  'match' : 'match not-opened'
             pname.className  = 'name'
             pmsg.className  = 'message'
             img.src = match.images.find(img=>img.mainPicture).url
@@ -60,7 +59,7 @@ class checkMatches{
             li.addEventListener('click', this.showDetailOfUser)
             this.matchesList.insertAdjacentElement('afterbegin', li)
         })
-        const newMatchesLength = list.map(match=>!match.clicked).length
+        const newMatchesLength = list.filter(match=>!match.clicked).length
         this.totalNewmatches.textContent = newMatchesLength !== 0 ? ` (${newMatchesLength})` : ''
     }
     showDetailOfUser(){

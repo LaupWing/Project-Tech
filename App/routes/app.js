@@ -28,7 +28,7 @@ router
             const sendMatches = async()=>{
                 const onlyMatches = req.user.seen
                     .filter(seen=>seen.status==='accepted')
-                    
+                // console.log(req.user.seen)
                 const promisses = onlyMatches.map((user)=>{
                     return User.findById(user.userId)
                 })
@@ -42,20 +42,35 @@ router
                             age: user.age,
                             images: user.images,
                             gender: user.gender,
-                            clicked,
-                            id: generatedId
+                            clicked: clicked.clicked,
+                            id: generatedId,
+                            userId: user._id
                         }
                     })
+                // console.log(reconstructed)
                 activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
-                socket.emit('send matchesList', reconstructed)
+                const clientUserList = reconstructed.map(x=>{
+                    delete x._id
+                    return x
+                })
+                socket.emit('send matchesList', clientUserList)
             }
             
             
             
             console.log('connected', socket.id)
             sendMatches()
-            socket.on('show detail', (id)=>{
+            socket.on('show detail', async (id)=>{
+                
                 const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
+                req.user.seen = req.user.seen.map(u=>{
+                    if(u.userId.equals(user.userId)){
+                        u.clicked = true
+                    }
+                    return u
+                })
+                // await req.user.save()
+                sendMatches()
                 delete user.clicked
                 socket.emit('user detail', user)
             })
