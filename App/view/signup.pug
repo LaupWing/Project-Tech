@@ -3,6 +3,7 @@ extends layout
 block content
     main
         h2 #{title}
+            span    1/5
         form(method="POST" action="/signup" enctype="multipart/form-data")
             .field.visible
                 input(type="email" placeholder="Email" name="email")

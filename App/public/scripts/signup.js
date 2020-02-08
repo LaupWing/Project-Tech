@@ -21,9 +21,10 @@ class nextSection{
     constructor(){
         this.nextBtn = document.querySelector('button.next')
         this.backBtn = document.querySelector('button.back')
-        
-        this.nextBtn.addEventListener('click', this.next)
-        this.backBtn.addEventListener('click', this.back)
+        this.currentStep = document.querySelector('h2 span')
+
+        this.nextBtn.addEventListener('click', this.next.bind(this))
+        this.backBtn.addEventListener('click', this.back.bind(this))
     }
     next(){
         const done = document.querySelectorAll('.done')
@@ -31,6 +32,7 @@ class nextSection{
         const ended = ()=>{
             fields[done.length+1].classList.add('visible')
             fields[done.length].removeEventListener('transitionend', ended)
+            this.updateCurrent()
         }
 
         fields[done.length].addEventListener('transitionend', ended)
@@ -42,12 +44,17 @@ class nextSection{
         const ended = ()=>{
             fields[done.length-1].classList.remove('done')
             fields[done.length].removeEventListener('transitionend', ended)
+            this.updateCurrent()
         }
         if(done.length === 0){
             return
         }
         fields[done.length].addEventListener('transitionend', ended)
         fields[done.length].classList.remove('visible')
+    }
+    updateCurrent(){
+        const done = document.querySelectorAll('.done')
+        this.currentStep.textContent = ` ${done.length+1}/5`
     }
 }
 
