@@ -181,6 +181,21 @@ p.error{
     background: var(--main-gradientColor);
 }
 
+.minAge,
+.maxAge{
+    width: 100%;
+}
+.minAge p,
+.maxAge p{
+    color: var(--purp);
+    font-weight: bold;  
+    margin: 10px 0;
+}
+.minAge p span,
+.maxAge p span{
+    color: black;
+    font-weight: normal;  
+}
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -188,7 +203,6 @@ p.error{
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
-    -webkit-transition: .2s;
     transition: opacity .2s;
 }
 
@@ -201,13 +215,13 @@ p.error{
     appearance: none;
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: var(--purp);
     cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: var(--purp);
     cursor: pointer;
 }
