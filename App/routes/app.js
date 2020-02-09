@@ -18,7 +18,7 @@ router
         
         const io = req.app.get('socketio')
         
-        io.on('connection',async (socket)=>{
+        io.on('connection', async (socket)=>{
             if(!activeUsers[`user_${socket.id}`]){
                 const filterForUser = await filterByNeeds(req)
                 activeUsers[`user_${socket.id}`] ={
