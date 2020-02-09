@@ -16,14 +16,35 @@ export default class Details{
         document.querySelector('#matching').classList.add('hidden')
     }
     renderDetail(user){
-        const h2 = this.detailPanel.querySelector('h2')
-        const gender = this.detailPanel.querySelector('.gender')
-        const age = this.detailPanel.querySelector('.age')
-        const img = this.detailPanel.querySelector('img')
+        this.removeChilds()
+        const h2 = document.createElement('h2')
+        const pGender = document.createElement('p')
+        const spanGender = document.createElement('span')
+        const pAge = document.createElement('p')
+        const spanAge = document.createElement('span')
+        const button = document.createElement('button')
+        const img = document.createElement('img')
         
         img.src = user.images.find(img=>img.mainPicture).url
         h2.textContent = user.name
-        age.textContent = user.age
-        gender.textContent = user.gender
+        pAge.textContent = 'Age '
+        pGender.textContent = 'Gender '
+        spanAge.textContent = user.age
+        spanGender.textContent = user.gender
+        pAge.appendChild(spanAge)
+        pGender.appendChild(spanGender)
+        
+        button.textContent = 'Send a message!'
+        this.detailPanel.appendChild(h2)
+        this.detailPanel.appendChild(img)
+        this.detailPanel.appendChild(pAge)
+        this.detailPanel.appendChild(pGender)
+        this.detailPanel.appendChild(button)
+    }
+    removeChilds(){
+        const parent = this.detailPanel
+        while (parent.firstChild) {
+            parent.firstChild.remove()
+        }
     }
 }

@@ -13,6 +13,7 @@ export default class MatchesList{
             const pmsg = document.createElement('p')
             const img = document.createElement('img')
             const info = document.createElement('div')
+            
             li.id = match.id
             info.className = 'info'
             li.className  = match.clicked ?  'match' : 'match not-opened'
