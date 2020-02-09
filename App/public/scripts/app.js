@@ -5,7 +5,7 @@ import Details from './app-parts/Details.js'
 import SwitchPanel from './app-parts/SwitchPanel.js'
 
 const init = ()=>{
-    const matches = new Matching()
+    const matches = new Matching(socket)
     const matchesList = new MatchesList((e)=>socket.emit('show detail', e.target.id))
     const details = new Details()
     new SwitchPanel()

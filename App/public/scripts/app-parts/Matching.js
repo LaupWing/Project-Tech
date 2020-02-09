@@ -1,8 +1,9 @@
 export default class Matches{
-    constructor(){
+    constructor(socket){
         this.card = document.getElementById("matching")
         this.card.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
         this.card.querySelector('button.no').addEventListener('click', this.denied.bind(this))
+        this.socket = socket
     }
     renderMatch(person){
         const h2 = this.card.querySelector('h2')
@@ -15,10 +16,10 @@ export default class Matches{
     }
     denied(){
         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-        socket.emit('denied match')
+        this.socket.emit('denied match')
     }
     accepted(){
         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-        socket.emit('accepted match')
+        this.socket.emit('accepted match')
     }
 }

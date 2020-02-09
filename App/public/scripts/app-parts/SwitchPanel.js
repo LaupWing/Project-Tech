@@ -1,4 +1,4 @@
-class SwitchPanel{
+export default class SwitchPanel{
     constructor(){
         this.mainNav = document.querySelector('.main-nav')
         this.cardContainer = document.querySelector('.card-container')
