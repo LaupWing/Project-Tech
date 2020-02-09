@@ -61,6 +61,10 @@ nav ul.active-list li{
     display: flex;
     cursor: pointer;
 }
+nav ul.active-list > p.info{
+    margin: 30px auto;
+    opacity: .3;
+}
 nav ul.active-list li .info{
     pointer-events: none;
 }

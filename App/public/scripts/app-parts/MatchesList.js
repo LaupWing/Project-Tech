@@ -5,6 +5,7 @@ export default class MatchesList{
         this.cb = eventFunction
     }
     renderList(list){
+        if(list.length===0) return
         this.removeChilds()
         list.forEach(match=>{
             const li = document.createElement('li')
