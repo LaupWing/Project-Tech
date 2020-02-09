@@ -19,7 +19,7 @@ const getMatch =  async(socket)=>{
         })
     }else{
         socket.emit('sending match', {
-            name: 'i have nobody',
+            name: 'mr lonely',
             images: [{
                 url:'https://i.ytimg.com/vi/6EEW-9NDM5k/maxresdefault.jpg',
                 mainPicture:true

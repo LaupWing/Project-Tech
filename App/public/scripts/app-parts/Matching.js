@@ -1,11 +1,8 @@
 export default class Matches{
     constructor(socket){
         this.matching = document.getElementById("matching")
-        this.matching.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
-        this.matching.querySelector('button.no').addEventListener('click', this.denied.bind(this))
+        this.applyButtonEvents()
         this.socket = socket
-        this.init = true
-        this.action = null
     }
     renderMatch(person){
         const h2 = this.matching.querySelector('h2')
@@ -24,6 +21,7 @@ export default class Matches{
                 this.matching.removeEventListener('transitionend', transitionEnded)
             }
             console.log('reset with new')
+            console.log(this.matching)
             this.matching.addEventListener('transitionend', transitionEnded)
             this.matching.style.transition = '1s opacity'
             this.matching.style.transitionDelay = '.2s'
@@ -31,25 +29,34 @@ export default class Matches{
             this.matching.classList.remove('denied')
         }
     }
+    applyButtonEvents(){
+        this.matching.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
+        this.matching.querySelector('button.no').addEventListener('click', this.denied.bind(this))
+    }
     denied(){
-        if(this.matching.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
+        if(this.matching.querySelector('.age').textContent === 'infinite')  return alert('I HAVE NOBODY')
         this.matching.classList.add('denied')
         this.matching.addEventListener('transitionend', this.showNewMatch.bind(this))
     }
     accepted(){
-        if(this.matching.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
+        if(this.matching.querySelector('.age').textContent === 'infinite')  return alert('I HAVE NOBODY')
         this.matching.classList.add('accepted')
         this.matching.addEventListener('transitionend', this.showNewMatch.bind(this))
     }
     showNewMatch(e){
-        console.log(e)
         if(e.propertyName === 'opacity'){
-            this.matching.removeEventListener('transitionend', this.showNewMatch)
+            console.log('zoek nieuwe gebruiker')
+            this.matching.removeEventListener('transitionend', this.showNewMatch.bind(this))
             if(e.target.classList[0]==='accepted'){
+                console.log('sending accept')
                 this.socket.emit('accepted match')
             }else if(e.target.classList[0]==='denied'){
                 this.socket.emit('denied match')
             }
+            const new_element = this.matching.cloneNode(true)
+            this.matching.parentNode.replaceChild(new_element, this.matching)
+            this.matching = new_element
+            this.applyButtonEvents()
         }
     }
 }
