@@ -1,4 +1,6 @@
-const getMatch = async (socket, user)=>{
+const activeUsers ={}
+
+async function getMatch(socket, user){
     const listOfUsers = user.couldBeAMatch
     const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
     if(match){
