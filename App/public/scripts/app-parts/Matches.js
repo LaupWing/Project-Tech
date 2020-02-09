@@ -1,13 +1,12 @@
-export default class getMatch{
+export default class Matches{
     constructor(){
-        socket.removeAllListeners()
-        socket.emit('get match')
-        socket.on('sending match', this.renderMatch.bind(this))
         this.card = document.getElementById("matching");
+        console.log(this.card)
         this.card.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
         this.card.querySelector('button.no').addEventListener('click', this.denied.bind(this))
     }
     renderMatch(person){
+        console.log(this)
         const h2 = this.card.querySelector('h2')
         const age = this.card.querySelector('.age')
         const gender = this.card.querySelector('.gender')
