@@ -13,15 +13,12 @@ export default class Matches{
         age.textContent = person.age
         gender.textContent = person.gender
         this.matching.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
-        console.log('new render')
         if(this.matching.classList.contains('accepted')||this.matching.classList.contains('denied')){
             const transitionEnded = ()=>{
                 this.matching.style.removeProperty('transitionDelay')
                 this.matching.style.removeProperty('transition')
                 this.matching.removeEventListener('transitionend', transitionEnded)
             }
-            console.log('reset with new')
-            console.log(this.matching)
             this.matching.addEventListener('transitionend', transitionEnded)
             this.matching.style.transition = '1s opacity'
             this.matching.style.transitionDelay = '.2s'
@@ -45,10 +42,8 @@ export default class Matches{
     }
     showNewMatch(e){
         if(e.propertyName === 'opacity'){
-            console.log('zoek nieuwe gebruiker')
             this.matching.removeEventListener('transitionend', this.showNewMatch.bind(this))
             if(e.target.classList[0]==='accepted'){
-                console.log('sending accept')
                 this.socket.emit('accepted match')
             }else if(e.target.classList[0]==='denied'){
                 this.socket.emit('denied match')
