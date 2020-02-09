@@ -2,9 +2,8 @@ const socket = io()
 import Matching from './app-parts/Matching.js'
 import MatchesList from './app-parts/MatchesList.js'
 
-class showDetails{
+class Details{
     constructor(){
-        socket.on('user detail', this.gotUserDetail.bind(this))
         this.mainNav = document.querySelector('.main-nav')
         this.panels = document.querySelectorAll('.card-container > div')
         this.detailPanel = document.querySelector('#info')
@@ -30,7 +29,6 @@ class showDetails{
         h2.textContent = user.name
         age.textContent = user.age
         gender.textContent = user.gender
-        
     }
 }
 
@@ -62,17 +60,15 @@ class switchPanel{
 
 const init = ()=>{
     const matches = new Matching()
-    const matchesList = new MatchesList((e)=>{
-        console.log(e.target.id)
-        socket.emit('show detail', e.target.id)
-    })
-    new showDetails()
+    const matchesList = new MatchesList((e)=>socket.emit('show detail', e.target.id))
+    const details = new Details()
     new switchPanel()
 
     // Sockets
     socket.emit('get match')
     socket.on('sending match', matches.renderMatch.bind(matches))
     socket.on('send matchesList', matchesList.renderList.bind(matchesList))
+    socket.on('user detail', details.gotUserDetail.bind(details))
 }
 
 init()

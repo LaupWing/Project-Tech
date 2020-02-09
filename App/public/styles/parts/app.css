@@ -61,12 +61,16 @@ nav ul.active-list li{
     display: flex;
     cursor: pointer;
 }
+nav ul.active-list li .info{
+    pointer-events: none;
+}
 nav ul.active-list li img{
     width: 50px;
     height: 50px;
     margin-right: 10px;
     object-fit: cover;
     border-radius: 50%;
+    pointer-events: none;
 }
 /* Matches */
 nav ul.active-list li.match.not-opened{
