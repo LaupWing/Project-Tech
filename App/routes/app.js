@@ -11,7 +11,7 @@ const activeUsers ={}
 const User = require('../models/user')
 const {
     getMatch
-} = require('./app/socketEvents')
+} = require('./app/socketMatchingEvents')
 router
     .get('/',auth, (req,res)=>{
         
