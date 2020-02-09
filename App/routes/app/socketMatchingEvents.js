@@ -99,8 +99,8 @@ const deniedMatch = async (socket, req)=>{
 const acceptedMatch = async(socket, req)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
     try{
-        await updateUserStatusCheck(req, currentMatchingUser)
         await updateMatchingUser(req, currentMatchingUser, 'accepted')
+        await updateUserStatusCheck(req, currentMatchingUser)
         activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
         await sendMatches(socket, req)
         await getMatch(socket)

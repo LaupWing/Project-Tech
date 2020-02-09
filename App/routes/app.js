@@ -26,7 +26,10 @@ router
 
             // Need realtime update to
             socket.on('denied match',()=> deniedMatch(socket, req))
-            socket.on('accepted match',()=> acceptedMatch(socket, req))
+            socket.on('accepted match',()=> {
+                console.log('acceptedMatch')
+                acceptedMatch(socket, req)
+            })
             
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match');

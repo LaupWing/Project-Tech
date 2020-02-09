@@ -38,7 +38,6 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
         userId: currentMatchingUser._id
     }) 
     try{
-        console.log('Trying to save user in deniedList')
         await user.save()
     }catch(e){
         console.log('updateUserDenied-----------Something went wrong', e)
