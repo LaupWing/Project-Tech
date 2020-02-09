@@ -60,7 +60,6 @@ router
             console.log('connected', socket.id)
             sendMatches()
             socket.on('show detail', async (id)=>{
-                
                 const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
                 req.user.seen = req.user.seen.map(u=>{
                     if(u.userId.equals(user.userId)){

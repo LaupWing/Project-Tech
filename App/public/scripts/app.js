@@ -1,76 +1,6 @@
 const socket = io()
-import Matches from './app-parts/Matches.js'
-// class getMatch{
-//     constructor(){
-//         socket.removeAllListeners()
-//         socket.emit('get match')
-//         socket.on('sending match', this.renderMatch.bind(this))
-//         this.card = document.getElementById("matching");
-//         this.card.querySelector('button.yes').addEventListener('click', this.accepted.bind(this))
-//         this.card.querySelector('button.no').addEventListener('click', this.denied.bind(this))
-//     }
-//     renderMatch(person){
-//         const h2 = this.card.querySelector('h2')
-//         const age = this.card.querySelector('.age')
-//         const gender = this.card.querySelector('.gender')
-//         h2.textContent = person.name
-//         age.textContent = person.age
-//         gender.textContent = person.gender
-//         this.card.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
-//     }
-//     denied(){
-//         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-//         socket.emit('denied match')
-//     }
-//     accepted(){
-//         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-//         socket.emit('accepted match')
-//     }
-// }
-class checkMatches{
-    constructor(){
-        socket.on('send matchesList', this.renderList.bind(this))
-        this.matchesList = document.querySelector('.active-list')
-        this.totalNewmatches = document.querySelector('.newMatches')
-    }
-    renderList(list){
-        this.removeChilds()
-        list.forEach(match=>{
-            const li = document.createElement('li')
-            const pname = document.createElement('p')
-            const pmsg = document.createElement('p')
-            const img = document.createElement('img')
-            const info = document.createElement('div')
-            li.id = match.id
-            info.className = 'info'
-            li.className  = match.clicked ?  'match' : 'match not-opened'
-            pname.className  = 'name'
-            pmsg.className  = 'message'
-            img.src = match.images.find(img=>img.mainPicture).url
-
-            pname.textContent = match.name
-            pmsg.textContent = !match.clicked ? 'You got a new match!' : 'Click for more info'
-
-            info.appendChild(pname)
-            info.appendChild(pmsg)
-            li.appendChild(img)
-            li.appendChild(info)
-            li.addEventListener('click', this.showDetailOfUser)
-            this.matchesList.insertAdjacentElement('afterbegin', li)
-        })
-        const newMatchesLength = list.filter(match=>!match.clicked).length
-        this.totalNewmatches.textContent = newMatchesLength !== 0 ? ` (${newMatchesLength})` : ''
-    }
-    showDetailOfUser(){
-        socket.emit('show detail', this.id)
-    }
-    removeChilds(){
-        const parent = this.matchesList
-        while (parent.firstChild) {
-            parent.firstChild.remove()
-        }
-    }
-}
+import Matching from './app-parts/Matching.js'
+import MatchesList from './app-parts/MatchesList.js'
 
 class showDetails{
     constructor(){
@@ -131,14 +61,18 @@ class switchPanel{
 }
 
 const init = ()=>{
-    const matches = new Matches()
-    new checkMatches()
+    const matches = new Matching()
+    const matchesList = new MatchesList((e)=>{
+        console.log(e.target.id)
+        socket.emit('show detail', e.target.id)
+    })
     new showDetails()
     new switchPanel()
 
     // Sockets
     socket.emit('get match')
     socket.on('sending match', matches.renderMatch.bind(matches))
+    socket.on('send matchesList', matchesList.renderList.bind(matchesList))
 }
 
 init()
