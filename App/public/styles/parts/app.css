@@ -170,9 +170,9 @@ main ul li:hover{
 
 /* Matching States */
 #matching.accepted{
-    transform: translate(50%,2%);
+    transform: translate(100%,2%);
     opacity: 0;
-    transition: .5s all;
+    transition: 1s all;
 }
 #matching.accepted p,
 #matching.accepted h2{

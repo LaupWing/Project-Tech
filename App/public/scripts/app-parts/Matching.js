@@ -29,6 +29,7 @@ export default class Matches{
         if(e.propertyName === 'opacity'){
             this.card.removeEventListener('transitionend', this.showNewMatch)
             this.card.style.transition = '1s opacity'
+            this.card.style.transitionDelay = '.2s'
             this.card.classList.remove('accepted')
             this.card.classList.remove('denied')
         }
