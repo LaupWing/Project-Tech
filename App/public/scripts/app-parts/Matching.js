@@ -16,7 +16,7 @@ export default class Matches{
         age.textContent = person.age
         gender.textContent = person.gender
         this.matching.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
-        
+        console.log('new render')
         if(this.matching.classList.contains('accepted')||this.matching.classList.contains('denied')){
             const transitionEnded = ()=>{
                 this.matching.style.removeProperty('transitionDelay')

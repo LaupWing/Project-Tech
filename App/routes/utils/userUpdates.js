@@ -20,8 +20,12 @@ const updateUserStatusCheck =async(req, currentMatchingUser)=>{
     })
     user.acceptedList = user.acceptedList.concat({
         userId: currentMatchingUser._id
-    }) 
-    await user.save()
+    })
+    try{
+        await user.save()
+    }catch(e){
+        console.log('updateUserStatusCheck-----------Something went wrong', e)
+    }
 }
 
 const updateUserDenied =async (req, currentMatchingUser)=>{
@@ -33,7 +37,12 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
     user.deniedList = user.deniedList.concat({
         userId: currentMatchingUser._id
     }) 
-    await user.save()
+    try{
+        console.log('Trying to save user in deniedList')
+        await user.save()
+    }catch(e){
+        console.log('updateUserDenied-----------Something went wrong', e)
+    }
 }
 
 const updateMatchingUser = async (req, currentMatchingUser, status)=>{
@@ -44,7 +53,11 @@ const updateMatchingUser = async (req, currentMatchingUser, status)=>{
             return
         }
         matchingUser.seen[indexSeen].status = status
-        matchingUser.save()
+        try{
+            matchingUser.save()
+        }catch(e){
+            console.log('updateMatchingUser-----------Something went wrong', e)
+        }
     }
 }
 

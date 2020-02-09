@@ -56,7 +56,6 @@ const sendMatches = async(socket, req)=>{
         delete x._id
         return x
     })
-    console.log('sending matches')
     socket.emit('send matchesList', clientUserList)
 }
 
@@ -87,22 +86,27 @@ const getUserDetail = async (id, socket, req)=>{
 
 const deniedMatch = async (socket, req)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-    
-    await updateUserDenied(req, currentMatchingUser)
-    await updateMatchingUser(req, currentMatchingUser, 'denied')
-
-    activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
+    try{
+        await updateUserDenied(req, currentMatchingUser)
+        await updateMatchingUser(req, currentMatchingUser, 'denied')
+        activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
+        await getMatch(socket)
+    }catch(e){
+        console.log('deniedMatch-----------Something went wrong', e)
+    }
 }
 
 const acceptedMatch = async(socket, req)=>{
-    console.log('accepted')
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-
-    await updateUserStatusCheck(req, currentMatchingUser)
-    await updateMatchingUser(req, currentMatchingUser, 'accepted')
-
-    activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
-    sendMatches(socket, req)
+    try{
+        await updateUserStatusCheck(req, currentMatchingUser)
+        await updateMatchingUser(req, currentMatchingUser, 'accepted')
+        activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
+        await sendMatches(socket, req)
+        await getMatch(socket)
+    }catch(e){
+        console.log('acceptMatch-----------Something went wrong', e)
+    }
 }
 module.exports ={
     getMatch,
