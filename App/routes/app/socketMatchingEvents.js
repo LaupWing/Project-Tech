@@ -3,7 +3,7 @@ const {
     updateUserStatusCheck,
     updateUserDenied,
     updateMatchingUser} = require('../utils/userUpdates')
-
+const User = require('../../models/user')
 const activeUsers ={}
 
 const getMatch =  async(socket)=>{
@@ -61,7 +61,7 @@ const sendMatches = async(socket, req)=>{
     socket.emit('send matchesList', clientUserList)
 }
 
-const setActiveUser=  async(socket)=>{
+const setActiveUser=  async(socket, req)=>{
     if(!activeUsers[`user_${socket.id}`]){
         const filterForUser = await filterByNeeds(req)
         activeUsers[`user_${socket.id}`] ={
@@ -81,7 +81,7 @@ const getUserDetail = async (id, socket, req)=>{
         return u
     })
     await req.user.save()
-    sendMatches()
+    sendMatches(socket,req)
     delete user.clicked
     socket.emit('user detail', user)
 }

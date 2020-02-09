@@ -1,16 +1,14 @@
 const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
-const filterByNeeds = require('./utils/filterByNeeds')
-const {
-    updateUserStatusCheck,
-    updateUserDenied,
-    updateMatchingUser} = require('./utils/userUpdates')
-    
 const activeUsers ={}
-const User = require('../models/user')
 const {
-    getMatch
+    getMatch,
+    acceptedMatch,
+    deniedMatch,
+    setActiveUser,
+    getUserDetail,
+    sendMatches
 } = require('./app/socketMatchingEvents')
 
 router
@@ -19,83 +17,16 @@ router
         const io = req.app.get('socketio')
         
         io.on('connection', async (socket)=>{
-            if(!activeUsers[`user_${socket.id}`]){
-                const filterForUser = await filterByNeeds(req)
-                activeUsers[`user_${socket.id}`] ={
-                    couldBeAMatch: filterForUser,
-                    currentMatching: null,
-                    matchedUsers: null
-                }
-            }
-            const sendMatches = async()=>{
-                const onlyMatches = req.user.seen
-                    .filter(seen=>seen.status==='accepted')
-                // console.log(req.user.seen)
-                const promisses = onlyMatches.map((user)=>{
-                    return User.findById(user.userId)
-                })
-                const userList = await Promise.all(promisses)
-                const reconstructed = userList
-                    .map(user=>{
-                        const clicked = onlyMatches.find(match=>match.userId.equals(user._id))
-                        const generatedId = `random_${Math.random()}`
-                        return {
-                            name: user.name,
-                            age: user.age,
-                            images: user.images,
-                            gender: user.gender,
-                            clicked: clicked.clicked,
-                            id: generatedId,
-                            userId: user._id
-                        }
-                    })
-                // console.log(reconstructed)
-                activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
-                const clientUserList = reconstructed.map(x=>{
-                    delete x._id
-                    return x
-                })
-                socket.emit('send matchesList', clientUserList)
-            }
-            
-            
+            setActiveUser(socket, req)
             
             console.log('connected', socket.id)
-            sendMatches()
-            socket.on('show detail', async (id)=>{
-                const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
-                req.user.seen = req.user.seen.map(u=>{
-                    if(u.userId.equals(user.userId)){
-                        u.clicked = true
-                    }
-                    return u
-                })
-                await req.user.save()
-                sendMatches()
-                delete user.clicked
-                socket.emit('user detail', user)
-            })
+            sendMatches(socket, req)
+            socket.on('show detail', (id)=>getUserDetail(id, socket, req))
             socket.on('get match', ()=>getMatch(socket, activeUsers[`user_${socket.id}`]))
+
             // Need realtime update to
-            socket.on('denied match',async ()=>{
-                const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-                
-                await updateUserDenied(req, currentMatchingUser)
-                await updateMatchingUser(req, currentMatchingUser, 'denied')
-
-                activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
-            })
-            
-            socket.on('accepted match',async()=>{
-                const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
-
-                await updateUserStatusCheck(req, currentMatchingUser)
-                await updateMatchingUser(req, currentMatchingUser, 'accepted')
-
-                activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
-
-                sendMatches()
-            })
+            socket.on('denied match',()=> deniedMatch(socket, req))
+            socket.on('accepted match',()=> acceptedMatch(socket, req))
             
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match');
