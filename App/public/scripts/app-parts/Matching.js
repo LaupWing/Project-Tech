@@ -23,5 +23,14 @@ export default class Matches{
         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
         // this.socket.emit('accepted match')
         this.card.classList.add('accepted')
+        this.card.addEventListener('transitionend', this.showNewMatch.bind(this))
+    }
+    showNewMatch(e){
+        if(e.propertyName === 'opacity'){
+            this.card.removeEventListener('transitionend', this.showNewMatch)
+            this.card.style.transition = '1s opacity'
+            this.card.classList.remove('accepted')
+            this.card.classList.remove('denied')
+        }
     }
 }
