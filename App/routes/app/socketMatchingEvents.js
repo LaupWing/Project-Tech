@@ -33,7 +33,6 @@ const getMatch =  async(socket)=>{
 const sendMatches = async(socket, req)=>{
     const onlyMatches = req.user.seen
         .filter(seen=>seen.status==='accepted')
-    // console.log(req.user.seen)
     const promisses = onlyMatches.map((user)=>{
         return User.findById(user.userId)
     })
@@ -52,12 +51,12 @@ const sendMatches = async(socket, req)=>{
                 userId: user._id
             }
         })
-    // console.log(reconstructed)
     activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
     const clientUserList = reconstructed.map(x=>{
         delete x._id
         return x
     })
+    console.log('sending matches')
     socket.emit('send matchesList', clientUserList)
 }
 
@@ -96,13 +95,13 @@ const deniedMatch = async (socket, req)=>{
 }
 
 const acceptedMatch = async(socket, req)=>{
+    console.log('accepted')
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
 
     await updateUserStatusCheck(req, currentMatchingUser)
     await updateMatchingUser(req, currentMatchingUser, 'accepted')
 
     activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
-
     sendMatches(socket, req)
 }
 module.exports ={
@@ -113,27 +112,3 @@ module.exports ={
     deniedMatch,
     acceptedMatch
 }
-
-// async ()=>{
-//     const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
-//     const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
-//     if(match){
-//         activeUsers[`user_${socket.id}`].currentMatching = match
-//         socket.emit('sending match', {
-//             name: match.name,
-//             images: match.images,
-//             age: match.age,
-//             gender: match.gender
-//         })
-//     }else{
-//         socket.emit('sending match', {
-//             name: 'i have nobody',
-//             images: [{
-//                 url:'https://i.ytimg.com/vi/6EEW-9NDM5k/maxresdefault.jpg',
-//                 mainPicture:true
-//             }],
-//             age: 'infinite',
-//             gender: 'unknown'
-//         })
-//     }
-// }

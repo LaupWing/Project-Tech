@@ -46,6 +46,7 @@ export default class Matches{
             this.matching.removeEventListener('transitionend', this.showNewMatch)
             console.log(e.target.classList[0])
             if(e.target.classList[0]==='accepted'){
+                console.log('accepted')
                 this.socket.emit('accepted match')
             }else if(e.target.classList[0]==='denied'){
                 this.socket.emit('denied match')
