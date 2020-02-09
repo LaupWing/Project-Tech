@@ -11,7 +11,6 @@ const updateUserStatusCheck =async(req, currentMatchingUser)=>{
         }else{
             return 'pending'
         }
-        
     }
 
     user.seen = user.seen.concat({
