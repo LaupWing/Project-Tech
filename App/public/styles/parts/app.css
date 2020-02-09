@@ -179,6 +179,16 @@ main ul li:hover{
     transition: all .3s;
     background: var(--green);
 }
+#matching.denied{
+    transform: translate(-100%,2%);
+    opacity: 0;
+    transition: 1s all;
+}
+#matching.denied p,
+#matching.denied h2{
+    transition: all .3s;
+    background: var(--red);
+}
 
 #matching .img-container{
     width: 100%;
