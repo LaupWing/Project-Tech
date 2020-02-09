@@ -9,7 +9,9 @@ const {
     
 const activeUsers ={}
 const User = require('../models/user')
-
+const {
+    getMatch
+} = require('./app/socketEvents')
 router
     .get('/',auth, (req,res)=>{
         
@@ -19,7 +21,7 @@ router
             if(!activeUsers[`user_${socket.id}`]){
                 const filterForUser = await filterByNeeds(req)
                 activeUsers[`user_${socket.id}`] ={
-                    canBeAMatch: filterForUser,
+                    couldBeAMatch: filterForUser,
                     currentMatching: null,
                     matchedUsers: null
                 }
@@ -72,29 +74,7 @@ router
                 delete user.clicked
                 socket.emit('user detail', user)
             })
-            socket.on('get match', async ()=>{
-                const listOfUsers = activeUsers[`user_${socket.id}`].canBeAMatch
-                const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
-                if(match){
-                    activeUsers[`user_${socket.id}`].currentMatching = match
-                    socket.emit('sending match', {
-                        name: match.name,
-                        images: match.images,
-                        age: match.age,
-                        gender: match.gender
-                    })
-                }else{
-                    socket.emit('sending match', {
-                        name: 'i have nobody',
-                        images: [{
-                            url:'https://i.ytimg.com/vi/6EEW-9NDM5k/maxresdefault.jpg',
-                            mainPicture:true
-                        }],
-                        age: 'infinite',
-                        gender: 'unknown'
-                    })
-                }
-            })
+            socket.on('get match', getMatch(socket, activeUsers[`user_${socket.id}`]))
             // Need realtime update to
             socket.on('denied match',async ()=>{
                 const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
@@ -102,7 +82,7 @@ router
                 await updateUserDenied(req, currentMatchingUser)
                 await updateMatchingUser(req, currentMatchingUser, 'denied')
 
-                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
+                activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
             })
             
             socket.on('accepted match',async()=>{
@@ -111,7 +91,7 @@ router
                 await updateUserStatusCheck(req, currentMatchingUser)
                 await updateMatchingUser(req, currentMatchingUser, 'accepted')
 
-                activeUsers[`user_${socket.id}`].canBeAMatch = await filterByNeeds(req)
+                activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
 
                 sendMatches()
             })
