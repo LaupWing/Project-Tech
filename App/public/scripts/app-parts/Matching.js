@@ -16,20 +16,19 @@ export default class Matches{
         age.textContent = person.age
         gender.textContent = person.gender
         this.matching.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
-        console.log(this.init)
-        if(!this.init){
+        
+        if(this.matching.classList.contains('accepted')||this.matching.classList.contains('denied')){
             const transitionEnded = ()=>{
                 this.matching.style.removeProperty('transitionDelay')
                 this.matching.style.removeProperty('transition')
                 this.matching.removeEventListener('transitionend', transitionEnded)
             }
+            console.log('reset with new')
             this.matching.addEventListener('transitionend', transitionEnded)
             this.matching.style.transition = '1s opacity'
             this.matching.style.transitionDelay = '.2s'
             this.matching.classList.remove('accepted')
             this.matching.classList.remove('denied')
-        }else{
-            this.init = false
         }
     }
     denied(){
