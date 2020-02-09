@@ -16,10 +16,12 @@ export default class Matches{
     }
     denied(){
         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-        this.socket.emit('denied match')
+        // this.socket.emit('denied match')
+        this.card.classList.add('accepted')
     }
     accepted(){
         if(this.card.querySelector('.age').textContent === 'infinite')  return alert('FOR MY OWN')
-        this.socket.emit('accepted match')
+        // this.socket.emit('accepted match')
+        this.card.classList.add('accepted')
     }
 }

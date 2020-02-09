@@ -168,6 +168,18 @@ main ul li:hover{
     transition: .5s all;
 }
 
+/* Matching States */
+#matching.accepted{
+    transform: translate(50%,10%);
+    opacity: 0;
+    transition: .8s all;
+}
+#matching.accepted p,
+#matching.accepted h2{
+    transition: all .8s;
+    background: var(--green);
+}
+
 #matching .img-container{
     width: 100%;
     height: 60vh;
