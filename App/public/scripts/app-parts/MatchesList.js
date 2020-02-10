@@ -1,6 +1,6 @@
 export default class MatchesList{
     constructor(eventFunction){
-        this.matchesList = document.querySelector('.match-list')
+        this.matchesList = document.querySelector('.active-list .match-list')
         this.totalNewmatches = document.querySelector('.newMatches')
         this.cb = eventFunction
     }
