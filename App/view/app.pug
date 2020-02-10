@@ -13,7 +13,10 @@ block content
                 span.newMatches
             li  Messages
         ul.active-list
-            p.info   No matches yet!
+            .match-list
+                p.info   No matches yet!
+            .message-list.hidden
+                p.info   No messages yet!
         a.logout-btn(href="/logout")  logout
     main
         ul.main-nav
