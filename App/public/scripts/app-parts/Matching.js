@@ -17,11 +17,13 @@ export default class Matches{
             const transitionEnded = ()=>{
                 this.matching.style.removeProperty('transitionDelay')
                 this.matching.style.removeProperty('transition')
+                this.matching.style.removeProperty('pointer-events')
                 this.matching.removeEventListener('transitionend', transitionEnded)
             }
             this.matching.addEventListener('transitionend', transitionEnded)
             this.matching.style.transition = '1s opacity'
             this.matching.style.transitionDelay = '.2s'
+            this.matching.style['pointer-events'] = 'none'
             this.matching.classList.remove('accepted')
             this.matching.classList.remove('denied')
         }
