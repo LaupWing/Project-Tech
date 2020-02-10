@@ -80,8 +80,8 @@ nav ul.active-list li img{
     pointer-events: none;
 }
 /* Matches && Messages */
-nav .match-list,
-nav .message-list{
+nav ul.active-list .match-list,
+nav ul.active-list .message-list{
     grid-row: 1;
     grid-column: 1;
 }
