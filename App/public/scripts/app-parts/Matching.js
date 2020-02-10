@@ -21,7 +21,7 @@ export default class Matches{
                 this.matching.removeEventListener('transitionend', transitionEnded)
             }
             this.matching.addEventListener('transitionend', transitionEnded)
-            this.matching.style.transition = '1s opacity'
+            this.matching.style.transition = '.5s opacity'
             this.matching.style.transitionDelay = '.2s'
             this.matching.style['pointer-events'] = 'none'
             this.matching.classList.remove('accepted')
