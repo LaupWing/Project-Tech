@@ -84,6 +84,7 @@ nav ul.active-list .match-list,
 nav ul.active-list .message-list{
     grid-row: 1;
     grid-column: 1;
+    transition: .5s all;
 }
 /* Matches */
 nav .match-list li.match.not-opened{
@@ -101,9 +102,13 @@ nav .newMatches{
     color: var(--orange);
 }
 /* Messages */
-nav .message-list.hidden{
+nav .active-list .message-list.hidden{
     opacity: 0;
     transform: translate(100%,0);
+}
+nav .active-list .match-list.hidden{
+    opacity: 0;
+    transform: translate(-100%,0);
 }
 
 
