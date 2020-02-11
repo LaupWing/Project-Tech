@@ -119,7 +119,6 @@ const savingUsers = users.map(async (user)=>{
     }catch(e){
         image = base64data
     }
-    console.log(image)
     const newUser = new User({
         email: user.email,
         password: user.password,
