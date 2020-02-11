@@ -4,7 +4,8 @@
   "description": "Project Tech full stack website",
   "main": "App/index.js",
   "scripts": {
-    "dev": "env-cmd -f ./config/dev.env nodemon App/index.js"
+    "dev": "env-cmd -f ./config/dev.env nodemon App/index.js",
+    "createDummy": "env-cmd -f ./config/dev.env node dummydata/createDummyData.js"
   },
   "repository": {
     "type": "git",
