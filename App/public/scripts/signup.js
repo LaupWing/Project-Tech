@@ -17,6 +17,7 @@ class imageLoader{
     }
 }
 
+
 class nextSection{
     constructor(){
         this.nextBtn = document.querySelector('button.next')
