@@ -1,7 +1,8 @@
 const User = require('../App/models/user')
 const fs = require('fs')
 const path = require('path')
-const imgur = require('imgur')
+const fetch = require('node-fetch')
+const FormData = require('form-data')
 //     email,
 //     password,
 //     passwordCheck,
@@ -113,16 +114,36 @@ const users = [
     // },
 ]
 
+const imgurBase64Upload = async(base64)=>{
+    console.log('upload..')
+    const url = 'https://api.imgur.com/3/image'
+    const form = new FormData()
+    const cliendId = '8a49497fbb1b7c4'
+    form.append('image', base64)
+    const options = {
+        method: 'POST',
+        body: form,
+        headers:{
+            Authorization: `Client-ID ${cliendId}`
+        }
+    }
+    const res = await fetch(url,options)
+    const json = await res.json()
+    
+    return json.data.link
+}
 const savingUsers = users.map(async (user)=>{
     const file = fs.readFileSync(path.join(__dirname,`images/${user.image}`))
     const base64data = new Buffer.from(file).toString('base64')
     let image=null
+    const res = await imgurBase64Upload(base64data)
+    console.log(res)
     try{
-        const res = await imgur.uploadBase64(base64data)
         image = res.data.link
     }catch(e){
         image = base64data
     }
+    // console.log(image)
     const newUser = new User({
         email: user.email,
         password: user.password,
@@ -143,23 +164,12 @@ const savingUsers = users.map(async (user)=>{
     }catch(e){
         console.log(e)
     }
-    return newUser.save()
+    // return newUser.save()
     
 })
 
-const imgurBase64Upload = (base64)=>{
-    const url = 'https://api.imgur.com/3/image'
-    const form = new FormData()
-    const cliendId = '8a49497fbb1b7c4'
-    form.append('image', base64)
-    const options = {
-        method: 'POST',
-        body: form
-    }
-    fetch(url,options)
-}
 
-// Promise.all(savedUsers).then(users=>{
-//         console.log('heh')
-//         console.log(users)
-//     })
+Promise.all(savingUsers).then(users=>{
+        console.log('heh')
+        console.log(users)
+    })
