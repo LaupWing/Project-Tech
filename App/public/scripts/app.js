@@ -8,7 +8,7 @@ import SwitchList   from './app-parts/SwitchList.js'
 const init = ()=>{
     const matches     = new Matching(socket)
     const matchesList = new MatchesList((e)=>socket.emit('show detail', e.target.id))
-    const details     = new Details()
+    const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
 

@@ -1,8 +1,10 @@
 export default class Details{
-    constructor(){
+    constructor(socket){
         this.mainNav     = document.querySelector('.main-nav')
         this.panels      = document.querySelectorAll('.card-container > div')
         this.detailPanel = document.querySelector('#info')
+        this.socket      = socket
+        this.id          = null
     }
     gotUserDetail(user){
         this.setActiveLinkAndPanel()
@@ -24,7 +26,8 @@ export default class Details{
         const spanAge    = document.createElement('span')
         const button     = document.createElement('button')
         const img        = document.createElement('img')
-        
+        this.id          = user.id
+
         img.src                = user.images.find(img=>img.mainPicture).url
         h2.textContent         = user.name
         pAge.textContent       = 'Age '
@@ -33,6 +36,7 @@ export default class Details{
         spanGender.textContent = user.gender
         pAge.appendChild(spanAge)
         pGender.appendChild(spanGender)
+        button.addEventListener('click', this.sendMessageClick.bind(this))
         
         button.textContent = 'Send a message!'
         this.detailPanel.appendChild(h2)
@@ -40,6 +44,9 @@ export default class Details{
         this.detailPanel.appendChild(pAge)
         this.detailPanel.appendChild(pGender)
         this.detailPanel.appendChild(button)
+    }
+    sendMessageClick(){
+        this.socket.emit('check messages', this.id)
     }
     removeChilds(){
         const parent = this.detailPanel

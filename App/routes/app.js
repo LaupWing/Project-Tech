@@ -12,6 +12,9 @@ const {
     setActiveUser,
     deleteUser
 } = require('./app/users')
+const {
+    checkMessages
+} = require('./app/socketMessages')
 
 router
     .get('/',auth, (req,res)=>{
@@ -32,11 +35,11 @@ router
             socket.on('accepted match', ()=> acceptedMatch(socket, req))
             
             // ---Messages---
-            socket.on('first message',  ()=>{})
+            socket.on('check messages',  (id)=> checkMessages(id, socket, req))
 
             socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')
-                socket.removeAllListeners('first message')
+                socket.removeAllListeners('check messages')
                 socket.removeAllListeners('get match')
                 socket.removeAllListeners('accepted match')
                 socket.removeAllListeners('show detail')
