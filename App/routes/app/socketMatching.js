@@ -5,14 +5,15 @@ const {
 const User = require('../../models/user')
 const {
     activeUsers,
-    updateCouldBeAMatch} = require('./users')
+    updateCouldBeAMatch,
+    updateActiveUser} = require('./users')
 
 
 const getMatch =  async(socket)=>{
     const listOfUsers = activeUsers[`user_${socket.id}`].couldBeAMatch
     const match = listOfUsers[Math.floor(Math.random() * listOfUsers.length)]
     if(match){
-        activeUsers[`user_${socket.id}`].currentMatching = match
+        updateActiveUser(socket, 'currentMatching', match)
         socket.emit('sending match', {
             name:   match.name,
             images: match.images,
@@ -53,7 +54,7 @@ const sendMatches = async(socket, req)=>{
                 userId:  user._id
             }
         })
-    activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
+    updateActiveUser(socket, 'matchedUsers', reconstructed)
     const clientUserList = reconstructed.map(x=>{
         delete x._id
         return x
