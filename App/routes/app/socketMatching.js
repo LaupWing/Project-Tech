@@ -1,10 +1,12 @@
-const filterByNeeds = require('../utils/filterByNeeds')
 const {
     updateUserStatusCheck,
     updateUserDenied,
     updateMatchingUser} = require('../utils/userUpdates')
 const User = require('../../models/user')
-const activeUsers ={}
+const {
+    activeUsers,
+    updateCouldBeAMatch} = require('./users')
+
 
 const getMatch =  async(socket)=>{
     const listOfUsers = activeUsers[`user_${socket.id}`].couldBeAMatch
@@ -59,17 +61,6 @@ const sendMatches = async(socket, req)=>{
     socket.emit('send matchesList', clientUserList)
 }
 
-const setActiveUser=  async(socket, req)=>{
-    if(!activeUsers[`user_${socket.id}`]){
-        const filterForUser = await filterByNeeds(req)
-        activeUsers[`user_${socket.id}`] ={
-            couldBeAMatch: filterForUser,
-            currentMatching: null,
-            matchedUsers: null
-        }
-    }
-}
-
 const getUserDetail = async (id, socket, req)=>{
     const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
     req.user.seen = req.user.seen.map(u=>{
@@ -89,7 +80,7 @@ const deniedMatch = async (socket, req)=>{
     try{
         await updateUserDenied(req, currentMatchingUser)
         await updateMatchingUser(req, currentMatchingUser, 'denied')
-        activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
+        await updateCouldBeAMatch(socket, req)
         await getMatch(socket)
     }catch(e){
         console.log('deniedMatch-----------Something went wrong', e)
@@ -101,7 +92,7 @@ const acceptedMatch = async(socket, req)=>{
     try{
         await updateMatchingUser(req, currentMatchingUser, 'accepted')
         await updateUserStatusCheck(req, currentMatchingUser)
-        activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
+        await updateCouldBeAMatch(socket, req)
         await sendMatches(socket, req)
         await getMatch(socket)
     }catch(e){
@@ -110,10 +101,8 @@ const acceptedMatch = async(socket, req)=>{
 }
 module.exports ={
     getMatch,
-    setActiveUser,
     sendMatches,
     getUserDetail,
     deniedMatch,
-    acceptedMatch,
-    activeUsers
+    acceptedMatch
 }

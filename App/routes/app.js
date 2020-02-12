@@ -5,11 +5,13 @@ const {
     getMatch,
     acceptedMatch,
     deniedMatch,
-    setActiveUser,
     getUserDetail,
-    sendMatches,
-    activeUsers
+    sendMatches
 } = require('./app/socketMatching')
+const {
+    setActiveUser,
+    deleteUser
+} = require('./app/users')
 
 router
     .get('/',auth, (req,res)=>{
@@ -30,7 +32,7 @@ router
             socket.on('accepted match',()=> acceptedMatch(socket, req))
             
             // ---Messages---
-            socket.on('first message', ()=>{console.log(activeUsers)})
+            socket.on('first message', ()=>{})
 
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match')
@@ -39,7 +41,7 @@ router
                 socket.removeAllListeners('accepted match')
                 socket.removeAllListeners('show detail')
                 io.removeAllListeners('connection')
-                delete activeUsers[`user_${socket.id}`]
+                deleteUser(socket)
             })
         })
         res.render('app', {
