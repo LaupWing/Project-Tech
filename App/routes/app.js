@@ -25,14 +25,14 @@ router
             sendMatches(socket, req)
             // !!!!!!!!!!!!!!! Need realtime update to
             // ---Matches---
-            socket.on('show detail', (id)=>getUserDetail(id, socket, req))
-            socket.on('get match', ()=>getMatch(socket))
+            socket.on('show detail',    (id)=>getUserDetail(id, socket, req))
+            socket.on('get match',      ()=>getMatch(socket))
 
-            socket.on('denied match',()=> deniedMatch(socket, req))
-            socket.on('accepted match',()=> acceptedMatch(socket, req))
+            socket.on('denied match',   ()=> deniedMatch(socket, req))
+            socket.on('accepted match', ()=> acceptedMatch(socket, req))
             
             // ---Messages---
-            socket.on('first message', ()=>{})
+            socket.on('first message',  ()=>{})
 
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match')
@@ -51,12 +51,12 @@ router
             },
             styling: 'app.css',
             user:{
-                images:req.user.images,
-                name: req.user.name,
-                email: req.user.email,
+                images: req.user.images,
+                name:   req.user.name,
+                email:  req.user.email,
                 minAge: req.user.minAge,
                 maxAge: req.user.maxAge,
-                age: req.user.age,
+                age:    req.user.age,
             },
             script: 'app.js'
         })

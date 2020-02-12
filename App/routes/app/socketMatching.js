@@ -14,19 +14,19 @@ const getMatch =  async(socket)=>{
     if(match){
         activeUsers[`user_${socket.id}`].currentMatching = match
         socket.emit('sending match', {
-            name: match.name,
+            name:   match.name,
             images: match.images,
-            age: match.age,
+            age:    match.age,
             gender: match.gender
         })
     }else{
         socket.emit('sending match', {
-            name: 'mr lonely',
+            name:   'mr lonely',
             images: [{
                 url:'https://i.ytimg.com/vi/6EEW-9NDM5k/maxresdefault.jpg',
                 mainPicture:true
             }],
-            age: 'infinite',
+            age:    'infinite',
             gender: 'unknown'
         })
     }
@@ -44,13 +44,13 @@ const sendMatches = async(socket, req)=>{
             const clicked = onlyMatches.find(match=>match.userId.equals(user._id))
             const generatedId = `random_${Math.random()}`
             return {
-                name: user.name,
-                age: user.age,
-                images: user.images,
-                gender: user.gender,
+                name:    user.name,
+                age:     user.age,
+                images:  user.images,
+                gender:  user.gender,
                 clicked: clicked.clicked,
-                id: generatedId,
-                userId: user._id
+                id:      generatedId,
+                userId:  user._id
             }
         })
     activeUsers[`user_${socket.id}`].matchedUsers = reconstructed
