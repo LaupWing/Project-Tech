@@ -114,5 +114,6 @@ module.exports ={
     sendMatches,
     getUserDetail,
     deniedMatch,
-    acceptedMatch
+    acceptedMatch,
+    activeUsers
 }

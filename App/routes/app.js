@@ -1,15 +1,15 @@
 const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
-const activeUsers ={}
 const {
     getMatch,
     acceptedMatch,
     deniedMatch,
     setActiveUser,
     getUserDetail,
-    sendMatches
-} = require('./app/socketMatchingEvents')
+    sendMatches,
+    activeUsers
+} = require('./app/socketMatching')
 
 router
     .get('/',auth, (req,res)=>{
@@ -21,13 +21,20 @@ router
             
             console.log('connected', socket.id)
             sendMatches(socket, req)
+            // !!!!!!!!!!!!!!! Need realtime update to
+            // ---Matches---
             socket.on('show detail', (id)=>getUserDetail(id, socket, req))
-            socket.on('get match', ()=>getMatch(socket, activeUsers[`user_${socket.id}`]))
+            socket.on('get match', ()=>getMatch(socket))
 
-            // Need realtime update to
             socket.on('denied match',()=> deniedMatch(socket, req))
             socket.on('accepted match',()=> acceptedMatch(socket, req))
             
+            // ---Messages---
+            socket.on('first message', ()=>{
+                console.log(activeUsers)
+                initChatRoom(socket,req)
+            })
+
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match')
                 socket.removeAllListeners('get match')
