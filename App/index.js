@@ -1,20 +1,20 @@
 // Requiring all the third party packages
-const express = require('express')
-const cors = require('cors')
+const express    = require('express')
+const cors       = require('cors')
 const bodyParser = require('body-parser')
-const path = require('path')
-const http = require('http')
-const socketio = require('socket.io')
+const path       = require('path')
+const http       = require('http')
+const socketio   = require('socket.io')
 
 // Own files
 require('./db/mongoose') // initialize the db connection 
 const authRoutes = require('./routes/auth')
-const appRoutes = require('./routes/app')
+const appRoutes  = require('./routes/app')
 
-const app = express()
+const app    = express()
 const server = http.createServer(app)
-const port = process.env.PORT
-const io = socketio(server)
+const port   = process.env.PORT
+const io     = socketio(server)
 
 app
     .use(express.urlencoded({extended:false}))

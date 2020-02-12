@@ -2,8 +2,8 @@ const fetch = require('node-fetch')
 const FormData = require('form-data')
 
 const imgurBase64Upload = async(base64)=>{
-    const url = 'https://api.imgur.com/3/image'
-    const form = new FormData()
+    const url      = 'https://api.imgur.com/3/image'
+    const form     = new FormData()
     const cliendId = '8a49497fbb1b7c4'
     form.append('image', base64)
     const options = {
@@ -13,8 +13,8 @@ const imgurBase64Upload = async(base64)=>{
             Authorization: `Client-ID ${cliendId}`
         }
     }
-    const res = await fetch(url,options)
-    const json = await res.json()
+    const res   = await fetch(url,options)
+    const json  = await res.json()
     return json.data.link
 }
 

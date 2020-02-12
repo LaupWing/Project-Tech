@@ -1,10 +1,10 @@
 const express = require('express')
-const router = new express.Router()
-const User = require('../models/user')
-const auth = require('../middleware/auth')
-const multer = require('multer')
-const imgur = require('imgur')
-const upload = multer({
+const router  = new express.Router()
+const User    = require('../models/user')
+const auth    = require('../middleware/auth')
+const multer  = require('multer')
+const imgur   = require('imgur')
+const upload  = multer({
     limits:{
         fileSize: 1000000
     },

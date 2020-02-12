@@ -1,7 +1,7 @@
 export default class Details{
     constructor(){
-        this.mainNav = document.querySelector('.main-nav')
-        this.panels = document.querySelectorAll('.card-container > div')
+        this.mainNav     = document.querySelector('.main-nav')
+        this.panels      = document.querySelectorAll('.card-container > div')
         this.detailPanel = document.querySelector('#info')
     }
     gotUserDetail(user){
@@ -17,19 +17,19 @@ export default class Details{
     }
     renderDetail(user){
         this.removeChilds()
-        const h2 = document.createElement('h2')
-        const pGender = document.createElement('p')
+        const h2         = document.createElement('h2')
+        const pGender    = document.createElement('p')
         const spanGender = document.createElement('span')
-        const pAge = document.createElement('p')
-        const spanAge = document.createElement('span')
-        const button = document.createElement('button')
-        const img = document.createElement('img')
+        const pAge       = document.createElement('p')
+        const spanAge    = document.createElement('span')
+        const button     = document.createElement('button')
+        const img        = document.createElement('img')
         
-        img.src = user.images.find(img=>img.mainPicture).url
-        h2.textContent = user.name
-        pAge.textContent = 'Age '
-        pGender.textContent = 'Gender '
-        spanAge.textContent = user.age
+        img.src                = user.images.find(img=>img.mainPicture).url
+        h2.textContent         = user.name
+        pAge.textContent       = 'Age '
+        pGender.textContent    = 'Gender '
+        spanAge.textContent    = user.age
         spanGender.textContent = user.gender
         pAge.appendChild(spanAge)
         pGender.appendChild(spanGender)

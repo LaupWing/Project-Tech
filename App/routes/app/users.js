@@ -1,13 +1,13 @@
-const activeUsers ={}
+const activeUsers   = {}
 const filterByNeeds = require('../utils/filterByNeeds')
 
 const setActiveUser=  async(socket, req)=>{
     if(!activeUsers[`user_${socket.id}`]){
         const filterForUser = await filterByNeeds(req)
         activeUsers[`user_${socket.id}`] ={
-            couldBeAMatch: filterForUser,
+            couldBeAMatch:   filterForUser,
             currentMatching: null,
-            matchedUsers: null
+            matchedUsers:    null
         }
     }
 }

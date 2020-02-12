@@ -5,12 +5,12 @@ export default class Matches{
         this.socket = socket
     }
     renderMatch(person){
-        const h2 = this.matching.querySelector('h2')
-        const age = this.matching.querySelector('.age')
+        const h2     = this.matching.querySelector('h2')
+        const age    = this.matching.querySelector('.age')
         const gender = this.matching.querySelector('.gender')
 
-        h2.textContent = person.name
-        age.textContent = person.age
+        h2.textContent     = person.name
+        age.textContent    = person.age
         gender.textContent = person.gender
         this.matching.style.setProperty('--profile',`url(${person.images.find(i=>i.mainPicture).url})`)
         if(this.matching.classList.contains('accepted')||this.matching.classList.contains('denied')){
