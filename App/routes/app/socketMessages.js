@@ -10,6 +10,9 @@ const checkMessages = async (id, socket, req)=>{
             chatRoom:[req.user._id, findUser.userId] 
         })
         await newRoom.save()
+        socket.emit('send chat', newRoom.messages)
+    }else{
+        socket.emit('send chat', findRoom.messages)
     }
 }
 

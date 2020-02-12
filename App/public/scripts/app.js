@@ -17,6 +17,7 @@ const init = ()=>{
     socket.on('sending match', matches.renderMatch.bind(matches))
     socket.on('send matchesList', matchesList.renderList.bind(matchesList))
     socket.on('user detail', details.gotUserDetail.bind(details))
+    socket.on('send chat', (messages)=>console.log(messages))
 }
 
 init()
