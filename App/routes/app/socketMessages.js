@@ -65,7 +65,11 @@ const getMessages = async (socket, req)=>{
     })
 
     updateActiveUser(socket, 'rooms', rooms)
-    socket.emit('send chatrooms', rooms)
+    socket.emit('send chatrooms', rooms.map(r=>({
+        chatId: r.chatId,
+        otherUser: r.otherUser,
+        messages: r.messages
+    })))
 }
 
 module.exports = {
