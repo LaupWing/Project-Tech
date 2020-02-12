@@ -7,7 +7,6 @@ const {
     activeUsers,
     updateCouldBeAMatch,
     updateActiveUser} = require('./users')
-const bcrypt = require('bcrypt')
 
 const getMatch =  async(socket)=>{
     const listOfUsers = activeUsers[`user_${socket.id}`].couldBeAMatch
@@ -71,8 +70,10 @@ const getUserDetail = async (id, socket, req)=>{
         return u
     })
     await req.user.save()
+    await sendMatches(socket, req)
+    const userWithUpdatedId = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.userId.equals(user.userId))
     delete user.clicked
-    socket.emit('user detail', user)
+    socket.emit('user detail', userWithUpdatedId)
 }
 
 const deniedMatch = async (socket, req)=>{

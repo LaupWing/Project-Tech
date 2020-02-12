@@ -2,7 +2,8 @@ const Messages = require('../../models/messages')
 const {activeUsers} = require('./users')
 
 const checkMessages = (id, socket, req)=>{
-    console.log(activeUsers[`user_${socket.id}`].matchedUsers)
+    const findUser = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)
+    console.log(findUser)
     console.log(id)
 }
 
