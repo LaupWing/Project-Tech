@@ -18,7 +18,7 @@ router
         
         const io = req.app.get('socketio')
         
-        io.on('connection', async (socket)=>{
+        io.once('connection', async (socket)=>{
             await setActiveUser(socket, req)
             
             console.log('connected', socket.id)
