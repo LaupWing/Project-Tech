@@ -16,9 +16,20 @@ const checkMessages = async (id, socket, req)=>{
         const otherUser = newRoom.chatRoom.find(id=>id.equals(req.user._id))
         const user = await User.findById(otherUser)
         
+        const room = {
+            ...newRoom._doc,
+            otherUser : user.images.find(img=>img.mainPicture),
+            chatId    : `room_${Math.random()}`
+        }
+        const updatedRooms = activeUsers[`user_${socket.id}`].rooms 
+            ? activeUsers[`user_${socket.id}`].rooms.concat(room) 
+            : [room]
+        updateActiveUser(socket, 'rooms', updatedRooms)
+        
         const chatObject ={
-            messages: newRoom.messages,
-            userProfilePic: user.images.find(img=>img.mainPicture)
+            messages: room.messages,
+            userProfilePic: user.images.find(img=>img.mainPicture),
+            chatId: room.chatId
         }
         socket.emit('send chat', chatObject)
     }else{

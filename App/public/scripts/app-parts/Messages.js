@@ -7,6 +7,7 @@ export default class Messages{
         console.log(room)
     }
     renderMessages(rooms){
+        console.log(rooms)
         const filterOut = rooms.filter(room=>room.messages.length!==0)
         if(filterOut.length ===0)   return
         this.removeChilds()
