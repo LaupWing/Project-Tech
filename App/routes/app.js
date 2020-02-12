@@ -13,7 +13,8 @@ const {
     deleteUser
 } = require('./app/users')
 const {
-    checkMessages
+    checkMessages,
+    getMessages
 } = require('./app/socketMessages')
 
 router
@@ -36,6 +37,7 @@ router
             
             // ---Messages---
             socket.on('check messages',  (id)=> checkMessages(id, socket, req))
+            socket.on('get messages',  ()=> getMessages(socket, req))
 
             socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')
