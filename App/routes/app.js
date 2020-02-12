@@ -34,7 +34,7 @@ router
             // ---Messages---
             socket.on('first message',  ()=>{})
 
-            socket.on('disconnect', ()=>{
+            socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')
                 socket.removeAllListeners('first message')
                 socket.removeAllListeners('get match')

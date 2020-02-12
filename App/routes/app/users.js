@@ -7,7 +7,8 @@ const setActiveUser=  async(socket, req)=>{
         activeUsers[`user_${socket.id}`] ={
             couldBeAMatch:   filterForUser,
             currentMatching: null,
-            matchedUsers:    null
+            matchedUsers:    null,
+            userId: req.user._id
         }
     }
 }
