@@ -102,21 +102,6 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required: true
         }
-    }],
-    messages:[{
-        message: {
-            type: String,
-            required: true
-        },
-        date:{
-            type: Date,
-            required: true
-        },
-        read:{
-            type:Boolean,
-            default: false,
-            required:true
-        }
     }]
 })
 
