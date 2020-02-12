@@ -38,6 +38,7 @@ export default class Matches{
         this.matching.addEventListener('transitionend', this.showNewMatch.bind(this))
     }
     accepted(){
+        this.socket.emit('first message')
         if(this.matching.querySelector('.age').textContent === 'infinite')  return alert('I HAVE NOBODY')
         this.matching.classList.add('accepted')
         this.matching.addEventListener('transitionend', this.showNewMatch.bind(this))

@@ -30,13 +30,11 @@ router
             socket.on('accepted match',()=> acceptedMatch(socket, req))
             
             // ---Messages---
-            socket.on('first message', ()=>{
-                console.log(activeUsers)
-                initChatRoom(socket,req)
-            })
+            socket.on('first message', ()=>{console.log(activeUsers)})
 
             socket.on('disconnect', ()=>{
                 socket.removeAllListeners('denied match')
+                socket.removeAllListeners('first message')
                 socket.removeAllListeners('get match')
                 socket.removeAllListeners('accepted match')
                 socket.removeAllListeners('show detail')
