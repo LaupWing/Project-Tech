@@ -1,7 +1,8 @@
 export default class Chat{
-    constructor(){
+    constructor(socket){
         this.detailPanel = document.querySelector('#info')
         this.id          = null
+        this.socket      = socket
     }
     renderChat(room){
         this.removeChilds()
@@ -22,12 +23,24 @@ export default class Chat{
         button.textContent     = 'SEND'
         form.appendChild(input)
         form.appendChild(button)
+        form.addEventListener('submit', this.onSubmit.bind(this))
 
         this.detailPanel.classList.remove('user-detail')
         this.detailPanel.classList.add('chat')
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(main)
         this.detailPanel.appendChild(form)
+    }
+    onSubmit(e){
+        e.preventDefault()
+        const input = e.target.querySelector('input')
+        if(input.value ==='')   return alert('You need to type something in')
+        this.socket.emit('send message', {
+            message   : input.value,
+            chatId    : this.id,
+            timestamp : new Date()
+        })
+        input.value = ''
     }
     removeChilds(){
         const parent = this.detailPanel

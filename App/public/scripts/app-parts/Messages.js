@@ -4,7 +4,7 @@ export default class Messages{
     constructor(socket){
         this.messages   = document.querySelector('.active-list .message-list')
         this.messageBtn = document.querySelector('.menu .message-list')
-        this.chat       = new Chat()
+        this.chat       = new Chat(socket)
         this.socket     = socket
     }
     renderFirstMessage(room){

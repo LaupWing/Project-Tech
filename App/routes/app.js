@@ -15,7 +15,8 @@ const {
 const {
     checkMessages,
     getMessages,
-    openChat
+    openChat,
+    saveMsg
     
 } = require('./app/socketMessages')
 
@@ -41,6 +42,7 @@ router
             socket.on('check messages', (id)=> checkMessages(id, socket, req))
             socket.on('get messages',   ()=> getMessages(socket, req))
             socket.on('open chat',      (chatId)=> openChat(chatId, socket, req))
+            socket.on('send message',   (msgObj)=> saveMsg(msgObj, socket, req))
 
             socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')
@@ -48,6 +50,7 @@ router
                 socket.removeAllListeners('get match')
                 socket.removeAllListeners('accepted match')
                 socket.removeAllListeners('show detail')
+                socket.removeAllListeners('send message')
                 io.removeAllListeners('connection')
                 deleteUser(socket)
             })

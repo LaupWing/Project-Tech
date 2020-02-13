@@ -33,6 +33,10 @@ const messagesSchema = new mongoose.Schema({
             type:Boolean,
             default: false,
             required:true
+        },
+        userSended:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
         }
     }]
 })

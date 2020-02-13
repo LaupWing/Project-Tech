@@ -81,15 +81,43 @@ const getMessages = async (socket, req)=>{
     socket.emit('send chatrooms', filteredRooms.map(createChatObject))
 }
 
-const openChat = async(id, socket, req)=>{
+const openChat = async(id, socket)=>{
     const room =activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room)
     socket.emit('open existing chat', chatObject)
 }
 
+const saveMsg = async(msgObj, socket, req)=>{
+    const findRoom = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
+    const messageRoom = await Messages.findById(findRoom._id)
+    
+    const updatedRooms = activeUsers[`user_${socket.id}`].rooms
+        .map(p=>{
+            if(p.chatId === msgObj.chatId){
+                p.messages.push({
+                    message: msgObj.message,
+                    date: msgObj.timestamp,
+                    userSended: req.user._id
+                })
+            }
+            return p
+        })
+    messageRoom.messages = messageRoom.messages.concat({
+        message: msgObj.message,
+        date: msgObj.timestamp,
+        userSended: req.user._id
+    })
+
+    await messageRoom.save()
+    updateActiveUser(socket, 'rooms', updatedRooms)
+    const appliedImgsAndId = await applyImgsAndId(messageRoom, req)
+    const chatObject = createChatObject(appliedImgsAndId)
+    console.log(chatObject)
+}
 
 module.exports = {
     checkMessages,
     getMessages,
-    openChat
+    openChat,
+    saveMsg
 }
