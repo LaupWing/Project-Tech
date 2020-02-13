@@ -4,7 +4,7 @@ const {
     activeUsers,
     updateActiveUser} = require('./users')
 
-const chatPrep = (rooms, req)=>{
+const filteringRooms = (rooms, req)=>{
     const filtered = rooms.filter(room=>{
         if(room.messages.length>0 ||room.emptyChat.find(u=>u.userId.equals(req.user._id))){
             return room
@@ -45,7 +45,7 @@ const createChatObject = (room)=>{
                 name:   room.otherUser.name,
                 age:    room.otherUser.age,
                 gender: room.otherUser.gender,
-                image:  room.otherUser.images
+                images:  room.otherUser.images
             },
             chatId:    room.chatId
         }
@@ -110,28 +110,12 @@ const getMessages = async (socket, req)=>{
     const res = await Promise.all(roomsPromises)
     const getUserImgs = res
         .filter(room=>room!==null)
-        .map(room=>{
-            const copy = {
-                ...room._doc,
-                chatId: `room_${Math.random()}`
-            }
-            return copy
-        })
-        .map(async room=>{
-            const findUserId = room.chatRoom.find(id=>!id.equals(req.user._id))
-            room.otherUser = await User.findById(findUserId)
-            room.name = room.otherUser.name
-            return room
-        })
+        .map(async room=> await applyImgsAndId(room, req))
         
     const resWithImgs = await Promise.all(getUserImgs)
-    const rooms = resWithImgs.map(r=>{
-        r.otherUser = r.otherUser.images.find(img=>img.mainPicture)
-        return r
-    })
-    const filteredRooms = chatPrep(rooms, req)
+    const filteredRooms = filteringRooms(resWithImgs, req)
     updateActiveUser(socket, 'rooms', filteredRooms)
-    socket.emit('send chatrooms', filteredRooms.map(sanitizeChatRoom,{req}))
+    socket.emit('send chatrooms', filteredRooms.map(createChatObject))
 }
 
 
