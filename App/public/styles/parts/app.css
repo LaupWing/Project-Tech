@@ -315,6 +315,44 @@ main ul li:hover{
     transform: translate(-100%,0);
     pointer-events: none;
 }
+
+/* USER CHAT STYLING */
+#info.chat h2{
+    align-items: center;
+    background: var(--orange);
+    color: white;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+}
+#info.chat h2 img{
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+#info.chat main{
+    width: 100%;
+}
+#info.chat form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+#info.chat form input{
+    width: 80%;
+    border-radius: 30px;
+    padding:0 10px;
+    border:none;
+    border: solid var(--blue) 2px;
+}
+#info.chat form button{
+    border-radius: 30px;
+    background: var(--blue);
+    color: var(--main-color);
+    font-weight: bold;
+    margin-left: 10px;
+}
 footer{
     text-align: right;
     padding-right: 10px;

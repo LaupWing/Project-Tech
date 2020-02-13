@@ -18,7 +18,7 @@ export default class Messages{
         this.messageBtn.click()
         const messageEl = document.getElementById(room.chatId)
         messageEl.classList.add('active')
-        console.log(messageEls)
+        this.chat.renderChat(room)
     }
     renderMessageListItem(room){
         const li    = document.createElement('li')
