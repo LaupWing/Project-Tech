@@ -91,10 +91,10 @@ nav .match-list li.match.not-opened{
     background: var(--main-color);
     border-right: var(--orange) 8px solid;
 }
-nav .match-list li.match p.name{
+nav .active-list li.match p.name{
     font-weight: bold;
 }
-nav .match-list li.match p.message{
+nav .active-list li.match p.message{
     opacity: .5;
 }
 nav .newMatches{

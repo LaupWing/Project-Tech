@@ -36,8 +36,8 @@ router
             socket.on('accepted match', ()=> acceptedMatch(socket, req))
             
             // ---Messages---
-            socket.on('check messages',  (id)=> checkMessages(id, socket, req))
-            socket.on('get messages',  ()=> getMessages(socket, req))
+            socket.on('check messages', (id)=> checkMessages(id, socket, req))
+            socket.on('get messages',   ()=> getMessages(socket, req))
 
             socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')

@@ -10,10 +10,11 @@ const checkMessages = async (id, socket, req)=>{
     
     if(!findRoom){
         const newRoom = new Messages({
-            chatRoom:[req.user._id, findUser.userId] 
+            chatRoom:[req.user._id, findUser.userId],
+            emptyChat:[req.user._id] 
         })
         await newRoom.save()
-        const otherUser = newRoom.chatRoom.find(id=>id.equals(req.user._id))
+        const otherUser = newRoom.chatRoom.find(id=>!id.equals(req.user._id))
         const user = await User.findById(otherUser)
         
         const room = {
@@ -29,9 +30,10 @@ const checkMessages = async (id, socket, req)=>{
         const chatObject ={
             messages: room.messages,
             userProfilePic: user.images.find(img=>img.mainPicture),
-            chatId: room.chatId
+            chatId: room.chatId,
+            name: user.name
         }
-        socket.emit('send chat', chatObject)
+        socket.emit('send first chat', chatObject)
     }else{
         socket.emit('send chat', findRoom.messages)
     }

@@ -4,32 +4,31 @@ export default class Messages{
         this.messageBtn = document.querySelector('.menu .message-list')
         this.socket   = socket
     }
-    renderStarterMessage(room){
-        console.log(room)
+    renderFirstMessage(room){
         this.messageBtn.click()
+        this.renderChatEl(room)
     }
-    renderChatEl(){
+    renderChatEl(room){
         const li    = document.createElement('li')
         const pname = document.createElement('p')
         const pmsg  = document.createElement('p')
         const img   = document.createElement('img')
         const info  = document.createElement('div')
         
-        li.id = match.id
+        li.id           = room.chatId
         info.className  = 'info'
-        li.className    = match.clicked ?  'match' : 'match not-opened'
+        li.className    = room.messages.length > 0 ?  'match' : 'match not-opened'
         pname.className = 'name'
         pmsg.className  = 'message'
-        img.src         = match.images.find(img=>img.mainPicture).url
+        img.src         = room.userProfilePic.url
 
-        pname.textContent = match.name
-        pmsg.textContent  = !match.clicked ? 'You got a new match!' : 'Click for more info'
+        pname.textContent = room.name
+        pmsg.textContent  = room.messages.length === 0 ? 'Send your first message!' : 'msg'
 
         info.appendChild(pname)
         info.appendChild(pmsg)
         li.appendChild(img)
         li.appendChild(info)
-        li.addEventListener('click', this.cb)
         this.messages.insertAdjacentElement('afterbegin', li)
     }
     renderMessages(rooms){

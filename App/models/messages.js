@@ -4,6 +4,9 @@ const messagesSchema = new mongoose.Schema({
     chatRoom:[{
         type: mongoose.Schema.Types.ObjectId
     }],
+    emptyChat:[{
+        type: mongoose.Schema.Types.ObjectId
+    }],
     messages:[{
         _id: false,
         message: {
