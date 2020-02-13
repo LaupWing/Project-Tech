@@ -274,24 +274,24 @@ main ul li:hover{
 }
 
 /* USER DETAIL STYLING */
-#info .user-detail h2{
+#info.user-detail h2{
     width: 100%;
     padding: 15px;
     background: var(--orange);
     color: var(--main-color);
     text-align: center;
 }
-#info .user-detail img{
+#info.user-detail img{
     width: 100%;
     height: 70%;
     object-fit: cover;
 }
-#info .user-detail p{
+#info.user-detail p{
     text-align: left;
     padding: 10px 15px;
     width: 100%;
 }
-#info .user-detail button{
+#info.user-detail button{
     margin-top: auto;
     padding: 10px 15px;
     color: var(--main-color);

@@ -21,6 +21,8 @@ export default class Chat{
         form.appendChild(input)
         form.appendChild(button)
 
+        this.detailPanel.classList.remove('user-detail')
+        this.detailPanel.classList.add('chat')
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(form)
     }
