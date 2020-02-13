@@ -1,17 +1,20 @@
+import Chat from './Chat.js'
 export default class Messages{
     constructor(socket){
-        this.messages = document.querySelector('.active-list .message-list')
+        this.messages   = document.querySelector('.active-list .message-list')
         this.messageBtn = document.querySelector('.menu .message-list')
-        this.socket   = socket
+        this.chat       = new Chat()
+        this.socket     = socket
     }
     renderFirstMessage(room){
         this.messageBtn.click()
         if(this.messages.querySelector('p.info')){
             this.removeChilds()
         }
-        this.renderChatEl(room)
+        this.renderMessageListItem(room)
+        this.chat.renderChat(room)
     }
-    renderChatEl(room){
+    renderMessageListItem(room){
         const li    = document.createElement('li')
         const pname = document.createElement('p')
         const pmsg  = document.createElement('p')
@@ -36,8 +39,7 @@ export default class Messages{
     }
     renderMessages(rooms){
         this.removeChilds()
-        console.log(rooms)
-        rooms.forEach(room=>this.renderChatEl(room))
+        rooms.forEach(room=>this.renderMessageListItem(room))
     }
     removeChilds(){
         const parent = this.messages

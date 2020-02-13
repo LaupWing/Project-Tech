@@ -1,0 +1,33 @@
+export default class Chat{
+    constructor(){
+        this.detailPanel = document.querySelector('#info')
+        this.id          = null
+    }
+    renderChat(room){
+        this.removeChilds()
+        const h2         = document.createElement('h2')
+        const button     = document.createElement('button')
+        const img        = document.createElement('img')
+        const input      = document.createElement('input')
+        const form       = document.createElement('form')
+        this.id          = room.id
+
+        img.src                = room.userProfilePic.url
+        h2.textContent         = room.name
+        h2.appendChild(img)
+        input.type             = 'text'
+        button.type            = 'submit'
+        button.textContent     = 'SEND'
+        form.appendChild(input)
+        form.appendChild(button)
+
+        this.detailPanel.appendChild(h2)
+        this.detailPanel.appendChild(form)
+    }
+    removeChilds(){
+        const parent = this.detailPanel
+        while (parent.firstChild) {
+            parent.firstChild.remove()
+        }
+    }
+}
