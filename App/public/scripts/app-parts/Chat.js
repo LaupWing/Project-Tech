@@ -14,7 +14,7 @@ export default class Chat{
         const form   = document.createElement('form')
         const main   = document.createElement('main')
         this.id      = room.chatId
-
+        
         img.src                = room.otherUser.images.find(x=>x.mainPicture).url
         h2.appendChild(img)
         h2.appendChild(h2text)
@@ -30,6 +30,18 @@ export default class Chat{
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(main)
         this.detailPanel.appendChild(form)
+        this.renderMessages(room.messages)
+    }
+    renderMessages(messages){
+        if(messages.length>0){
+            const msgContainer = this.detailPanel.querySelector('main')
+            messages.forEach(msg=>{
+                const p       = document.createElement('p')
+                p.textContent = msg.message
+                p.className   = msg.userSended
+                msgContainer.insertAdjacentElement('beforeend', p) 
+            })
+        }
     }
     onSubmit(e){
         e.preventDefault()

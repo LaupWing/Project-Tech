@@ -332,6 +332,18 @@ main ul li:hover{
 }
 #info.chat main{
     width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    overflow-y: auto;
+}
+#info.chat main p.you{
+    align-self: flex-end;
+    padding: 5px 10px;
+    background: var(--purp);
+    color: var(--main-color);
+    margin: 5px 0;
+    border-radius: 10px;
 }
 #info.chat form{
     width: 100%;
