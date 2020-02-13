@@ -253,7 +253,7 @@ main ul li:hover{
 #matching p span:first-of-type{
     font-weight: bold;
 }
-
+/* GENERAL INFO CONTAINER STYLING */
 #info{
     width: 600px;
     height: 700px;
@@ -268,28 +268,30 @@ main ul li:hover{
     flex-direction: column;
     align-items: center;
 }
-#info h2{
+#info.hidden{
+    opacity: 0;
+    transform: translate(100%,0);
+}
+
+/* USER DETAIL STYLING */
+#info .user-detail h2{
     width: 100%;
     padding: 15px;
     background: var(--orange);
     color: var(--main-color);
     text-align: center;
 }
-#info img{
+#info .user-detail img{
     width: 100%;
     height: 70%;
     object-fit: cover;
 }
-#info.hidden{
-    opacity: 0;
-    transform: translate(100%,0);
-}
-#info p{
+#info .user-detail p{
     text-align: left;
     padding: 10px 15px;
     width: 100%;
 }
-#info button{
+#info .user-detail button{
     margin-top: auto;
     padding: 10px 15px;
     color: var(--main-color);

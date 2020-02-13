@@ -39,6 +39,7 @@ export default class Details{
         button.addEventListener('click', this.sendMessageClick.bind(this))
         
         button.textContent = 'Send a message!'
+        this.detailPanel.classList.add('user-detail')
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(img)
         this.detailPanel.appendChild(pAge)
