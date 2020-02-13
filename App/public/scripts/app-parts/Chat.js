@@ -10,10 +10,10 @@ export default class Chat{
         const img        = document.createElement('img')
         const input      = document.createElement('input')
         const form       = document.createElement('form')
-        this.id          = room.id
+        this.id          = room.chatId
 
-        img.src                = room.userProfilePic.url
-        h2.textContent         = room.name
+        img.src                = room.otherUser.images.find(x=>x.mainPicture).url
+        h2.textContent         = room.otherUser.name
         h2.appendChild(img)
         input.type             = 'text'
         button.type            = 'submit'

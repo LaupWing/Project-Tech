@@ -7,6 +7,7 @@ export default class Messages{
         this.socket     = socket
     }
     renderFirstMessage(room){
+        console.log(room)
         this.messageBtn.click()
         if(this.messages.querySelector('p.info')){
             this.removeChilds()
@@ -23,15 +24,15 @@ export default class Messages{
         const pmsg  = document.createElement('p')
         const img   = document.createElement('img')
         const info  = document.createElement('div')
-        
+        console.log(room)
         li.id           = room.chatId
         info.className  = 'info'
         li.className    = room.messages.length > 0 ?  'match' : 'match not-opened'
         pname.className = 'name'
         pmsg.className  = 'message'
-        img.src         = room.userProfilePic.url
+        img.src         = room.otherUser.images.find(img=>img.mainPicture).url
 
-        pname.textContent = room.name
+        pname.textContent = room.otherUser.name
         pmsg.textContent  = room.messages.length === 0 ? 'Send your first message!' : 'msg'
 
         info.appendChild(pname)
