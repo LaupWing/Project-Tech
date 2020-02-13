@@ -327,15 +327,17 @@ main ul li:hover{
 }
 #info.chat h2 img{
     width: 50px;
+    height: 50px;
+    object-fit: cover;
     border-radius: 50%;
     margin-right: 20px;
 }
 #info.chat main{
     width: 100%;
-    align-items: flex-end;
-    justify-content: flex-end;
     padding: 10px 20px;
     overflow-y: auto;
+    flex-direction: column-reverse;
+    align-items: flex-end;
 }
 #info.chat main p.you{
     align-self: flex-end;

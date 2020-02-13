@@ -30,6 +30,7 @@ export default class Chat{
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(main)
         this.detailPanel.appendChild(form)
+        input.focus()
         this.renderMessages(room.messages)
     }
     renderMessages(messages){
@@ -39,7 +40,7 @@ export default class Chat{
                 const p       = document.createElement('p')
                 p.textContent = msg.message
                 p.className   = msg.userSended
-                msgContainer.insertAdjacentElement('beforeend', p) 
+                msgContainer.insertAdjacentElement('afterbegin', p) 
             })
         }
     }
