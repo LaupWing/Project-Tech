@@ -13,15 +13,29 @@ const filteringRooms = (rooms, req)=>{
     return filtered
 }
 
-const applyImgsAndId = async (room, req)=>{
+const formatChatMessages = (messages, req)=>{
+    return messages.map(msg=>{
+        const copy = {
+            ...msg._doc
+        }
+        if(msg.userSended.equals(req.user._id)){
+            copy.userSended = 'you'
+        }else{
+            copy.userSended = 'otherUser'
+        }
+        return copy
+    })
+}
+
+const applyOtherUser = async (room, req)=>{
     const otherUser = room.chatRoom.find(id=>!id.equals(req.user._id))
     const user = await User.findById(otherUser)
-    const roomWithImgsAndID = {
+    const roomWithOtherUser = {
         ...room._doc,
         otherUser : user,
         chatId    : `room_${Math.random()}`
     }
-    return roomWithImgsAndID
+    return roomWithOtherUser
 }
 
 const createChatObject = (room)=>{
@@ -52,7 +66,7 @@ const checkMessages = async (id, socket, req)=>{
         })
         await newRoom.save()
 
-        const room = await applyImgsAndId(newRoom, req)
+        const room = await applyOtherUser(newRoom, req)
         socket.emit('send first chat', createChatObject(room))
     }else{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
@@ -72,7 +86,7 @@ const getMessages = async (socket, req)=>{
 
     const getUserImgs = res
         .filter(room=>room!==null)
-        .map(async room=> await applyImgsAndId(room, req))
+        .map(async room=> await applyOtherUser(room, req))
     const resWithImgs = await Promise.all(getUserImgs)
 
     const filteredRooms = filteringRooms(resWithImgs, req)
@@ -90,29 +104,21 @@ const openChat = async(id, socket)=>{
 const saveMsg = async(msgObj, socket, req)=>{
     const findRoom = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom = await Messages.findById(findRoom._id)
-    
-    const updatedRooms = activeUsers[`user_${socket.id}`].rooms
-        .map(p=>{
-            if(p.chatId === msgObj.chatId){
-                p.messages.push({
-                    message: msgObj.message,
-                    date: msgObj.timestamp,
-                    userSended: req.user._id
-                })
-            }
-            return p
-        })
+
     messageRoom.messages = messageRoom.messages.concat({
-        message: msgObj.message,
-        date: msgObj.timestamp,
+        message:    msgObj.message,
+        date:       msgObj.timestamp,
         userSended: req.user._id
     })
 
     await messageRoom.save()
-    updateActiveUser(socket, 'rooms', updatedRooms)
-    const appliedImgsAndId = await applyImgsAndId(messageRoom, req)
-    const chatObject = createChatObject(appliedImgsAndId)
-    console.log(chatObject)
+    await getMessages(socket, req)
+
+    const againFindRoom = activeUsers[`user_${socket.id}`].rooms.find(q=>q._id.equals(findRoom._id)) 
+    const chatObj       = createChatObject(againFindRoom)
+    chatObj.messages    = formatChatMessages(chatObj.messages, req)
+
+    socket.emit('open existing chat', chatObj)
 }
 
 module.exports = {
