@@ -7,7 +7,6 @@ export default class Messages{
         this.socket     = socket
     }
     renderFirstMessage(room){
-        console.log(room)
         this.messageBtn.click()
         if(this.messages.querySelector('p.info')){
             this.removeChilds()
@@ -16,7 +15,10 @@ export default class Messages{
         this.chat.renderChat(room)
     }
     openExistingChat(room){
-        console.log(room)
+        this.messageBtn.click()
+        const messageEl = document.getElementById(room.chatId)
+        messageEl.classList.add('active')
+        console.log(messageEls)
     }
     renderMessageListItem(room){
         const li    = document.createElement('li')
@@ -24,10 +26,10 @@ export default class Messages{
         const pmsg  = document.createElement('p')
         const img   = document.createElement('img')
         const info  = document.createElement('div')
-        console.log(room)
+
         li.id           = room.chatId
         info.className  = 'info'
-        li.className    = room.messages.length > 0 ?  'match' : 'match not-opened'
+        li.className    = 'message'
         pname.className = 'name'
         pmsg.className  = 'message'
         img.src         = room.otherUser.images.find(img=>img.mainPicture).url

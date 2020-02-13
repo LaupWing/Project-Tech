@@ -26,15 +26,15 @@ const applyImgsAndId = async (room, req)=>{
 
 const createChatObject = (room)=>{
     return{
-            messages:  room.messages,
-            otherUser: {
-                name:   room.otherUser.name,
-                age:    room.otherUser.age,
-                gender: room.otherUser.gender,
-                images:  room.otherUser.images
-            },
-            chatId:    room.chatId
-        }
+        messages:  room.messages,
+        otherUser: {
+            name:   room.otherUser.name,
+            age:    room.otherUser.age,
+            gender: room.otherUser.gender,
+            images: room.otherUser.images
+        },
+        chatId:    room.chatId
+    }
 }
 // TODO : Property in chatroom for who deleted the chat.
 // SortedBy latest message or Emptychat
@@ -42,28 +42,23 @@ const createChatObject = (room)=>{
 const checkMessages = async (id, socket, req)=>{
     const findUser = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)
     const findRoom = await Messages.findOne({ chatRoom: { $all: [req.user._id, findUser.userId] } })
-    if(!findRoom || !findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))){
+    if(
+        !findRoom || 
+        !findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))
+    ){
         const newRoom = new Messages({
-            chatRoom:[req.user._id, findUser.userId],
-            emptyChat:[{
-                userId:req.user._id
-            }] 
+            chatRoom  :[req.user._id, findUser.userId],
+            emptyChat :[{userId:req.user._id}] 
         })
         await newRoom.save()
 
         const room = await applyImgsAndId(newRoom, req)
         socket.emit('send first chat', createChatObject(room))
     }else{
-        const otherUserId = findRoom.chatRoom.find(id=>!id.equals(req.user._id))
+        const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
         const findChatRoom = activeUsers[`user_${socket.id}`].rooms
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
-            
-        const chatObject = {
-            messages: findChatRoom.messages,
-            userProfilePic: findChatRoom.otherUser,
-            chatId: findChatRoom.chatId,
-            name: findChatRoom.name
-        }
+        const chatObject = createChatObject(findChatRoom)
         socket.emit('open existing chat', chatObject)
     }
 }
