@@ -14,6 +14,9 @@ export default class Messages{
         this.renderMessageListItem(room)
         this.chat.renderChat(room)
     }
+    openExistingChat(room){
+        console.log(room)
+    }
     renderMessageListItem(room){
         const li    = document.createElement('li')
         const pname = document.createElement('p')

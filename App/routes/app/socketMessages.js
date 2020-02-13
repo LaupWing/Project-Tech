@@ -48,7 +48,17 @@ const checkMessages = async (id, socket, req)=>{
         }
         socket.emit('send first chat', chatObject)
     }else{
-        socket.emit('send chat', findRoom.messages)
+        const otherUserId = findRoom.chatRoom.find(id=>!id.equals(req.user._id))
+        const findChatRoom = activeUsers[`user_${socket.id}`].rooms
+            .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
+            
+        const chatObject = {
+            messages: findChatRoom.messages,
+            userProfilePic: findChatRoom.otherUser,
+            chatId: findChatRoom.chatId,
+            name: findChatRoom.name
+        }
+        socket.emit('open existing chat', chatObject)
     }
 }
 
