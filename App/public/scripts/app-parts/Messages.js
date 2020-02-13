@@ -1,4 +1,5 @@
 import Chat from './Chat.js'
+import deleteActives from './utils/deleteActives.js'
 export default class Messages{
     constructor(socket){
         this.messages   = document.querySelector('.active-list .message-list')
@@ -16,6 +17,7 @@ export default class Messages{
     }
     openExistingChat(room){
         this.messageBtn.click()
+        document.querySelector('main .main-nav .info').click()
         const messageEl = document.getElementById(room.chatId)
         messageEl.classList.add('active')
         this.chat.renderChat(room)
@@ -41,7 +43,13 @@ export default class Messages{
         info.appendChild(pmsg)
         li.appendChild(img)
         li.appendChild(info)
+        li.addEventListener('click', this.openChat.bind(this))
         this.messages.insertAdjacentElement('afterbegin', li)
+    }
+    openChat(e){
+        deleteActives()
+        const li = e.target.closest('li')
+        this.socket.emit('open chat', li.id)
     }
     renderMessages(rooms){
         this.removeChilds()

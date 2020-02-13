@@ -81,9 +81,15 @@ const getMessages = async (socket, req)=>{
     socket.emit('send chatrooms', filteredRooms.map(createChatObject))
 }
 
+const openChat = async(id, socket, req)=>{
+    const room =activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
+    const chatObject = createChatObject(room)
+    socket.emit('open existing chat', chatObject)
+}
 
 
 module.exports = {
     checkMessages,
-    getMessages
+    getMessages,
+    openChat
 }

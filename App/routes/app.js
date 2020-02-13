@@ -14,7 +14,9 @@ const {
 } = require('./app/users')
 const {
     checkMessages,
-    getMessages
+    getMessages,
+    openChat
+    
 } = require('./app/socketMessages')
 
 router
@@ -38,6 +40,7 @@ router
             // ---Messages---
             socket.on('check messages', (id)=> checkMessages(id, socket, req))
             socket.on('get messages',   ()=> getMessages(socket, req))
+            socket.on('open chat',      (chatId)=> openChat(chatId, socket, req))
 
             socket.on('disconnect',     ()=>{
                 socket.removeAllListeners('denied match')
