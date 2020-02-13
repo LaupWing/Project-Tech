@@ -92,7 +92,13 @@ const getMessages = async (socket, req)=>{
     const filteredRooms = filteringRooms(resWithImgs, req)
 
     updateActiveUser(socket, 'rooms', filteredRooms)
-    socket.emit('send chatrooms', filteredRooms.map(createChatObject))
+    const chatObjects = filteredRooms
+        .map(createChatObject)
+        .map(c=>{
+            c.messages = formatChatMessages(c.messages, req)
+            return c
+        })
+    socket.emit('send chatrooms', chatObjects)
 }
 
 const openChat = async(id, socket)=>{
@@ -117,7 +123,7 @@ const saveMsg = async(msgObj, socket, req)=>{
     const againFindRoom = activeUsers[`user_${socket.id}`].rooms.find(q=>q._id.equals(findRoom._id)) 
     const chatObj       = createChatObject(againFindRoom)
     chatObj.messages    = formatChatMessages(chatObj.messages, req)
-
+    
     socket.emit('open existing chat', chatObj)
 }
 

@@ -37,7 +37,9 @@ export default class Messages{
         img.src         = room.otherUser.images.find(img=>img.mainPicture).url
 
         pname.textContent = room.otherUser.name
-        pmsg.textContent  = room.messages.length === 0 ? 'Send your first message!' : 'msg'
+        pmsg.textContent  = room.messages.length === 0 
+            ? 'Send your first message!' 
+            : `${room.messages[room.messages.length-1].message}`
 
         info.appendChild(pname)
         info.appendChild(pmsg)
