@@ -5,7 +5,16 @@ const messagesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     }],
     emptyChat:[{
-        type: mongoose.Schema.Types.ObjectId
+        _id: false,
+        userId:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        },
+        date:{
+            _id: false,
+            type: Date,
+            default: new Date()
+        }
     }],
     messages:[{
         _id: false,

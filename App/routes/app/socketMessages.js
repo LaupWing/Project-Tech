@@ -4,6 +4,18 @@ const {
     activeUsers,
     updateActiveUser} = require('./users')
 
+const chatPrep = (rooms, req)=>{
+    const filtered = rooms.filter(room=>{
+        if(room.messages.length>0 ||emptyChat.userId.equals(req.user._id)){
+            return room
+        }
+    })
+    return filtered
+}
+
+// TODO : Property in chatroom for who deleted the chat.
+// SortedBy latest message or Emptychat
+
 const checkMessages = async (id, socket, req)=>{
     const findUser = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)
     const findRoom = await Messages.findOne({ chatRoom: { $all: [req.user._id, findUser.userId] } })
@@ -11,7 +23,9 @@ const checkMessages = async (id, socket, req)=>{
     if(!findRoom){
         const newRoom = new Messages({
             chatRoom:[req.user._id, findUser.userId],
-            emptyChat:[req.user._id] 
+            emptyChat:[{
+                userId:req.user._id
+            }] 
         })
         await newRoom.save()
         const otherUser = newRoom.chatRoom.find(id=>!id.equals(req.user._id))
@@ -65,7 +79,7 @@ const getMessages = async (socket, req)=>{
         r.otherUser = r.otherUser.images.find(img=>img.mainPicture)
         return r
     })
-
+    const prepareForClient = chatPrep(rooms)
     updateActiveUser(socket, 'rooms', rooms)
     socket.emit('send chatrooms', rooms.map(r=>({
         chatId: r.chatId,
