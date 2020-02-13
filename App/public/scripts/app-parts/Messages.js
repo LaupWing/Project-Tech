@@ -23,22 +23,25 @@ export default class Messages{
         this.chat.renderChat(room)
     }
     renderMessageListItem(room){
-        const li    = document.createElement('li')
-        const pname = document.createElement('p')
-        const pmsg  = document.createElement('p')
-        const img   = document.createElement('img')
-        const info  = document.createElement('div')
+        const li     = document.createElement('li')
+        const pname  = document.createElement('p')
+        const pmsg   = document.createElement('p')
+        const img    = document.createElement('img')
+        const info   = document.createElement('div')
+        const unread = document.createElement('div')
 
-        li.id           = room.chatId
-        info.className  = 'info'
-        li.className    = 'message'
-        pname.className = 'name'
-        pmsg.className  = 'message'
-        img.src         = room.otherUser.images.find(img=>img.mainPicture).url
-
-        pname.textContent = room.otherUser.name
-        const sended      = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
-        pmsg.textContent  = room.messages.length === 0 
+        li.id            = room.chatId
+        info.className   = 'info'
+        unread.className = 'unread'
+        li.className     = 'message'
+        pname.className  = 'name'
+        pmsg.className   = 'message'
+        img.src          = room.otherUser.images.find(img=>img.mainPicture).url
+        
+        unread.textContent = this.unread(room.messages).length
+        pname.textContent  = room.otherUser.name
+        const sended       = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
+        pmsg.textContent   = room.messages.length === 0 
             ? 'Send your first message!' 
             : `${sended()}: ${room.messages[room.messages.length-1].message}`
 
@@ -46,8 +49,13 @@ export default class Messages{
         info.appendChild(pmsg)
         li.appendChild(img)
         li.appendChild(info)
+        this.unread(room.messages).length > 0 && li.appendChild(unread)
         li.addEventListener('click', this.openChat.bind(this))
         this.messages.insertAdjacentElement('afterbegin', li)
+    }
+    unread(messages){
+        return messages
+            .filter(msg=>msg.userSended === 'otherUser' && !msg.read)
     }
     openChat(e){
         deleteActives()
