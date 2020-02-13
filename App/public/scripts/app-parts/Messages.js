@@ -6,6 +6,9 @@ export default class Messages{
     }
     renderFirstMessage(room){
         this.messageBtn.click()
+        if(this.messages.querySelector('p.info')){
+            this.removeChilds()
+        }
         this.renderChatEl(room)
     }
     renderChatEl(room){
@@ -32,9 +35,9 @@ export default class Messages{
         this.messages.insertAdjacentElement('afterbegin', li)
     }
     renderMessages(rooms){
-        const filterOut = rooms.filter(room=>room.messages.length!==0)
-        if(filterOut.length ===0)   return
         this.removeChilds()
+        console.log(rooms)
+        rooms.forEach(room=>this.renderChatEl(room))
     }
     removeChilds(){
         const parent = this.messages

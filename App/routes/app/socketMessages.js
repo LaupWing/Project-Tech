@@ -6,7 +6,7 @@ const {
 
 const chatPrep = (rooms, req)=>{
     const filtered = rooms.filter(room=>{
-        if(room.messages.length>0 ||emptyChat.userId.equals(req.user._id)){
+        if(room.messages.length>0 ||room.emptyChat.find(u=>u.userId.equals(req.user._id))){
             return room
         }
     })
@@ -71,6 +71,7 @@ const getMessages = async (socket, req)=>{
         .map(async room=>{
             const findUserId = room.chatRoom.find(id=>!id.equals(req.user._id))
             room.otherUser = await User.findById(findUserId)
+            room.name = room.otherUser.name
             return room
         })
         
@@ -79,13 +80,23 @@ const getMessages = async (socket, req)=>{
         r.otherUser = r.otherUser.images.find(img=>img.mainPicture)
         return r
     })
-    const prepareForClient = chatPrep(rooms)
-    updateActiveUser(socket, 'rooms', rooms)
-    socket.emit('send chatrooms', rooms.map(r=>({
-        chatId: r.chatId,
-        otherUser: r.otherUser,
-        messages: r.messages
-    })))
+    const filteredRooms = chatPrep(rooms, req)
+    updateActiveUser(socket, 'rooms', filteredRooms)
+    socket.emit('send chatrooms', filteredRooms.map(sanitizeChatRoom,{req}))
+}
+
+function sanitizeChatRoom(room){
+    const thisUserEmptyChat = room.emptyChat
+            .find(x=>x.userId.equals(this.req.user._id))
+    const emptyChat = thisUserEmptyChat.date
+
+    return {
+        name: room.name,
+        chatId: room.chatId,
+        userProfilePic: room.otherUser,
+        messages: room.messages,
+        emptyChat
+    }
 }
 
 module.exports = {
