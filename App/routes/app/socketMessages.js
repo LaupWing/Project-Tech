@@ -56,8 +56,9 @@ const createChatObject = (room, req)=>{
 const checkMessages = async (id, socket, req)=>{
     const findUser = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)
     const findRoom = await Messages.findOne({ chatRoom: { $all: [req.user._id, findUser.userId] } })
+    console.log(findRoom, findUser)
     if(
-        !findRoom || 
+        !findRoom && 
         !findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))
     ){
         const newRoom = new Messages({
