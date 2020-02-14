@@ -133,8 +133,8 @@ class autoAdjust{
         const minAgeDisplay = document.querySelector('.minAge p span')
         const maxAgeDisplay = document.querySelector('.maxAge p span')
         
-        minAge.value = changeMinAge<18 ? 18 : changeMinAge
-        maxAge.value = changeMaxAge<18 ? 18 : changeMaxAge
+        minAge.value = changeMinAge < 18 ? 18 : changeMinAge
+        maxAge.value = changeMaxAge < 18 ? 18 : changeMaxAge
         
         minAgeDisplay.textContent = changeMinAge<18 ? 18 : changeMinAge
         maxAgeDisplay.textContent = changeMaxAge<18 ? 18 : changeMaxAge
