@@ -70,6 +70,9 @@ nav ul.active-list p.info{
     opacity: .3;
     text-align: center;
 }
+nav ul.active-list .message-list li .info {
+    max-width: 65%;
+}
 nav ul.active-list li .info{
     pointer-events: none;
     flex-grow: 1;
@@ -99,14 +102,22 @@ nav ul.active-list .message-list{
     grid-row: 1;
     grid-column: 1;
     transition: .5s all;
+    overflow: hidden;
+    min-width: 0;
 }
 nav .active-list li.match p.name,
 nav .active-list li.message p.name{
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 nav .active-list li.match p.message,
 nav .active-list li.message p.message{
     opacity: .5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 /* Matches */
 nav .match-list li.match.not-opened{
@@ -352,13 +363,20 @@ main ul li:hover{
     flex-direction: column-reverse;
     align-items: flex-end;
 }
-#info.chat main p.you{
-    align-self: flex-end;
+#info.chat main p.you,
+#info.chat main p.otherUser{
     padding: 5px 10px;
-    background: var(--purp);
     color: var(--main-color);
     margin: 5px 0;
     border-radius: 10px;
+}
+#info.chat main p.you{
+    background: var(--purp);
+    align-self: flex-end;
+}
+#info.chat main p.otherUser{
+    background: var(--blue);
+    align-self: flex-start;
 }
 #info.chat form{
     width: 100%;
