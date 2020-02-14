@@ -3,7 +3,7 @@ export default class SwitchPanel{
         this.mainNav       = document.querySelector('.main-nav')
         this.cardContainer = document.querySelector('.card-container')
         
-        this.items = this.mainNav.querySelectorAll('li')
+        this.items         = this.mainNav.querySelectorAll('li')
         this.items.forEach(item=>item.addEventListener('click', this.switch.bind(this)))
     }
     

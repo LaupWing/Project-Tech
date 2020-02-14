@@ -38,9 +38,9 @@ const applyOtherUser = async (room, req)=>{
     return roomWithOtherUser
 }
 
-const createChatObject = (room)=>{
+const createChatObject = (room, req)=>{
     return{
-        messages:  room.messages,
+        messages:  formatChatMessages(room.messages, req),
         otherUser: {
             name:   room.otherUser.name,
             age:    room.otherUser.age,
@@ -68,14 +68,12 @@ const checkMessages = async (id, socket, req)=>{
 
         const room       = await applyOtherUser(newRoom, req)
         const chatObj    = createChatObject(room)
-        chatObj.messages = formatChatMessages(chatObj.messages, req)
         socket.emit('send first chat', chatObj)
     }else{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
         const findChatRoom = activeUsers[`user_${socket.id}`].rooms
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
-        const chatObj    = createChatObject(findChatRoom)
-        chatObj.messages = formatChatMessages(chatObj.messages, req)
+        const chatObj      = createChatObject(findChatRoom)
         socket.emit('open existing chat', chatObj)
     }
 }
@@ -90,31 +88,24 @@ const getMessages = async (socket, req)=>{
     const getUserImgs = res
         .filter(room=>room!==null)
         .map(async room=> await applyOtherUser(room, req))
-    const resWithImgs = await Promise.all(getUserImgs)
 
+    const resWithImgs   = await Promise.all(getUserImgs)
     const filteredRooms = filteringRooms(resWithImgs, req)
 
     updateActiveUser(socket, 'rooms', filteredRooms)
-    const chatObjects = filteredRooms
-        .map(createChatObject)
-        .map(c=>{
-            c.messages = formatChatMessages(c.messages, req)
-            return c
-        })
+    const chatObjects = filteredRooms.map(createChatObject)
     socket.emit('send chatrooms', chatObjects)
 }
 
 const openChat = async(id, socket, req)=>{
-    const room =activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
+    const room       =activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room)
-    chatObject.messages = formatChatMessages(chatObject.messages, req)
     socket.emit('open existing chat', chatObject)
 }
 
 const saveMsg = async(msgObj, socket, req)=>{
-    const findRoom = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
-    const messageRoom = await Messages.findById(findRoom._id)
-    console.log(messageRoom)
+    const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
+    const messageRoom    = await Messages.findById(findRoom._id)
     messageRoom.messages = messageRoom.messages.concat({
         message:    msgObj.message,
         date:       msgObj.timestamp,
@@ -126,7 +117,6 @@ const saveMsg = async(msgObj, socket, req)=>{
 
     const againFindRoom = activeUsers[`user_${socket.id}`].rooms.find(q=>q._id.equals(findRoom._id)) 
     const chatObj       = createChatObject(againFindRoom)
-    chatObj.messages    = formatChatMessages(chatObj.messages, req)
     
     socket.emit('open existing chat', chatObj)
 }
