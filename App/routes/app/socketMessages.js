@@ -56,7 +56,7 @@ const createChatObject = (room, req)=>{
 const checkMessages = async (id, socket, req)=>{
     const findUser   = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)
     const findRoom   = await Messages.findOne({ chatRoom: { $all: [req.user._id, findUser.userId] } })
-    const checkEmpty = () => findRoom && findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id)
+    const checkEmpty = () => findRoom && findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))
 
     if(
         !findRoom && 
@@ -100,7 +100,7 @@ const getMessages = async (socket, req)=>{
 }
 
 const openChat = async(id, socket, req)=>{
-    const room       =activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
+    const room       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room, req)
     socket.emit('open existing chat', chatObject)
 }

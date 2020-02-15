@@ -8,19 +8,18 @@ export default class Messages{
         this.socket     = socket
     }
     renderFirstMessage(room){
-        this.messageBtn.click()
         if(this.messages.querySelector('p.info')){
             this.removeChilds()
         }
         this.renderMessageListItem(room)
         this.chat.renderChat(room)
+        this.messageBtn.click()
     }
     openExistingChat(room){
-        this.messageBtn.click()
-        document.querySelector('main .main-nav .info').click()
         const messageEl = document.getElementById(room.chatId)
-        messageEl.classList.add('active')
         this.chat.renderChat(room)
+        messageEl.classList.add('active')
+        this.messageBtn.click()
     }
     renderMessageListItem(room){
         const li     = document.createElement('li')
@@ -59,8 +58,15 @@ export default class Messages{
     }
     openChat(e){
         deleteActives()
-        const li = e.target.closest('li')
-        this.socket.emit('open chat', li.id)
+        const infoBtn           = document.querySelector('main .main-nav .info')
+        const matchingContainer = document.getElementById('matching')
+        const getChat           = ()=>{
+            matchingContainer.removeEventListener('transitionend', getChat)
+            const li = e.target.closest('li')
+            this.socket.emit('open chat', li.id)
+        }
+        infoBtn.click()
+        matchingContainer.addEventListener('transitionend', getChat)
     }
     renderMessages(rooms){
         this.removeChilds()
