@@ -382,12 +382,12 @@ main ul li:hover{
 }
 #info.chat main p.you.new-message{
     animation: newMsg .3s forwards;
-    transform-origin: right;
-    transform: scaleX(0);
+    transform-origin: right bottom;
+    transform: scale(0);
 }
 @keyframes newMsg{
     to{
-        transform: scaleX(1);
+        transform: scale(1);
     }
 }
 #info.chat main p.otherUser{
