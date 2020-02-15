@@ -11,6 +11,7 @@ Each week consists of a `Brief Summary`, `Details` which describes the details o
 
 ## Todo
 - [ ] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
+- [ ] Dont rerender whole list when one thing changes
 - [x] Split up cliend side javascript
 - [x] Split up server side javascript
 - [x] Render files seperate (client side)

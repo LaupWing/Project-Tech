@@ -17,12 +17,12 @@ const init = ()=>{
     // Sockets
     socket.emit('get match')
     socket.emit('get messages')
-    socket.on('sending match',       matches.renderMatch.bind(matches))
-    socket.on('send matchesList',    matchesList.renderList.bind(matchesList))
-    socket.on('user detail',         details.gotUserDetail.bind(details))
-    socket.on('send chatrooms',      messages.renderMessages.bind(messages))
-    socket.on('send first chat',     messages.renderFirstMessage.bind(messages))
-    socket.on('open existing chat',  messages.openExistingChat.bind(messages))
+    socket.on('sending match',          matches.renderMatch.bind(matches))
+    socket.on('send matchesList',       matchesList.renderList.bind(matchesList))
+    socket.on('user detail',            details.gotUserDetail.bind(details))
+    socket.on('initialize chatrooms',   messages.initializeMessages.bind(messages))
+    socket.on('send first chat',        messages.renderFirstMessage.bind(messages))
+    socket.on('open existing chat',     messages.openExistingChat.bind(messages))
 }
 
 init()

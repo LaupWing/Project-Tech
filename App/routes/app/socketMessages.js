@@ -96,7 +96,7 @@ const getMessages = async (socket, req)=>{
 
     updateActiveUser(socket, 'rooms', filteredRooms)
     const chatObjects = filteredRooms.map((room)=>createChatObject(room,req))
-    socket.emit('send chatrooms', chatObjects)
+    socket.emit('initialize chatrooms', chatObjects)
 }
 
 const openChat = async(id, socket, req)=>{

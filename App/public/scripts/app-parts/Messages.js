@@ -63,7 +63,7 @@ export default class Messages{
         const li = e.target.closest('li')
         this.socket.emit('open chat', li.id)
     }
-    renderMessages(rooms){
+    initializeMessages(rooms){
         this.removeChilds()
         rooms.forEach(room=>this.renderMessageListItem(room))
     }
