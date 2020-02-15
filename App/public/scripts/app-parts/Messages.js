@@ -58,15 +58,10 @@ export default class Messages{
     }
     openChat(e){
         deleteActives()
-        const infoBtn           = document.querySelector('main .main-nav .info')
-        const matchingContainer = document.getElementById('matching')
-        const getChat           = ()=>{
-            matchingContainer.removeEventListener('transitionend', getChat)
-            const li = e.target.closest('li')
-            this.socket.emit('open chat', li.id)
-        }
+        const infoBtn = document.querySelector('main .main-nav .info')
         infoBtn.click()
-        matchingContainer.addEventListener('transitionend', getChat)
+        const li = e.target.closest('li')
+        this.socket.emit('open chat', li.id)
     }
     renderMessages(rooms){
         this.removeChilds()

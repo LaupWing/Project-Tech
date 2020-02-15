@@ -29,8 +29,10 @@ export default class Chat{
         this.detailPanel.classList.add('chat')
         this.detailPanel.appendChild(h2)
         this.detailPanel.appendChild(main)
-        this.detailPanel.appendChild(form)
-        input.focus()
+        setTimeout(()=>{
+            this.detailPanel.appendChild(form)
+            input.focus()
+        },500)
         this.renderMessages(room.messages)
     }
     renderMessages(messages){

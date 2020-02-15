@@ -386,6 +386,14 @@ main ul li:hover{
     display: flex;
     justify-content: center;
     padding: 10px;
+    animation: scaleIn forwards .5s;
+    transform: scaleX(0);
+    transform-origin: center;
+}
+@keyframes scaleIn{
+    to{
+        transform: scaleX(1);
+    }
 }
 #info.chat form input{
     width: 80%;
