@@ -136,7 +136,7 @@ nav .active-list .message-list.hidden{
 nav .active-list li.message{
     transform-origin: top;
     background: var(--main-color);
-    transition: .5s;
+    transition: .2s;
 }
 nav .active-list li.message.active{
     background: var(--orange);
