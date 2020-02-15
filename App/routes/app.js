@@ -14,7 +14,7 @@ const {
 } = require('./app/users')
 const {
     checkMessages,
-    getMessages,
+    initializeMessages,
     openChat,
     saveMsg
     
@@ -40,7 +40,7 @@ router
             
             // ---Messages---
             socket.on('check messages', (id)=>     checkMessages(id, socket, req))
-            socket.on('get messages',   ()=>       getMessages(socket, req))
+            socket.on('get messages',   ()=>       initializeMessages(socket, req))
             socket.on('open chat',      (chatId)=> openChat(chatId, socket, req))
             socket.on('send message',   (msgObj)=> saveMsg(msgObj, socket, req))
 

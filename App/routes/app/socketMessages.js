@@ -80,7 +80,7 @@ const checkMessages = async (id, socket, req)=>{
     }
 }
 
-const getMessages = async (socket, req)=>{
+const initializeMessages = async (socket, req)=>{
     const roomsPromises = activeUsers[`user_${socket.id}`]
         .matchedUsers.map(user=>{
             return Messages.findOne({ chatRoom: { $all: [req.user._id, user.userId] } })
@@ -113,19 +113,21 @@ const saveMsg = async(msgObj, socket, req)=>{
         date:       msgObj.timestamp,
         userSended: req.user._id
     })
+    findRoom.messages    = messageRoom.messages
 
     await messageRoom.save()
-    await getMessages(socket, req)
+    // await initializeMessages(socket, req)
 
     const againFindRoom = activeUsers[`user_${socket.id}`].rooms.find(q=>q._id.equals(findRoom._id)) 
     const chatObj       = createChatObject(againFindRoom, req)
     
     socket.emit('open existing chat', chatObj)
+    socket.emit('update chatroom in list', createChatObject(findRoom, req))
 }
 
 module.exports = {
     checkMessages,
-    getMessages,
+    initializeMessages,
     openChat,
     saveMsg
 }

@@ -15,6 +15,27 @@ export default class Messages{
         this.chat.renderChat(room)
         this.messageBtn.click()
     }
+    updateChatRoomInList(room){
+        const rooms     = Array.from(this.messages.querySelectorAll('li'))
+        const roomIndex = rooms.map(r=>r.id).indexOf(room.chatId)
+        const roomEl    = document.getElementById(room.chatId)
+
+        if(roomIndex===0){
+            const displayMsg = `${room.messages[room.messages.length-1].userSended}: ${room.messages[room.messages.length-1].message}`
+            roomEl.querySelector('.message').textContent = displayMsg
+        }
+        else{
+            roomEl.classList.add('dissapear')
+            roomEl.addEventListener('transitionend', ()=>{
+                const clone = roomEl.cloneNode(true)
+                this.messages.removeChild(roomEl)
+                this.messages.insertAdjacentElement('afterbegin', clone)
+                setTimeout(()=>{
+                    document.getElementById(room.chatId).classList.remove('dissapear')
+                })
+            })
+        }
+    }
     openExistingChat(room){
         const messageEl = document.getElementById(room.chatId)
         this.chat.renderChat(room)
