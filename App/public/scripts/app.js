@@ -23,6 +23,7 @@ const init = ()=>{
     socket.on('initialize chatrooms',    messages.initializeMessages.bind(messages))
     socket.on('send first chat',         messages.renderFirstMessage.bind(messages))
     socket.on('open existing chat',      messages.openExistingChat.bind(messages))
+    socket.on('user sended msg',         messages.addUserMessage.bind(messages))
     socket.on('update chatroom in list', messages.updateChatRoomInList.bind(messages))
 }
 

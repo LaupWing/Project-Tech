@@ -380,6 +380,16 @@ main ul li:hover{
     background: var(--purp);
     align-self: flex-end;
 }
+#info.chat main p.you.new-message{
+    animation: newMsg .3s forwards;
+    transform-origin: right;
+    transform: scaleX(0);
+}
+@keyframes newMsg{
+    to{
+        transform: scaleX(1);
+    }
+}
 #info.chat main p.otherUser{
     background: var(--blue);
     align-self: flex-start;

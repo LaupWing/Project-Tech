@@ -13,6 +13,16 @@ const filteringRooms = (rooms, req)=>{
     return filtered
 }
 
+const updateActiveUserRooms = (room, socket)=>{
+    const updatedRooms = activeUsers[`user_${socket.id}`].rooms.map(r=>{
+        if(r.chatId === room.chatId){
+            return room
+        }
+        return r
+    }) 
+    updateActiveUser(socket, 'rooms', updatedRooms)
+}
+
 const formatChatMessages = (messages, req)=>{
     return messages.map(msg=>{
         const copy = {
@@ -116,13 +126,10 @@ const saveMsg = async(msgObj, socket, req)=>{
     findRoom.messages    = messageRoom.messages
 
     await messageRoom.save()
-    // await initializeMessages(socket, req)
-
-    const againFindRoom = activeUsers[`user_${socket.id}`].rooms.find(q=>q._id.equals(findRoom._id)) 
-    const chatObj       = createChatObject(againFindRoom, req)
+    updateActiveUserRooms(findRoom, socket)
     
-    socket.emit('open existing chat', chatObj)
-    socket.emit('update chatroom in list', createChatObject(findRoom, req))
+    socket.emit('user sended msg',          msgObj)
+    socket.emit('update chatroom in list',  createChatObject(findRoom, req))
 }
 
 module.exports = {

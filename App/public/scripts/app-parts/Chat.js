@@ -46,6 +46,13 @@ export default class Chat{
             })
         }
     }
+    addUserMessage(msg){
+        const msgContainer = this.detailPanel.querySelector('main')
+        const p       = document.createElement('p')
+        p.textContent = msg.message
+        p.className   = 'you new-message'
+        msgContainer.insertAdjacentElement('afterbegin', p) 
+    }
     onSubmit(e){
         e.preventDefault()
         const input = e.target.querySelector('input')

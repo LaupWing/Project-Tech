@@ -36,6 +36,9 @@ export default class Messages{
             })
         }
     }
+    addUserMessage(msg){
+        this.chat.addUserMessage(msg)
+    }
     openExistingChat(room){
         const messageEl = document.getElementById(room.chatId)
         this.chat.renderChat(room)
