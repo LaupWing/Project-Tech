@@ -1,7 +1,8 @@
-import Chat from './Chat.js'
 import deleteActives from './utils/deleteActives.js'
-export default class Messages{
+import Component from './utils/component.js'
+export default class Messages extends Component{
     constructor(socket, chat){
+        super()
         this.messages   = document.querySelector('.active-list .message-list')
         this.messageBtn = document.querySelector('.menu .message-list')
         this.chat       = chat
@@ -9,7 +10,7 @@ export default class Messages{
     }
     renderFirstMessage(room){
         if(this.messages.querySelector('p.info')){
-            this.removeChilds()
+            this.removeChilds(this.messages)
         }
         this.renderMessageListItem(room)
         this.chat.renderChat(room)
@@ -79,14 +80,8 @@ export default class Messages{
         this.socket.emit('open chat', li.id)
     }
     initializeMessages(rooms){
-        this.removeChilds()
+        this.removeChilds(this.messages)
         rooms.forEach(room=>this.renderMessageListItem(room))
-    }
-    removeChilds(){
-        const parent = this.messages
-        while (parent.firstChild) {
-            parent.firstChild.remove()
-        }
     }
 }
 

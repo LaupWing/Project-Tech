@@ -1,12 +1,14 @@
-export default class MatchesList{
+import Component from './utils/component.js'
+export default class MatchesList extends Component{
     constructor(eventFunction){
+        super()
         this.matchesList = document.querySelector('.active-list .match-list')
         this.totalNewmatches = document.querySelector('.newMatches')
         this.cb = eventFunction
     }
     renderList(list){
         if(list.length===0) return
-        this.removeChilds()
+        this.removeChilds(this.matchesList)
         list.forEach(match=>{
             const li    = document.createElement('li')
             const pname = document.createElement('p')
@@ -33,11 +35,5 @@ export default class MatchesList{
         })
         const newMatchesLength = list.filter(match=>!match.clicked).length
         this.totalNewmatches.textContent = newMatchesLength !== 0 ? ` (${newMatchesLength})` : ''
-    }
-    removeChilds(){
-        const parent = this.matchesList
-        while (parent.firstChild) {
-            parent.firstChild.remove()
-        }
     }
 }

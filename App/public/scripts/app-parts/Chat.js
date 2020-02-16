@@ -1,12 +1,14 @@
-export default class Chat{
+import Component from './utils/component.js'
+export default class Chat extends Component{
     constructor(socket){
+        super()
         this.detailPanel = document.querySelector('#info')
         this.messageBtn  = document.querySelector('.menu .message-list')
         this.id          = null
         this.socket      = socket
     }
     renderChat(room){
-        this.removeChilds()
+        this.removeChilds(this.detailPanel)
         const h2     = document.createElement('h2')
         const h2text = document.createTextNode(room.otherUser.name + ` (${room.otherUser.age})`)
         const button = document.createElement('button')
@@ -70,11 +72,5 @@ export default class Chat{
             timestamp : new Date()
         })
         input.value = ''
-    }
-    removeChilds(){
-        const parent = this.detailPanel
-        while (parent.firstChild) {
-            parent.firstChild.remove()
-        }
     }
 }

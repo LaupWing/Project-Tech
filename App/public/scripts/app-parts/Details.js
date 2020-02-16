@@ -1,5 +1,7 @@
-export default class Details{
+import Component from './utils/component.js'
+export default class Details extends Component{
     constructor(socket){
+        super()
         this.mainNav     = document.querySelector('.main-nav')
         this.panels      = document.querySelectorAll('.card-container > div')
         this.detailPanel = document.querySelector('#info')
@@ -18,7 +20,7 @@ export default class Details{
         document.querySelector('#matching').classList.add('hidden')
     }
     renderDetail(user){
-        this.removeChilds()
+        this.removeChilds(this.detailPanel)
         const h2         = document.createElement('h2')
         const pGender    = document.createElement('p')
         const spanGender = document.createElement('span')
@@ -49,11 +51,5 @@ export default class Details{
     }
     sendMessageClick(){
         this.socket.emit('check messages', this.id)
-    }
-    removeChilds(){
-        const parent = this.detailPanel
-        while (parent.firstChild) {
-            parent.firstChild.remove()
-        }
     }
 }
