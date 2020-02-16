@@ -30,6 +30,7 @@ const init = ()=>{
     socket.on('update chatroom in list', messages.updateChatRoomInList.bind(messages))
     socket.on('user sended msg',         chat.addUserMessage.bind(chat))
     socket.on('open existing chat',      chat.openExistingChat.bind(chat))
+    socket.on('other user message',      chat.otherUserMessage.bind(chat))
 }
 
 init()

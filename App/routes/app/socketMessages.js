@@ -1,7 +1,8 @@
 const Messages = require('../../models/messages')
 const {
     activeUsers,
-    updateActiveUser} = require('./users')
+    updateActiveUser,
+    updateUserWhenOnline} = require('./users')
 
 const {
     applyOtherUser,
@@ -65,7 +66,7 @@ const openChat = async(id, socket, req)=>{
     socket.emit('open existing chat', chatObject)
 }
 
-const saveMsg = async(msgObj, socket, req)=>{
+const saveMsg = async(msgObj, socket, req, io)=>{
     const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom    = await Messages.findById(findRoom._id)
     messageRoom.messages = messageRoom.messages.concat({
@@ -77,6 +78,7 @@ const saveMsg = async(msgObj, socket, req)=>{
 
     await messageRoom.save()
     updateActiveUserRooms(findRoom, socket)
+    updateUserWhenOnline(findRoom.otherUser, io)
     
     socket.emit('user sended msg',          msgObj)
     socket.emit('update chatroom in list',  createChatObject(findRoom, req))

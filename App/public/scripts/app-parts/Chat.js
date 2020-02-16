@@ -73,4 +73,7 @@ export default class Chat extends Component{
         })
         input.value = ''
     }
+    otherUserMessage(){
+        console.log('test')
+    }
 }

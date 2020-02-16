@@ -1,4 +1,7 @@
-const User = require('../../../models/user')
+const User            = require('../../../models/user')
+const {
+    activeUsers,
+    updateActiveUser} = require('../users')
 
 const filteringRooms = (rooms, req)=>{
     const filtered = rooms.filter(room=>{

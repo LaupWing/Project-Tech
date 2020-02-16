@@ -13,6 +13,11 @@ const setActiveUser=  async(socket, req)=>{
     }
 }
 
+const checkIfUserIsOnline = (id)=>{
+    const findUser = Object.entries(activeUsers).find(user=>user[1].userId.equals(id))
+    return findUser
+}
+
 const updateCouldBeAMatch = async(socket, req)=>{
     activeUsers[`user_${socket.id}`].couldBeAMatch = await filterByNeeds(req)
 }
@@ -24,11 +29,19 @@ const updateActiveUser = (socket, update, value)=>{
 const deleteUser = (socket)=>{
     delete activeUsers[`user_${socket.id}`]
 }
+const updateUserWhenOnline = (user, io)=>{
+    const userIsOnline = checkIfUserIsOnline(user._id)
+    if(userIsOnline){
+        const socketId = userIsOnline[0].replace('user_', '')
+        io.to(socketId).emit('other user message')
+    }
+}
 
 module.exports = {
     activeUsers,
     deleteUser,
     setActiveUser,
     updateCouldBeAMatch,
-    updateActiveUser
+    updateActiveUser,
+    updateUserWhenOnline
 }

@@ -16,7 +16,7 @@ export default class MatchesList extends Component{
             const img   = document.createElement('img')
             const info  = document.createElement('div')
             
-            li.id = match.id
+            li.id           = match.id
             info.className  = 'info'
             li.className    = match.clicked ?  'match' : 'match not-opened'
             pname.className = 'name'
