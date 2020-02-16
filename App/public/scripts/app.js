@@ -20,8 +20,6 @@ const init = ()=>{
     new SwitchList()
 
     // Sockets
-    socket.emit('get match')
-    socket.emit('get messages')
     socket.on('sending match',           matches.renderMatch.bind(matches))
     socket.on('send matchesList',        matchesList.renderList.bind(matchesList))
     socket.on('user detail',             details.gotUserDetail.bind(details))

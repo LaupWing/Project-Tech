@@ -29,11 +29,12 @@ const updateActiveUser = (socket, update, value)=>{
 const deleteUser = (socket)=>{
     delete activeUsers[`user_${socket.id}`]
 }
-const updateUserWhenOnline = (user, io)=>{
+const updateUserWhenOnline = (user, msgObj, io)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
     if(userIsOnline){
         const socketId = userIsOnline[0].replace('user_', '')
-        io.to(socketId).emit('other user message')
+        console.log(socketId, userIsOnline)
+        io.to(socketId).emit('other user message', msgObj)
     }
 }
 
