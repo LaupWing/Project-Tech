@@ -44,7 +44,7 @@ export default class Messages extends Component{
         const img    = document.createElement('img')
         const info   = document.createElement('div')
         const unread = document.createElement('div')
-
+        
         li.id            = room.chatId
         info.className   = 'info'
         unread.className = 'unread'

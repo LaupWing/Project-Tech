@@ -42,7 +42,6 @@ const checkMessages = async (id, socket, req)=>{
 }
 
 const initializeMessages = async (socket, req)=>{
-    console.log(activeUsers, socket.id)
     const roomsPromises = activeUsers[`user_${socket.id}`]
         .matchedUsers.map(user=>{
             return Messages.findOne({ chatRoom: { $all: [req.user._id, user.userId] } })
@@ -79,7 +78,7 @@ const saveMsg = async(msgObj, socket, req, io)=>{
 
     await messageRoom.save()
     updateActiveUserRooms(findRoom, socket)
-    updateUserWhenOnline(findRoom.otherUser,msgObj, io)
+    updateUserWhenOnline(findRoom.otherUser,msgObj, io, req)
     
     socket.emit('user sended msg',          {...msgObj, type: 'you'})
     socket.emit('update chatroom in list',  createChatObject(findRoom, req))
