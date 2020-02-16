@@ -31,11 +31,14 @@ const checkMessages = async (id, socket, req)=>{
 
         const room       = await applyOtherUser(newRoom, req)
         const chatObj    = createChatObject(room, req)
+        updateActiveUser(socket, 'currentOpenRoom', room)
+
         socket.emit('send first chat', chatObj)
     }else{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
         const findChatRoom = activeUsers[`user_${socket.id}`].rooms
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
+        updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
         const chatObj      = createChatObject(findChatRoom, req)
         socket.emit('open existing chat', chatObj)
     }
@@ -63,6 +66,7 @@ const initializeMessages = async (socket, req)=>{
 const openChat = async(id, socket, req)=>{
     const room       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room, req)
+    updateActiveUser(socket, 'currentOpenRoom', room)
     socket.emit('open existing chat', chatObject)
 }
 

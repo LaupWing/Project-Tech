@@ -45,7 +45,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
                 }
                 return x
             }) 
-            
+
         const messages = chatRoom.messages.map(m=>{
             const copy = {
                 ...m._doc
@@ -57,11 +57,13 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
             }
             return copy
         })
-        console.log(messages)
         io.to(socketId).emit('other user message', {
             ...msgObj, 
             type: 'otherUser', 
-            extra: chatRoom
+            chatId: chatRoom.chatId,
+            extra: {
+                messages,
+            }
         })
     }
 }

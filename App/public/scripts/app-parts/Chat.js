@@ -56,17 +56,13 @@ export default class Chat extends Component{
         }
     }
     addMessage(msg){
-        const msgContainer = this.detailPanel.querySelector('main')
-        if(this.detailPanel && this.detailPanel.classList.contains('chat')){
-            if(this.id === msg.chatId){
-                const p       = document.createElement('p')
-                p.textContent = msg.message
-                p.className   = `${msg.type} new-message`
-                msgContainer.insertAdjacentElement('afterbegin', p) 
-                return
-            }
+        if(this.id === msg.chatId){
+            const p       = document.createElement('p')
+            p.textContent = msg.message
+            p.className   = `${msg.type} new-message`
+            msgContainer.insertAdjacentElement('afterbegin', p) 
+            return
         }
-        console.log(msg)
     }
     onSubmit(e){
         e.preventDefault()
