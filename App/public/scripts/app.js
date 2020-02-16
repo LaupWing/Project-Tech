@@ -5,11 +5,13 @@ import Details      from './app-parts/Details.js'
 import SwitchPanel  from './app-parts/SwitchPanel.js'
 import SwitchList   from './app-parts/SwitchList.js'
 import Messages     from './app-parts/Messages.js'
+import Chat         from './app-parts/Chat.js'
 
 const init = ()=>{
     const matches     = new Matching(socket)
     const matchesList = new MatchesList((e)=>socket.emit('show detail', e.target.id))
-    const messages    = new Messages(socket)
+    const chat        = new Chat(socket)
+    const messages    = new Messages(socket, chat)
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
@@ -22,9 +24,9 @@ const init = ()=>{
     socket.on('user detail',             details.gotUserDetail.bind(details))
     socket.on('initialize chatrooms',    messages.initializeMessages.bind(messages))
     socket.on('send first chat',         messages.renderFirstMessage.bind(messages))
-    socket.on('open existing chat',      messages.openExistingChat.bind(messages))
-    socket.on('user sended msg',         messages.addUserMessage.bind(messages))
     socket.on('update chatroom in list', messages.updateChatRoomInList.bind(messages))
+    socket.on('user sended msg',         chat.addUserMessage.bind(chat))
+    socket.on('open existing chat',      chat.openExistingChat.bind(chat))
 }
 
 init()

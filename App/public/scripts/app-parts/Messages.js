@@ -1,10 +1,10 @@
 import Chat from './Chat.js'
 import deleteActives from './utils/deleteActives.js'
 export default class Messages{
-    constructor(socket){
+    constructor(socket, chat){
         this.messages   = document.querySelector('.active-list .message-list')
         this.messageBtn = document.querySelector('.menu .message-list')
-        this.chat       = new Chat(socket)
+        this.chat       = chat
         this.socket     = socket
     }
     renderFirstMessage(room){
@@ -35,15 +35,6 @@ export default class Messages{
                 })
             })
         }
-    }
-    addUserMessage(msg){
-        this.chat.addUserMessage(msg)
-    }
-    openExistingChat(room){
-        const messageEl = document.getElementById(room.chatId)
-        this.chat.renderChat(room)
-        messageEl.classList.add('active')
-        this.messageBtn.click()
     }
     renderMessageListItem(room){
         const li     = document.createElement('li')

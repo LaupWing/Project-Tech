@@ -1,6 +1,7 @@
 export default class Chat{
     constructor(socket){
         this.detailPanel = document.querySelector('#info')
+        this.messageBtn  = document.querySelector('.menu .message-list')
         this.id          = null
         this.socket      = socket
     }
@@ -34,6 +35,12 @@ export default class Chat{
             input.focus()
         },500)
         this.renderMessages(room.messages)
+    }
+    openExistingChat(room){
+        const messageEl = document.getElementById(room.chatId)
+        this.renderChat(room)
+        messageEl.classList.add('active')
+        this.messageBtn.click()
     }
     renderMessages(messages){
         if(messages.length>0){
