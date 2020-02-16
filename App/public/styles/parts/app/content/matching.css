@@ -13,7 +13,7 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    --profile: url(../../assets/person.png);
+    --profile: url(../../../../assets/person.png);
     transition: .5s all;
 }
 

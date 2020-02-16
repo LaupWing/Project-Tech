@@ -1,15 +1,18 @@
 const socket = io()
-import Matching     from './app-parts/Matching.js'
-import MatchesList  from './app-parts/MatchesList.js'
-import Details      from './app-parts/Details.js'
-import SwitchPanel  from './app-parts/SwitchPanel.js'
-import SwitchList   from './app-parts/SwitchList.js'
-import Messages     from './app-parts/Messages.js'
-import Chat         from './app-parts/Chat.js'
-
+import Matching      from './app-parts/Matching.js'
+import MatchesList   from './app-parts/MatchesList.js'
+import Details       from './app-parts/Details.js'
+import SwitchPanel   from './app-parts/SwitchPanel.js'
+import SwitchList    from './app-parts/SwitchList.js'
+import Messages      from './app-parts/Messages.js'
+import Chat          from './app-parts/Chat.js'
+import deleteActives from './app-parts/utils/deleteActives.js'
 const init = ()=>{
     const matches     = new Matching(socket)
-    const matchesList = new MatchesList((e)=>socket.emit('show detail', e.target.id))
+    const matchesList = new MatchesList((e)=>{
+        deleteActives()
+        socket.emit('show detail', e.target.id)
+    })
     const chat        = new Chat(socket)
     const messages    = new Messages(socket, chat)
     const details     = new Details(socket)
