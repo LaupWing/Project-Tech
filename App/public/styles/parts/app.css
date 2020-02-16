@@ -1,4 +1,11 @@
 @import url("/static/styles/main.css");
+@import url("/static/styles/parts/app/logo.css");
+@import url("/static/styles/parts/app/content/detail.css");
+@import url("/static/styles/parts/app/content/matching.css");
+@import url("/static/styles/parts/app/content/chat.css");
+@import url("/static/styles/parts/app/nav/matchesNav.css");
+@import url("/static/styles/parts/app/nav/messagesNav.css");
+
 body{
     background: var(--main-gradientColor);
     display: flex;
@@ -96,7 +103,27 @@ nav ul.active-list li img{
     border-radius: 50%;
     pointer-events: none;
 }
-/* Matches && Messages */
+/* Nav For Matches && Messages and Shared Matches and Messages styling*/
+nav ul.menu li{
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--purp);
+    transition: all .25s;
+}
+nav ul.menu li:hover,
+nav .profile:hover{
+    background: var(--purp);
+    color: var(--main-color);
+    opacity: .5;
+}
+nav ul li.active,
+nav ul li.active:hover{
+    background: var(--purp);
+    color: var(--main-color);
+    opacity: 1;
+}
 nav ul.active-list .match-list,
 nav ul.active-list .message-list{
     grid-row: 1;
@@ -119,64 +146,6 @@ nav .active-list li.message p.message{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-/* Matches */
-nav .match-list li.match.not-opened{
-    background: var(--main-color);
-    border-right: var(--orange) 8px solid;
-}
-nav .newMatches{
-    font-weight: bold;
-    color: var(--orange);
-}
-/* Messages */
-nav .active-list .message-list.hidden{
-    opacity: 0;
-    transform: translate(100%,0);
-}
-nav .active-list li.message{
-    transform-origin: top;
-    background: var(--main-color);
-    transition: .2s;
-}
-nav .active-list li.message.active{
-    background: var(--orange);
-}
-nav .active-list .match-list.hidden{
-    opacity: 0;
-    transform: translate(-100%,0);
-}
-nav .active-list li.message.dissapear{
-    transform: scaleY(0);
-}
-nav a.logout-btn{
-    padding: 10px;
-    font-size: 1.3rem;
-    text-align: center;
-    color: var(--main-color);
-    text-transform: uppercase;
-    background: var(--blue);
-    cursor: pointer;
-}
-nav ul.menu li{
-    width: 50%;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    color: var(--purp);
-    transition: all .25s;
-}
-nav ul.menu li:hover,
-nav .profile:hover{
-    background: var(--purp);
-    color: var(--main-color);
-    opacity: .5;
-}
-nav ul li.active,
-nav ul li.active:hover{
-    background: var(--purp);
-    color: var(--main-color);
-    opacity: 1;
-}
 main{
     flex-grow: 1;
     display: flex;
@@ -187,6 +156,11 @@ main ul{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+main ul li.active,
+main ul li:hover{
+    background: var(--main-color);
+    color: var(--purp);
 }
 main ul li{
     width: 120px;
@@ -203,92 +177,7 @@ main ul li{
     cursor: pointer;
     transition: all .25s;
 }
-main ul li.active,
-main ul li:hover{
-    background: var(--main-color);
-    color: var(--purp);
-}
-.card-container{
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    overflow: hidden;
-}
-#matching{
-    width: 80vw;
-    max-width: 400px;
-    grid-row: 1;
-    grid-column: 1;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    --profile: url(../../assets/person.png);
-    transition: .5s all;
-}
 
-/* Matching States */
-#matching.accepted{
-    transform: translate(100%,2%);
-    opacity: 0;
-    transition: 1s all;
-}
-#matching.accepted p,
-#matching.accepted h2{
-    transition: all .3s;
-    background: var(--green);
-}
-#matching.denied{
-    transform: translate(-100%,2%);
-    opacity: 0;
-    transition: 1s all;
-}
-#matching.denied p,
-#matching.denied h2{
-    transition: all .3s;
-    background: var(--red);
-}
-
-#matching .img-container{
-    width: 100%;
-    height: 60vh;
-    max-height: 350px;
-    background-image: var(--profile);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-#matching h2{
-    background: var(--main-color);
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    color: var(--purp);
-}
-#matching p{
-    padding: 10px;
-    width: 100%;
-    background-color: var(--main-color);
-}
-
-#matching button{
-    width: 50%;
-    color: var(--main-color);
-    font-weight: bold;
-    padding: 20px;
-}
-
-#matching button.yes{
-    background: var(--green);
-    border-radius: 0 0 10px 0;
-}
-#matching button.no{
-    background: var(--red);
-    border-radius: 0 0 0 10px;
-}
-
-#matching p span:first-of-type{
-    font-weight: bold;
-}
 /* GENERAL INFO CONTAINER STYLING */
 #info{
     width: 600px;
@@ -312,158 +201,7 @@ main ul li:hover{
     background: var(--main-color);
 }
 
-/* USER DETAIL STYLING */
-#info.user-detail h2{
-    width: 100%;
-    padding: 15px;
-    background: var(--orange);
-    color: var(--main-color);
-    text-align: center;
-}
-#info.user-detail img{
-    width: 100%;
-    height: 70%;
-    object-fit: cover;
-}
-#info.user-detail p{
-    text-align: left;
-    padding: 10px 15px;
-    width: 100%;
-}
-#info.user-detail button{
-    margin-top: auto;
-    padding: 10px 15px;
-    color: var(--main-color);
-    background: var(--blue);
-    border-radius: 30px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1rem;
-}
-#matching.hidden{
-    opacity: 0;
-    transform: translate(-100%,0);
-    pointer-events: none;
-}
-
-/* USER CHAT STYLING */
-#info.chat h2{
-    align-items: center;
-    background: var(--orange);
-    color: white;
-    padding: 10px;
-    display: flex;
-    width: 100%;
-}
-#info.chat h2 img{
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-#info.chat main{
-    width: 100%;
-    padding: 10px 20px;
-    overflow-y: auto;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-}
-#info.chat main p.you,
-#info.chat main p.otherUser{
-    padding: 5px 10px;
-    color: var(--main-color);
-    margin: 5px 0;
-    border-radius: 10px;
-}
-#info.chat main p.you{
-    background: var(--purp);
-    align-self: flex-end;
-}
-#info.chat main p.you.new-message{
-    animation: newMsg .3s forwards;
-    transform-origin: right bottom;
-    transform: scale(0);
-}
-@keyframes newMsg{
-    to{
-        transform: scale(1);
-    }
-}
-#info.chat main p.otherUser{
-    background: var(--blue);
-    align-self: flex-start;
-}
-#info.chat form{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    animation: scaleIn forwards .5s;
-    transform: scaleX(0);
-    transform-origin: center;
-}
-@keyframes scaleIn{
-    to{
-        transform: scaleX(1);
-    }
-}
-#info.chat form input{
-    width: 80%;
-    border-radius: 30px;
-    padding:0 10px;
-    border:none;
-    border: solid var(--blue) 2px;
-}
-#info.chat form button{
-    border-radius: 30px;
-    background: var(--blue);
-    color: var(--main-color);
-    font-weight: bold;
-    margin-left: 10px;
-}
 footer{
     text-align: right;
     padding-right: 10px;
-}
-
-
-/* Logo styling */
-svg{
-    padding: 20px;
-    overflow: visible;
-}
-svg .cls-1{
-    fill:#3fa2a5;
-}
-svg .cls-2{
-    fill:#c779d0;
-}
-svg .cls-3{
-    fill:#ea9a59;
-}
-svg .cls-4{
-    fill:#feac5e;
-}
-svg .cls-5{
-    fill:#7b4d82;
-}
-svg .cls-6{
-    fill:#4bc0c8;
-}
-
-svg > *{
-    transition: .5s;
-    -webkit-transform: scale(1);
-    -webkit-transform-origin: 50% 50%;
-    -webkit-transition:.3s;
-    transform: scale(1);
-    transform-origin: 50% 50%;
-    transform-box: fill-box;
-}
-
-svg > *:hover{
-    transform: scale(1.2);
-    z-index: 100;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }

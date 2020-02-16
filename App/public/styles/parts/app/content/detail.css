@@ -1,0 +1,28 @@
+/* USER DETAIL STYLING */
+#info.user-detail h2{
+    width: 100%;
+    padding: 15px;
+    background: var(--orange);
+    color: var(--main-color);
+    text-align: center;
+}
+#info.user-detail img{
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+#info.user-detail p{
+    text-align: left;
+    padding: 10px 15px;
+    width: 100%;
+}
+#info.user-detail button{
+    margin-top: auto;
+    padding: 10px 15px;
+    color: var(--main-color);
+    background: var(--blue);
+    border-radius: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+}

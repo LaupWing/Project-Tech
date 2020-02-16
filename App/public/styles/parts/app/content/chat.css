@@ -1,0 +1,76 @@
+/* USER CHAT STYLING */
+#info.chat h2{
+    align-items: center;
+    background: var(--orange);
+    color: white;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+}
+#info.chat h2 img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+#info.chat main{
+    width: 100%;
+    padding: 10px 20px;
+    overflow-y: auto;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+#info.chat main p.you,
+#info.chat main p.otherUser{
+    padding: 5px 10px;
+    color: var(--main-color);
+    margin: 5px 0;
+    border-radius: 10px;
+}
+#info.chat main p.you{
+    background: var(--purp);
+    align-self: flex-end;
+}
+#info.chat main p.you.new-message{
+    animation: newMsg .3s forwards;
+    transform-origin: right bottom;
+    transform: scale(0);
+}
+@keyframes newMsg{
+    to{
+        transform: scale(1);
+    }
+}
+#info.chat main p.otherUser{
+    background: var(--blue);
+    align-self: flex-start;
+}
+#info.chat form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    animation: scaleIn forwards .5s;
+    transform: scaleX(0);
+    transform-origin: center;
+}
+@keyframes scaleIn{
+    to{
+        transform: scaleX(1);
+    }
+}
+#info.chat form input{
+    width: 80%;
+    border-radius: 30px;
+    padding:0 10px;
+    border:none;
+    border: solid var(--blue) 2px;
+}
+#info.chat form button{
+    border-radius: 30px;
+    background: var(--blue);
+    color: var(--main-color);
+    font-weight: bold;
+    margin-left: 10px;
+}

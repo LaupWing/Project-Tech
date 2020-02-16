@@ -1,0 +1,25 @@
+nav .active-list .message-list.hidden{
+    opacity: 0;
+    transform: translate(100%,0);
+}
+nav .active-list li.message{
+    transform-origin: top;
+    background: var(--main-color);
+    transition: .2s;
+}
+nav .active-list li.message.active{
+    background: var(--orange);
+}
+
+nav .active-list li.message.dissapear{
+    transform: scaleY(0);
+}
+nav a.logout-btn{
+    padding: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--main-color);
+    text-transform: uppercase;
+    background: var(--blue);
+    cursor: pointer;
+}

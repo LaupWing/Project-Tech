@@ -1,0 +1,12 @@
+nav .match-list li.match.not-opened{
+    background: var(--main-color);
+    border-right: var(--orange) 8px solid;
+}
+nav .newMatches{
+    font-weight: bold;
+    color: var(--orange);
+}
+nav .active-list .match-list.hidden{
+    opacity: 0;
+    transform: translate(-100%,0);
+}
