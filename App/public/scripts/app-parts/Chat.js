@@ -55,11 +55,11 @@ export default class Chat extends Component{
             })
         }
     }
-    addUserMessage(msg){
+    addMessage(msg){
         const msgContainer = this.detailPanel.querySelector('main')
         const p       = document.createElement('p')
         p.textContent = msg.message
-        p.className   = 'you new-message'
+        p.className   = `${msg.type} new-message`
         msgContainer.insertAdjacentElement('afterbegin', p) 
     }
     onSubmit(e){
@@ -73,7 +73,11 @@ export default class Chat extends Component{
         })
         input.value = ''
     }
-    otherUserMessage(){
-        console.log('test')
+    otherUserMessage(obj){
+        const msgContainer = this.detailPanel.querySelector('main')
+        const p       = document.createElement('p')
+        p.textContent = msg.message
+        p.className   = 'other new-message'
+        msgContainer.insertAdjacentElement('afterbegin', p) 
     }
 }

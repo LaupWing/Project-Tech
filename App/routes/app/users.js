@@ -33,8 +33,7 @@ const updateUserWhenOnline = (user, msgObj, io)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
     if(userIsOnline){
         const socketId = userIsOnline[0].replace('user_', '')
-        console.log(socketId, userIsOnline)
-        io.to(socketId).emit('other user message', msgObj)
+        io.to(socketId).emit('other user message', {...msgObj, type: 'otherUser'})
     }
 }
 
