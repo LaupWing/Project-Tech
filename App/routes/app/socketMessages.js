@@ -47,7 +47,10 @@ const checkMessages = async (id, socket, req)=>{
 const initializeMessages = async (socket, req)=>{
     const roomsPromises = activeUsers[`user_${socket.id}`]
         .matchedUsers.map(user=>{
-            return Messages.findOne({ chatRoom: { $all: [req.user._id, user.userId] } })
+            return Messages
+                .findOne({ chatRoom: { $all: [req.user._id, user.userId] } })
+                .slice('messages', 30)
+
         })
     const res = await Promise.all(roomsPromises)
 
