@@ -53,6 +53,7 @@ export default class Chat extends Component{
                 p.className   = msg.userSended
                 msgContainer.insertAdjacentElement('beforeend', p) 
             })
+            this.scrollToBottom()
         }
     }
     addMessage(msg){
@@ -62,9 +63,13 @@ export default class Chat extends Component{
             p.textContent = msg.message
             p.className   = `${msg.type} new-message`
             msgContainer.insertAdjacentElement('beforeend', p) 
+            this.scrollToBottom()
             return
         }
-        console.log(msg)
+    }
+    scrollToBottom(){
+        const msgContainer = this.detailPanel.querySelector('main')
+        msgContainer.scrollTop = msgContainer.scrollHeight
     }
     onSubmit(e){
         e.preventDefault()
