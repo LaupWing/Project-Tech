@@ -16,6 +16,18 @@ export default class Messages extends Component{
         this.chat.renderChat(room)
         this.messageBtn.click()
     }
+    updateUnreadNumber({messages, chatId}){
+        const chatRoom = document.getElementById(chatId)
+        const unread   = chatRoom.querySelector('.unread')
+        if(unread){
+            const filterUnread = messages.filter(x=>x.userSended!=='you' && !x.read)
+            if(filterUnread.length === 0){
+                chatRoom.removeChild(unread)
+            }else{
+                unread.textContent = filterUnread.length
+            }
+        }
+    }
     updateChatRoomInList(room){
         const rooms      = Array.from(this.messages.querySelectorAll('li'))
         const roomIndex  = rooms.map(r=>r.id).indexOf(room.chatId)

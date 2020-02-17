@@ -70,6 +70,12 @@ const updateRead = async (room, socket, req)=>{
         return msg
     })
     await chatRoom.save()
+
+    const formatted = formatChatMessages(chatRoom.messages, req)
+    socket.emit('updated unread messages', {
+        messages: formatted,
+        chatId:   room.chatId
+    })
 }
 
 module.exports = {

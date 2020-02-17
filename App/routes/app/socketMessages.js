@@ -50,8 +50,6 @@ const initializeMessages = async (socket, req)=>{
         .matchedUsers.map(user=>{
             return Messages
                 .findOne({ chatRoom: { $all: [req.user._id, user.userId] } })
-                .slice('messages', 30)
-
         })
     const res = await Promise.all(roomsPromises)
 
