@@ -8,7 +8,8 @@ const {
     applyOtherUser,
     createChatObject,
     filteringRooms,
-    updateActiveUserRooms
+    updateActiveUserRooms,
+    updateRead
 } = require('./socketMessages/utils')
 
 // TODO : Property in chatroom for who deleted the chat.
@@ -69,7 +70,10 @@ const initializeMessages = async (socket, req)=>{
 const openChat = async(id, socket, req)=>{
     const room       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room, req)
+    
     updateActiveUser(socket, 'currentOpenRoom', room)
+    updateRead(room, socket, req)
+    
     socket.emit('open existing chat', chatObject)
 }
 

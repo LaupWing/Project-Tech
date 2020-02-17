@@ -27,7 +27,7 @@ export default class Chat extends Component{
         form.appendChild(input)
         form.appendChild(button)
         form.addEventListener('submit', this.onSubmit.bind(this))
-
+        form.addEventListener('animationend', this.scrollToBottom.bind(this))
         this.detailPanel.classList.remove('user-detail')
         this.detailPanel.classList.add('chat')
         this.detailPanel.appendChild(h2)

@@ -1,4 +1,5 @@
 const User            = require('../../../models/user')
+const Messages        = require('../../../models/messages')
 const {
     activeUsers,
     updateActiveUser} = require('../users')
@@ -60,10 +61,22 @@ const createChatObject = (room, req)=>{
     }
 }
 
+const updateRead = async (room, socket, req)=>{
+    const chatRoom    = await Messages.findById(room._id)
+    chatRoom.messages = chatRoom.messages.map(msg=>{
+        if(!msg.userSended.equals(req.user._id)){
+            msg.read = true
+        }
+        return msg
+    })
+    await chatRoom.save()
+}
+
 module.exports = {
     filteringRooms,
     updateActiveUserRooms,
     formatChatMessages,
     applyOtherUser,
-    createChatObject
+    createChatObject,
+    updateRead
 }
