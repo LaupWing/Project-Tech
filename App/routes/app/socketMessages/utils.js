@@ -42,7 +42,7 @@ const applyOtherUser = async (room, req)=>{
     const roomWithOtherUser = {
         ...room._doc,
         otherUser : user,
-        chatId    : `room_${Math.random()}`
+        chatId    : `room_${Math.round(Math.random()*1000000)}`
     }
     return roomWithOtherUser
 }

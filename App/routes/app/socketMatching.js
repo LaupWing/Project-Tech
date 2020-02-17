@@ -73,6 +73,7 @@ const getUserDetail = async (id, socket, req)=>{
     await sendMatches(socket, req)
     const userWithUpdatedId = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.userId.equals(user.userId))
     delete user.clicked
+    updateActiveUser(socket, 'currentOpenRoom', null)
     socket.emit('user detail', userWithUpdatedId)
 }
 

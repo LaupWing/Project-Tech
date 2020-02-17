@@ -17,12 +17,14 @@ export default class Messages extends Component{
         this.messageBtn.click()
     }
     updateChatRoomInList(room){
-        const rooms     = Array.from(this.messages.querySelectorAll('li'))
-        const roomIndex = rooms.map(r=>r.id).indexOf(room.chatId)
-        const roomEl    = document.getElementById(room.chatId)
-
+        const rooms      = Array.from(this.messages.querySelectorAll('li'))
+        const roomIndex  = rooms.map(r=>r.id).indexOf(room.chatId)
+        const roomEl     = document.getElementById(room.chatId)
+        const userSended = room.messages[room.messages.length-1].userSended === 'you' 
+            ? 'you' 
+            : room.otherUser
+        const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
         if(roomIndex===0){
-            const displayMsg = `${room.messages[room.messages.length-1].userSended}: ${room.messages[room.messages.length-1].message}`
             roomEl.querySelector('.message').textContent = displayMsg
         }
         else{
@@ -33,6 +35,7 @@ export default class Messages extends Component{
                 this.messages.insertAdjacentElement('afterbegin', clone)
                 setTimeout(()=>{
                     document.getElementById(room.chatId).classList.remove('dissapear')
+                    document.querySelector(`#${room.chatId} .message`).textContent = displayMsg
                 })
             })
         }

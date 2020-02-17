@@ -56,6 +56,7 @@ export default class Chat extends Component{
         }
     }
     addMessage(msg){
+        const msgContainer = this.detailPanel.querySelector('main')
         if(this.id === msg.chatId){
             const p       = document.createElement('p')
             p.textContent = msg.message
@@ -63,6 +64,7 @@ export default class Chat extends Component{
             msgContainer.insertAdjacentElement('afterbegin', p) 
             return
         }
+        console.log(msg)
     }
     onSubmit(e){
         e.preventDefault()

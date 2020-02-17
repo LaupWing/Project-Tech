@@ -57,13 +57,23 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
             }
             return copy
         })
-        io.to(socketId).emit('other user message', {
-            ...msgObj, 
-            type: 'otherUser', 
-            chatId: chatRoom.chatId,
-            extra: {
-                messages,
-            }
+        if(
+            userIsOnline[1].currentOpenRoom &&
+            chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)
+        {
+            io.to(socketId).emit('other user message', {
+                ...msgObj, 
+                type: 'otherUser', 
+                chatId: chatRoom.chatId,
+                extra: {
+                    messages,
+                }
+            })
+        }
+        io.to(socketId).emit('update chatroom in list', {
+            chatId:     chatRoom.chatId,
+            messages,
+            otherUser:  req.user.name
         })
     }
 }
