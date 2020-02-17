@@ -51,7 +51,7 @@ export default class Chat extends Component{
                 const p       = document.createElement('p')
                 p.textContent = msg.message
                 p.className   = msg.userSended
-                msgContainer.insertAdjacentElement('afterbegin', p) 
+                msgContainer.insertAdjacentElement('beforeend', p) 
             })
         }
     }
@@ -61,7 +61,7 @@ export default class Chat extends Component{
             const p       = document.createElement('p')
             p.textContent = msg.message
             p.className   = `${msg.type} new-message`
-            msgContainer.insertAdjacentElement('afterbegin', p) 
+            msgContainer.insertAdjacentElement('beforeend', p) 
             return
         }
         console.log(msg)
