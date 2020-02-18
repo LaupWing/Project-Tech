@@ -30,9 +30,14 @@ const checkMessages = async (id, socket, req)=>{
         })
         await newRoom.save()
 
-        const room       = await applyOtherUser(newRoom, req)
-        const chatObj    = createChatObject(room, req)
+        const room         = await applyOtherUser(newRoom, req)
+        const chatObj      = createChatObject(room, req)
+        const currentchats = activeUsers[`user_${socket.id}`].rooms 
+            ? activeUsers[`user_${socket.id}`].rooms.concat(room)
+            : [room]
+
         updateActiveUser(socket, 'currentOpenRoom', room)
+        updateActiveUser(socket, 'rooms', currentchats)
 
         socket.emit('send first chat', chatObj)
     }else{
