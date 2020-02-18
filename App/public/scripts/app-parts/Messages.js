@@ -3,10 +3,11 @@ import Component from './utils/component.js'
 export default class Messages extends Component{
     constructor(socket, chat){
         super()
-        this.messages   = document.querySelector('.active-list .message-list')
-        this.messageBtn = document.querySelector('.menu .message-list')
-        this.chat       = chat
-        this.socket     = socket
+        this.messages    = document.querySelector('.active-list .message-list')
+        this.messageBtn  = document.querySelector('.menu .message-list')
+        this.chat        = chat
+        this.socket      = socket
+        this.totalUnread = 0
     }
     renderFirstMessage(room){
         if(this.messages.querySelector('p.info')){
@@ -80,6 +81,11 @@ export default class Messages extends Component{
         li.appendChild(img)
         li.appendChild(info)
         this.unread(room.messages).length > 0 && li.appendChild(unread)
+        this.totalUnread += this.unread(room.messages).length
+        this.totalUnread > 0 
+            ? document.querySelector('.message-list span').textContent = ` (${this.totalUnread})` 
+            : null
+        
         li.addEventListener('click', this.openChat.bind(this))
         this.messages.insertAdjacentElement('afterbegin', li)
     }
@@ -95,6 +101,7 @@ export default class Messages extends Component{
         this.socket.emit('open chat', li.id)
     }
     initializeMessages(rooms){
+        if(rooms.length===0 || !rooms)  return
         this.removeChilds(this.messages)
         rooms.forEach(room=>this.renderMessageListItem(room))
     }
