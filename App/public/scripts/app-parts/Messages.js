@@ -98,6 +98,9 @@ export default class Messages extends Component{
         const infoBtn = document.querySelector('main .main-nav .info')
         infoBtn.click()
         const li = e.target.closest('li')
+        li.querySelector('.unread') 
+            ? document.querySelector('.message-list span').textContent = ` (${this.totalUnread -= Number(li.querySelector('.unread').textContent)})`
+            : null 
         this.socket.emit('open chat', li.id)
     }
     initializeMessages(rooms){
