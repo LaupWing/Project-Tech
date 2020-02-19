@@ -253,13 +253,14 @@ p.error{
 }
 .progress svg{
     width: 70px;
+    opacity: .4;
 }
 
 .progress .step{
-    opacity: .4;
     text-align: center;
 }
 .progress .step p{
+    opacity: .4;
     margin: 15px 0;
     color: var(--purp);
 }
