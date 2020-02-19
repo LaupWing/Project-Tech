@@ -59,7 +59,7 @@ class nextSection{
         fields[done.length].classList.remove('visible')
     }
     updateCurrent(){
-        const done = document.querySelectorAll('.done')
+        const done = this.form.querySelectorAll('.done')
         this.currentStep.textContent = ` ${done.length+1}/4`
     }
     disableButton(){
@@ -83,6 +83,7 @@ class nextSection{
 
 class EnableSubmit{
     constructor(){
+        this.form      = document.querySelector('form')
         this.submit    = document.querySelector('button[type="submit"]')
         this.inputs    = document.querySelectorAll('input')
         this.radioBtns = document.querySelectorAll('input[type="radio"]')
