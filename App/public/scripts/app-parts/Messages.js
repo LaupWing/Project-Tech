@@ -87,7 +87,7 @@ export default class Messages extends Component{
             : null
         
         li.addEventListener('click', this.openChat.bind(this))
-        this.messages.insertAdjacentElement('afterbegin', li)
+        this.messages.insertAdjacentElement('beforeend', li)
     }
     unread(messages){
         return messages
