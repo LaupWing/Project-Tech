@@ -261,6 +261,7 @@ p.error{
 }
 .progress .step p{
     margin: 15px 0;
+    color: var(--purp);
 }
 .progress svg path{
     fill: var(--purp);

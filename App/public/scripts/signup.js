@@ -1,4 +1,5 @@
 console.log('signuppage')
+import CheckDone from './signup-parts/checkDone.js'
 // Todo!!!!!!!!!!!!!
 // When user changes his/her age the slides automatic changes
 class imageLoader{
@@ -147,6 +148,7 @@ const init = ()=>{
     new slider()
     new EnableSubmit()
     new autoAdjust()
+    new CheckDone()
 }
 
 init()
