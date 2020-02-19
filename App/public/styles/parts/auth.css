@@ -242,3 +242,21 @@ p.error{
         margin-top: 25vh;
     }
 }
+
+.progress{
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+}
+.progress svg{
+    width: 70px;
+}
+
+.progress .step{
+    opacity: .2;
+}
+.progress svg path{
+    fill: var(--purp);
+}
