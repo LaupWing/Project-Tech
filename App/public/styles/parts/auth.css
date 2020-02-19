@@ -248,6 +248,7 @@ p.error{
     bottom: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     width: 50vw;
 }
 .progress svg{
@@ -255,7 +256,11 @@ p.error{
 }
 
 .progress .step{
-    opacity: .2;
+    opacity: .4;
+    text-align: center;
+}
+.progress .step p{
+    margin: 15px 0;
 }
 .progress svg path{
     fill: var(--purp);
