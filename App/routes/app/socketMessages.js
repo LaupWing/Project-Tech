@@ -9,7 +9,8 @@ const {
     createChatObject,
     filteringRooms,
     updateActiveUserRooms,
-    updateRead
+    updateRead,
+    sortingChatrooms
 } = require('./socketMessages/utils')
 
 // TODO : Property in chatroom for who deleted the chat.
@@ -71,11 +72,8 @@ const initializeMessages = async (socket, req)=>{
     updateActiveUser(socket, 'rooms', filteredRooms)
     const chatObjects = filteredRooms
         .map((room)=>createChatObject(room,req))
-        // .sort((a,b)=>{
-        //     const aSorted = a.
-        // })
-    console.log(chatObjects)
-    console.log(chatObjects[0].messages)
+        .sort(sortingChatrooms)
+        
     socket.emit('initialize chatrooms', chatObjects)
 }
 

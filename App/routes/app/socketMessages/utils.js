@@ -13,6 +13,31 @@ const filteringRooms = (rooms, req)=>{
     return filtered
 }
 
+const sortingChatrooms = (a, b)=>{
+    const aHighestVal = a.messages.length > 0 
+        ?   a.messages.reduce((aS, bS) => {
+                return new Date(aS.date) > new Date(bS.date) ? aS : bS;
+            })
+        :   a.emptyChat.find(x=>x.userId==='you')
+    const bHighestVal = b.messages.length > 0 
+        ?   b.messages.reduce((aS, bS) => {
+                return new Date(aS.date) > new Date(bS.date) ? aS : bS;
+            })
+        :   b.emptyChat.find(x=>x.userId==='you')
+    console.log('--------a---------',aHighestVal)
+    console.log('--------b---------',bHighestVal)
+
+    console.log('--------a---------',new Date(aHighestVal.date))
+    console.log('--------b---------',new Date(bHighestVal.date))
+    console.log(new Date(aHighestVal.date) > new Date(bHighestVal.date) ? a : b)
+    console.log('--------End---------')
+    if(!aHighestVal || !bHighestVal){
+        if(!aHighestVal)    return a
+                            return b
+    }
+    return new Date(aHighestVal.date) > new Date(bHighestVal.date) ? a : b
+}
+
 const updateActiveUserRooms = (room, socket)=>{
     const updatedRooms = activeUsers[`user_${socket.id}`].rooms.map(r=>{
         if(r.chatId === room.chatId){
@@ -57,7 +82,12 @@ const createChatObject = (room, req)=>{
             gender: room.otherUser.gender,
             images: room.otherUser.images
         },
-        chatId:    room.chatId
+        chatId:    room.chatId,
+        emptyChat: room.emptyChat.map(u=>{
+            const copy = {...u._doc}
+            copy.userId.equals(req.user._id) ? copy.userId = 'you' : copy.userId = 'otherUser'
+            return copy
+        })
     }
 }
 
@@ -84,5 +114,6 @@ module.exports = {
     formatChatMessages,
     applyOtherUser,
     createChatObject,
-    updateRead
+    updateRead,
+    sortingChatrooms
 }
