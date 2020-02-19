@@ -24,13 +24,6 @@ const sortingChatrooms = (a, b)=>{
                 return new Date(aS.date) > new Date(bS.date) ? aS : bS;
             })
         :   b.emptyChat.find(x=>x.userId==='you')
-    console.log('--------a---------',aHighestVal)
-    console.log('--------b---------',bHighestVal)
-
-    console.log('--------a---------',new Date(aHighestVal.date))
-    console.log('--------b---------',new Date(bHighestVal.date))
-    console.log(new Date(aHighestVal.date) > new Date(bHighestVal.date) ? a : b)
-    console.log('--------End---------')
     if(!aHighestVal || !bHighestVal){
         if(!aHighestVal)    return a
                             return b
