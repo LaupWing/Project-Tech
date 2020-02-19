@@ -21,18 +21,19 @@ class imageLoader{
 
 class nextSection{
     constructor(){
-        this.nextBtn = document.querySelector('button.next')
-        this.backBtn = document.querySelector('button.back')
+        this.nextBtn     = document.querySelector('button.next')
+        this.backBtn     = document.querySelector('button.back')
         this.currentStep = document.querySelector('h2 span')
+        this.form        = document.querySelector('form')
 
         this.nextBtn.addEventListener('click', this.next.bind(this))
         this.backBtn.addEventListener('click', this.back.bind(this))
         this.disableButton()
     }
     next(){
-        const done = document.querySelectorAll('.done')
-        const fields = document.querySelectorAll('.field')
-        const ended = ()=>{
+        const done   = this.form.querySelectorAll('.done')
+        const fields = this.form.querySelectorAll('.field')
+        const ended  = ()=>{
             fields[done.length+1].classList.add('visible')
             fields[done.length].removeEventListener('transitionend', ended)
             this.updateCurrent()

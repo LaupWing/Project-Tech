@@ -72,8 +72,7 @@ const initializeMessages = async (socket, req)=>{
     updateActiveUser(socket, 'rooms', filteredRooms)
     const chatObjects = filteredRooms
         .map((room)=>createChatObject(room,req))
-    const sorted = chatObjects.sort(sortingChatrooms)
-    console.log(sorted)
+        .sort(sortingChatrooms)
         
     socket.emit('initialize chatrooms', chatObjects)
 }
