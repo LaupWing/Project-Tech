@@ -129,8 +129,32 @@ nav ul.active-list .message-list{
     grid-row: 1;
     grid-column: 1;
     transition: .5s all;
-    overflow: hidden;
+    overflow-y: auto;
     min-width: 0;
+}
+
+/* width */
+nav ul.active-list .match-list::-webkit-scrollbar,
+nav ul.active-list .message-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+nav ul.active-list .match-list::-webkit-scrollbar-track,
+nav ul.active-list .message-list::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+nav ul.active-list .match-list::-webkit-scrollbar-thumb,
+nav ul.active-list .message-list::-webkit-scrollbar-thumb {
+    background: var(--purp); 
+}
+
+/* Handle on hover */
+nav ul.active-list .match-list::-webkit-scrollbar-thumb:hover, 
+nav ul.active-list .message-list::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 nav .active-list li.match p.name,
 nav .active-list li.message p.name{
