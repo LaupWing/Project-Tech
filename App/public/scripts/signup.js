@@ -44,9 +44,9 @@ class nextSection{
         fields[done.length].classList.add('done')
     }
     back(){
-        const done = document.querySelectorAll('.done')
-        const fields = document.querySelectorAll('.field')
-        const ended = ()=>{
+        const done   = this.form.querySelectorAll('.done')
+        const fields = this.form.querySelectorAll('.field')
+        const ended  = ()=>{
             fields[done.length-1].classList.remove('done')
             fields[done.length].removeEventListener('transitionend', ended)
             this.updateCurrent()
@@ -63,8 +63,8 @@ class nextSection{
         this.currentStep.textContent = ` ${done.length+1}/4`
     }
     disableButton(){
-        const done = document.querySelectorAll('.done')
-        const fields = document.querySelectorAll('.field')
+        const done   = this.form.querySelectorAll('.done')
+        const fields = this.form.querySelectorAll('.field')
         
         if(done.length === 0){
             this.backBtn.disabled = true
@@ -83,16 +83,16 @@ class nextSection{
 
 class EnableSubmit{
     constructor(){
-        this.submit = document.querySelector('button[type="submit"]')
-        this.inputs = document.querySelectorAll('input')
+        this.submit    = document.querySelector('button[type="submit"]')
+        this.inputs    = document.querySelectorAll('input')
         this.radioBtns = document.querySelectorAll('input[type="radio"]')
         this.inputs.forEach(input=>input.addEventListener('input', this.userInput.bind(this)))
         document.querySelector('button.next').addEventListener('click', this.userInput.bind(this))
         this.reachedEnd = false
     }
     userInput(){
-        const done = document.querySelectorAll('.done')
-        const fields = document.querySelectorAll('.field')
+        const done = this.form.querySelectorAll('.done')
+        const fields = this.form.querySelectorAll('.field')
         const empty = Array.from(this.inputs).some(input=>input.value === '')
         const noneChecked = Array.from(this.radioBtns).every(radio=>!radio.checked)
         
@@ -132,8 +132,8 @@ class autoAdjust{
         const changeMinAge = Number(e.target.value) -threshhold
         const changeMaxAge = Number(e.target.value) + threshhold
 
-        const minAgeDisplay = document.querySelector('.minAge p span')
-        const maxAgeDisplay = document.querySelector('.maxAge p span')
+        const minAgeDisplay = this.form.querySelector('.minAge p span')
+        const maxAgeDisplay = this.form.querySelector('.maxAge p span')
         
         minAge.value = changeMinAge < 18 ? 18 : changeMinAge
         maxAge.value = changeMaxAge < 18 ? 18 : changeMaxAge
