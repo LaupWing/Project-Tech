@@ -35,7 +35,9 @@ const sortingChatrooms = (a, b)=>{
         if(!aHighestVal)    return a
                             return b
     }
-    return new Date(aHighestVal.date) > new Date(bHighestVal.date) ? a : b
+    if(new Date(aHighestVal.date) > new Date(bHighestVal.date))         return -1
+    else if(new Date(aHighestVal.date) < new Date(bHighestVal.date))    return 1
+    else                                                                return 0
 }
 
 const updateActiveUserRooms = (room, socket)=>{
