@@ -64,7 +64,7 @@ class nextSection{
             return
         }
 
-        section.textContent = this.signupParts[done.length] 
+        section.textContent = this.signupParts[done.length-1] 
         fields[done.length].addEventListener('transitionend', ended)
         fields[done.length].classList.remove('visible')
     }
