@@ -24,8 +24,18 @@ class Modal extends HTMLElement{
                 }
             </style>
             <div id="backdrop"></div>
-            <div id="modal"></div>
+            <div id="modal">
+                <h2></h2>
+            </div>
         `
+        this._title = 'Warning'
+        this._titleEl = this.shadowRoot.querySelector('#modal h2')
+    }
+    connectedCallback(){
+        if(this.hasAttribute('title')){
+            this._title = this.getAttribute('title')
+        }
+        this._titleEl.textContent = this._title
     }
 }
 
