@@ -39,7 +39,6 @@ router
                 title: `Dating:Login`
             },
             styling: 'auth.css',
-            script: 'signup.js'
         })
     })
     .get('/signup', (req,res)=>{
