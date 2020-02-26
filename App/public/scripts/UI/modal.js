@@ -4,6 +4,11 @@ class Modal extends HTMLElement{
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
             <style>
+                :host([opened]) #backdrop,
+                :host([opened]) #modal{
+                    pointer-events: all;
+                    opacity:1;
+                }
                 #backdrop{
                     position: fixed;
                     top: 0;
@@ -14,6 +19,8 @@ class Modal extends HTMLElement{
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    pointer-events: none;
+                    opacity:0;
                 }
                 #modal{
                     position: fixed;
@@ -21,6 +28,8 @@ class Modal extends HTMLElement{
                     z-index: 100;
                     background: white;
                     border-radius: 5px;
+                    pointer-events: none;
+                    opacity:0;
                 }
             </style>
             <div id="backdrop"></div>
@@ -28,8 +37,9 @@ class Modal extends HTMLElement{
                 <h2></h2>
             </div>
         `
-        this._title = 'Warning'
+        this._title   = 'Warning'
         this._titleEl = this.shadowRoot.querySelector('#modal h2')
+        this.opened   = false
     }
     connectedCallback(){
         if(this.hasAttribute('title')){
