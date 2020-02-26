@@ -4,8 +4,8 @@ class Modal extends HTMLElement{
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
             <style>
-                :host([opened]) #backdrop,
-                :host([opened]) #modal{
+                :host([open]) #backdrop,
+                :host([open]) #modal{
                     pointer-events: all;
                     opacity:1;
                 }
@@ -21,6 +21,7 @@ class Modal extends HTMLElement{
                     align-items: center;
                     pointer-events: none;
                     opacity:0;
+                    background-color: rgba(0,0,0,.5);
                 }
                 #modal{
                     position: fixed;
