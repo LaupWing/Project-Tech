@@ -25,14 +25,20 @@ class nextSection{
         this.backBtn     = document.querySelector('button.back')
         this.currentStep = document.querySelector('h2 span')
         this.form        = document.querySelector('form')
-
+        this.signupParts = [
+            'Your Inlog Info',
+            'Something About Yourself',
+            'Your Handsome Photo',
+            'Your Partner Preferences'
+        ]
         this.nextBtn.addEventListener('click', this.next.bind(this))
         this.backBtn.addEventListener('click', this.back.bind(this))
         this.disableButton()
     }
     next(){
-        const done   = this.form.querySelectorAll('.done')
-        const fields = this.form.querySelectorAll('.field')
+        const done    = this.form.querySelectorAll('.done')
+        const fields  = this.form.querySelectorAll('.field')
+        const section = document.querySelector('.signup-part')
         const ended  = ()=>{
             fields[done.length+1].classList.add('visible')
             fields[done.length].removeEventListener('transitionend', ended)
@@ -40,12 +46,14 @@ class nextSection{
             this.disableButton()
         }
 
+        section.textContent = this.signupParts[done.length+1] 
         fields[done.length].addEventListener('transitionend', ended)
         fields[done.length].classList.add('done')
     }
     back(){
-        const done   = this.form.querySelectorAll('.done')
-        const fields = this.form.querySelectorAll('.field')
+        const done    = this.form.querySelectorAll('.done')
+        const fields  = this.form.querySelectorAll('.field')
+        const section = document.querySelector('.signup-part')
         const ended  = ()=>{
             fields[done.length-1].classList.remove('done')
             fields[done.length].removeEventListener('transitionend', ended)
@@ -55,6 +63,8 @@ class nextSection{
         if(done.length === 0){
             return
         }
+
+        section.textContent = this.signupParts[done.length] 
         fields[done.length].addEventListener('transitionend', ended)
         fields[done.length].classList.remove('visible')
     }
