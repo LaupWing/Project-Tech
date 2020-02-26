@@ -234,17 +234,6 @@ p.error{
     cursor: pointer;
 }
 
-@media only screen and (max-width: 550px) {
-    form {
-        overflow: hidden;
-    }
-}
-
-@media only screen and (max-height: 1000px) {
-    main {
-        margin-top: 25vh;
-    }
-}
 
 .progress{
     position: fixed;
@@ -278,4 +267,25 @@ p.error{
 }
 .progress svg path{
     fill: var(--purp);
+}
+
+@media only screen and (max-width: 550px) {
+    form {
+        overflow: hidden;
+    }
+    main {
+        margin-top: 15vh;
+    }
+    footer{
+        display: none;
+    }
+    .progress{
+        width: 95vw;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    main {
+        margin-top: 25vh;
+    }
 }
