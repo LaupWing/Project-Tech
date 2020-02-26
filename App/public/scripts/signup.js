@@ -1,5 +1,6 @@
 console.log('signuppage')
-import CheckDone from './signup-parts/checkDone.js'
+import ProgressHearth from './signup-parts/progress-hearth.js'
+import ProgressBar from './signup-parts/progress-bar.js'
 // Todo!!!!!!!!!!!!!
 // When user changes his/her age the slides automatic changes
 class imageLoader{
@@ -160,7 +161,11 @@ const init = ()=>{
     new slider()
     new EnableSubmit()
     new autoAdjust()
-    new CheckDone()
+    if(window.innerWidth < 500){
+        new ProgressBar()
+    }else{
+        new ProgressHearth()
+    }
 }
 
 init()

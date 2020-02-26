@@ -1,4 +1,4 @@
-export default class CheckDone{
+export default class ProgressHearth{
     constructor(){
         this.stepsContainer  = document.querySelector('.progress')
         this.inputs          = document.querySelectorAll('input')
