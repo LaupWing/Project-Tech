@@ -3,18 +3,16 @@ export default class {
         this.el
     }
     create(element){
-        const checkIdOrClass = element.includes('#') || element.includes('.') 
-        if(checkIdOrClass){
-            const splitted = element.includes('#') ? element.split('#') : element.split('.')
-            this.el = document.createElement(splitted[0])
-            if(splitted[1]=== '#'){
-                this.el.id = splitted[1].replace('#', '')
-            }else{
-                this.el.className = splitted[1].replace('.', '')
-            }
-        }else{
-            this.el = document.createElement(element)
-        }
+        this.el = document.createElement(element)
+        return this
+    }
+    classes(list){
+        list.forEach(item=>{
+            this.el.classList.add(item)
+        })
+    }
+    id(id){
+        this.$el.id= id
         return this
     }
     attr(type, value){
