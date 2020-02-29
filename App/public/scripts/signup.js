@@ -1,8 +1,7 @@
 console.log('signuppage')
 import ProgressHearth from './signup-parts/progress-hearth.js'
 import ProgressBar from './signup-parts/progress-bar.js'
-// Todo!!!!!!!!!!!!!
-// When user changes his/her age the slides automatic changes
+
 class imageLoader{
     constructor(){
         this.input = document.querySelector('input[type="file"]')
