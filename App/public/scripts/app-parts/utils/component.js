@@ -12,7 +12,13 @@ export default class {
             }else{
                 this.el.className = splitted[1].replace('.', '')
             }
+        }else{
+            this.el = document.createElement(element)
         }
+        return this
+    }
+    attr(type, value){
+        this.el.setAttribute(type, value)
         return this
     }
     removeChilds(parent){

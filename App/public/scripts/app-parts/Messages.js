@@ -54,21 +54,23 @@ export default class Messages extends Component{
         }
     }
     renderMessageListItem(room){
-        const li     = document.createElement('li')
-        const pname  = document.createElement('p')
-        const pmsg   = document.createElement('p')
-        const img    = document.createElement('img')
+        const li     = this.create(`li#${room.chatId}`).el
+        const pname  = this.create(`p.name`).el
+        const pmsg   = this.create(`p.message`).el
+        const imgsrc = room.otherUser.images.find(img=>img.mainPicture).url
+        const img    = this.create(`img`).attr('src', imgsrc).el
         const info   = document.createElement('div')
         const unread = document.createElement('div')
+
         console.log(this.create(`li#${room.chatId}`).el)
         console.log(this.create(`p.name`).el)
         li.id            = room.chatId
         info.className   = 'info'
         unread.className = 'unread'
         li.className     = 'message'
-        pname.className  = 'name'
-        pmsg.className   = 'message'
-        img.src          = room.otherUser.images.find(img=>img.mainPicture).url
+        // pname.className  = 'name'
+        // pmsg.className   = 'message'
+        // img.src          = room.otherUser.images.find(img=>img.mainPicture).url
         
         unread.textContent = this.unread(room.messages).length
         pname.textContent  = room.otherUser.name
