@@ -42,7 +42,7 @@ const sendMatches = async(socket, req)=>{
     const reconstructed = userList
         .map(user=>{
             const clicked = onlyMatches.find(match=>match.userId.equals(user._id))
-            const generatedId = `userIdClient_${Math.random()}`
+            const generatedId = `userIdClient_${Math.random().toString().replace('.', '')}`
             return {
                 name:    user.name,
                 age:     user.age,

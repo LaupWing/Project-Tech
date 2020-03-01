@@ -10,26 +10,15 @@ export default class MatchesList extends Component{
         if(list.length===0) return
         this.removeChilds(this.matchesList)
         list.forEach(match=>{
-            const li    = document.createElement('li')
-            const pname = document.createElement('p')
-            const pmsg  = document.createElement('p')
-            const img   = document.createElement('img')
-            const info  = document.createElement('div')
+            const li    = this.create(`li#${match.id}.${match.clicked ?  'match' : 'match not-opened'}`).el
+            const pname = this.create('p.name').txt(match.name).el
+            const pmsg  = this.create('p.message').txt(!match.clicked ? 'You got a new match!' : 'Click for more info').el
+            const img   = this.create('img').attr('src', match.images.find(img=>img.mainPicture).url).el
+            const info  = this.create('div.info').el
+
+            this.appendChilds(info, [pname, pmsg])
+            this.appendChilds(li, [img,info])
             
-            li.id           = match.id
-            info.className  = 'info'
-            li.className    = match.clicked ?  'match' : 'match not-opened'
-            pname.className = 'name'
-            pmsg.className  = 'message'
-            img.src         = match.images.find(img=>img.mainPicture).url
-
-            pname.textContent = match.name
-            pmsg.textContent  = !match.clicked ? 'You got a new match!' : 'Click for more info'
-
-            info.appendChild(pname)
-            info.appendChild(pmsg)
-            li.appendChild(img)
-            li.appendChild(info)
             li.addEventListener('click', this.cb)
             this.matchesList.insertAdjacentElement('afterbegin', li)
         })
