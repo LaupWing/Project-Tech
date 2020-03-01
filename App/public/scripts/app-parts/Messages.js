@@ -55,9 +55,7 @@ export default class Messages extends Component{
     }
     renderMessageListItem(room){
         const li     = this.create(`li#${room.chatId}.message`).el
-        const pname  = this.create('p.name')
-            .txt(room.otherUser.name)
-            .el
+        const pname  = this.create('p.name').txt(room.otherUser.name).el
         const sended       = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
         const pmsg   = this.create('p.message')
             .txt(room.messages.length === 0 
@@ -69,14 +67,11 @@ export default class Messages extends Component{
             .attr('src', room.otherUser.images.find(img=>img.mainPicture).url)
             .el
         const info   = this.create('div.info').el
-        const unread = this.create('div.unread')
-            .txt(this.unread(room.messages).length)
-            .el
+        const unread = this.create('div.unread').txt(this.unread(room.messages).length).el
+        
         this.appendChilds(info, [pname, pmsg])
-        // info.appendChild(pname)
-        // info.appendChild(pmsg)
-        li.appendChild(img)
-        li.appendChild(info)
+        this.appendChilds(li, [img, info])
+
         this.unread(room.messages).length > 0 && li.appendChild(unread)
         this.totalUnread += this.unread(room.messages).length
         this.totalUnread > 0 
