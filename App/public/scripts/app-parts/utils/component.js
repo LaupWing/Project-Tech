@@ -28,7 +28,10 @@ export default class {
                 this.el.classList.add(tag.replace('.', ''))
             }
         })
-        console.log(this.el)
+        return this
+    }
+    txt(value){
+        this.el.textContent = value
         return this
     }
     attr(type, value){
