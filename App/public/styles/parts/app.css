@@ -204,8 +204,8 @@ main ul li{
 
 /* GENERAL INFO CONTAINER STYLING */
 #info{
-    width: 600px;
-    height: 700px;
+    width: 80vw;
+    max-width: 300px;
     grid-row: 1;
     grid-column: 1;
     margin: auto;

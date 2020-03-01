@@ -56,7 +56,7 @@ export default class Messages extends Component{
     renderMessageListItem(room){
         const li     = this.create(`li#${room.chatId}.message`).el
         const pname  = this.create('p.name').txt(room.otherUser.name).el
-        const sended       = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
+        const sended = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
         const pmsg   = this.create('p.message')
             .txt(room.messages.length === 0 
                 ? 'Send your first message!' 
