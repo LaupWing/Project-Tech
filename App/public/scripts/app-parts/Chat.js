@@ -21,11 +21,13 @@ export default class Chat extends Component{
         
         this.appendChilds(h2, [img, h2text])
         this.appendChilds(form, [input,button])
+        this.appendChilds(this.detailPanel, [h2,main])
+
         form.addEventListener('submit', this.onSubmit.bind(this))
         form.addEventListener('animationend', this.scrollToBottom.bind(this))
+        
         this.detailPanel.classList.remove('user-detail')
         this.detailPanel.classList.add('chat')
-        this.appendChilds(this.detailPanel, [h2,main])
         
         setTimeout(()=>{
             this.detailPanel.appendChild(form)
