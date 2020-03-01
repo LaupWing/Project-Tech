@@ -9,29 +9,24 @@ export default class Chat extends Component{
     }
     renderChat(room){
         this.removeChilds(this.detailPanel)
-        const h2     = document.createElement('h2')
+        const h2     = this.create('h2').el
         const h2text = document.createTextNode(room.otherUser.name + ` (${room.otherUser.age})`)
-        const button = document.createElement('button')
-        const img    = document.createElement('img')
-        const input  = document.createElement('input')
-        const form   = document.createElement('form')
-        const main   = document.createElement('main')
+        const button = this.create('button').txt('SEND').attr('type', 'submit').el
+        const img    = this.create('img').attr('src',room.otherUser.images.find(x=>x.mainPicture).url).el
+        const input  = this.create('input').attr('type', 'text').el
+        const form   = this.create('form').el
+        const main   = this.create('main').el
         this.id      = room.chatId
         
-        img.src                = room.otherUser.images.find(x=>x.mainPicture).url
-        h2.appendChild(img)
-        h2.appendChild(h2text)
-        input.type             = 'text'
-        button.type            = 'submit'
-        button.textContent     = 'SEND'
-        form.appendChild(input)
-        form.appendChild(button)
+        
+        this.appendChilds(h2, [img, h2text])
+        this.appendChilds(form, [input,button])
         form.addEventListener('submit', this.onSubmit.bind(this))
         form.addEventListener('animationend', this.scrollToBottom.bind(this))
         this.detailPanel.classList.remove('user-detail')
         this.detailPanel.classList.add('chat')
-        this.detailPanel.appendChild(h2)
-        this.detailPanel.appendChild(main)
+        this.appendChilds(this.detailPanel, [h2,main])
+        
         setTimeout(()=>{
             this.detailPanel.appendChild(form)
             input.focus()
@@ -48,9 +43,7 @@ export default class Chat extends Component{
         if(messages.length>0){
             const msgContainer = this.detailPanel.querySelector('main')
             messages.forEach(msg=>{
-                const p       = document.createElement('p')
-                p.textContent = msg.message
-                p.className   = msg.userSended
+                const p = this.create(`p.${msg.userSended}`).txt(msg.message).el
                 msgContainer.insertAdjacentElement('beforeend', p) 
             })
             this.scrollToBottom()
@@ -59,9 +52,7 @@ export default class Chat extends Component{
     addMessage(msg){
         const msgContainer = this.detailPanel.querySelector('main')
         if(this.id === msg.chatId){
-            const p       = document.createElement('p')
-            p.textContent = msg.message
-            p.className   = `${msg.type} new-message`
+            const p = this.create(`p.${msg.type}.new-message`).txt(msg.message).el
             msgContainer.insertAdjacentElement('beforeend', p) 
             this.scrollToBottom()
             return
