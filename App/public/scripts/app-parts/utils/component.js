@@ -3,8 +3,6 @@ export default class {
         this.el
     }
     create(element){
-        console.log(element)
-        // this.el = document.createElement(element)
         const elParts = element
             .split('')
             .map(ltr=>{
@@ -33,6 +31,11 @@ export default class {
     txt(value){
         this.el.textContent = value
         return this
+    }
+    appendChilds(element, nodes){
+        nodes.forEach(node=>{
+            element.appendChild(node)
+        })
     }
     attr(type, value){
         this.el.setAttribute(type, value)
