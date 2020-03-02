@@ -16,7 +16,6 @@
 }
 
 .menu-mobile h2.active{
-    font-weight: normal;
     color: var(--purp);
 }
 
@@ -43,4 +42,5 @@
 }
 .menu-mobile h2{
     color: rgba(0,0,0,.1);
+    font-weight: normal;
 }

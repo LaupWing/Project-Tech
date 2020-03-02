@@ -243,6 +243,9 @@ footer{
         max-width: 1000px;
         height: 92%;
     }
+    nav.hide{
+        transform: translateY(100%);
+    }
     #info{
         width: 90vw;
         height: 80vh;
