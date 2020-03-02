@@ -37,6 +37,11 @@ export default class {
             element.appendChild(node)
         })
     }
+    insertRawHTMLText(element, texts){
+        texts.forEach(txt=>{
+            element.insertAdjacentHTML('beforeend', txt)
+        })
+    }
     attr(type, value){
         this.el.setAttribute(type, value)
         return this

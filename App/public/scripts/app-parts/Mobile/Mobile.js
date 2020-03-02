@@ -1,5 +1,5 @@
 import Component from '../utils/component.js'
-
+import Logo from '../SVGstrings/logo.js'
 export default class extends Component{
     constructor(){
         super()
@@ -7,7 +7,7 @@ export default class extends Component{
         this.renderMenu()
     }
     renderMenu(){
-        console.log('rendering')
+        
         const mobileMenu = this.create('div.menu-mobile').el
         const bar1       = this.create('div.bar1').el
         const bar2       = this.create('div.bar2').el
