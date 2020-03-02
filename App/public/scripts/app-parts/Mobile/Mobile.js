@@ -12,8 +12,9 @@ export default class extends Component{
         const bar1       = this.create('div.bar1').el
         const bar2       = this.create('div.bar2').el
         const bar3       = this.create('div.bar3').el
+        const backdrop   = this.create('div.backdrop').el
 
         this.appendChilds(mobileMenu, [bar1, bar2, bar3])
-        this.appendChilds(this.body, [mobileMenu])
+        this.appendChilds(this.body, [mobileMenu, backdrop])
     }
 }
