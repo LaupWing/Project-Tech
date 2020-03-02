@@ -205,7 +205,9 @@ main ul li{
 /* GENERAL INFO CONTAINER STYLING */
 #info{
     width: 80vw;
-    max-width: 300px;
+    max-width: 700px;
+    max-height: 800px;
+    height: 70vh;
     grid-row: 1;
     grid-column: 1;
     margin: auto;
@@ -228,4 +230,18 @@ main ul li{
 footer{
     text-align: right;
     padding-right: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+    nav{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+    #info{
+        width: 90vw;
+        height: 80vh;
+    }
 }
