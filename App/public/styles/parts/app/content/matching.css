@@ -91,6 +91,12 @@
         width: 85vw;
     }
     #matching .img-container {
-        height: 40vh;
+        height: 50vh;
+    }
+    #matching p{
+        padding: 5px 10px;
+    }
+    #matching button {
+        padding: 10px;
     }
 }
