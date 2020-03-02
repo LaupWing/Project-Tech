@@ -5,6 +5,7 @@ import Details       from './app-parts/Details.js'
 import SwitchPanel   from './app-parts/SwitchPanel.js'
 import SwitchList    from './app-parts/SwitchList.js'
 import Messages      from './app-parts/Messages.js'
+import Mobile      from './app-parts/Mobile/Mobile.js'
 import Chat          from './app-parts/Chat.js'
 import deleteActives from './app-parts/utils/deleteActives.js'
 const init = ()=>{
@@ -18,6 +19,10 @@ const init = ()=>{
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
+
+    if(window.innerWidth <= 500){
+        new Mobile()
+    }
 
     // Sockets
     socket.on('sending match',           matches.renderMatch.bind(matches))

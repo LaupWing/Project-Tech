@@ -232,6 +232,16 @@ footer{
     padding-right: 10px;
 }
 
+.menu-mobile{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.menu-mobile .bar1{
+    width: 20px;
+}
+
 @media only screen and (max-width: 500px) {
     nav{
         position: fixed;
