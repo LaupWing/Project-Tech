@@ -85,3 +85,9 @@
 #matching p span:first-of-type{
     font-weight: bold;
 }
+
+@media only screen and (max-width: 500px) {
+    #matching{
+        width: 85vw;
+    }
+}
