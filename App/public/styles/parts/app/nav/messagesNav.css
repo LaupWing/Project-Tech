@@ -23,3 +23,11 @@ nav a.logout-btn{
     background: var(--blue);
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 500px) {
+    nav a.logout-btn {
+        padding: 5px;
+        font-size: 1.1rem;
+    }
+}

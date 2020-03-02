@@ -240,6 +240,8 @@ footer{
         left: 0;
         width: 100%;
         z-index: 10000;
+        max-width: 1000px;
+        height: 92%;
     }
     #info{
         width: 90vw;
@@ -247,5 +249,19 @@ footer{
     }
     main{
         max-height: 90%;
+    }
+    nav ul.menu li {
+        padding: 8px;
+    }
+    nav .profile h2 {
+        padding-right: 7%;
+        font-size: 1.5rem;
+    }
+    nav .profile .img-container {
+        width: 50px;
+        height: 50px;
+    }
+    nav .profile {
+        padding: 5px 10px;
     }
 }
