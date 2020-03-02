@@ -5,6 +5,7 @@
 @import url("/static/styles/parts/app/content/chat.css");
 @import url("/static/styles/parts/app/nav/matchesNav.css");
 @import url("/static/styles/parts/app/nav/messagesNav.css");
+@import url("/static/styles/parts/app/nav/mobileMenu.css");
 
 body{
     background: var(--main-gradientColor);
@@ -232,16 +233,6 @@ footer{
     padding-right: 10px;
 }
 
-.menu-mobile{
-    position: fixed;
-    top: 10px;
-    left: 10px;
-}
-
-.menu-mobile .bar1{
-    width: 20px;
-}
-
 @media only screen and (max-width: 500px) {
     nav{
         position: fixed;
@@ -253,5 +244,8 @@ footer{
     #info{
         width: 90vw;
         height: 80vh;
+    }
+    main{
+        max-height: 90%;
     }
 }

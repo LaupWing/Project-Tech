@@ -1,0 +1,44 @@
+.menu-mobile{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    background: var(--main-color);
+}
+.menu-mobile svg{
+    width: 12%;
+    padding: 8px;
+}
+
+.menu-mobile h2.active{
+    font-weight: normal;
+    color: var(--purp);
+}
+
+.menu-mobile svg.active .cls-1{
+    fill:#3fa2a5;
+}
+.menu-mobile svg.active .cls-2{
+    fill:#c779d0;
+}
+.menu-mobile svg.active .cls-3{
+    fill:#ea9a59;
+}
+.menu-mobile svg.active .cls-4{
+    fill:#feac5e;
+}
+.menu-mobile svg.active .cls-5{
+    fill:#7b4d82;
+}
+.menu-mobile svg.active .cls-6{
+    fill:#4bc0c8;
+}
+.menu-mobile svg > *{
+    fill: rgba(0,0,0,.1);
+}
+.menu-mobile h2{
+    color: rgba(0,0,0,.1);
+}
