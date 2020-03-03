@@ -20,9 +20,9 @@ export default class MatchesList extends Component{
             this.appendChilds(info, [pname, pmsg])
             this.appendChilds(li, [img,info])
             
-            li.addEventListener('click',()=>{ 
-                this.cb()
-                this.mobile.openMenu()
+            li.addEventListener('click',(e)=>{ 
+                this.cb.call(this,e)
+                this.mobile && this.mobile.openMenu()
             })
             this.matchesList.insertAdjacentElement('afterbegin', li)
         })

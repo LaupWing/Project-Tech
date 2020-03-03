@@ -80,7 +80,10 @@ export default class Messages extends Component{
             ? document.querySelector('.message-list span').textContent = ` (${this.totalUnread})` 
             : null
         
-        li.addEventListener('click', this.openChat.bind(this))
+        li.addEventListener('click',(e)=>{ 
+            this.openChat.call(this,e)
+            this.mobile && this.mobile.openMenu()
+        })
         this.messages.insertAdjacentElement('beforeend', li)
     }
     unread(messages){

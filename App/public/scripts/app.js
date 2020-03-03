@@ -13,6 +13,7 @@ const init = ()=>{
     const matches     = new Matching(socket)
     const matchesList = new MatchesList((e)=>{
         deleteActives()
+        console.log(e)
         socket.emit('show detail', e.target.id)
     }, mobile)
     const chat        = new Chat(socket)
