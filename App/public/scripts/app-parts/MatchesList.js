@@ -11,7 +11,7 @@ export default class MatchesList extends Component{
         if(list.length===0) return
         this.removeChilds(this.matchesList)
         list.forEach(match=>{
-            const li    = this.create(`li#${match.id}.${match.clicked ?  'match' : 'match not-opened'}`).el
+            const li    = this.create(`li#${match.id}.${match.clicked ?  'match' : 'match.not-opened'}`).el
             const pname = this.create('p.name').txt(match.name).el
             const pmsg  = this.create('p.message').txt(!match.clicked ? 'You got a new match!' : 'Click for more info').el
             const img   = this.create('img').attr('src', match.images.find(img=>img.mainPicture).url).el
