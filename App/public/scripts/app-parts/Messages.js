@@ -31,13 +31,23 @@ export default class Messages extends Component{
         }
     }
     updateTotalUnread(room){
-        console.log(room)
         const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
         if(currentUnreadOfRoom){
             const roomUnread          = this.unread(room.messages).length
             const currentUnreadInRoom = Number(currentUnreadOfRoom.textContent.trim())
             this.totalUnread          = (this.totalUnread - currentUnreadInRoom) + roomUnread
             this.messageBtn.querySelector('.newMatches').textContent = `(${this.totalUnread})`
+        }
+    }
+    updateUnreadOfChat(room){
+        const roomEl          = document.querySelector(`#${room.chatId}`)
+        const unreadContainer = document.querySelector(`#${room.chatId} .unread`)
+        console.log(roomEl, unreadContainer)
+        if(unreadContainer){
+            unreadContainer.textContent = this.unread(room.messages).length
+        }else{
+            const unread = this.create('div.unread').txt(this.unread(room.messages).length).el
+            roomEl.appendChild(unread)
         }
     }
     updateChatRoomInList(room){
@@ -48,9 +58,10 @@ export default class Messages extends Component{
             ? 'you' 
             : room.otherUser
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
-        this.updateTotalUnread(room)
         if(roomIndex===0){
             roomEl.querySelector('.message').textContent = displayMsg
+            this.updateTotalUnread(room)
+            this.updateUnreadOfChat(room)
         }
         else{
             roomEl.classList.add('dissapear')
@@ -61,6 +72,8 @@ export default class Messages extends Component{
                 setTimeout(()=>{
                     document.getElementById(room.chatId).classList.remove('dissapear')
                     document.querySelector(`#${room.chatId} .message`).textContent = displayMsg
+                    this.updateTotalUnread(room)
+                    this.updateUnreadOfChat(room)
                 })
             })
         }
