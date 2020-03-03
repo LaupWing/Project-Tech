@@ -11,8 +11,12 @@
     z-index: 10000000;
 }
 .menu-mobile svg{
-    width: 12%;
+    width: 100%;
     padding: 8px;
+}
+
+.menu-mobile .svg-container{
+    width: 12%;
 }
 
 .menu-mobile h2.active{

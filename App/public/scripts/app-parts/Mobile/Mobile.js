@@ -15,10 +15,16 @@ export default class extends Component{
     }
     
     renderMenu(){
-        const mobileMenu = this.create('div.menu-mobile').el
-        const backdrop   = this.create('div.backdrop').el
-
-        this.insertRawHTMLText(mobileMenu, [Hearth, '<h2>Menu</h2>', Chat])
+        const mobileMenu    = this.create('div.menu-mobile').el
+        const backdrop      = this.create('div.backdrop').el
+        const h2            = this.create('h2').txt('Menu').el
+        const svgContainer  = this.create('div.svg-container').el
+        const svgContainer2 = this.create('div.svg-container').el
+        
+        svgContainer.insertAdjacentHTML('beforeend', Hearth)
+        svgContainer2.insertAdjacentHTML('beforeend', Chat)
+        
+        this.appendChilds(mobileMenu, [svgContainer, h2, svgContainer2])
         this.appendChilds(this.body, [mobileMenu, backdrop])
 
         this.menu = mobileMenu
