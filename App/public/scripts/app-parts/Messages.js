@@ -34,7 +34,7 @@ export default class Messages extends Component{
         console.log(room)
         const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
         if(currentUnreadOfRoom){
-            const roomUnread          = this.unread(room.messages)
+            const roomUnread          = this.unread(room.messages).length
             const currentUnreadInRoom = Number(currentUnreadOfRoom.textContent.trim())
             this.totalUnread          = (this.totalUnread - currentUnreadInRoom) + roomUnread
             this.messageBtn.querySelector('.newMatches').textContent = `(${this.totalUnread})`
