@@ -17,6 +17,17 @@
 
 .menu-mobile .svg-container{
     width: 12%;
+    position: relative;
+}
+
+.menu-mobile .svg-container .new{
+    width: 15px;
+    height: 15px;
+    background: var(--blue);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu-mobile h2.active{
