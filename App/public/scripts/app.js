@@ -9,20 +9,18 @@ import Mobile      from './app-parts/Mobile/Mobile.js'
 import Chat          from './app-parts/Chat.js'
 import deleteActives from './app-parts/utils/deleteActives.js'
 const init = ()=>{
+    const mobile      = window.innerWidth <= 500 && new Mobile()
     const matches     = new Matching(socket)
     const matchesList = new MatchesList((e)=>{
         deleteActives()
         socket.emit('show detail', e.target.id)
-    })
+    }, mobile)
     const chat        = new Chat(socket)
-    const messages    = new Messages(socket, chat)
+    const messages    = new Messages(socket, chat, mobile)
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
 
-    if(window.innerWidth <= 500){
-        new Mobile()
-    }
 
     // Sockets
     socket.on('sending match',           matches.renderMatch.bind(matches))

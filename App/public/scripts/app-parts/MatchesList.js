@@ -1,10 +1,11 @@
 import Component from './utils/component.js'
 export default class MatchesList extends Component{
-    constructor(eventFunction){
+    constructor(eventFunction, mobile){
         super()
-        this.matchesList = document.querySelector('.active-list .match-list')
+        this.matchesList     = document.querySelector('.active-list .match-list')
         this.totalNewmatches = document.querySelector('.newMatches')
-        this.cb = eventFunction
+        this.cb              = eventFunction
+        this.mobile          = mobile
     }
     renderList(list){
         if(list.length===0) return
@@ -19,7 +20,10 @@ export default class MatchesList extends Component{
             this.appendChilds(info, [pname, pmsg])
             this.appendChilds(li, [img,info])
             
-            li.addEventListener('click', this.cb)
+            li.addEventListener('click',()=>{ 
+                this.cb()
+                this.mobile.openMenu()
+            })
             this.matchesList.insertAdjacentElement('afterbegin', li)
         })
         const newMatchesLength = list.filter(match=>!match.clicked).length
