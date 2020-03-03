@@ -24,10 +24,9 @@ router
     .get('/',auth, (req,res)=>{
         
         const io = req.app.get('socketio')
-        
+        console.log('heh')
         io.once('connection', async (socket)=>{
             console.log('connected', socket.id)
-
             await setActiveUser(socket, req)
             await sendMatches(socket, req)
             await getMatch(socket)

@@ -39,6 +39,7 @@ export default class Messages extends Component{
             ? 'you' 
             : room.otherUser
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
+        console.log(room)
         if(roomIndex===0){
             roomEl.querySelector('.message').textContent = displayMsg
         }
