@@ -9,7 +9,6 @@ export default class Messages extends Component{
         this.socket      = socket
         this.totalUnread = 0
         this.mobile      = mobile
-        console.log(this.mobile)
     }
     renderFirstMessage(room){
         if(this.messages.querySelector('p.info')){
@@ -31,6 +30,18 @@ export default class Messages extends Component{
             }
         }
     }
+    updateTotalUnread(room){
+        console.log(room)
+        const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
+        if(currentUnreadOfRoom){
+            const roomUnread          = room.messages
+                .filter(msg=>msg.userSended === 'otherUser')
+                .filter(msg=>!msg.read).length
+            const currentUnreadInRoom = Number(currentUnreadOfRoom.textContent.trim())
+            this.totalUnread          = (this.totalUnread - currentUnreadInRoom) + roomUnread
+            this.messageBtn.querySelector('.newMatches').textContent = `(${this.totalUnread})`
+        }
+    }
     updateChatRoomInList(room){
         const rooms      = Array.from(this.messages.querySelectorAll('li'))
         const roomIndex  = rooms.map(r=>r.id).indexOf(room.chatId)
@@ -39,7 +50,7 @@ export default class Messages extends Component{
             ? 'you' 
             : room.otherUser
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
-        console.log(room)
+        this.updateTotalUnread(room)
         if(roomIndex===0){
             roomEl.querySelector('.message').textContent = displayMsg
         }
