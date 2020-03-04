@@ -207,7 +207,10 @@ main ul li{
     cursor: pointer;
     transition: all .25s;
 }
-
+main ul li .unread{
+    margin-left: 5px;
+    color: var(--orange);
+}
 /* GENERAL INFO CONTAINER STYLING */
 #info{
     width: 80vw;
