@@ -17,7 +17,7 @@ export default class Chat extends Component{
         const form   = this.create('form').el
         const main   = this.create('main').el
         this.id      = room.chatId
-        
+        window.currentChatId = this.id
         
         this.appendChilds(h2, [img, h2text])
         this.appendChilds(form, [input,button])
@@ -53,9 +53,6 @@ export default class Chat extends Component{
     }
     addMessage(msg){
         const msgContainer = this.detailPanel.querySelector('main')
-        console.log(msg)
-        console.log('---------------------------------------')
-        console.log(this.id)
         if(this.id === msg.chatId){
             const p = this.create(`p.${msg.type}.new-message`).txt(msg.message).el
             msgContainer.insertAdjacentElement('beforeend', p) 

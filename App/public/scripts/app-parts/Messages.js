@@ -1,7 +1,7 @@
 import deleteActives from './utils/deleteActives.js'
 import Component from './utils/component.js'
 export default class Messages extends Component{
-    constructor(socket, chat, mobile, chatId){
+    constructor(socket, chat, mobile){
         super()
         this.messages    = document.querySelector('.active-list .message-list')
         this.messageBtn  = document.querySelector('.menu .message-list')
@@ -9,7 +9,6 @@ export default class Messages extends Component{
         this.socket      = socket
         this.totalUnread = 0
         this.mobile      = mobile
-        this.chatId      = chatId
     }
     renderFirstMessage(room){
         if(this.messages.querySelector('p.info')){
@@ -19,8 +18,15 @@ export default class Messages extends Component{
         this.chat.renderChat(room)
         this.messageBtn.click()
     }
-    checkIfUnreadNeedUpdate(){
-
+    checkIfUnreadNeedUpdate(room){
+        console.log(room)
+        console.log('--------------------')
+        console.log(window.currentChatId)
+        if(this.chatId && this.chatId === room.chatId){
+            console.log('chat is open')
+        }
+        this.updateTotalUnread(room)
+        this.updateUnreadOfChat(room)
     }
     updateTotalUnread(room){
         const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
@@ -57,8 +63,7 @@ export default class Messages extends Component{
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
         if(roomIndex===0){
             roomEl.querySelector('.message').textContent = displayMsg
-            this.updateTotalUnread(room)
-            this.updateUnreadOfChat(room)
+            this.checkIfUnreadNeedUpdate(room)
         }
         else{
             roomEl.classList.add('dissapear')
@@ -69,8 +74,7 @@ export default class Messages extends Component{
                 setTimeout(()=>{
                     document.getElementById(room.chatId).classList.remove('dissapear')
                     document.querySelector(`#${room.chatId} .message`).textContent = displayMsg
-                    this.updateTotalUnread(room)
-                    this.updateUnreadOfChat(room)
+                    this.checkIfUnreadNeedUpdate(room)
                 })
             })
         }
