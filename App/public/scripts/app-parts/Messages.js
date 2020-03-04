@@ -22,19 +22,21 @@ export default class Messages extends Component{
         console.log(room)
         console.log('--------------------')
         console.log(window.currentChatId)
-        if(this.chatId && this.chatId === room.chatId){
+        const chatEl = document.querySelector('.chat') 
+        if(window.currentChatId && window.currentChatId === room.chatId){
             console.log('chat is open')
+            console.log(chatEl)
+            
         }
-        this.updateTotalUnread(room)
         this.updateUnreadOfChat(room)
+        this.updateTotalUnread(room)
     }
     updateTotalUnread(room){
-        const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
-        if(currentUnreadOfRoom){
-            const roomUnread          = this.unread(room.messages).length
-            const currentUnreadInRoom = Number(currentUnreadOfRoom.textContent.trim())
-            this.totalUnread          = (this.totalUnread - currentUnreadInRoom) + roomUnread
-            this.messageBtn.querySelector('.newMatches').textContent = `(${this.totalUnread})`
+        const unreads = Array.from(this.messages.querySelectorAll('.unread'))
+            .map(u=>Number(u.textContent.trim()))
+            .reduce((accumulator, currentValue) => accumulator + currentValue)
+        if(unreads>0){
+            this.messageBtn.querySelector('.newMatches').textContent = `(${unreads})`
         }
     }
     updateUnreadOfChat(room){
