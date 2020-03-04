@@ -33,9 +33,6 @@ const init = ()=>{
     socket.on('user sended msg',         chat.addMessage.bind(chat))
     socket.on('open existing chat',      chat.openExistingChat.bind(chat))
     socket.on('other user message',      chat.addMessage.bind(chat))
-    if(mobile){
-        
-    }
 }
 
 window.addEventListener('load', ()=>init())
