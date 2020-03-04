@@ -43,7 +43,8 @@ export default class Messages extends Component{
         }
     }
     updateTotalUnread(){
-        const unreads = Array.from(this.messages.querySelectorAll('.unread'))
+        const unreadsEl = Array.from(this.messages.querySelectorAll('.unread'))
+        const unreads   =  unreadsEl.length>0 && unreadsEl
             .map(u=>Number(u.textContent.trim()))
             .reduce((accumulator, currentValue) => accumulator + currentValue)
         if(unreads>0){
@@ -134,9 +135,7 @@ export default class Messages extends Component{
         const infoBtn = document.querySelector('main .main-nav .info')
         infoBtn.click()
         const li = e.target.closest('li')
-        li.querySelector('.unread') 
-            ? document.querySelector('.message-list span').textContent = ` (${this.totalUnread -= Number(li.querySelector('.unread').textContent)})`
-            : null 
+        this.updateTotalUnread()
         this.socket.emit('open chat', li.id)
     }
     initializeMessages(rooms){
