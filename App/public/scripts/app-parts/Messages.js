@@ -27,7 +27,7 @@ export default class Messages extends Component{
             if(chatEl.classList.contains('hidden')){
                 console.log('hidden', room)
                 const info         = document.querySelector('.main-nav .info')
-                const unreadInInfo = this.create('span.unread').txt(`(${info.length})`).el
+                const unreadInInfo = this.create('span.unread').txt(`(${this.unread(room.messages).length})`).el
                 info.appendChild(unreadInInfo)
             }
         }
