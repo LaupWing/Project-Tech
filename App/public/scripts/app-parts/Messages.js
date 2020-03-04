@@ -24,9 +24,12 @@ export default class Messages extends Component{
         console.log(window.currentChatId)
         const chatEl = document.querySelector('.chat') 
         if(window.currentChatId && window.currentChatId === room.chatId){
-            console.log('chat is open')
-            console.log(chatEl)
-            
+            if(chatEl.classList.contains('hidden')){
+                console.log('hidden', room)
+                const info         = document.querySelector('.main-nav .info')
+                const unreadInInfo = this.create('span.unread').txt(`(${info.length})`).el
+                info.appendChild(unreadInInfo)
+            }
         }
         this.updateUnreadOfChat(room)
         this.updateTotalUnread(room)
