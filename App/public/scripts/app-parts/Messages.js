@@ -19,17 +19,8 @@ export default class Messages extends Component{
         this.chat.renderChat(room)
         this.messageBtn.click()
     }
-    updateUnreadNumber({messages, chatId}){
-        const chatRoom = document.getElementById(chatId)
-        const unread   = chatRoom.querySelector('.unread')
-        if(unread){
-            const filterUnread = messages.filter(x=>x.userSended!=='you' && !x.read)
-            if(filterUnread.length === 0){
-                chatRoom.removeChild(unread)
-            }else{
-                unread.textContent = filterUnread.length
-            }
-        }
+    checkIfUnreadNeedUpdate(){
+
     }
     updateTotalUnread(room){
         const currentUnreadOfRoom = document.querySelector(`#${room.chatId} .unread`)
@@ -43,11 +34,16 @@ export default class Messages extends Component{
     updateUnreadOfChat(room){
         const roomEl          = document.querySelector(`#${room.chatId}`)
         const unreadContainer = document.querySelector(`#${room.chatId} .unread`)
+        const unreadLength = this.unread(room.messages).length
         
         if(unreadContainer){
-            unreadContainer.textContent = this.unread(room.messages).length
+            if(unreadLength === 0){
+                roomEl.removeChild(unreadContainer)
+            }else{
+                unreadContainer.textContent = unreadLength
+            }
         }else{
-            const unread = this.create('div.unread').txt(this.unread(room.messages).length).el
+            const unread = this.create('div.unread').txt(unreadLength).el
             roomEl.appendChild(unread)
         }
     }
