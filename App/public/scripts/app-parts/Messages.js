@@ -25,25 +25,31 @@ export default class Messages extends Component{
         const chatEl = document.querySelector('.chat') 
         if(window.currentChatId && window.currentChatId === room.chatId){
             if(chatEl.classList.contains('hidden')){
-                console.log('hidden', room)
-                const info         = document.querySelector('.main-nav .info')
+                const info = document.querySelector('.main-nav .info')
+                this.updateUnreadOfChat(room)
+                this.updateTotalUnread(room)
                 if(info.querySelector('.unread')){
                     info.querySelector('.unread').textContent = `(${this.unread(room.messages).length})`
                 }else{
                     const unreadInInfo = this.create('span.unread').txt(`(${this.unread(room.messages).length})`).el
                     info.appendChild(unreadInInfo)
                 }
+            }else{
+
             }
+        }else{
+            this.updateUnreadOfChat(room)
+            this.updateTotalUnread(room)
         }
-        this.updateUnreadOfChat(room)
-        this.updateTotalUnread(room)
     }
-    updateTotalUnread(room){
+    updateTotalUnread(){
         const unreads = Array.from(this.messages.querySelectorAll('.unread'))
             .map(u=>Number(u.textContent.trim()))
             .reduce((accumulator, currentValue) => accumulator + currentValue)
         if(unreads>0){
             this.messageBtn.querySelector('.newMatches').textContent = `(${unreads})`
+        }else{
+            this.messageBtn.querySelector('.newMatches').textContent = ''
         }
     }
     updateUnreadOfChat(room){
