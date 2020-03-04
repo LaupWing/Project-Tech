@@ -145,6 +145,5 @@ const savingUsers = users.map(async (user)=>{
 
 
 Promise.all(savingUsers).then(users=>{
-        console.log('heh')
         console.log(users)
 })
