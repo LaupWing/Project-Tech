@@ -17,7 +17,6 @@ const {
     initializeMessages,
     openChat,
     saveMsg
-    
 } = require('./app/socketMessages')
 
 router
