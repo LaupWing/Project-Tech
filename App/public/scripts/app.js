@@ -5,9 +5,10 @@ import Details       from './app-parts/Details.js'
 import SwitchPanel   from './app-parts/SwitchPanel.js'
 import SwitchList    from './app-parts/SwitchList.js'
 import Messages      from './app-parts/Messages.js'
-import Mobile      from './app-parts/Mobile/Mobile.js'
+import Mobile        from './app-parts/Mobile/Mobile.js'
 import Chat          from './app-parts/Chat.js'
 import deleteActives from './app-parts/utils/deleteActives.js'
+
 const init = ()=>{
     const mobile      = window.innerWidth <= 500 && new Mobile()
     const matches     = new Matching(socket)
@@ -16,7 +17,7 @@ const init = ()=>{
         socket.emit('show detail', e.target.id)
     }, mobile)
     const chat        = new Chat(socket)
-    const messages    = new Messages(socket, chat, mobile)
+    const messages    = new Messages(socket, chat, mobile, chat.id)
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()

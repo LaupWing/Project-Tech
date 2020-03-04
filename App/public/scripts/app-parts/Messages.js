@@ -1,7 +1,7 @@
 import deleteActives from './utils/deleteActives.js'
 import Component from './utils/component.js'
 export default class Messages extends Component{
-    constructor(socket, chat, mobile){
+    constructor(socket, chat, mobile, chatId){
         super()
         this.messages    = document.querySelector('.active-list .message-list')
         this.messageBtn  = document.querySelector('.menu .message-list')
@@ -9,6 +9,7 @@ export default class Messages extends Component{
         this.socket      = socket
         this.totalUnread = 0
         this.mobile      = mobile
+        this.chatId      = chatId
     }
     renderFirstMessage(room){
         if(this.messages.querySelector('p.info')){
