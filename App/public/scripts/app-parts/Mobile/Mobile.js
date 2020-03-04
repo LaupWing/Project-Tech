@@ -28,7 +28,6 @@ export default class extends Component{
         this.appendChilds(this.body, [mobileMenu, backdrop])
 
         this.menu = mobileMenu
-        console.log(this.menu)
         this.menu.querySelector('h2').addEventListener('click', this.openMenu.bind(this))
     }
     openMenu(){

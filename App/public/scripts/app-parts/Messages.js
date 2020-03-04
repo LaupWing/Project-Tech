@@ -42,7 +42,7 @@ export default class Messages extends Component{
     updateUnreadOfChat(room){
         const roomEl          = document.querySelector(`#${room.chatId}`)
         const unreadContainer = document.querySelector(`#${room.chatId} .unread`)
-        console.log(roomEl, unreadContainer)
+        
         if(unreadContainer){
             unreadContainer.textContent = this.unread(room.messages).length
         }else{
