@@ -2,7 +2,8 @@ extends layout
 
 block content
     nav 
-        h1  LOGO
+        h1  
+            include logo.pug
         .profile
             - const profilePic = user.images.find(img=>img.mainPicture) 
             .img-container

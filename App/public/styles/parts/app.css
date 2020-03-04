@@ -20,10 +20,15 @@ nav{
     flex-direction: column;
 }
 nav h1{
-    text-align: center;
-    opacity: .5;
-    padding: 10px;
-} 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav h1 svg{
+    width: 30px;
+    padding: 0;
+    margin:8px auto;
+}
 nav .profile{
     width: 100%;
     display: flex;
