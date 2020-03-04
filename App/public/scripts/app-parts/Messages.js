@@ -37,19 +37,22 @@ export default class Messages extends Component{
             }else{
 
             }
-        }else{
-            this.updateUnreadOfChat(room)
-            this.updateTotalUnread(room)
         }
+        this.updateUnreadOfChat(room)
+        this.updateTotalUnread(room)
+        
     }
     updateTotalUnread(){
         const unreadsEl = Array.from(this.messages.querySelectorAll('.unread'))
         const unreads   =  unreadsEl.length>0 && unreadsEl
             .map(u=>Number(u.textContent.trim()))
             .reduce((accumulator, currentValue) => accumulator + currentValue)
+        console.log('updateUnread', unreads)
+        console.log(unreadsEl)
         if(unreads>0){
             this.messageBtn.querySelector('.newMatches').textContent = `(${unreads})`
         }else{
+            console.log('clearing')
             this.messageBtn.querySelector('.newMatches').textContent = ''
         }
     }
