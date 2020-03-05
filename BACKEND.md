@@ -28,3 +28,10 @@ What are my goals for this project(what do i want to show eventually), and what 
 ### 2.2 Technologies
 What are the technologies that will make the process of making my job story easier?
 #### Must Have (part)
+| Name        | Type           | What does it do  |
+| ------------- |:-------------:| -------------------------------:|
+| Nodemon      | Dev |For hot reloading it saves time to automatically see changes |
+| env-cmd      | Dev |Loading my .env files so i can use them during development |
+| Bcrypt      | Prod      | Saving the user valuable information encrypted |
+| JWT | Prod      | Making tokens to confirm the user. User can use this token to login |
+| Express | Prod    | Server where my apps run on |
