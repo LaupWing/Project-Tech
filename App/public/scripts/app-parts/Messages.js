@@ -28,6 +28,7 @@ export default class Messages extends Component{
                 const info = document.querySelector('.main-nav .info')
                 this.updateUnreadOfChat(room)
                 this.updateTotalUnread(room)
+                console.log('set unread of chat')
                 if(info.querySelector('.unread')){
                     info.querySelector('.unread').textContent = `(${this.unread(room.messages).length})`
                 }else{
@@ -60,14 +61,19 @@ export default class Messages extends Component{
         const roomEl          = document.querySelector(`#${room.chatId}`)
         const unreadContainer = document.querySelector(`#${room.chatId} .unread`)
         const unreadLength = this.unread(room.messages).length
-        
+        console.log('set unread of chat')
+        console.log(unreadContainer)
         if(unreadContainer){
             if(unreadLength === 0){
                 roomEl.removeChild(unreadContainer)
             }else{
+                console.log(unreadLength)
                 unreadContainer.textContent = unreadLength
             }
         }else{
+            if(unreadLength===0){
+                return
+            }
             const unread = this.create('div.unread').txt(unreadLength).el
             roomEl.appendChild(unread)
         }
