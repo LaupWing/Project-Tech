@@ -13,14 +13,14 @@ As you can see the i mainly focus on the signup part and login part of the whole
 
 ### Goals
 What are my goals for this project(what do i want to show eventually), and what do want to do if i feel extra motivated.
-**Must Have**
+#### Must Have
 *   Signup Page
     *   Progressivley enhanced Signup
     *   Saving Users to the Mongo via signup form
 *   Login Page
     *   Correctly loggin Users in
 
-**Should Have(extra stuff)**
+#### Should Have(extra stuff)
 *   Matching(matching mechanisme)
 *   Showing Users to match
 *   Chatting
