@@ -7,7 +7,7 @@ This project is about making a full stack dating app using node. Every student h
 ## My Job Story
 I have chosen the Job Story 
 
-**_When I'm single, I want to signup for an dating site easily and give my preference, So i can find my true love._**
+>**_When I'm single, I want to signup for an dating site easily and give my preference, So i can find my true love._**
 
 As you can see the i mainly focus on the signup part and login part of the whole application.
 
