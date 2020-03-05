@@ -24,3 +24,7 @@ What are my goals for this project(what do i want to show eventually), and what 
 *   Matching(matching mechanisme)
 *   Showing Users to match
 *   Chatting
+
+#### Technologies
+What are the technologies that will make the process of making my job story easier?
+##### Must Have (part)
