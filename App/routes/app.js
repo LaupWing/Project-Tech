@@ -19,11 +19,11 @@ const {
     saveMsg
 } = require('./app/socketMessages')
 
-router
+router  
     .get('/',auth, (req,res)=>{
         const io = req.app.get('socketio')
         
-        io.once('connection', async (socket)=>{
+        io.on('connection', async (socket)=>{
             console.log('connected', socket.id)
             await setActiveUser(socket, req)
             await sendMatches(socket, req)

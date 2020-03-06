@@ -98,7 +98,7 @@ class Modal extends HTMLElement{
             </div>
         `
         this._title         = 'Warning'
-        this._description   = 'Here comes your warning message'
+        this._description   = 'Here comes _your_ warning message'
         this._titleEl       = this.shadowRoot.querySelector('#modal h2')
         this._descriptionEl = this.shadowRoot.querySelector('#modal p')
         this._buttonEl      = this.shadowRoot.querySelector('#modal button')
@@ -113,11 +113,21 @@ class Modal extends HTMLElement{
             this._description = this.getAttribute('description')
         }
         this._titleEl.textContent = this._title
+        this.checkHighlight(this._description)
         this._descriptionEl.textContent = this._description
+    }
+    checkHighlight(string){
+        const highlightString = string
+                                    .replace('_', '<span>')
+                                    .replace('_', '</span>')
+        
     }
     _closeModal(){
         this.opened = false
         this.removeAttribute('open')
+    }
+    _getPosition(string, subString, index) {
+        return string.split(subString, index).join(subString).length;
     }
 }
 
