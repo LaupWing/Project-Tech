@@ -29,7 +29,7 @@ class Modal extends HTMLElement{
                 }
                 #modal{
                     position: fixed;
-                    top: 25vh;
+                    top: 30vh;
                     z-index: 100;
                     background: white;
                     border-radius: 5px;
@@ -56,6 +56,7 @@ class Modal extends HTMLElement{
                     color: black;
                     padding: 2px 15px;
                     color:var(--blue);
+                    margin-bottom: 5px;
                     text-transform: uppercase;
                 }
                 h2{
