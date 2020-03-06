@@ -25,12 +25,13 @@ class Modal extends HTMLElement{
                 }
                 #modal{
                     position: fixed;
-                    top: 15vh;
+                    top: 25vh;
                     z-index: 100;
                     background: white;
                     border-radius: 5px;
                     pointer-events: none;
                     opacity:0;
+                    transform: translateX(-50%);
                 }
             </style>
             <div id="backdrop"></div>
