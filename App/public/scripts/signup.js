@@ -18,6 +18,11 @@ class imageLoader{
     }
 }
 
+function applyTransitions(el){
+    console.log(el)
+    console.log(document.querySelectorAll(el))
+    document.querySelectorAll(el).forEach(x=>x.style.transition = 'all .5s')
+}
 
 class nextSection{
     constructor(){
@@ -165,6 +170,7 @@ const init = ()=>{
     }else{
         new ProgressHearth()
     }
+    window.addEventListener('load',()=> applyTransitions('.field'))
 }
 
 init()

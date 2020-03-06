@@ -112,7 +112,6 @@ p.error{
     opacity: 0;
     pointer-events: none;
     transform: translate(50%,0);
-    transition: all .5s;
 }
 .field.visible{
     opacity: 1;
@@ -312,6 +311,16 @@ p.error{
         bottom: 0;
     }
 }
+@media only screen and (max-width: 400px){
+    main {
+        margin-top: 10vh;
+    }
+}
+@media only screen and (max-width: 400px){
+    main {
+        margin-top: 2vh;
+    }
+}
 
 
 @media only screen and (min-width: 1000px) {
@@ -319,7 +328,7 @@ p.error{
         margin-top: 15vh;
     }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 1200px) {
     main {
         margin-top: 25vh;
     }
