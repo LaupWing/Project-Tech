@@ -4,6 +4,10 @@ class Modal extends HTMLElement{
         this.attachShadow({mode: 'open'})
         this.shadowRoot.innerHTML = `
             <style>
+                *{
+                    margin: 0;
+                    padding: 0;
+                }
                 :host([open]) #backdrop,
                 :host([open]) #modal{
                     pointer-events: all;
@@ -20,7 +24,7 @@ class Modal extends HTMLElement{
                     justify-content: center;
                     align-items: center;
                     pointer-events: none;
-                    opacity:0;
+                    opacity:1;
                     background-color: rgba(0,0,0,.5);
                 }
                 #modal{
@@ -29,25 +33,85 @@ class Modal extends HTMLElement{
                     z-index: 100;
                     background: white;
                     border-radius: 5px;
-                    pointer-events: none;
-                    opacity:0;
+                    // pointer-events: none;
+                    opacity:1;
                     transform: translateX(-50%);
+                    display: flex;
+                    flex-direction: column;
+                    align-items:center;
+                    padding: 5px 15px;
+                    width: 50%;
                 }
+                button{
+                    background: var(--main-color);
+                }
+                button{
+                    display: flex;
+                    align-items: center;
+                    background-clip: padding-box;
+                    border: solid 3px transparent;
+                    text-align: center;
+                    position: relative;
+                    justify-content: center;
+                    color: black;
+                    padding: 2px 15px;
+                    color:var(--blue);
+                    text-transform: uppercase;
+                }
+                h2{
+                    color: var(--purp);
+                }
+                p{
+                    margin: 10px 0;
+                    text-align:center;
+                    margin-bottom: 15px;
+                    font-size: .8em;
+                }
+                p span{
+                    color: var(--red);
+                }
+                button::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: -1;
+                    margin: -3px;
+                    border-radius: inherit;
+                    background: var(--main-gradientColor);
+                }
+
             </style>
             <div id="backdrop"></div>
             <div id="modal">
                 <h2></h2>
+                <p></p>
+                <button>Ok</button>
             </div>
         `
-        this._title   = 'Warning'
-        this._titleEl = this.shadowRoot.querySelector('#modal h2')
-        this.opened   = false
+        this._title         = 'Warning'
+        this._description   = 'Here comes your warning message'
+        this._titleEl       = this.shadowRoot.querySelector('#modal h2')
+        this._descriptionEl = this.shadowRoot.querySelector('#modal p')
+        this._buttonEl      = this.shadowRoot.querySelector('#modal button')
+        this.opened         = false
+        this._buttonEl.addEventListener('click', this._closeModal.bind(this))
     }
     connectedCallback(){
         if(this.hasAttribute('title')){
             this._title = this.getAttribute('title')
         }
+        else if(this.hasAttribute('description')){
+            this._description = this.getAttribute('description')
+        }
         this._titleEl.textContent = this._title
+        this._descriptionEl.textContent = this._description
+    }
+    _closeModal(){
+        this.opened = false
+        this.removeAttribute('open')
     }
 }
 
