@@ -13,6 +13,9 @@ class Modal extends HTMLElement{
                     pointer-events: all;
                     opacity:1;
                 }
+                :host([open]) #modal{
+                    top: 30vh;
+                }
                 #backdrop{
                     position: fixed;
                     top: 0;
@@ -24,23 +27,25 @@ class Modal extends HTMLElement{
                     justify-content: center;
                     align-items: center;
                     pointer-events: none;
-                    opacity:1;
+                    opacity:0;
+                    transition: .5s all;
                     background-color: rgba(0,0,0,.5);
                 }
                 #modal{
                     position: fixed;
-                    top: 30vh;
                     z-index: 100;
+                    top: -50vh;
                     background: white;
                     border-radius: 5px;
-                    // pointer-events: none;
-                    opacity:1;
+                    pointer-events: none;
+                    opacity:0;
                     transform: translateX(-50%);
                     display: flex;
                     flex-direction: column;
                     align-items:center;
                     padding: 5px 15px;
                     width: 50%;
+                    transition: .5s all;
                 }
                 button{
                     background: var(--main-color);
