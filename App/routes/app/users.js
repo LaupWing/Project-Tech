@@ -37,9 +37,13 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
         const chatRoom    = userIsOnline[1].rooms
             .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
         const updatedRoom = await Messages.findById(chatRoom._id)
-        console.log('-------------------------updateuserwhenonline')
-        console.log(updatedRoom)
+        console.log('################## updateuserwhenonline')
+        console.log('------userIsOnline[1].rooms')
         console.log(userIsOnline[1].rooms)
+        console.log('------updatedRoom')
+        console.log(updatedRoom)
+        console.log('------chatroom')
+        console.log(chatRoom)
         activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
             .map(x=>{
                 if(chatRoom.chatId === x.chatId){
@@ -73,6 +77,11 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
                 }
             })
         }
+        console.log({
+            chatId:     chatRoom.chatId,
+            messages,
+            otherUser:  req.user.name
+        })
         io.to(socketId).emit('update chatroom in list', {
             chatId:     chatRoom.chatId,
             messages,
