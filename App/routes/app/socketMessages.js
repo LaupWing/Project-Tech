@@ -47,10 +47,11 @@ const checkMessages = async (id, socket, req)=>{
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
             ?   activeUsers[`user_${socket.id}`].rooms
                     .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
-            : (function(){
+            : await (async function(){
                 updateActiveUser(socket, 'rooms', activeUsers[`user_${socket.id}`].rooms.push(findRoom))
-                return findRoom
+                return await  applyOtherUser(findRoom, req)
             }())
+            
         const chatObj      = createChatObject(findChatRoom, req)
 
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
