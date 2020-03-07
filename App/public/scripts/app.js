@@ -21,6 +21,7 @@ const init = ()=>{
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
+    console.log('sending init sockets')
 
 
     // Sockets
