@@ -22,8 +22,7 @@ const init = ()=>{
     new SwitchPanel()
     new SwitchList()
     console.log('sending init sockets')
-
-
+    console.log(socket)
     // Sockets
     socket.on('sending match',           matches.renderMatch.bind(matches))
     socket.on('send matchesList',        matchesList.renderList.bind(matchesList))
@@ -37,4 +36,4 @@ const init = ()=>{
     socket.on('other user message',      chat.addMessage.bind(chat))
 }
 
-window.addEventListener('load', ()=>init())
+window.addEventListener('load', init)

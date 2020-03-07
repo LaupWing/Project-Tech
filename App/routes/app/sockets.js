@@ -37,7 +37,7 @@ exports.sockets = (req,res)=>{
         socket.on('check messages', (id)=>     checkMessages(id, socket, req))
         socket.on('open chat',      (chatId)=> openChat(chatId, socket, req))
         socket.on('send message',   (msgObj)=> saveMsg(msgObj, socket, req, io))
-
+        
         socket.on('disconnect',     ()=>{
             socket.removeAllListeners('denied match')
             socket.removeAllListeners('check messages')
