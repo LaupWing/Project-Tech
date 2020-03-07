@@ -20,7 +20,7 @@ exports.sockets = (req,res)=>{
     const io = req.app.get('socketio')
     io.sockets.once('connection', async (socket)=>{
         console.log(socket.id, '----------connected')
-        socket.emit('connection')
+        
         await setActiveUser(socket, req)
         await sendMatches(socket, req)
         await getMatch(socket)

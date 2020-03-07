@@ -22,7 +22,7 @@ const checkMessages = async (id, socket, req)=>{
     const checkEmpty = () => findRoom && findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))
 
     if(
-        !findRoom && 
+        !findRoom || 
         !checkEmpty()
     ){
         const newRoom = new Messages({
@@ -45,7 +45,8 @@ const checkMessages = async (id, socket, req)=>{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
         const findChatRoom = activeUsers[`user_${socket.id}`].rooms
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
-            const chatObj      = createChatObject(findChatRoom, req)
+        console.log(findChatRoom)
+        const chatObj      = createChatObject(findChatRoom, req)
 
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
         updateRead(findChatRoom, socket, req)
