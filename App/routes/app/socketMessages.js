@@ -91,15 +91,22 @@ const openChat = async(id, socket, req)=>{
 const saveMsg = async(msgObj, socket, req, io)=>{
     const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom    = await Messages.findById(findRoom._id)
+    console.log('-----------------------------')
     console.log(findRoom)
+    console.log('-----------------------------')
+    console.log(messageRoom)
     messageRoom.messages = messageRoom.messages.concat({
         message:    msgObj.message,
         date:       msgObj.timestamp,
         userSended: req.user._id
     })
     findRoom.messages    = messageRoom.messages
-
+    console.log('-----------------------------')
+    console.log(messageRoom.messages)
+    console.log('-----------------------------')
     await messageRoom.save()
+    const messageRoomTest    = await Messages.findById(findRoom._id)
+    console.log(messageRoomTest, findRoom.id)
     updateActiveUserRooms(findRoom, socket)
     updateUserWhenOnline(findRoom.otherUser,msgObj, io, req)
     

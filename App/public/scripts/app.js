@@ -21,7 +21,6 @@ const init = ()=>{
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
-    console.log(socket)
     
     // Sockets
     socket.on('sending match',           matches.renderMatch.bind(matches))
