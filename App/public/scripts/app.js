@@ -9,6 +9,14 @@ import Mobile        from './app-parts/Mobile/Mobile.js'
 import Chat          from './app-parts/Chat.js'
 import deleteActives from './app-parts/utils/deleteActives.js'
 
+let connectedFlag = false 
+
+const stupidAssCheck = ()=>{
+    if(!connectedFlag){
+        location.reload()
+    }
+}
+
 const init = ()=>{
     const mobile      = window.innerWidth <= 500 && new Mobile()
     const matches     = new Matching(socket)
@@ -23,6 +31,7 @@ const init = ()=>{
     new SwitchList()
     
     // Sockets
+    socket.on('connection',              ()=>connectedFlag=true)
     socket.on('sending match',           matches.renderMatch.bind(matches))
     socket.on('send matchesList',        matchesList.renderList.bind(matchesList))
     socket.on('user detail',             details.gotUserDetail.bind(details))
@@ -36,3 +45,8 @@ const init = ()=>{
 }
 
 init()
+window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+        stupidAssCheck()
+    },500)
+})
