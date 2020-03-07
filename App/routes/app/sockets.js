@@ -18,7 +18,7 @@ const {
 
 exports.sockets = (req,res)=>{
     const io = req.app.get('socketio')
-    io.sockets.on('connection', async (socket)=>{
+    io.sockets.once('connection', async (socket)=>{
         console.log(socket.id, '----------connected')
         socket.emit('connection')
         await setActiveUser(socket, req)
@@ -39,13 +39,13 @@ exports.sockets = (req,res)=>{
         socket.on('send message',   (msgObj)=> saveMsg(msgObj, socket, req, io))
 
         socket.on('disconnect',     ()=>{
-            socket.removeAllListeners('denied match')
-            socket.removeAllListeners('check messages')
-            socket.removeAllListeners('accepted match')
-            socket.removeAllListeners('show detail')
-            socket.removeAllListeners('open chat')
-            socket.removeAllListeners('send message')
-            io.removeAllListeners(socket)
+            // socket.removeAllListeners('denied match')
+            // socket.removeAllListeners('check messages')
+            // socket.removeAllListeners('accepted match')
+            // socket.removeAllListeners('show detail')
+            // socket.removeAllListeners('open chat')
+            // socket.removeAllListeners('send message')
+            // io.removeAllListeners()
             deleteUser(socket)
         })
     })
