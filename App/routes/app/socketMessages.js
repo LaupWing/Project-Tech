@@ -91,6 +91,7 @@ const openChat = async(id, socket, req)=>{
 const saveMsg = async(msgObj, socket, req, io)=>{
     const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom    = await Messages.findById(findRoom._id)
+    console.log(findRoom)
     messageRoom.messages = messageRoom.messages.concat({
         message:    msgObj.message,
         date:       msgObj.timestamp,
