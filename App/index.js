@@ -14,7 +14,7 @@ const appRoutes  = require('./routes/app')
 const app    = express()
 const server = http.createServer(app)
 const port   = process.env.PORT
-const io     = socketio(server)
+const io     = socketio.listen(server)
 
 app
     .use(express.urlencoded({extended:false}))

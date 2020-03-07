@@ -18,9 +18,8 @@ const {
 
 exports.sockets = (req,res)=>{
     const io = req.app.get('socketio')
-        
-    io.on('connection', async (socket)=>{
-        console.log('connected', socket.id)
+    io.sockets.on('connection', async (socket)=>{
+        console.log(socket.id, '----------connected')
         socket.emit('connection')
         await setActiveUser(socket, req)
         await sendMatches(socket, req)
@@ -46,7 +45,7 @@ exports.sockets = (req,res)=>{
             socket.removeAllListeners('show detail')
             socket.removeAllListeners('open chat')
             socket.removeAllListeners('send message')
-            io.removeAllListeners('connection')
+            io.removeAllListeners(socket)
             deleteUser(socket)
         })
     })

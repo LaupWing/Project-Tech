@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io({transports: ['websocket'], upgrade: false});
 import Matching      from './app-parts/Matching.js'
 import MatchesList   from './app-parts/MatchesList.js'
 import Details       from './app-parts/Details.js'
@@ -13,7 +13,7 @@ let connectedFlag = false
 
 const stupidAssCheck = ()=>{
     if(!connectedFlag){
-        location.reload()
+        // location.reload()
     }
 }
 
@@ -29,6 +29,7 @@ const init = ()=>{
     const details     = new Details(socket)
     new SwitchPanel()
     new SwitchList()
+    console.log(socket)
     
     // Sockets
     socket.on('connection',              ()=>connectedFlag=true)
