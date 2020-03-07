@@ -22,7 +22,7 @@ const checkMessages = async (id, socket, req)=>{
     const checkEmpty = () => findRoom && findRoom.emptyChat.find(ch=>ch.userId.equals(req.user._id))
 
     if(
-        !findRoom || 
+        !findRoom && 
         !checkEmpty()
     ){
         const newRoom = new Messages({
@@ -45,7 +45,12 @@ const checkMessages = async (id, socket, req)=>{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
         const findChatRoom = activeUsers[`user_${socket.id}`].rooms
             .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
-        console.log(findChatRoom)
+            ?   activeUsers[`user_${socket.id}`].rooms
+                    .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
+            : (function(){
+                updateActiveUser(socket, 'rooms', activeUsers[`user_${socket.id}`].rooms.push(findRoom))
+                return findRoom
+            }())
         const chatObj      = createChatObject(findChatRoom, req)
 
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
@@ -91,23 +96,17 @@ const openChat = async(id, socket, req)=>{
 const saveMsg = async(msgObj, socket, req, io)=>{
     const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom    = await Messages.findById(findRoom._id)
-    console.log('-----------------------------')
-    console.log(findRoom._id)
-    console.log('-----------------------------')
-    console.log(messageRoom)
+    
     messageRoom.messages = messageRoom.messages.concat({
         message:    msgObj.message,
         date:       msgObj.timestamp,
         userSended: req.user._id
     })
     findRoom.messages    = messageRoom.messages
-    console.log('-----------------------------')
-    console.log(messageRoom.messages)
-    console.log('-----------------------------')
-    // await messageRoom.save()
-    // await Messages.findByIdAndUpdate(findRoom._id, {messages: messageRoom.messages})
+
+    await messageRoom.save()
     updateActiveUserRooms(findRoom, socket)
-    // updateUserWhenOnline(findRoom.otherUser,msgObj, io, req)
+    updateUserWhenOnline(findRoom.otherUser,msgObj, io, req)
     
     socket.emit('user sended msg',          {...msgObj, type: 'you'})
     socket.emit('update chatroom in list',  createChatObject(findRoom, req))

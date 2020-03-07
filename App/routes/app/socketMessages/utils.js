@@ -69,6 +69,7 @@ const applyOtherUser = async (room, req)=>{
 }
 
 const createChatObject = (room, req)=>{
+    // console.log(room)
     return{
         messages:  formatChatMessages(room.messages, req),
         otherUser: {
