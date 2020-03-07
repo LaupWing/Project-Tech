@@ -35,4 +35,4 @@ const init = ()=>{
     socket.on('other user message',      chat.addMessage.bind(chat))
 }
 
-window.addEventListener('load', init)
+init()
