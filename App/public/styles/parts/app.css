@@ -220,7 +220,6 @@ main ul li .unread{
     grid-row: 1;
     grid-column: 1;
     margin: auto;
-    transition: .5s all;
     border-radius: 10px;
     overflow: hidden;
     display: flex;

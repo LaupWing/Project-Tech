@@ -5,6 +5,7 @@ export default class Details extends Component{
         this.mainNav     = document.querySelector('.main-nav')
         this.panels      = document.querySelectorAll('.card-container > div')
         this.detailPanel = document.querySelector('#info')
+        this.detailPanel.style.transition = 'all .5s'
         this.socket      = socket
         this.id          = null
     }

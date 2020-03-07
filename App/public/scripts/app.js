@@ -45,6 +45,7 @@ const init = ()=>{
 }
 
 init()
+
 window.addEventListener('load', ()=>{
     setTimeout(()=>{
         stupidAssCheck()
