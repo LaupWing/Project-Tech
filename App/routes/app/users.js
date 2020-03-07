@@ -57,9 +57,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req)=>{
             }
             return copy
         })
-        console.log(userIsOnline[1])
-        console.log('-----------------------------------------------')
-        console.log(chatRoom)
+        
         if(
             userIsOnline[1].currentOpenRoom &&
             chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)

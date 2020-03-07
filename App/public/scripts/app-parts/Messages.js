@@ -61,8 +61,7 @@ export default class Messages extends Component{
         const roomEl          = document.querySelector(`#${room.chatId}`)
         const unreadContainer = document.querySelector(`#${room.chatId} .unread`)
         const unreadLength = this.unread(room.messages).length
-        console.log('set unread of chat')
-        console.log(unreadContainer)
+        
         if(unreadContainer){
             if(unreadLength === 0){
                 roomEl.removeChild(unreadContainer)
