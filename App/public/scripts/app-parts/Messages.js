@@ -14,14 +14,12 @@ export default class Messages extends Component{
         if(this.messages.querySelector('p.info')){
             this.removeChilds(this.messages)
         }
-        this.renderMessageListItem(room)
+        this.renderMessageListItem(room, 'afterbegin')
+        document.getElementById(room.chatId).classList.add('active')
         this.chat.renderChat(room)
         this.messageBtn.click()
     }
     checkIfUnreadNeedUpdate(room){
-        console.log(room)
-        console.log('--------------------')
-        console.log(window.currentChatId)
         const chatEl = document.querySelector('.chat') 
         if(window.currentChatId && window.currentChatId === room.chatId){
             if(chatEl.classList.contains('hidden')){
@@ -101,8 +99,7 @@ export default class Messages extends Component{
             })
         }
     }
-    renderMessageListItem(room){
-        console.log('renderMessageList', room)
+    renderMessageListItem(room, pos){
         const li     = this.create(`li#${room.chatId}.message`).el
         const pname  = this.create('p.name').txt(room.otherUser.name).el
         const sended = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
@@ -131,7 +128,7 @@ export default class Messages extends Component{
             this.openChat.call(this,e)
             this.mobile && this.mobile.openMenu()
         })
-        this.messages.insertAdjacentElement('beforeend', li)
+        this.messages.insertAdjacentElement(pos, li)
     }
     unread(messages){
         return messages
@@ -148,7 +145,7 @@ export default class Messages extends Component{
     initializeMessages(rooms){
         if(rooms.length===0 || !rooms)  return
         this.removeChilds(this.messages)
-        rooms.forEach(room=>this.renderMessageListItem(room))
+        rooms.forEach(room=>this.renderMessageListItem(room, 'beforeend'))
     }
 }
 

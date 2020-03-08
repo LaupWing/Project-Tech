@@ -39,7 +39,7 @@ const checkMessages = async (id, socket, req)=>{
 
         updateActiveUser(socket, 'currentOpenRoom', room)
         updateActiveUser(socket, 'rooms', currentchats)
-
+        
         socket.emit('send first chat', chatObj)
     }else{
         const otherUserId  = findRoom.chatRoom.find(x=>!x.equals(req.user._id))
@@ -53,7 +53,7 @@ const checkMessages = async (id, socket, req)=>{
                 updateActiveUser(socket, 'rooms', tempArray)
                 return chatRoom
             }())
-            
+        console.log('open existing')
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
         updateRead(findChatRoom, socket, req)
             
