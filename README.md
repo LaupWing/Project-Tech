@@ -10,8 +10,9 @@ This README is mainly used for table of contents. You can find the detail of wha
 Each week consists of a `Brief Summary`, `Details` which describes the details of some of the stuff i have done during that week (if you dont want to know the details just read the `Brief Summary`), and the last is the `Conclusion` where i document what i have learned after that specific week.
 
 ## Todo
-- [ ] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
-- [ ] Dont rerender whole list when one thing changes
+- [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
+- [x] Dont rerender whole list when one thing changes
+- [ ] When first send add event listener
 - [x] Split up cliend side javascript
 - [x] Split up server side javascript
 - [x] Render files seperate (client side)
