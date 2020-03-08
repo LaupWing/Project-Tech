@@ -9,7 +9,6 @@ export default class ProgressBar{
     }
     _barClick(e){
         const index = Array.from(this._bars).findIndex(el=>el===e.currentTarget)
-        console.log(e.currentTarget, index)
     }
     _checkDone(){
         const done = this._fields.filter(field=>field.classList.contains('done')).length

@@ -53,7 +53,7 @@ const checkMessages = async (id, socket, req)=>{
                 updateActiveUser(socket, 'rooms', tempArray)
                 return chatRoom
             }())
-        console.log('open existing')
+            
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
         updateRead(findChatRoom, socket, req)
             
@@ -96,8 +96,6 @@ const openChat = async(id, socket, req)=>{
 }
 
 const saveMsg = async(msgObj, socket, req, io)=>{
-    console.log(activeUsers[`user_${socket.id}`].rooms)
-    console.log(msgObj)
     const findRoom       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId === msgObj.chatId)
     const messageRoom    = await Messages.findById(findRoom._id)
     
