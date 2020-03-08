@@ -54,7 +54,6 @@ const checkMessages = async (id, socket, req)=>{
                 return chatRoom
             }())
             
-            
         updateActiveUser(socket, 'currentOpenRoom', findChatRoom)
         updateRead(findChatRoom, socket, req)
             

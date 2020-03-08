@@ -48,12 +48,10 @@ export default class Messages extends Component{
         const unreads   =  unreadsEl.length>0 && unreadsEl
             .map(u=>Number(u.textContent.trim()))
             .reduce((accumulator, currentValue) => accumulator + currentValue)
-        console.log('updateUnread', unreads)
-        console.log(unreadsEl)
+            
         if(unreads>0){
             this.messageBtn.querySelector('.newMatches').textContent = `(${unreads})`
         }else{
-            console.log('clearing')
             this.messageBtn.querySelector('.newMatches').textContent = ''
         }
     }
@@ -104,6 +102,7 @@ export default class Messages extends Component{
         }
     }
     renderMessageListItem(room){
+        console.log('renderMessageList', room)
         const li     = this.create(`li#${room.chatId}.message`).el
         const pname  = this.create('p.name').txt(room.otherUser.name).el
         const sended = ()=> room.messages[room.messages.length-1].userSended === 'you' ? 'you' :  room.otherUser.name
