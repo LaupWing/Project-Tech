@@ -43,6 +43,7 @@ class Modal extends HTMLElement{
                     display: flex;
                     flex-direction: column;
                     align-items:center;
+                    max-width: 280px;
                     padding: 5px 15px;
                     width: 50%;
                     transition: .5s all;

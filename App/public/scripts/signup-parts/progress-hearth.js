@@ -21,8 +21,12 @@ export default class ProgressHearth{
             el.closest('.step').querySelector('svg').classList.remove('done')
         }
     }
-    checkWarning(){
-        const modal = document.querySelector('laup-modal') 
+    checkWarning(e){
+        const modal       = document.querySelector('laup-modal') 
+        const field       = e.target.closest('.step')
+        const indexField  = Array.from(this.steps).findIndex(x=>x===field)
+        const inputFields = document.querySelectorAll('form .field')
+        
         modal.setAttribute('open', '')
         modal.setAttribute('title', 'Incomplete')
         modal.setAttribute('description', 'Input Value not filled in')
