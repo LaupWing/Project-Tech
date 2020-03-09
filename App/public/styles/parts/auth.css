@@ -68,7 +68,7 @@ form .gender label{
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: .1;
+    opacity: .2;
     border: 2px solid var(--purp);
     color: var(--purp);
     font-weight: bold;
@@ -80,12 +80,22 @@ form .gender label{
 form .gender label > svg path{
     fill: var(--purp);
 }
+form .gender.preference label{
+    padding: 2px 5px;
+}
+form .gender.preference svg{
+    width: 60px;
+}
+form .gender.preference label:last-of-type svg{
+    padding: 0px;
+    padding-left: 10px;
+}
 
 form .gender input[type="radio"]:checked+label{
     opacity: 1;
 }
 form .gender label:hover{
-    opacity: .4;
+    opacity: .7;
 
 }
 
