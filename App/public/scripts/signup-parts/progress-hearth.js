@@ -1,5 +1,8 @@
+import Warning from './FieldCheck/Warning.js'
+
 export default class ProgressHearth{
     constructor(){
+        this.warning         = new Warning()
         this.stepsContainer  = document.querySelector('.progress')
         this.inputs          = document.querySelectorAll('input')
         this.steps           = document.querySelectorAll('.step')
@@ -22,13 +25,7 @@ export default class ProgressHearth{
         }
     }
     checkWarning(e){
-        const modal       = document.querySelector('laup-modal') 
-        const field       = e.target.closest('.step')
-        const indexField  = Array.from(this.steps).findIndex(x=>x===field)
-        const inputFields = document.querySelectorAll('form .field')
-        
-        modal.setAttribute('open', '')
-        modal.setAttribute('title', 'Incomplete')
-        modal.setAttribute('description', 'Input Value not filled in')
+        console.log(this.warning)
+        this.warning.checkField(e)
     }
 }
