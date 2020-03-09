@@ -12,6 +12,7 @@ In this README you can find the details of my final product. I will describe wha
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
 - [x] When first send add highlight
+- [ ] Reactive Label
 - [ ] Dont update unread when chat is open
 - [ ] Add field for gender preference (server)
 - [ ] Server can receive gender preference (server)

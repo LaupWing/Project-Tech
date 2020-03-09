@@ -82,6 +82,7 @@ form .gender label > svg path{
 }
 form .gender.preference label{
     padding: 2px 5px;
+    margin-bottom: 10px;
 }
 form .gender.preference svg{
     width: 60px;
@@ -216,10 +217,11 @@ p.error{
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
+    height: 15px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
+    margin-bottom: 10px;
     transition: opacity .2s;
 }
 

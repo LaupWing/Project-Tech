@@ -15,7 +15,6 @@ export default class ProgressHearth{
             this.extraCheck(e.target)
         ){
             const el = this.stepsContainer.querySelector(`.${e.target.name}`)
-            console.log(e.target.name)
             el.classList.add('done')
             const checkEveryDone = Array.from(el.closest('.step').querySelectorAll('p'))
                 .every(p=>p.classList.contains('done'))

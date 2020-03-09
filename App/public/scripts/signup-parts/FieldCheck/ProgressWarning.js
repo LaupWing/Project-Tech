@@ -28,7 +28,7 @@ export default class ProgressWarning {
     }
     _empty(field){
         const inputs = Array.from(field.querySelectorAll('input'))
-        const empty  = inputs.some(input => input.value === '' || !input.value)
+        const empty  = inputs.some(input => input.value === '' || !input.value || !input.checked)
 
         return empty
     }
