@@ -102,8 +102,10 @@ class Modal extends HTMLElement{
         this._titleEl       = this.shadowRoot.querySelector('#modal h2')
         this._descriptionEl = this.shadowRoot.querySelector('#modal p')
         this._buttonEl      = this.shadowRoot.querySelector('#modal button')
+        this._backdropEl    = this.shadowRoot.querySelector('#backdrop')
         this.opened         = false
         this._buttonEl.addEventListener('click', this._closeModal.bind(this))
+        this._backdropEl.addEventListener('click', this._closeModal.bind(this))
     }
     connectedCallback(){
         if(this.hasAttribute('title')){
