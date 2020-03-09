@@ -12,7 +12,8 @@ Each week consists of a `Brief Summary`, `Details` which describes the details o
 ## Todo
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
-- [ ] When first send add event listener
+- [x] When first send add highlight
+- [ ] Dont update unread when chat is open
 - [x] Split up cliend side javascript
 - [x] Split up server side javascript
 - [x] Render files seperate (client side)
