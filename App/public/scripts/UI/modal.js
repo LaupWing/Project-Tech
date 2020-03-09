@@ -44,7 +44,7 @@ class Modal extends HTMLElement{
                     flex-direction: column;
                     align-items:center;
                     max-width: 280px;
-                    padding: 5px 15px;
+                    padding: 8px 15px;
                     width: 50%;
                     transition: .5s all;
                 }
@@ -68,6 +68,7 @@ class Modal extends HTMLElement{
                 h2{
                     color: var(--purp);
                     text-align: center;
+                    font-size: 1.2rem;
                 }
                 p{
                     margin: 10px 0;

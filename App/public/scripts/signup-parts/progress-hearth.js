@@ -1,4 +1,4 @@
-import Warning from './FieldCheck/Warning.js'
+import Warning from './FieldCheck/ProgressWarning.js/index.js'
 
 export default class ProgressHearth{
     constructor(){

@@ -1,4 +1,4 @@
-export default class Warning {
+export default class ProgressWarning {
     constructor(){
         this._fields = Array.from(document.querySelectorAll('form .field'))
         this._modal  = document.querySelector('laup-modal') 
@@ -41,7 +41,7 @@ export default class Warning {
         else if(password.value != passwordCheck.value){
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Password doesnt match')
-            this._modal.setAttribute('description', 'The filled in passwords doesnt match with each other')
+            this._modal.setAttribute('description', 'The filled in _passwords_ doesnt match with each other')
         }   
     }
     _generalInfo(field){
