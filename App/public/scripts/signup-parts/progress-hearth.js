@@ -1,4 +1,4 @@
-import Warning from './FieldCheck/ProgressWarning.js/index.js'
+import Warning from './FieldCheck/ProgressWarning.js'
 
 export default class ProgressHearth{
     constructor(){
@@ -10,19 +10,64 @@ export default class ProgressHearth{
         this.steps.forEach(step=>step.addEventListener('click', this.checkWarning.bind(this))) 
     }
     checkInput(e){
-        const el = this.stepsContainer.querySelector(`.${e.target.name}`)
-        if(!el) return
-        if(e.target.value !== '' && !el.classList.contains('done')){
+        if(
+            e.target.value !== '' && 
+            this.extraCheck(e.target)
+        ){
+            const el = this.stepsContainer.querySelector(`.${e.target.name}`)
             el.classList.add('done')
             const checkEveryDone = Array.from(el.closest('.step').querySelectorAll('p'))
                 .every(p=>p.classList.contains('done'))
             if(checkEveryDone){
                 el.closest('.step').querySelector('svg').classList.add('done')
             }
-        }else if(e.target.value === ''){
+        }else if(e.target.value === '' && e.target.name !== 'passwordCheck'){
+            const el = this.stepsContainer.querySelector(`.${e.target.name}`)
             el.classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('done')
         }
+    }
+    extraCheck(target){
+        if(
+            target.name === 'password'||
+            target.name === 'passwordCheck'||
+            target.name === 'maxAge'||
+            target.name === 'minAge'
+        ){
+            if(target.name === 'password' || target.name === 'passwordCheck'){
+                this.passwordCheck()
+                return false
+            }
+            if(target.name === 'minAge' || target.name === 'maxAge'){
+                this.agePreferenceCheck(target)
+                return false
+            }
+        }
+        return true
+    }
+    passwordCheck(){
+        const svg           = document.querySelector('.steps-hearth .step.one svg')
+        const passwordLabel = document.querySelector('.step .password')
+
+        const password      = document.querySelector('form input[name="password"]')
+        const passwordCheck = document.querySelector('form input[name="passwordCheck"]')
+
+        if(password.value === '' || passwordCheck.value === ''){
+            return
+        }
+        else if(password.value !== passwordCheck.value){
+            passwordLabel.classList.add('error')
+            svg.classList.add('error')
+        }else{
+            svg.classList.remove('error')
+            svg.classList.add('done')
+            
+            passwordLabel.classList.remove('error')
+            passwordLabel.classList.add('done')
+        }
+    }
+    agePreferenceCheck(target){
+        console.log(target)
     }
     checkWarning(e){
         this.warning.checkField(e)

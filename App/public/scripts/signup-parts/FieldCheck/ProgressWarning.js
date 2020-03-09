@@ -30,8 +30,8 @@ export default class ProgressWarning {
         const inputs = Array.from(field.querySelectorAll('input'))
         const empty  = inputs.some(input => input.value === '' || !input.value)
         
-        const password       = document.querySelector('input[name="password"]')
-        const passwordCheck  = document.querySelector('input[name="passwordCheck"]')
+        const password      = document.querySelector('input[name="password"]')
+        const passwordCheck = document.querySelector('input[name="passwordCheck"]')
 
         if(empty){
             this._modal.setAttribute('open', '')
@@ -43,6 +43,11 @@ export default class ProgressWarning {
             this._modal.setAttribute('title', 'Password doesnt match')
             this._modal.setAttribute('description', 'The filled in _passwords_ doesnt match with each other')
         }   
+        else{
+            this._modal.setAttribute('open', '')
+            this._modal.setAttribute('title', 'Complete')
+            this._modal.setAttribute('description', 'You have completed this field!')
+        }
     }
     _generalInfo(field){
         console.log(field)        
