@@ -1,5 +1,6 @@
 import deleteActives from './utils/deleteActives.js'
 import Component from './utils/component.js'
+
 export default class Messages extends Component{
     constructor(socket, chat, mobile){
         super()
