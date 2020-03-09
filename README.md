@@ -15,6 +15,7 @@ In this README you can find the details of my final product. I will describe wha
 - [ ] Dont update unread when chat is open
 - [ ] Add field for gender preference (server)
 - [ ] Server can receive gender preference (server)
+- [ ] Connect Cloud Database
 - [x] Split up cliend side javascript
 - [x] Split up server side javascript
 - [x] Render files seperate (client side)
