@@ -26,12 +26,17 @@ export default class ProgressWarning {
             default: return
           }
     }
-    _inlogInfo(field){
+    _empty(field){
         const inputs = Array.from(field.querySelectorAll('input'))
         const empty  = inputs.some(input => input.value === '' || !input.value)
+
+        return empty
+    }
+    _inlogInfo(field){
+        const empty = this._empty(field)
         
-        const password      = document.querySelector('input[name="password"]')
-        const passwordCheck = document.querySelector('input[name="passwordCheck"]')
+        const password      = field.querySelector('input[name="password"]')
+        const passwordCheck = field.querySelector('input[name="passwordCheck"]')
 
         if(empty){
             this._modal.setAttribute('open', '')
@@ -50,7 +55,12 @@ export default class ProgressWarning {
         }
     }
     _generalInfo(field){
-        console.log(field)        
+        if(this._empty(field)){
+            this._modal.setAttribute('open', '')
+            this._modal.setAttribute('title', 'Incomplete')
+            this._modal.setAttribute('description', 'Please fill in _all_ fields')
+        }        
+        console.log(field)
     }
     _photo(field){
         console.log(field)        

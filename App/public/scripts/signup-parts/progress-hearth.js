@@ -48,7 +48,6 @@ export default class ProgressHearth{
                 return false
             }
         }
-        console.log('extracheck')
         return true
     }
     passwordCheck(){
