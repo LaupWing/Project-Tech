@@ -21,8 +21,11 @@ export default class ProgressHearth{
             if(checkEveryDone){
                 el.closest('.step').querySelector('svg').classList.add('done')
             }
-        }else if(e.target.value === '' && e.target.name !== 'passwordCheck'){
-            const el = this.stepsContainer.querySelector(`.${e.target.name}`)
+        }else if(e.target.value === ''){
+            const el = e.target.name !== 'passwordCheck'  
+                ? this.stepsContainer.querySelector(`.${e.target.name}`)
+                : this.stepsContainer.querySelector('.password')
+                
             el.classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('done')
         }
