@@ -2,7 +2,9 @@ export default class ProgressHearth{
     constructor(){
         this.stepsContainer  = document.querySelector('.progress')
         this.inputs          = document.querySelectorAll('input')
+        this.steps           = document.querySelectorAll('.step')
         this.inputs.forEach(input=>input.addEventListener('input', this.checkInput.bind(this))) 
+        this.steps.forEach(step=>step.addEventListener('click', this.checkWarning.bind(this))) 
     }
     checkInput(e){
         const el = this.stepsContainer.querySelector(`.${e.target.name}`)
@@ -18,5 +20,8 @@ export default class ProgressHearth{
             el.classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('done')
         }
+    }
+    checkWarning(){
+        console.log(document.querySelector('laup-modal'))
     }
 }

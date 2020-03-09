@@ -112,15 +112,33 @@ class Modal extends HTMLElement{
         else if(this.hasAttribute('description')){
             this._description = this.getAttribute('description')
         }
-        this._titleEl.textContent = this._title
-        this.checkHighlight(this._description)
-        this._descriptionEl.textContent = this._description
+        this._titleEl.textContent     = this._title
+        this._descriptionEl.innerHTML = this.checkHighlight(this._description)
+    }
+    attributeChangedCallback(name, oldValue, newValue){
+        switch(name){
+            case 'open':
+                this.opened = !this.opened
+                break
+            case 'title':
+                this._title = newValue
+                this._titleEl.textContent = this._title
+                break
+            case 'description':
+                this._description = newValue
+                this._descriptionEl.textContent = this._description
+                break
+            default: null
+        }
     }
     checkHighlight(string){
         const highlightString = string
-                                    .replace('_', '<span>')
-                                    .replace('_', '</span>')
-        
+            .replace('_', '<span>')
+            .replace('_', '</span>')
+        return highlightString
+    }
+    static get observedAttributes(){
+        return ['title', 'description']
     }
     _closeModal(){
         this.opened = false
