@@ -22,6 +22,9 @@ export default class ProgressHearth{
         }
     }
     checkWarning(){
-        console.log(document.querySelector('laup-modal'))
+        const modal = document.querySelector('laup-modal') 
+        modal.setAttribute('open', '')
+        modal.setAttribute('title', 'Incomplete')
+        modal.setAttribute('description', 'Input Value not filled in')
     }
 }
