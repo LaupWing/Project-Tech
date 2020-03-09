@@ -254,6 +254,11 @@ p.error{
 .progress svg.done{
     opacity: 1;
 }
+.progress svg.error > *,
+.progress svg.error {
+    fill: var(--red);
+    opacity: 1;
+}
 .progress .step{
     text-align: center;
 }

@@ -28,6 +28,8 @@ export default class ProgressHearth{
                 
             el.classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('done')
+            el.classList.remove('error')
+            el.closest('.step').querySelector('svg').classList.remove('error')
         }
     }
     extraCheck(target){
@@ -46,6 +48,7 @@ export default class ProgressHearth{
                 return false
             }
         }
+        console.log('extracheck')
         return true
     }
     passwordCheck(){
@@ -54,9 +57,10 @@ export default class ProgressHearth{
 
         const password      = document.querySelector('form input[name="password"]')
         const passwordCheck = document.querySelector('form input[name="passwordCheck"]')
-
+        
         if(password.value === '' || passwordCheck.value === ''){
-            return
+            svg.classList.remove('error')
+            passwordLabel.classList.remove('error')
         }
         else if(password.value !== passwordCheck.value){
             passwordLabel.classList.add('error')
