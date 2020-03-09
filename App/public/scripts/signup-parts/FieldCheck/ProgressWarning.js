@@ -32,6 +32,11 @@ export default class ProgressWarning {
 
         return empty
     }
+    _completed(){
+        this._modal.setAttribute('open', '')
+        this._modal.setAttribute('title', 'Complete')
+        this._modal.setAttribute('description', 'You have completed this field!')
+    }
     _inlogInfo(field){
         const empty = this._empty(field)
         
@@ -49,9 +54,7 @@ export default class ProgressWarning {
             this._modal.setAttribute('description', 'The filled in _passwords_ doesnt match with each other')
         }   
         else{
-            this._modal.setAttribute('open', '')
-            this._modal.setAttribute('title', 'Complete')
-            this._modal.setAttribute('description', 'You have completed this field!')
+            this._completed()
         }
     }
     _generalInfo(field){
@@ -60,7 +63,9 @@ export default class ProgressWarning {
             this._modal.setAttribute('title', 'Incomplete')
             this._modal.setAttribute('description', 'Please fill in _all_ fields')
         }        
-        console.log(field)
+        else{
+            this._completed()
+        }
     }
     _photo(field){
         console.log(field)        

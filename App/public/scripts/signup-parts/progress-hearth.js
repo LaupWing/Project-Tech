@@ -55,6 +55,7 @@ export default class ProgressHearth{
         const passwordLabel = document.querySelector('.step .password')
 
         const password      = document.querySelector('form input[name="password"]')
+        const email         = document.querySelector('form input[name="email"]')
         const passwordCheck = document.querySelector('form input[name="passwordCheck"]')
         
         if(password.value === '' || passwordCheck.value === ''){
@@ -66,7 +67,9 @@ export default class ProgressHearth{
             svg.classList.add('error')
         }else{
             svg.classList.remove('error')
-            svg.classList.add('done')
+            if(email.value !== ''){
+                svg.classList.add('done')
+            }
             
             passwordLabel.classList.remove('error')
             passwordLabel.classList.add('done')
