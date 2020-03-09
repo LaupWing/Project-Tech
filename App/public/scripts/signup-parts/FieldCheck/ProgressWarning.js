@@ -32,6 +32,11 @@ export default class ProgressWarning {
 
         return empty
     }
+    _incomplete(){
+        this._modal.setAttribute('open', '')
+        this._modal.setAttribute('title', 'Incomplete')
+        this._modal.setAttribute('description', 'Please fill in _all_ fields')
+    }
     _completed(){
         this._modal.setAttribute('open', '')
         this._modal.setAttribute('title', 'Complete')
@@ -44,9 +49,7 @@ export default class ProgressWarning {
         const passwordCheck = field.querySelector('input[name="passwordCheck"]')
 
         if(empty){
-            this._modal.setAttribute('open', '')
-            this._modal.setAttribute('title', 'Incomplete')
-            this._modal.setAttribute('description', 'Please fill in _all_ fields')
+            this._incomplete() 
         }
         else if(password.value != passwordCheck.value){
             this._modal.setAttribute('open', '')
@@ -59,18 +62,26 @@ export default class ProgressWarning {
     }
     _generalInfo(field){
         if(this._empty(field)){
-            this._modal.setAttribute('open', '')
-            this._modal.setAttribute('title', 'Incomplete')
-            this._modal.setAttribute('description', 'Please fill in _all_ fields')
+            this._incomplete()
         }        
         else{
             this._completed()
         }
     }
     _photo(field){
-        console.log(field)        
+        if(this._empty(field)){
+            this._incomplete()
+        }        
+        else{
+            this._completed()
+        }       
     }
     _preference(field){
-        console.log(field)         
+        if(this._empty(field)){
+            this._incomplete()
+        }        
+        else{
+            this._completed()
+        }        
     }
 }
