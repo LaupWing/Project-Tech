@@ -27,7 +27,14 @@ export default class Warning {
           }
     }
     _inlogInfo(field){
-        console.log(field)        
+        const inputs = Array.from(field.querySelectorAll('input'))
+        const empty  = inputs.some(input => input.value === '' || !input.value)
+        
+        if(empty){
+            this._modal.setAttribute('open', '')
+            this._modal.setAttribute('title', 'Incomplete')
+            this._modal.setAttribute('description', 'Please fill in _all_ fields')
+        }       
     }
     _generalInfo(field){
         console.log(field)        

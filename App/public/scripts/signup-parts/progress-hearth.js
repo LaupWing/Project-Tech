@@ -25,7 +25,6 @@ export default class ProgressHearth{
         }
     }
     checkWarning(e){
-        console.log(this.warning)
         this.warning.checkField(e)
     }
 }

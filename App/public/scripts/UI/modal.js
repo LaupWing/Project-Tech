@@ -76,6 +76,7 @@ class Modal extends HTMLElement{
                 }
                 p span{
                     color: var(--red);
+                    font-weight: bold;
                 }
                 button::before {
                     content: '';
@@ -129,7 +130,7 @@ class Modal extends HTMLElement{
                 break
             case 'description':
                 this._description = newValue
-                this._descriptionEl.textContent = this._description
+                this._descriptionEl.innerHTML = this.checkHighlight(this._description)
                 break
             default: null
         }
