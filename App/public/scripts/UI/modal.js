@@ -67,6 +67,7 @@ class Modal extends HTMLElement{
                 }
                 h2{
                     color: var(--purp);
+                    text-align: center;
                 }
                 p{
                     margin: 10px 0;

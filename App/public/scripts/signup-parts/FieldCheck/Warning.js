@@ -30,11 +30,19 @@ export default class Warning {
         const inputs = Array.from(field.querySelectorAll('input'))
         const empty  = inputs.some(input => input.value === '' || !input.value)
         
+        const password       = document.querySelector('input[name="password"]')
+        const passwordCheck  = document.querySelector('input[name="passwordCheck"]')
+
         if(empty){
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Incomplete')
             this._modal.setAttribute('description', 'Please fill in _all_ fields')
-        }       
+        }
+        else if(password.value != passwordCheck.value){
+            this._modal.setAttribute('open', '')
+            this._modal.setAttribute('title', 'Password doesnt match')
+            this._modal.setAttribute('description', 'The filled in passwords doesnt match with each other')
+        }   
     }
     _generalInfo(field){
         console.log(field)        
