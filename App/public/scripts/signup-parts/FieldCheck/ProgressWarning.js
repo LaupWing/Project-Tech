@@ -28,8 +28,17 @@ export default class ProgressWarning {
     }
     _empty(field){
         const inputs = Array.from(field.querySelectorAll('input'))
-        const empty  = inputs.some(input => input.value === '' || !input.value || !input.checked)
-
+        const empty  = inputs.some(input => {
+            if(input.type === 'radio'){
+                const radioInputs = Array.from(field.querySelectorAll(`input[name=${input.name}]`))
+                if(radioInputs.some(rbtn=>rbtn.checked)){
+                    return
+                }
+                return input
+            }
+            return input.value === '' || !input.value
+        })
+        console.log(empty)
         return empty
     }
     _incomplete(){
@@ -77,9 +86,18 @@ export default class ProgressWarning {
         }       
     }
     _preference(field){
+        const minAge = field.querySelector('input[name="minAge"]')
+        const maxAge = field.querySelector('input[name="maxAge"]')
+        
+        console.log(this._empty(field))
         if(this._empty(field)){
             this._incomplete()
         }        
+        else if(minAge.value > maxAge.value){
+            this._modal.setAttribute('open', '')
+            this._modal.setAttribute('title', 'Minage Higher?')
+            this._modal.setAttribute('description', 'Your Min Age is higher than Max Age?? Lower the min age than max age')
+        }  
         else{
             this._completed()
         }        
