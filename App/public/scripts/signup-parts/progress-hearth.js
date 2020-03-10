@@ -25,8 +25,10 @@ export default class ProgressHearth{
             const el = e.target.name !== 'passwordCheck'  
                 ? this.stepsContainer.querySelector(`.${e.target.name}`)
                 : this.stepsContainer.querySelector('.password')
+                
             el.classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('done')
+
             el.classList.remove('error')
             el.closest('.step').querySelector('svg').classList.remove('error')
         }
@@ -74,8 +76,20 @@ export default class ProgressHearth{
             passwordLabel.classList.add('done')
         }
     }
-    agePreferenceCheck(target){
-        console.log(target)
+    agePreferenceCheck(){
+        const minAge  = document.querySelector('form input[name="minAge"]')
+        const maxAge  = document.querySelector('form input[name="maxAge"]')
+        const svg     = document.querySelector('.steps-hearth .step.four svg')
+
+        if(minAge>maxAge){
+            minAge.classList.add('error')
+            maxAge.classList.add('error')
+            svg.classList.add('error')
+        }else if(minAge.classList.contains('error')){
+            minAge.classList.remove('error')
+            maxAge.classList.remove('error')
+            svg.classList.remove('error')
+        }
     }
     checkWarning(e){
         this.warning.checkField(e)
