@@ -95,8 +95,8 @@ export default class ProgressWarning {
         }        
         else if(minAge.value > maxAge.value){
             this._modal.setAttribute('open', '')
-            this._modal.setAttribute('title', 'Minage Higher?')
-            this._modal.setAttribute('description', 'Your Min Age is higher than Max Age?? Lower the min age than max age')
+            this._modal.setAttribute('title', 'Min Age Higher?')
+            this._modal.setAttribute('description', 'Your Min Age is higher than Max Age?? Min Age has to belower than Max Age')
         }  
         else{
             this._completed()

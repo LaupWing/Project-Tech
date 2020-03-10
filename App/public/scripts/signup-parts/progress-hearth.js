@@ -82,11 +82,13 @@ export default class ProgressHearth{
         const maxAge = document.querySelector('form input[name="maxAge"]')
         const svg    = document.querySelector('.steps-hearth .step.four svg')
 
+        const minAgeLabel = document.querySelector('.step .minAge')
+
         if(minAge.value>maxAge.value){
-            minAge.classList.add('error')
+            minAgeLabel.classList.add('error')
             svg.classList.add('error')
-        }else if(minAge.classList.contains('error')){
-            minAge.classList.remove('error')
+        }else if(minAgeLabel.classList.contains('error')){
+            minAgeLabel.classList.remove('error')
             svg.classList.remove('error')
         }
     }
