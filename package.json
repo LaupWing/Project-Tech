@@ -5,7 +5,8 @@
   "main": "App/index.js",
   "scripts": {
     "dev": "env-cmd -f ./config/dev.env nodemon App/index.js",
-    "createDummy": "env-cmd -f ./config/dev.env node dummydata/createDummyData.js"
+    "createDummy": "env-cmd -f ./config/dev.env node dummydata/createDummyData.js",
+    "start": "node App/index.js"
   },
   "repository": {
     "type": "git",
