@@ -8,6 +8,7 @@ export default class ProgressHearth{
         this.steps           = document.querySelectorAll('.step')
         this.inputs.forEach(input=>input.addEventListener('input', this.checkInput.bind(this))) 
         this.steps.forEach(step=>step.addEventListener('click', this.checkWarning.bind(this))) 
+        this._initValueChecks()
     }
     checkInput(e){
         if(
@@ -77,21 +78,31 @@ export default class ProgressHearth{
         }
     }
     agePreferenceCheck(){
-        const minAge  = document.querySelector('form input[name="minAge"]')
-        const maxAge  = document.querySelector('form input[name="maxAge"]')
-        const svg     = document.querySelector('.steps-hearth .step.four svg')
+        const minAge = document.querySelector('form input[name="minAge"]')
+        const maxAge = document.querySelector('form input[name="maxAge"]')
+        const svg    = document.querySelector('.steps-hearth .step.four svg')
 
-        if(minAge>maxAge){
+        if(minAge.value>maxAge.value){
             minAge.classList.add('error')
-            maxAge.classList.add('error')
             svg.classList.add('error')
         }else if(minAge.classList.contains('error')){
             minAge.classList.remove('error')
-            maxAge.classList.remove('error')
             svg.classList.remove('error')
         }
     }
     checkWarning(e){
         this.warning.checkField(e)
+    }
+    _initValueChecks(){
+        this.inputs.forEach(input=>{
+            if(input.value !== ''){
+                if(input.type === 'radio'){
+                    if(!input.checked){
+                        return
+                    }
+                }
+                this.stepsContainer.querySelector(`.${input.name}`).classList.add('done')  
+            }
+        })
     }
 }
