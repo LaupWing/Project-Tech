@@ -13,7 +13,8 @@ const users = [
         age: 30,
         minAge: 25,
         maxAge: 50,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'female'
     },
     {
         image: '2.jpg',
@@ -23,7 +24,8 @@ const users = [
         age: 40,
         minAge: 18,
         maxAge: 60,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'female'
     },
     {
         image: '3.jpeg',
@@ -33,7 +35,8 @@ const users = [
         age: 18,
         minAge: 18,
         maxAge: 50,
-        gender: 'female'
+        gender: 'female',
+        gender_preference: 'male'
     },
     {
         image: '4.jpg',
@@ -43,7 +46,8 @@ const users = [
         age: 45,
         minAge: 30,
         maxAge: 50,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'both'
     },
     {
         image: '5.jpg',
@@ -53,7 +57,8 @@ const users = [
         age: 25,
         minAge: 18,
         maxAge: 35,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'both'
     },
     {
         image: 'johny_bravo.png',
@@ -63,7 +68,8 @@ const users = [
         age: 22,
         minAge: 18,
         maxAge: 40,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'both'
     },
     {
         image: 'lois.jpg',
@@ -73,7 +79,8 @@ const users = [
         age: 38,
         minAge: 22,
         maxAge: 55,
-        gender: 'female'
+        gender: 'female',
+        gender_preference: 'both'
     },
     {
         image: 'malone.jpg',
@@ -83,7 +90,8 @@ const users = [
         age: 24,
         minAge: 18,
         maxAge: 30,
-        gender: 'male'
+        gender: 'male',
+        gender_preference: 'male'
     },
     {
         image: 'marge.jpg',
@@ -93,7 +101,8 @@ const users = [
         age: 45,
         minAge: 30,
         maxAge: 50,
-        gender: 'female'
+        gender: 'female',
+        gender_preference: 'male'
     },
     {
         image: 'misty.png',
@@ -103,7 +112,8 @@ const users = [
         age: 18,
         minAge: 18,
         maxAge: 50,
-        gender: 'female'
+        gender: 'female',
+        gender_preference: 'female'
     },
 ]
 
@@ -127,6 +137,7 @@ const savingUsers = users.map(async (user)=>{
         maxAge: user.maxAge,
         name: user.name,
         gender: user.gender,
+        gender_preference: user.gender_preference,
         images:[
             {
                 url: image,
