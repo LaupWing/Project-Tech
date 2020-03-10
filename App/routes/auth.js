@@ -76,10 +76,12 @@ router
         }
     })
     .post('/signup',upload.single('image'), async (req,res)=>{
+        console.log(req.body)
         const {
             email,
             password,
             passwordCheck,
+            gender_preference,
             age,
             name,
             minAge,
@@ -103,6 +105,7 @@ router
             password,
             age,
             minAge,
+            gender_preference,
             maxAge,
             name,
             gender,
