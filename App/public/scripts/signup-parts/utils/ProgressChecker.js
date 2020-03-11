@@ -63,7 +63,7 @@ export default class ProgressChecker{
         return true
     }
     passwordCheck(){
-        const container     = this._type === 'mobile'
+        const indicator     = this._type === 'mobile'
             ?   document.querySelector('.steps-bar .bar.one')
             :   document.querySelector('.steps-hearth .step.one svg')
         const passwordLabel = document.querySelector('.step .password')
@@ -73,16 +73,16 @@ export default class ProgressChecker{
         const passwordCheck = document.querySelector('form input[name="passwordCheck"]')
         
         if(password.value === '' || passwordCheck.value === ''){
-            container.classList.remove('error')
+            indicator.classList.remove('error')
             passwordLabel.classList.remove('error')
         }
         else if(password.value !== passwordCheck.value){
             passwordLabel.classList.add('error')
-            container.classList.add('error')
+            indicator.classList.add('error')
         }else{
-            container.classList.remove('error')
+            indicator.classList.remove('error')
             if(email.value !== ''){
-                container.classList.add('done')
+                indicator.classList.add('done')
             }
             
             passwordLabel.classList.remove('error')
@@ -90,18 +90,20 @@ export default class ProgressChecker{
         }
     }
     agePreferenceCheck(){
-        const minAge = document.querySelector('form input[name="minAge"]')
-        const maxAge = document.querySelector('form input[name="maxAge"]')
-        const svg    = document.querySelector('.steps-hearth .step.four svg')
+        const minAge    = document.querySelector('form input[name="minAge"]')
+        const maxAge    = document.querySelector('form input[name="maxAge"]')
+        const indicator = this._type === 'mobile'
+            ?   document.querySelector('.steps-bar .bar.four')
+            :   document.querySelector('.steps-hearth .step.four svg')
 
         const minAgeLabel = document.querySelector('.step .minAge')
 
         if(minAge.value>maxAge.value){
             minAgeLabel.classList.add('error')
-            svg.classList.add('error')
+            indicator.classList.add('error')
         }else if(minAgeLabel.classList.contains('error')){
             minAgeLabel.classList.remove('error')
-            svg.classList.remove('error')
+            indicator.classList.remove('error')
         }
     }
 }
