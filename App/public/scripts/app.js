@@ -8,6 +8,7 @@ import Messages      from './app-parts/Messages.js'
 import Mobile        from './app-parts/Mobile/Mobile.js'
 import Chat          from './app-parts/Chat.js'
 import deleteActives from './app-parts/utils/deleteActives.js'
+import youGotAMatch  from './app-parts/youGotAMatch.js'
 
 const init = ()=>{
     const mobile      = window.innerWidth <= 500 && new Mobile()
@@ -23,6 +24,7 @@ const init = ()=>{
     new SwitchList()
     
     // Sockets
+    socket.on('you got a match',         youGotAMatch)
     socket.on('sending match',           matches.renderMatch.bind(matches))
     socket.on('send matchesList',        matchesList.renderList.bind(matchesList))
     socket.on('user detail',             details.gotUserDetail.bind(details))

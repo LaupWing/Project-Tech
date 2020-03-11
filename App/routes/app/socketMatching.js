@@ -77,6 +77,10 @@ const getUserDetail = async (id, socket, req)=>{
     socket.emit('user detail', userWithUpdatedId)
 }
 
+const youGotAMatch = (socket, currentMatchingUser)=>{
+    socket.emit('you got a match', currentMatchingUser)
+}
+
 const deniedMatch = async (socket, req)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
     try{
@@ -93,6 +97,7 @@ const acceptedMatch = async(socket, req)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
     try{
         await updateMatchingUser(req, currentMatchingUser, 'accepted')
+        await youGotAMatch(socket, currentMatchingUser)
         await updateUsersStatus(req, currentMatchingUser)
         await updateCouldBeAMatch(socket, req)
         await sendMatches(socket, req)
