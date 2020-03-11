@@ -20,9 +20,9 @@ export default class ProgressChecker{
                 : this.stepsContainer.querySelector('.password')
                 
             el.classList.remove('done')
-            el.closest('.step').querySelector('svg').classList.remove('done')
-
             el.classList.remove('error')
+            
+            el.closest('.step').querySelector('svg').classList.remove('done')
             el.closest('.step').querySelector('svg').classList.remove('error')
         }
     }
@@ -45,7 +45,9 @@ export default class ProgressChecker{
         return true
     }
     passwordCheck(){
-        const svg           = document.querySelector('.steps-hearth .step.one svg')
+        const container     = this._type === 'mobile'
+            ?   document.querySelector('.steps-bar .bar.one')
+            :   document.querySelector('.steps-hearth .step.one svg')
         const passwordLabel = document.querySelector('.step .password')
 
         const password      = document.querySelector('form input[name="password"]')
@@ -53,16 +55,16 @@ export default class ProgressChecker{
         const passwordCheck = document.querySelector('form input[name="passwordCheck"]')
         
         if(password.value === '' || passwordCheck.value === ''){
-            svg.classList.remove('error')
+            container.classList.remove('error')
             passwordLabel.classList.remove('error')
         }
         else if(password.value !== passwordCheck.value){
             passwordLabel.classList.add('error')
-            svg.classList.add('error')
+            container.classList.add('error')
         }else{
-            svg.classList.remove('error')
+            container.classList.remove('error')
             if(email.value !== ''){
-                svg.classList.add('done')
+                container.classList.add('done')
             }
             
             passwordLabel.classList.remove('error')
