@@ -263,12 +263,15 @@ p.error{
     opacity: .4;
     transition: all 1s;
 }
-.progress svg.done{
+.progress svg.active{
     opacity: 1;
+}
+.progress svg.done > path{
+    fill: var(--green);
 }
 .progress svg.error > *,
 .progress svg.error {
-    fill: var(--red);
+    fill: var(--red) !important;
     opacity: 1;
 }
 .progress .step{

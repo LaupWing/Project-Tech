@@ -18,6 +18,9 @@ body{
     width: 100vw;
     height: 100vh;
 }
+svg > *{
+    transition: .25s;
+}
 a{
     text-decoration: none;
     color: var(--main-fontColor);
