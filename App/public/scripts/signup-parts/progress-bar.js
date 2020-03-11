@@ -1,8 +1,10 @@
 import {checkDone} from './utils/utils.js'
+import Warning from './FieldCheck/ProgressWarning.js'
 import ProgressChecker from './utils/ProgressChecker.js'
 
 export default class ProgressBar{
     constructor(){
+        this.warning   = new Warning()
         this._bars     = document.querySelectorAll('.bar')
         this._fields   = Array.from(document.querySelectorAll('.field'))
         this._buttons  = document.querySelectorAll('form button')
@@ -15,9 +17,9 @@ export default class ProgressBar{
         this.inputs.forEach(input=>input.addEventListener('input', 
             this._progress.checkInput.bind(this._progress))
         ) 
-        this._bars.forEach(bar=>bar.addEventListener('click', this._barClick.bind(this)))
+        this._bars.forEach(bar=>bar.addEventListener('click', this.checkWarning.bind(this)))
     }
-    _barClick(e){
-        const index = Array.from(this._bars).findIndex(el=>el===e.currentTarget)
+    checkWarning(e){
+        this.warning.checkField(document.querySelector(`.step.${e.currentTarget.classList[1]}`))
     }
 }

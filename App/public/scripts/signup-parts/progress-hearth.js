@@ -22,7 +22,7 @@ export default class ProgressHearth{
         this._initValueChecks()
     }
     checkWarning(e){
-        this.warning.checkField(e)
+        this.warning.checkField(e.target.closest('.step'))
     }
     _initValueChecks(){
         this.inputs.forEach(input=>{

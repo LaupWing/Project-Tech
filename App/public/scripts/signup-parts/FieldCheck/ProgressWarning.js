@@ -4,12 +4,13 @@ export default class ProgressWarning {
         this._modal  = document.querySelector('laup-modal') 
         this._steps  = document.querySelectorAll('.step')
     }
-    checkField(e){
-        const field       = e.target.closest('.step')
+    checkField(el){
+        console.log(el)
+        const field       = el
         const indexField  = Array.from(this._steps).findIndex(x=>x===field)
         const inputFields = document.querySelectorAll('form .field')
         const inputField  = inputFields[indexField]
-
+        
         switch(indexField) {
             case 0:
                 this._inlogInfo(inputField)
