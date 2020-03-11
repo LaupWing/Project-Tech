@@ -5,7 +5,6 @@ export default class ProgressChecker{
         this.stepsContainer  = document.querySelector('.progress')
     }
     checkInput(e){
-        console.log(e)
         if(
             e.target.value !== '' && 
             this.extraCheck(e.target)

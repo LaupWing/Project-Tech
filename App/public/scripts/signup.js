@@ -96,24 +96,32 @@ class nextSection{
 
 class EnableSubmit{
     constructor(){
-        this.form      = document.querySelector('form')
-        this.submit    = document.querySelector('button[type="submit"]')
-        this.inputs    = document.querySelectorAll('input')
-        this.radioBtns = document.querySelectorAll('input[type="radio"]')
+        this.form       = document.querySelector('form')
+        this.submit     = document.querySelector('button[type="submit"]')
+        this.inputs     = document.querySelectorAll('input')
+        this.gender     = document.querySelectorAll('input[name="gender"]')
+        this.genderPref = document.querySelectorAll('input[name="gender_preference"]')
         this.inputs.forEach(input=>input.addEventListener('input', this.userInput.bind(this)))
         document.querySelector('button.next').addEventListener('click', this.userInput.bind(this))
         this.reachedEnd = false
     }
     userInput(){
-        const done = this.form.querySelectorAll('.done')
-        const fields = this.form.querySelectorAll('.field')
-        const empty = Array.from(this.inputs).some(input=>input.value === '')
-        const noneChecked = Array.from(this.radioBtns).every(radio=>!radio.checked)
+        const done                  = this.form.querySelectorAll('.done')
+        const fields                = this.form.querySelectorAll('.field')
+        const notEmpty              = Array.from(this.inputs).every(input=>input.value !== '')
+        const someCheckedGender     = Array.from(this.gender).some(radio=>radio.checked)
+        const someCheckedGenderPref = Array.from(this.genderPref).some(radio=>radio.checked)
+        
         
         if((done.length+1) === fields.length){
             this.reachedEnd = true
         }
-        if(this.reachedEnd && !empty && !noneChecked){
+        if(
+            this.reachedEnd && 
+            notEmpty && 
+            someCheckedGender && 
+            someCheckedGenderPref)
+        {
             this.submit.disabled = false
         }
     }
