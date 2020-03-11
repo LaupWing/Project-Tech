@@ -1,6 +1,7 @@
 export default class ProgressChecker{
     constructor(type){
         this._type = type
+        this._bars = Array.from(document.querySelectorAll('.bar'))
     }
     checkInput(e){
         if(
@@ -9,21 +10,38 @@ export default class ProgressChecker{
         ){
             const el = this.stepsContainer.querySelector(`.${e.target.name}`)
             el.classList.add('done')
+
             const checkEveryDone = Array.from(el.closest('.step').querySelectorAll('p'))
                 .every(p=>p.classList.contains('done'))
             if(checkEveryDone){
-                el.closest('.step').querySelector('svg').classList.add('done')
+                const indicator = this._type === 'mobile'
+                    ?   (()=>{
+                            const step = el.closest('.step')
+                            const stepNumber = step.classList[1]
+                            
+                            return document.querySelector(`.bar.${stepNumber}`)
+                        })() 
+                    :   el.closest('.step').querySelector('svg')
+                indicator.classList.add('done')
             }
         }else if(e.target.value === ''){
             const el = e.target.name !== 'passwordCheck'  
                 ? this.stepsContainer.querySelector(`.${e.target.name}`)
                 : this.stepsContainer.querySelector('.password')
-                
+            const indicator = this._type === 'mobile'
+                ?   (()=>{
+                        const step = el.closest('.step')
+                        const stepNumber = step.classList[1]
+                        
+                        return document.querySelector(`.bar.${stepNumber}`)
+                    })() 
+                :   el.closest('.step').querySelector('svg')    
+
             el.classList.remove('done')
             el.classList.remove('error')
             
-            el.closest('.step').querySelector('svg').classList.remove('done')
-            el.closest('.step').querySelector('svg').classList.remove('error')
+            indicator.classList.remove('done')
+            indicator.classList.remove('error')
         }
     }
     extraCheck(target){
