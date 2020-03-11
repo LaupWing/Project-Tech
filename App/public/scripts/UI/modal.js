@@ -45,7 +45,7 @@ class Modal extends HTMLElement{
                     align-items:center;
                     max-width: 280px;
                     padding: 8px 15px;
-                    width: 50%;
+                    width: 80%;
                     transition: .5s all;
                 }
                 button{

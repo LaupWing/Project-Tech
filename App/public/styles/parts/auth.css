@@ -313,11 +313,9 @@ p.error{
 }
 .bar.error{
     background: var(--red)!important;
-    opacity: .8;
 }
 .bar.done{
     background: var(--green);
-    opacity: .8;
 }
 .bar:last-of-type{
     border: none;

@@ -1,4 +1,4 @@
-import {checkDone} from './utils/utils.js'
+import {checkDone, initValueChecks}     from './utils/utils.js'
 import Warning from './FieldCheck/ProgressWarning.js'
 import ProgressChecker from './utils/ProgressChecker.js'
 
@@ -11,6 +11,7 @@ export default class ProgressBar{
         this.inputs    = document.querySelectorAll('input')
         this._progress = new ProgressChecker('mobile')
         checkDone(this._bars)
+        initValueChecks()
         this._fields.forEach(field=>
             field.addEventListener('transitionend', checkDone.bind(this, this._bars))
         )

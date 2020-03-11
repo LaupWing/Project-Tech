@@ -5,6 +5,7 @@ export default class ProgressChecker{
         this.stepsContainer  = document.querySelector('.progress')
     }
     checkInput(e){
+        console.log(e)
         if(
             e.target.value !== '' && 
             this.extraCheck(e.target)
@@ -91,8 +92,9 @@ export default class ProgressChecker{
         }
     }
     agePreferenceCheck(){
-        const minAge    = document.querySelector('form input[name="minAge"]')
-        const maxAge    = document.querySelector('form input[name="maxAge"]')
+        const minAge      = document.querySelector('form input[name="minAge"]')
+        const maxAge      = document.querySelector('form input[name="maxAge"]')
+        const genderPref  = Array.from(document.querySelectorAll('form input[name="gender_preference"]'))
         const indicator = this._type === 'mobile'
             ?   document.querySelector('.steps-bar .bar.four')
             :   document.querySelector('.steps-hearth .step.four svg')
@@ -102,9 +104,17 @@ export default class ProgressChecker{
         if(minAge.value>maxAge.value){
             minAgeLabel.classList.add('error')
             indicator.classList.add('error')
-        }else if(minAgeLabel.classList.contains('error')){
+        }else{
             minAgeLabel.classList.remove('error')
             indicator.classList.remove('error')
+            console.log('else')
+            if(
+                maxAge.value !== '' &&
+                minAge.value !== '' &&
+                genderPref.some(pref=>pref.checked)
+            ){
+                indicator.classList.add('done')
+            }
         }
     }
 }

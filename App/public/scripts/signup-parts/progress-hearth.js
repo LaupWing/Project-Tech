@@ -1,5 +1,5 @@
 import Warning         from './FieldCheck/ProgressWarning.js'
-import {checkDone}     from './utils/utils.js'
+import {checkDone, initValueChecks}     from './utils/utils.js'
 import ProgressChecker from './utils/ProgressChecker.js'
 
 export default class ProgressHearth{
@@ -19,21 +19,9 @@ export default class ProgressHearth{
             this._progress.checkInput.bind(this._progress))
         ) 
         this.steps.forEach(step=>step.addEventListener('click', this.checkWarning.bind(this))) 
-        this._initValueChecks()
+        initValueChecks()
     }
     checkWarning(e){
         this.warning.checkField(e.target.closest('.step'))
-    }
-    _initValueChecks(){
-        this.inputs.forEach(input=>{
-            if(input.value !== ''){
-                if(input.type === 'radio'){
-                    if(!input.checked){
-                        return
-                    }
-                }
-                this.stepsContainer.querySelector(`.${input.name}`).classList.add('done')  
-            }
-        })
     }
 }
