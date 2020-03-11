@@ -305,10 +305,19 @@ p.error{
     height: 10px;
     background: var(--purp);
     opacity: .3;
+    transition: all .25s;
     border-right: solid 2px white;
 }
 .bar.active{
     opacity: 1;
+}
+.bar.error{
+    background: var(--red)!important;
+    opacity: .8;
+}
+.bar.done{
+    background: var(--green);
+    opacity: .8;
 }
 .bar:last-of-type{
     border: none;
