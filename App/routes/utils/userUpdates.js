@@ -1,6 +1,6 @@
 const User = require('../../models/user')
 
-const updateUserStatusCheck =async(req, currentMatchingUser)=>{
+const updateUsersStatus =async(req, currentMatchingUser)=>{
     const {user} = req
 
     const statusChecker = ()=>{
@@ -23,7 +23,7 @@ const updateUserStatusCheck =async(req, currentMatchingUser)=>{
     try{
         await user.save()
     }catch(e){
-        console.log('updateUserStatusCheck-----------Something went wrong', e)
+        console.log('updateUsersStatus-----------Something went wrong', e)
     }
 }
 
@@ -60,7 +60,7 @@ const updateMatchingUser = async (req, currentMatchingUser, status)=>{
 }
 
 module.exports ={
-    updateUserStatusCheck,
+    updateUsersStatus,
     updateUserDenied,
     updateMatchingUser
 }

@@ -1,7 +1,6 @@
 const User = require('../../models/user')
 
 module.exports = async (req)=>{
-    console.log(req.user)
     const dbFiltered = req.user.gender_preference === 'both' 
         ?   await User.find({})
                 .where('age').gte(req.user.minAge).lte(req.user.maxAge)

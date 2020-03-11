@@ -1,5 +1,5 @@
 const {
-    updateUserStatusCheck,
+    updateUsersStatus,
     updateUserDenied,
     updateMatchingUser} = require('../utils/userUpdates')
 const User = require('../../models/user')
@@ -93,7 +93,7 @@ const acceptedMatch = async(socket, req)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
     try{
         await updateMatchingUser(req, currentMatchingUser, 'accepted')
-        await updateUserStatusCheck(req, currentMatchingUser)
+        await updateUsersStatus(req, currentMatchingUser)
         await updateCouldBeAMatch(socket, req)
         await sendMatches(socket, req)
         await getMatch(socket)
