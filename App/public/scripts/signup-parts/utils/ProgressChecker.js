@@ -1,7 +1,8 @@
 export default class ProgressChecker{
     constructor(type){
-        this._type = type
-        this._bars = Array.from(document.querySelectorAll('.bar'))
+        this._type           = type
+        this._bars           = Array.from(document.querySelectorAll('.bar'))
+        this.stepsContainer  = document.querySelector('.progress')
     }
     checkInput(e){
         if(

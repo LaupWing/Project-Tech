@@ -1,4 +1,5 @@
 import {checkDone} from './utils/utils.js'
+
 export default class ProgressBar{
     constructor(){
         this._bars    = document.querySelectorAll('.bar')
