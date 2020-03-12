@@ -17,12 +17,12 @@ In this README you can find the details of my final product. I will describe wha
 Below you can see 2 table contents. One is mend for the README you are currently on and the other is for the external logs, which lives in my wiki.
 
 ### Table of contents (this readme)
-* [App](http://google.com)
-* [Project Log](http://google.com)
-* [Week 1](http://google.com)
-* [Week 2](http://google.com)
-* [Week 3](http://google.com)
-* [Week 4](http://google.com)
+* [Run this project on your own pc](#run-this-project-on-your-own-pc)
+* [Visit the live link](#-visit-the-live-link)
+* [My App](#my-app)
+    * [Homepage](#homepage)
+        * [Login](#login)
+        * [Signup](#signup)
 
 ### Table of contents (external)
 * [App](http://google.com)
