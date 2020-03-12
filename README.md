@@ -55,7 +55,7 @@ __**Note:** To see a more technical explaination of this application go the Back
 If you visit the page for the first time or you didnt logged in in prior sessions you will be greeted with an login/signup page. The user cant visit the actually dating interface unless he/she is logged in. This is done with the help of JWT (Json Web Tokens)
 
 #### Login
-![Login][https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true]
+![Login](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
 
 
 ## Todos
