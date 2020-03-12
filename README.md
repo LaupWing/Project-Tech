@@ -31,13 +31,24 @@ Below you can see 2 table contents. One is mend for the README you are currently
 * [Week 4](http://google.com)
 
 ## My App
+My main job for this project is working on the signup and login page. And if i got more time on my hands i will possibly make the matching and chating functional alongside the signup and login page also.
 
-### How to run this project on your own pc
+### Run this project on your own pc
 ```pc
-git clone this repo
+[git clone] this repo
 
-`npm install` in this directory
+[npm install] in this directory
+
+NOTE: Before you can even run the next command you need to set up your own config directory with an .env file which holds the next information: PORT, MONGODB_URL and your JWT_SECRET
+
+[npm run dev] to start up this project
+
+visit localhost:3000 to see the website in action
 ```
+
+### Visit the live link
+[Click here to visit the websites live link]()
+
 
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
