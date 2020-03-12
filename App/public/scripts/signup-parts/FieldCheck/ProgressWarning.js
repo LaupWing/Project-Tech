@@ -58,14 +58,16 @@ export default class ProgressWarning {
         const password      = field.querySelector('input[name="password"]')
         const passwordCheck = field.querySelector('input[name="passwordCheck"]')
 
-        if(empty){
-            this._incomplete() 
-        }
-        else if(password.value != passwordCheck.value){
+        if(password.value != passwordCheck.value){
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Password doesnt match')
             this._modal.setAttribute('description', 'The filled in _passwords_ doesnt match with each other')
+            return
         }   
+        if(empty){
+            this._incomplete() 
+            return
+        }
         else{
             this._completed()
         }

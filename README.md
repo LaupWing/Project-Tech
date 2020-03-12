@@ -11,7 +11,9 @@ My Job story:
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
 ## What can i find in this README?
-In this README you can find the details of my final product. I will describe what for features it got and how to work with it. To find how the process went per week you can click [here](http://google.com) to see the full log. Or go the the [Tabel of contents](http://google.com) in this README and choose the week you want to see.
+In this README you can find the details of my final product. I will describe what for features it got and how to work with it. 
+
+To find how the process went per week you can click [here](http://google.com) to see the full log. Or go the the [Tabel of contents](http://google.com) in this README and choose the week you want to see. If  you want to see a more technical detail see the `BACKEND` readme by clicking [here]() or in the `Table of contents (external)` or navigate by yourself.
 
 ## Table of contents
 Below you can see 2 table contents. One is mend for the README you are currently on and the other is for the external logs, which lives in my wiki.
@@ -25,7 +27,7 @@ Below you can see 2 table contents. One is mend for the README you are currently
         * [Signup](#signup)
 
 ### Table of contents (external)
-* [App](http://google.com)
+* [Backend](http://google.com)
 * [Project Log](http://google.com)
 * [Week 1](http://google.com)
 * [Week 2](http://google.com)
