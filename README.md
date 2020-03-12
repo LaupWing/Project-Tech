@@ -90,6 +90,12 @@ _As you can see below the purple colored hearth shows the current step you are o
 **_Progressbar: Click to see more info_**
 ![Progress4](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_more_info.gif?raw=true)
 
+### Application Interface
+If you enter the matching/chat interface part of the website (which should happen when you logged in or signed up). You will be greeted with your first matching person. Ofcoure is this person matched according to your preference.  
+
+The application interface on this stage looks quite diffrent depending on what for device you are using it. On a mobile you have to undergo more steps to go to your chats or matches, but on desktop there is more real estate so it is easier to navigate to those parts.
+
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
