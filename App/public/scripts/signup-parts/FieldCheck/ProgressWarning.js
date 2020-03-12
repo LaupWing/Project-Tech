@@ -5,7 +5,6 @@ export default class ProgressWarning {
         this._steps  = document.querySelectorAll('.step')
     }
     checkField(el){
-        console.log(el)
         const field       = el
         const indexField  = Array.from(this._steps).findIndex(x=>x===field)
         const inputFields = document.querySelectorAll('form .field')
@@ -92,15 +91,16 @@ export default class ProgressWarning {
         const minAge = field.querySelector('input[name="minAge"]')
         const maxAge = field.querySelector('input[name="maxAge"]')
         
-        console.log(this._empty(field))
-        if(this._empty(field)){
-            this._incomplete()
-        }        
-        else if(minAge.value > maxAge.value){
+        if(minAge.value > maxAge.value){
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Min Age Higher?')
             this._modal.setAttribute('description', 'Your Min Age is higher than Max Age?? Min Age has to belower than Max Age')
+            return
         }  
+        if(this._empty(field)){
+            this._incomplete()
+            return
+        }        
         else{
             this._completed()
         }        
