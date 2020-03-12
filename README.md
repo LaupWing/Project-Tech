@@ -80,7 +80,7 @@ _As you can see below the purple colored hearth shows the current step you are o
 **_Progressbar: Everything is finished_**
 ![Progress3](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress_finish.png?raw=true)
 **_Progressbar: Click to see more info_**
-![Progress4](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress1.png?raw=true)
+![Progress4](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_more_info.gif?raw=true)
 
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
