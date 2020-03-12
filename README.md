@@ -62,6 +62,7 @@ Below the login field you see an link where you can signup if you dont have an a
 
 **_Login_**
 ![Login](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
+
 **_Login Error_**
 ![Login Error](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
 
@@ -77,12 +78,16 @@ _As you can see below the purple colored hearth shows the current step you are o
 
 **_Just progressbar_**
 ![Progress1](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress1.png?raw=true)
+
 **_Progressbar: Something went wrong_**
 ![Progress2](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress_faulty.png?raw=true)
+
 **_Progressbar: Everything is finished_**
 ![Progress3](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress_finish.png?raw=true)
+
 **_Progressbar: Click to see more info_**
 ![Progress4](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_more_info.gif?raw=true)
+
 
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
