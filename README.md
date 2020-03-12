@@ -58,8 +58,9 @@ If you visit the page for the first time or you didnt logged in in prior session
 As you can see below the Login page is quite basic. You can login with your email and password. If your password and email doesnt match with the data in the database you will get an error message.
 Below the login field you see an link where you can signup if you dont have an account yet.
 
-**<p>Login</p>**
+<p style="color:blue;text-align:center;>Login</p>
 ![Login](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
+
 **Login Error**
 ![Login Error](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login_error.png?raw=true)
 ## Todos
