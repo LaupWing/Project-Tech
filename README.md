@@ -51,6 +51,9 @@ My main job for this project is working on the signup and login page. But becaus
 
 __**Note:** To see a more technical explaination of this application go the Backend README or click [here]()__
 
+### Homepage
+If you visit the page for the first time or you didnt logged in in prior sessions you will be greeted with an login/signup page. The user cant visit the actually dating interface unless he/she is logged in. This is done with the help of JWT (Json Web Tokens)
+
 
 
 ## Todos
