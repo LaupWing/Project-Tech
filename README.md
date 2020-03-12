@@ -8,6 +8,8 @@ This project is about all about  web development from frontend to the backend. D
 My Job story:
 > When I'm single, I want to signup for an dating site easily and give my preference, So i can find my true love.
 
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
+
 ## What can i find in this README?
 In this README you can find the details of my final product. I will describe what for features it got and how to work with it. To find how the process went per week you can click [here](http://google.com) to see the full log. Or go the the [Tabel of contents](http://google.com) in this README and choose the week you want to see.
 
