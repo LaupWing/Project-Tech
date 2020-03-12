@@ -62,6 +62,26 @@ Below the login field you see an link where you can signup if you dont have an a
 ![Login](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
 **_Login Error_**
 ![Login Error](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/login.png?raw=true)
+
+#### Signup
+The signup page is quite a bit more complex than the login page. It is more progressively enhanced by the use of css and javascript. THe signup page is acutally one big form but split up in multple sections(fields). You can navigate through the form by either clicking `next` or `back`. There are two indicators to show on which section you are; on the top of the website which shows the current and total steps, and on the bottom which does the same but has more detail on each steps. When you are finished with the form the `submit` button will be visible for the user to click on. The `submit` button is only activated when all the steps indicators on the bottom are green. If you dont know why one of the steps isnt green yet, you can click on it to have more information why it isnt green yet.
+
+**_Signup_**
+![Signup](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup.png?raw=true)
+
+**_Progress Indicator bottom_**
+
+_As you can see below the purple colored hearth shows the current step you are on. Above the hearth is the information that exists within this step. By the color you can see if it is either faulty or its is finished. Green hearth means that you are done and red means that there is something wrong. If the text above the hearth is purple it means it is finished and nothing wrong with it, if it is red there is something wrong with it. You can click on the current step to see more info_
+
+**_Just progressbar_**
+![Progress1](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress1.png?raw=true)
+**_Progressbar: Something went wrong_**
+![Progress2](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress_faulty.png?raw=true)
+**_Progressbar: Everything is finished_**
+![Progress3](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress_finish.png?raw=true)
+**_Progressbar: Click to see more info_**
+![Progress4](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/signup_progress1.png?raw=true)
+
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
