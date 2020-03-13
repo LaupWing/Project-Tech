@@ -140,12 +140,16 @@ class Modal extends HTMLElement{
                 this.opened = !this.opened
                 break
             case 'title':
-                this._title = newValue
+                this._title               = newValue
                 this._titleEl.textContent = this._title
                 break
             case 'description':
-                this._description = newValue
+                this._description             = newValue
                 this._descriptionEl.innerHTML = this.checkHighlight(this._description)
+                break
+            case 'animation':
+                this._animation         = newValue
+                this._modalEl.className = this._animation
                 break
             default: null
         }
@@ -157,7 +161,7 @@ class Modal extends HTMLElement{
         return highlightString
     }
     static get observedAttributes(){
-        return ['title', 'description']
+        return ['title', 'description', 'animation']
     }
     _closeModal(){
         this.opened = false
