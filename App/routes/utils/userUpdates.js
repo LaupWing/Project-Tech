@@ -1,10 +1,11 @@
 const User = require('../../models/user')
 
-const updateUsersStatus =async(req, currentMatchingUser)=>{
+const updateUsersStatus =async(req, currentMatchingUser, socket)=>{
     const {user} = req
 
     const statusChecker = ()=>{
         if(currentMatchingUser.acceptedList.find(user=>user.userId.equals(req.user._id))){
+            socket.emit('you got a match', currentMatchingUser)
             return 'accepted'
         }else if(currentMatchingUser.deniedList.find(user=>user.userId.equals(req.user._id))){
             return 'denied'
