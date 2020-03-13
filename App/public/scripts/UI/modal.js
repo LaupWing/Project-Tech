@@ -16,6 +16,9 @@ class Modal extends HTMLElement{
                 :host([open]) #modal{
                     top: 30vh;
                 }
+                :host([open]) #modal.top{
+                    top: 30vh;
+                }
                 #backdrop{
                     position: fixed;
                     top: 0;
@@ -48,6 +51,9 @@ class Modal extends HTMLElement{
                     width: 80%;
                     left: 50vw;
                     transition: .5s all;
+                }
+                #modal.top{
+                    top: -50vh;
                 }
                 button{
                     background: var(--main-color);
@@ -104,6 +110,8 @@ class Modal extends HTMLElement{
         `
         this._title         = 'Warning'
         this._description   = 'Here comes _your_ warning message'
+        this._animation     = ''
+        this._modalEl       = this.shadowRoot.querySelector('#modal')
         this._titleEl       = this.shadowRoot.querySelector('#modal h2')
         this._descriptionEl = this.shadowRoot.querySelector('#modal p')
         this._buttonEl      = this.shadowRoot.querySelector('#modal button')
@@ -116,10 +124,14 @@ class Modal extends HTMLElement{
         if(this.hasAttribute('title')){
             this._title = this.getAttribute('title')
         }
-        else if(this.hasAttribute('description')){
+        if(this.hasAttribute('description')){
             this._description = this.getAttribute('description')
         }
+        if(this.hasAttribute('animation')){
+            this._animation = this.getAttribute('animation')
+        }
         this._titleEl.textContent     = this._title
+        this._modalEl.className       = this._animation
         this._descriptionEl.innerHTML = this.checkHighlight(this._description)
     }
     attributeChangedCallback(name, oldValue, newValue){
