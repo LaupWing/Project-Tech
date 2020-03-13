@@ -1,4 +1,4 @@
-# Project Tech
+# Dating App
 Here you can find everything related to Project Tech from the HVA. 
 
 **What is Project Tech??**
