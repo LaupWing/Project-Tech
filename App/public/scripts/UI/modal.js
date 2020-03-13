@@ -33,6 +33,7 @@ class Modal extends HTMLElement{
                 }
                 #modal{
                     position: fixed;
+                    top: 30vh;
                     z-index: 100;
                     background: white;
                     border-radius: 5px;

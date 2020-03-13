@@ -25,9 +25,9 @@
 
 /* Matching States */
 #matching.accepted {
-    transform: translate(100%, 2%);
+    transform: translate(50%, 2%);
     opacity: 0;
-    transition: 1s all;
+    transition: .5s all;
 }
 #matching.accepted p,
 #matching.accepted h2 {
@@ -35,9 +35,9 @@
     background: var(--green);
 }
 #matching.denied {
-    transform: translate(-100%, 2%);
+    transform: translate(-50%, 2%);
     opacity: 0;
-    transition: 1s all;
+    transition: .5s all;
 }
 #matching.denied p,
 #matching.denied h2 {
