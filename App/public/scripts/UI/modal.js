@@ -13,9 +13,6 @@ class Modal extends HTMLElement{
                     pointer-events: all;
                     opacity:1;
                 }
-                :host([open]) #modal{
-                    top: 30vh;
-                }
                 :host([open]) #modal.fromTheTop{
                     top: 30vh;
                 }
@@ -37,7 +34,6 @@ class Modal extends HTMLElement{
                 #modal{
                     position: fixed;
                     z-index: 100;
-                    top: -50vh;
                     background: white;
                     border-radius: 5px;
                     pointer-events: none;

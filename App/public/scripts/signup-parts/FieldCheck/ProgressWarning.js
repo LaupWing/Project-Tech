@@ -42,16 +42,16 @@ export default class ProgressWarning {
         return empty
     }
     _incomplete(){
+        this._modal.setAttribute('animation', 'fromTheTop')
         this._modal.setAttribute('open', '')
         this._modal.setAttribute('title', 'Incomplete')
         this._modal.setAttribute('description', 'Please fill in _all_ fields')
-        this._modal.setAttribute('animation', 'fromTheTop')
     }
     _completed(){
+        this._modal.setAttribute('animation', 'fromTheTop')
         this._modal.setAttribute('open', '')
         this._modal.setAttribute('title', 'Complete')
         this._modal.setAttribute('description', 'You have completed this field!')
-        this._modal.setAttribute('animation', 'fromTheTop')
     }
     _inlogInfo(field){
         const empty = this._empty(field)
@@ -60,10 +60,10 @@ export default class ProgressWarning {
         const passwordCheck = field.querySelector('input[name="passwordCheck"]')
 
         if(password.value != passwordCheck.value){
+            this._modal.setAttribute('animation', 'fromTheTop')
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Password doesnt match')
             this._modal.setAttribute('description', 'The filled in _passwords_ doesnt match with each other')
-            this._modal.setAttribute('animation', 'fromTheTop')
             return
         }   
         if(empty){
@@ -95,10 +95,10 @@ export default class ProgressWarning {
         const maxAge = field.querySelector('input[name="maxAge"]')
         
         if(minAge.value > maxAge.value){
+            this._modal.setAttribute('animation', 'fromTheTop')
             this._modal.setAttribute('open', '')
             this._modal.setAttribute('title', 'Min Age Higher?')
             this._modal.setAttribute('description', 'Your Min Age is higher than Max Age?? Min Age has to belower than Max Age')
-            this._modal.setAttribute('animation', 'fromTheTop')
             return
         }  
         if(this._empty(field)){
