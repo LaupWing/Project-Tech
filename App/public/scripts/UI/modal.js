@@ -16,7 +16,7 @@ class Modal extends HTMLElement{
                 :host([open]) #modal{
                     top: 30vh;
                 }
-                :host([open]) #modal.top{
+                :host([open]) #modal.fromTheTop{
                     top: 30vh;
                 }
                 #backdrop{
@@ -52,7 +52,7 @@ class Modal extends HTMLElement{
                     left: 50vw;
                     transition: .5s all;
                 }
-                #modal.top{
+                #modal.fromTheTop{
                     top: -50vh;
                 }
                 button{
