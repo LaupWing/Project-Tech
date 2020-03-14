@@ -32,10 +32,14 @@ export default class extends Component{
         
         this.menu = mobileMenu
         this.menu.querySelector('h2').addEventListener('click', this.openMenu.bind(this))
-        svgContainer.querySelector('svg').addEventListener('click', this.openSection.bind(null,'match-list'))
+        svgContainer.querySelector('svg').addEventListener('click', this.openSection.bind(this,'match-list'))
+        svgContainer2.querySelector('svg').addEventListener('click', this.openSection.bind(this,'message-list'))
     }
     openSection(section){
-        console.log(section)
+        if(this.nav.classList.contains('hide')){
+            this.openMenu()
+        }
+        document.querySelector(`nav .menu .${section}`).click()
     }
     openMenu(){
         this.nav.classList.toggle('hide')
