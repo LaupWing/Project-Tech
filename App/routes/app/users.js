@@ -1,6 +1,7 @@
-const activeUsers   = {}
-const filterByNeeds = require('../utils/filterByNeeds')
-const Messages      = require('../../models/messages')
+const activeUsers      = {}
+const filterByNeeds    = require('../utils/filterByNeeds')
+const Messages         = require('../../models/messages')
+const User             = require('../../models/user')
 
 const setActiveUser=  async(socket, req)=>{
     if(!activeUsers[`user_${socket.id}`]){
@@ -12,6 +13,17 @@ const setActiveUser=  async(socket, req)=>{
             userId:          req.user._id
         }
     }
+}
+
+const applyOtherUser = async (room, userId)=>{
+    const otherUser = room.chatRoom.find(id=>!id.equals(userId))
+    const user = await User.findById(otherUser)
+    const roomWithOtherUser = {
+        ...room._doc,
+        otherUser : user,
+        chatId    : `room_${Math.round(Math.random()*1000000)}`
+    }
+    return roomWithOtherUser
 }
 
 const checkIfUserIsOnline = (id)=>{
@@ -36,12 +48,13 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
         const socketId    = userIsOnline[0].replace('user_', '')
         const findRoom    = userIsOnline[1].rooms
             .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
-        const chatRoom    = userIsOnline[1].rooms
-            .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
+        const chatRoom    = findRoom || await applyOtherUser(room, user._id) 
         console.log('------------userIsOnline[1].rooms------------')
         console.log(userIsOnline[1].rooms)
-        console.log('------------user------------')
-        console.log(user)
+        console.log('------------room------------')
+        console.log(room)
+        console.log('------------chatRoom------------')
+        console.log(chatRoom)
 
         // const updatedRoom = await Messages.findById(chatRoom._id)
         // activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
