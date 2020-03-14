@@ -23,6 +23,10 @@ const init = ()=>{
     new SwitchPanel()
     new SwitchList()
     
+    if(mobile){
+        socket.on('send matchesList',     mobile.setInfo.bind(mobile, 'hearth'))
+        socket.on('initialize chatrooms', mobile.setInfo.bind(mobile, 'chat'))
+    }
     // Sockets
     socket.on('you got a match',         youGotAMatch)
     socket.on('sending match',           matches.renderMatch.bind(matches))

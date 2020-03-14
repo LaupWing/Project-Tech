@@ -41,4 +41,13 @@ export default class extends Component{
             this.menu.querySelector('h2').classList.add('active')
         }
     }
+    setInfo(type, data){
+        const container = document.querySelector(`.menu-mobile .${type}`)
+        if(data.length>0){
+            container.querySelector('svg').classList.add('active')
+            const infoEl = this.create('div.info').txt(data.length).el
+            console.log(infoEl)
+            container.insertAdjacentElement('beforeend', infoEl)
+        }
+    }
 }
