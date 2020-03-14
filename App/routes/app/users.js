@@ -15,11 +15,11 @@ const setActiveUser=  async(socket, req)=>{
     }
 }
 
-const applyOtherUser = async (room, userId)=>{
+const reApplyOtherUser = async (room, userId)=>{
     const otherUser = room.chatRoom.find(id=>!id.equals(userId))
     const user = await User.findById(otherUser)
     const roomWithOtherUser = {
-        ...room._doc,
+        ...room,
         otherUser : user,
         chatId    : `room_${Math.round(Math.random()*1000000)}`
     }
@@ -48,15 +48,11 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
         const socketId    = userIsOnline[0].replace('user_', '')
         const findRoom    = userIsOnline[1].rooms
             .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
-        const chatRoom    = findRoom || await applyOtherUser(room, user._id) 
-        console.log('------------userIsOnline[1].rooms------------')
-        console.log(userIsOnline[1].rooms)
-        console.log('------------room------------')
-        console.log(room)
-        console.log('------------chatRoom------------')
-        console.log(chatRoom)
-
-        // const updatedRoom = await Messages.findById(chatRoom._id)
+        const chatRoom    = findRoom || await reApplyOtherUser(room, user._id) 
+        const updatedRoom = await Messages.findById(chatRoom._id)
+        
+        console.log('------------updatedChatroom------------')
+        console.log(updatedRoom)
         // activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
         //     .map(x=>{
         //         if(chatRoom.chatId === x.chatId){
