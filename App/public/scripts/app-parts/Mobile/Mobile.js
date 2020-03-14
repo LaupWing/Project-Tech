@@ -22,8 +22,11 @@ export default class extends Component{
         const svgContainer2 = this.create('div.svg-container').el
         
         svgContainer.insertAdjacentHTML('beforeend', Hearth)
+        svgContainer.classList.add('hearth')
+
         svgContainer2.insertAdjacentHTML('beforeend', Chat)
-        
+        svgContainer2.classList.add('chat')
+
         this.appendChilds(mobileMenu, [svgContainer, h2, svgContainer2])
         this.appendChilds(this.body, [mobileMenu, backdrop])
 

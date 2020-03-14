@@ -81,7 +81,6 @@ const initializeMessages = async (socket, req)=>{
     const chatObjects = filteredRooms
         .map((room)=>createChatObject(room,req))
         .sort(sortingChatrooms)
-        
     socket.emit('initialize chatrooms', chatObjects)
 }
 
