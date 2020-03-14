@@ -107,7 +107,7 @@ const saveMsg = async(msgObj, socket, req, io)=>{
 
     await messageRoom.save()
     updateActiveUserRooms(findRoom, socket)
-    updateUserWhenOnline(findRoom.otherUser,msgObj, io, req)
+    updateUserWhenOnline(findRoom.otherUser,msgObj, io, req, findRoom)
     
     socket.emit('user sended msg',          {...msgObj, type: 'you'})
     socket.emit('update chatroom in list',  createChatObject(findRoom, req))

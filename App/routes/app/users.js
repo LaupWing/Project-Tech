@@ -30,56 +30,58 @@ const updateActiveUser = (socket, update, value)=>{
 const deleteUser = (socket)=>{
     delete activeUsers[`user_${socket.id}`]
 }
-const updateUserWhenOnline = async (user, msgObj, io, req)=>{
+const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
     if(userIsOnline){
         const socketId    = userIsOnline[0].replace('user_', '')
+        const findRoom    = userIsOnline[1].rooms
+            .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
         const chatRoom    = userIsOnline[1].rooms
             .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
         console.log('------------userIsOnline[1].rooms------------')
         console.log(userIsOnline[1].rooms)
-        console.log('------------req.user------------')
-        console.log(req.user._id)
+        console.log('------------user------------')
+        console.log(user)
 
-        const updatedRoom = await Messages.findById(chatRoom._id)
-        activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
-            .map(x=>{
-                if(chatRoom.chatId === x.chatId){
-                    x.messages = updatedRoom.messages
-                }
-                return x
-            }) 
+        // const updatedRoom = await Messages.findById(chatRoom._id)
+        // activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
+        //     .map(x=>{
+        //         if(chatRoom.chatId === x.chatId){
+        //             x.messages = updatedRoom.messages
+        //         }
+        //         return x
+        //     }) 
 
-        const messages = chatRoom.messages.map(m=>{
-            const copy = {
-                ...m._doc
-            }
-            if(m.userSended.equals(userIsOnline[1].userId)){
-                copy.userSended = 'you'
-            }else{
-                copy.userSended = 'otherUser'
-            }
-            return copy
-        })
+        // const messages = chatRoom.messages.map(m=>{
+        //     const copy = {
+        //         ...m._doc
+        //     }
+        //     if(m.userSended.equals(userIsOnline[1].userId)){
+        //         copy.userSended = 'you'
+        //     }else{
+        //         copy.userSended = 'otherUser'
+        //     }
+        //     return copy
+        // })
         
-        if(
-            userIsOnline[1].currentOpenRoom &&
-            chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)
-        {
-            io.to(socketId).emit('other user message', {
-                ...msgObj, 
-                type: 'otherUser', 
-                chatId: chatRoom.chatId,
-                extra: {
-                    messages,
-                }
-            })
-        }
-        io.to(socketId).emit('update chatroom in list', {
-            chatId:     chatRoom.chatId,
-            messages,
-            otherUser:  req.user.name
-        })
+        // if(
+        //     userIsOnline[1].currentOpenRoom &&
+        //     chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)
+        // {
+        //     io.to(socketId).emit('other user message', {
+        //         ...msgObj, 
+        //         type: 'otherUser', 
+        //         chatId: chatRoom.chatId,
+        //         extra: {
+        //             messages,
+        //         }
+        //     })
+        // }
+        // io.to(socketId).emit('update chatroom in list', {
+        //     chatId:     chatRoom.chatId,
+        //     messages,
+        //     otherUser:  req.user.name
+        // })
     }
 }
 
