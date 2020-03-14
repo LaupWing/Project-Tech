@@ -66,14 +66,8 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
         }
 
         const messages = chatRoom.messages.map(m=>{
-            const copy = {
-                ...m._doc
-            }
-            if(m.userSended.equals(userIsOnline[1].userId)){
-                copy.userSended = 'you'
-            }else{
-                copy.userSended = 'otherUser'
-            }
+            const copy = {...m._doc}
+            copy.userSended = m.userSended.equals(userIsOnline[1].userId) ? 'you' : 'otherUser'
             return copy
         })
         
