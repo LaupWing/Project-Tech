@@ -31,7 +31,7 @@ const checkMessages = async (id, socket, req)=>{
         })
         await newRoom.save()
 
-        const room         = await applyOtherUser(newRoom, req)
+        const room         = await applyOtherUser(newRoom, req.user._id)
         const chatObj      = createChatObject(room, req)
         const currentchats = activeUsers[`user_${socket.id}`].rooms 
             ? activeUsers[`user_${socket.id}`].rooms.concat(room)
@@ -48,7 +48,7 @@ const checkMessages = async (id, socket, req)=>{
             ?   activeUsers[`user_${socket.id}`].rooms
                     .find(room=>room.chatRoom.some(r=>r.equals(otherUserId)))
             : await (async function(){
-                const chatRoom = await  applyOtherUser(findRoom, req)
+                const chatRoom = await  applyOtherUser(findRoom, req.user._id)
                 const tempArray = activeUsers[`user_${socket.id}`].rooms.concat(chatRoom)
                 updateActiveUser(socket, 'rooms', tempArray)
                 return chatRoom
@@ -72,7 +72,7 @@ const initializeMessages = async (socket, req)=>{
 
     const getUserImgs = res
         .filter(room=>room!==null)
-        .map(async room=> await applyOtherUser(room, req))
+        .map(async room=> await applyOtherUser(room, req.user._id))
 
     const resWithImgs   = await Promise.all(getUserImgs)
     const filteredRooms = filteringRooms(resWithImgs, req)

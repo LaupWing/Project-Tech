@@ -57,8 +57,8 @@ const formatChatMessages = (messages, req)=>{
     })
 }
 
-const applyOtherUser = async (room, req)=>{
-    const otherUser = room.chatRoom.find(id=>!id.equals(req.user._id))
+const applyOtherUser = async (room, userId)=>{
+    const otherUser = room.chatRoom.find(id=>!id.equals(userId))
     const user = await User.findById(otherUser)
     const roomWithOtherUser = {
         ...room._doc,
