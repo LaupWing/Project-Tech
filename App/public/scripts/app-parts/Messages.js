@@ -134,8 +134,8 @@ export default class Messages extends Component{
             this.openChat.call(this,e)
             this.mobile && this.mobile.openMenu()
         })
-        if(this.messages.querySelector('.info')){
-            this.messages.removeChild(this.messages.querySelector('.info'))
+        if(this.messages.querySelector('p.info')){
+            this.messages.removeChild(this.messages.querySelector('p.info'))
         }
         this.messages.insertAdjacentElement(pos, li)
     }
