@@ -82,6 +82,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
             chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)
         {
             // When user has his currentchatopen
+            console.log('Chat Room open')
             io.to(socketId).emit('other user message', {
                 ...msgObj, 
                 type: 'otherUser', 
