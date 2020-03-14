@@ -13,8 +13,6 @@ const {
     sortingChatrooms
 } = require('./socketMessages/utils')
 
-// TODO : Property in chatroom for who deleted the chat.
-// SortedBy latest message or Emptychat
 
 const checkMessages = async (id, socket, req)=>{
     const findUser   = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.id === id)

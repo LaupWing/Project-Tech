@@ -82,6 +82,12 @@ export default class Messages extends Component{
             ? 'you' 
             : room.otherUser
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
+
+        if(!roomEl){
+            console.log(room)
+            this.renderMessageListItem(room, 'afterbegin')
+            return
+        }
         if(roomIndex===0){
             roomEl.querySelector('.message').textContent = displayMsg
             this.checkIfUnreadNeedUpdate(room)
@@ -129,6 +135,9 @@ export default class Messages extends Component{
             this.openChat.call(this,e)
             this.mobile && this.mobile.openMenu()
         })
+        if(this.messages.querySelector('.info')){
+            this.messages.removeChild(this.messages.querySelector('.info'))
+        }
         this.messages.insertAdjacentElement(pos, li)
     }
     unread(messages){

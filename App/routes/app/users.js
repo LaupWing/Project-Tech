@@ -15,6 +15,14 @@ const setActiveUser=  async(socket, req)=>{
     }
 }
 
+const sanitizeUserData = (user)=>{
+    return{
+        name: user.name,
+        images: user.images,
+        age: user.age
+    }
+} 
+
 const reApplyOtherUser = async (room, userId)=>{
     const otherUser = room.chatRoom.find(id=>!id.equals(userId))
     const user = await User.findById(otherUser)
@@ -85,10 +93,11 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
                 }
             })
         }
+        
         io.to(socketId).emit('update chatroom in list', {
             chatId:     chatRoom.chatId,
             messages,
-            otherUser:  req.user.name
+            otherUser:  findRoom ? req.user.name : sanitizeUserData(req.user)
         })
     }
 }
