@@ -67,7 +67,6 @@ const applyOtherUser = async (room, req)=>{
     }
     return roomWithOtherUser
 }
-d
 
 const createChatObject = (room, req)=>{
     return{
