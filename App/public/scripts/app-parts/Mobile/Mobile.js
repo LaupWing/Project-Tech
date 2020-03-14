@@ -43,11 +43,25 @@ export default class extends Component{
     }
     setInfo(type, data){
         const container = document.querySelector(`.menu-mobile .${type}`)
-        if(data.length>0){
+        const filtered  = data
+            .filter(item=>{
+                return type === 'chat' ? !item.clicked : !item.clicked
+            })
+
+        if(filtered.length>0){
+            if(container.querySelector('.info')){
+                container.querySelector('.info').textContent = filtered.length
+                return
+            }
             container.querySelector('svg').classList.add('active')
-            const infoEl = this.create('div.info').txt(data.length).el
-            console.log(infoEl)
+            const infoEl = this.create('div.info').txt(filtered.length).el
             container.insertAdjacentElement('beforeend', infoEl)
+        }else{
+            container.querySelector('svg').classList.contains('active') && 
+            container.querySelector('svg').classList.remove('active')
+
+            container.querySelector('.info') &&
+            container.removeChild(container.querySelector('.info'))
         }
     }
 }
