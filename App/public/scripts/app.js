@@ -24,8 +24,11 @@ const init = ()=>{
     new SwitchList()
     
     if(mobile){
-        socket.on('send matchesList',     mobile.setInfo.bind(mobile, 'hearth'))
-        socket.on('initialize chatrooms', mobile.setInfo.bind(mobile, 'chat'))
+        socket.on('send matchesList',        mobile.setInfo.bind(mobile, 'hearth'))
+        socket.on('initialize chatrooms',    mobile.setInfo.bind(mobile, 'chat'))
+        socket.on('update chatroom in list', (chatObj)=>{
+            mobile.setInfo.call(mobile,'chat', chatObj.messages)
+        })
     }
     // Sockets
     socket.on('you got a match',         youGotAMatch)
@@ -40,10 +43,10 @@ const init = ()=>{
     socket.on('open existing chat',      chat.openExistingChat.bind(chat))
     socket.on('other user message',      chat.addMessage.bind(chat))
 
-    // const log = (test)=>console.log(test)
-    // socket.on('initialize chatrooms',    log)
-    // socket.on('updated unread messages', log)
-    // socket.on('update chatroom in list', log)
+    
+    socket.on('initialize chatrooms',    (test)=>console.log(test))
+    socket.on('updated unread messages', (test)=>console.log(test))
+    socket.on('update chatroom in list', (test)=>console.log(test))
     
 }
 

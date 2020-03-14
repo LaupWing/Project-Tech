@@ -84,7 +84,6 @@ export default class Messages extends Component{
         const displayMsg = `${userSended}: ${room.messages[room.messages.length-1].message}`
 
         if(!roomEl){
-            console.log(room)
             this.renderMessageListItem(room, 'afterbegin')
             return
         }

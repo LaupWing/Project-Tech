@@ -53,7 +53,7 @@ export default class extends Component{
         const container = document.querySelector(`.menu-mobile .${type}`)
         const filtered  = data
             .filter(item=>{
-                return type === 'chat' ? !item.clicked : !item.clicked
+                return type === 'chat' ? !item.clicked : !item.read
             })
 
         if(filtered.length>0){
