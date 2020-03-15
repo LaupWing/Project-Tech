@@ -50,6 +50,13 @@ const updateActiveUser = (socket, update, value)=>{
 const deleteUser = (socket)=>{
     delete activeUsers[`user_${socket.id}`]
 }
+
+const updateRead = (msg)=>{
+    const copy = {...msg._doc}
+    copy.read = true
+    return copy
+} 
+
 const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
     if(userIsOnline){
@@ -58,6 +65,17 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
             .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
         const chatRoom    = findRoom || await reApplyOtherUser(room, user._id) 
         const updatedRoom = await Messages.findById(chatRoom._id)
+
+        if(userIsOnline[1].currentOpenRoom){
+            if(chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId){
+                chatRoom.messages    = chatRoom.messages.map(updateRead)
+                updatedRoom.messages = updatedRoom.messages.map(updateRead)
+                await Messages.findByIdAndUpdate(chatRoom._id, {
+                    messages:  updatedRoom.messages,
+                    emptyChat: updatedRoom.emptyChat
+                })
+            }
+        }
 
         if(findRoom){
             activeUsers[`user_${socketId}`].rooms = activeUsers[`user_${socketId}`].rooms
@@ -73,9 +91,6 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
 
         const messages = chatRoom.messages.map(m=>{
             const copy = {...m._doc}
-            if(chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId){
-                copy.read = true
-            }
             copy.userSended = m.userSended.equals(userIsOnline[1].userId) ? 'you' : 'otherUser'
             return copy
         })
