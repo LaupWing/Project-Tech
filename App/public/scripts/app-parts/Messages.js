@@ -73,6 +73,7 @@ export default class Messages extends Component{
             const unread = this.create('div.unread').txt(unreadLength).el
             roomEl.appendChild(unread)
         }
+        this.updateTotalUnread()
     }
     updateChatRoomInList(room){
         console.log(room)
@@ -147,9 +148,9 @@ export default class Messages extends Component{
     openChat(e){
         deleteActives()
         const infoBtn = document.querySelector('main .main-nav .info')
-        infoBtn.click()
         const li = e.target.closest('li')
-        this.updateTotalUnread()
+        
+        infoBtn.click()
         this.socket.emit('open chat', li.id)
     }
     initializeMessages(rooms){

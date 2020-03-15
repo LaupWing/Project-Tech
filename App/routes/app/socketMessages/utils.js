@@ -95,13 +95,6 @@ const updateRead = async (room, socket, req)=>{
         return msg
     })
     await chatRoom.save()
-    const allRoomsRes = await Messages.find({chatRoom:req.user._id})
-    const unreadMsgs  = allRoomsRes
-        .map(room=>{
-            const unread = room.messages.filter(msg=>!msg.read && !msg.userSended.equals(req.user._id))
-            return unread
-        })
-        .filter(msgs=>msgs.length>0)
         
     const formatted = formatChatMessages(chatRoom.messages, req)
     socket.emit('updated unread messages', {
