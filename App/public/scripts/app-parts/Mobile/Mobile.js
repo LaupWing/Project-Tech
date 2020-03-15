@@ -16,15 +16,15 @@ export default class extends Component{
         })
     }
     socketListeners(){
-        this.socket.on('send matchesList',     mobile.setInfo.bind(mobile, 'hearth'))
+        this.socket.on('send matchesList',     this.setInfo.bind(this, 'hearth'))
         this.socket.on('initialize chatrooms', (chatObj)=>{
             const unreadMsgs = chatObj
                 .reduce((acc, val) => acc.concat(val.messages), []) 
                 .filter(msg=>msg.userSended === 'otherUser')
-            mobile.setInfo.call(mobile, 'chat', unreadMsgs)
+            this.setInfo('chat', unreadMsgs)
         })
         this.socket.on('update chatroom in list', (chatObj)=>{
-            mobile.setInfo.call(mobile,'chat', chatObj.messages)
+            this.setInfo('chat', chatObj.messages)
         })
     }
     renderMenu(){
