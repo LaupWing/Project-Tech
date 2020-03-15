@@ -33,6 +33,11 @@
     background: var(--purp);
     align-self: flex-end;
 }
+#info.chat main p.otherUser.new-message{
+    animation: newMsg .3s forwards;
+    transform-origin: left bottom;
+    transform: scale(0);
+}
 #info.chat main p.you.new-message{
     animation: newMsg .3s forwards;
     transform-origin: right bottom;
