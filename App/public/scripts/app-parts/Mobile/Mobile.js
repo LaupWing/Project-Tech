@@ -49,9 +49,7 @@ export default class extends Component{
         svgContainer2.querySelector('svg').addEventListener('click', this.openSection.bind(this,'message-list'))
     }
     openSection(section){
-        if(this.nav.classList.contains('hide')){
-            this.openMenu()
-        }
+        this.openMenu()
         document.querySelector(`nav .menu .${section}`).click()
     }
     openMenu(){
