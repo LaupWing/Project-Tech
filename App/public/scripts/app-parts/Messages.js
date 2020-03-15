@@ -75,6 +75,7 @@ export default class Messages extends Component{
         }
     }
     updateChatRoomInList(room){
+        console.log(room)
         const rooms      = Array.from(this.messages.querySelectorAll('li'))
         const roomIndex  = rooms.map(r=>r.id).indexOf(room.chatId)
         const roomEl     = document.getElementById(room.chatId)

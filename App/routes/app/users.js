@@ -73,6 +73,9 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
 
         const messages = chatRoom.messages.map(m=>{
             const copy = {...m._doc}
+            if(chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId){
+                copy.read = true
+            }
             copy.userSended = m.userSended.equals(userIsOnline[1].userId) ? 'you' : 'otherUser'
             return copy
         })
@@ -82,7 +85,6 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
             chatRoom.chatId === userIsOnline[1].currentOpenRoom.chatId)
         {
             // When user has his currentchatopen
-            console.log('Chat Room open')
             io.to(socketId).emit('other user message', {
                 ...msgObj, 
                 type: 'otherUser', 

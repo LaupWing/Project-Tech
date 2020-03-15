@@ -41,13 +41,7 @@ const init = ()=>{
     socket.on('update chatroom in list', messages.updateChatRoomInList.bind(messages))
     socket.on('user sended msg',         chat.addMessage.bind(chat))
     socket.on('open existing chat',      chat.openExistingChat.bind(chat))
-    socket.on('other user message',      chat.addMessage.bind(chat))
-
-    
-    socket.on('initialize chatrooms',    (test)=>console.log(test))
-    socket.on('updated unread messages', (test)=>console.log(test))
-    socket.on('update chatroom in list', (test)=>console.log(test))
-    
+    socket.on('other user message',      chat.addMessage.bind(chat))    
 }
 
 init()
