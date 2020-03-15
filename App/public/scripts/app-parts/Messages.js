@@ -48,7 +48,7 @@ export default class Messages extends Component{
         const unreads   =  unreadsEl.length>0 && unreadsEl
             .map(u=>Number(u.textContent.trim()))
             .reduce((accumulator, currentValue) => accumulator + currentValue)
-            
+        console.log('total unread')
         if(unreads>0){
             this.messageBtn.querySelector('.newMatches').textContent = `(${unreads})`
         }else{

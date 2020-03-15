@@ -85,7 +85,7 @@ const initializeMessages = async (socket, req)=>{
 const openChat = async(id, socket, req)=>{
     const room       = activeUsers[`user_${socket.id}`].rooms.find(r=>r.chatId===id) 
     const chatObject = createChatObject(room, req)
-    
+
     updateActiveUser(socket, 'currentOpenRoom', room)
     updateRead(room, socket, req)
     
