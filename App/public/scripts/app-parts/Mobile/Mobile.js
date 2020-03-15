@@ -2,18 +2,31 @@ import Component from '../utils/component.js'
 import Hearth from '../SVGstrings/hearth.js'
 import Chat from '../SVGstrings/chat.js'
 export default class extends Component{
-    constructor(){
+    constructor(socket){
         super()
-        this.body = document.body
-        this.nav  = document.querySelector('nav') 
+        this.socket = socket
+        this.body   = document.body
+        this.nav    = document.querySelector('nav') 
         this.menu
         this.renderMenu()
+        this.socketListeners()
         this.nav.classList.add('hide')
         setTimeout(()=>{
             this.nav.style.transition = 'all 1s'
         })
     }
-    
+    socketListeners(){
+        this.socket.on('send matchesList',     mobile.setInfo.bind(mobile, 'hearth'))
+        this.socket.on('initialize chatrooms', (chatObj)=>{
+            const unreadMsgs = chatObj
+                .reduce((acc, val) => acc.concat(val.messages), []) 
+                .filter(msg=>msg.userSended === 'otherUser')
+            mobile.setInfo.call(mobile, 'chat', unreadMsgs)
+        })
+        this.socket.on('update chatroom in list', (chatObj)=>{
+            mobile.setInfo.call(mobile,'chat', chatObj.messages)
+        })
+    }
     renderMenu(){
         const mobileMenu    = this.create('div.menu-mobile').el
         const backdrop      = this.create('div.backdrop').el
@@ -53,9 +66,9 @@ export default class extends Component{
         const container = document.querySelector(`.menu-mobile .${type}`)
         const filtered  = data
             .filter(item=>{
-                return type === 'chat' ? !item.clicked : !item.read
+                return type === 'chat' ? !item.read : !item.clicked
             })
-
+        console.log(type, data)
         if(filtered.length>0){
             if(container.querySelector('.info')){
                 container.querySelector('.info').textContent = filtered.length
