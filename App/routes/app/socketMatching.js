@@ -89,16 +89,14 @@ const deniedMatch = async (socket, req)=>{
     }
 }
 
-const acceptedMatch = async(socket, req)=>{
+const acceptedMatch = async(socket, req, io)=>{
     const currentMatchingUser = activeUsers[`user_${socket.id}`].currentMatching
     try{
-        await updateMatchingUser(req, currentMatchingUser, 'accepted')
+        await updateMatchingUser(req, currentMatchingUser, 'accepted', io)
         await updateUsersStatus(req, currentMatchingUser,socket)
         await updateCouldBeAMatch(socket, req)
         await sendMatches(socket, req)
         await getMatch(socket)
-
-        console.log(checkIfUserIsOnline(currentMatchingUser._id))
     }catch(e){
         console.log('acceptMatch-----------Something went wrong', e)
     }

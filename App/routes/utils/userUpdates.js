@@ -46,6 +46,10 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
     }
 }
 
+const sendMatchWhenOnline = ()=>{
+
+}
+
 const updateMatchingUser = async (req, currentMatchingUser, status)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
     const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))

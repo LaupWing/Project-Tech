@@ -31,7 +31,7 @@ exports.sockets = (req,res)=>{
         socket.on('show detail',    (id)=>     getUserDetail(id, socket, req))
 
         socket.on('denied match',   ()=>       deniedMatch(socket, req))
-        socket.on('accepted match', ()=>       acceptedMatch(socket, req))
+        socket.on('accepted match', ()=>       acceptedMatch(socket, req, io))
         
         // ---Messages---
         socket.on('check messages', (id)=>     checkMessages(id, socket, req))
