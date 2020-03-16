@@ -1,4 +1,5 @@
 const User = require('../../models/user')
+const {checkIfUserIsOnline} = require('../app/users')
 
 const updateUsersStatus =async(req, currentMatchingUser, socket)=>{
     const {user} = req
@@ -48,7 +49,9 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
 const updateMatchingUser = async (req, currentMatchingUser, status)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
     const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))
-    
+    if(checkIfUserIsOnline(currentMatchingUser._id)){
+        console.log(checkIfUserIsOnline(currentMatchingUser._id))
+    }
     if(indexSeen>=0){
         if(matchingUser.seen[indexSeen].status === 'denied'){
             return
