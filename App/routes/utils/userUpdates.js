@@ -46,18 +46,21 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
     }
 }
 
-const sendMatchWhenOnline = (matchingUser, io)=>{
-    console.log(matchingUser)
+const sendMatchWhenOnline = async (user, matchingUser, io)=>{
+    const activeUser          = checkIfUserIsOnline(matchingUser._id)
+    const updatedMatchingUser = await User.findById(matchingUser._id)
+    const inAcceptedList      = updateMatchingUser.acceptedList.find(user=>user.userId.equals(user._id)) 
+    console.log('------------user-------------')
+    console.log(user)
+    console.log('------------matching user-------------')
+    console.log(updateMatchingUser)
+    console.log('------------updates??????')
+    console.log(inAcceptedList)
 }
 
 const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
     const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))
-    if(status === 'accepted'){
-        if(checkIfUserIsOnline(currentMatchingUser._id)){
-            sendMatchWhenOnline(currentMatchingUser, io)
-        }
-    }
     if(indexSeen>=0){
         if(matchingUser.seen[indexSeen].status === 'denied'){
             return
@@ -67,6 +70,11 @@ const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{
             matchingUser.save()
         }catch(e){
             console.log('updateMatchingUser-----------Something went wrong', e)
+        }
+    }
+    if(status === 'accepted'){
+        if(checkIfUserIsOnline(currentMatchingUser._id)){
+            sendMatchWhenOnline(req.user,currentMatchingUser, io)
         }
     }
 }
