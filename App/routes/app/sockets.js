@@ -32,7 +32,10 @@ exports.sockets = (req,res)=>{
 
         socket.on('denied match',    ()=>       deniedMatch(socket, req))
         socket.on('accepted match',  ()=>       acceptedMatch(socket, req, io))
-        socket.on('get all matches', ()=>       sendMatches(socket, req))
+        socket.on('get all matches', ()=>       {
+            console.log('get all matches')
+            sendMatches(socket, req)
+        })
         
         // ---Messages---
         socket.on('check messages',  (id)=>     checkMessages(id, socket, req))

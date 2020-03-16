@@ -16,7 +16,7 @@ const init = ()=>{
     const matchesList = new MatchesList((e)=>{
         deleteActives()
         socket.emit('show detail', e.target.id)
-    }, mobile)
+    }, mobile, socket)
     const chat        = new Chat(socket)
     const messages    = new Messages(socket, chat, mobile)
     const details     = new Details(socket)

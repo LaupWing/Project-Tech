@@ -12,7 +12,7 @@ export default class MatchesList extends Component{
     }
     otherUserAccepted(user){
         youGotAMatch(user)
-        this.socket('get all matches')
+        this.socket.emit('get all matches')
     }
     renderList(list){
         if(list.length===0) return
