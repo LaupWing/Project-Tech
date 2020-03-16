@@ -59,9 +59,23 @@ const updateRead = (msg)=>{
 
 const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
-    console.log(userIsOnline)
+    // ################## DEBUG HEROKU PURPOSES ##################
+    if(userIsOnline){
+        console.log('_____________USER IS ONLINE WITH SOCKET ID_____________')
+        console.log(userIsOnline[0])
+        console.log('_______________________________________________________')
+    }else{
+        
+        console.log(userIsOnline[0])
+        console.log('_______________________________________________________')
+    }
+    console.log('______________ORIGINAL USER INFORMATION______________')
     console.log(req.user)
+    console.log('_____________________________________________________')
+    console.log('__________________ALL ACTIVE USERS___________________')
     console.log(activeUsers)
+    console.log('_____________________________________________________')
+    // ####################### ENDING LOGS #######################
     if(userIsOnline){
         const socketId    = userIsOnline[0].replace('user_', '')
         const findRoom    = userIsOnline[1].rooms
