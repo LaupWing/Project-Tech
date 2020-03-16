@@ -1,4 +1,6 @@
 import Component from './utils/component.js'
+import youGotAMatch from './youGotAMatch.js'
+
 export default class MatchesList extends Component{
     constructor(eventFunction, mobile, socket){
         super()
@@ -9,8 +11,8 @@ export default class MatchesList extends Component{
         this.socket          = socket
     }
     otherUserAccepted(user){
-        console.log('other user accepted')
-        console.log(user)
+        youGotAMatch(user)
+        this.socket('get all matches')
     }
     renderList(list){
         if(list.length===0) return

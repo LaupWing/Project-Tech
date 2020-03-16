@@ -28,17 +28,18 @@ exports.sockets = (req,res)=>{
         
         // !!!!!!!!!!!!!!! Need realtime update to
         // ---Matches---
-        socket.on('show detail',    (id)=>     getUserDetail(id, socket, req))
+        socket.on('show detail',     (id)=>     getUserDetail(id, socket, req))
 
-        socket.on('denied match',   ()=>       deniedMatch(socket, req))
-        socket.on('accepted match', ()=>       acceptedMatch(socket, req, io))
+        socket.on('denied match',    ()=>       deniedMatch(socket, req))
+        socket.on('accepted match',  ()=>       acceptedMatch(socket, req, io))
+        socket.on('get all matches', ()=>       sendMatches(socket, req))
         
         // ---Messages---
-        socket.on('check messages', (id)=>     checkMessages(id, socket, req))
-        socket.on('open chat',      (chatId)=> openChat(chatId, socket, req))
-        socket.on('send message',   (msgObj)=> saveMsg(msgObj, socket, req, io))
+        socket.on('check messages',  (id)=>     checkMessages(id, socket, req))
+        socket.on('open chat',       (chatId)=> openChat(chatId, socket, req))
+        socket.on('send message',    (msgObj)=> saveMsg(msgObj, socket, req, io))
 
-        socket.on('disconnect',     ()=>{
+        socket.on('disconnect',      ()=>{
             deleteUser(socket)
         })
     })
