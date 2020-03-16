@@ -124,5 +124,6 @@ module.exports = {
     setActiveUser,
     updateCouldBeAMatch,
     updateActiveUser,
-    updateUserWhenOnline
+    updateUserWhenOnline,
+    checkIfUserIsOnline
 }

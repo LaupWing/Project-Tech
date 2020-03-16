@@ -60,7 +60,6 @@ const updateMatchingUser = async (req, currentMatchingUser, status)=>{
             console.log('updateMatchingUser-----------Something went wrong', e)
         }
     }
-    console.log('--------------------------------------end')
 }
 
 module.exports ={

@@ -6,6 +6,7 @@ const User = require('../../models/user')
 const {
     activeUsers,
     updateCouldBeAMatch,
+    checkIfUserIsOnline,
     updateActiveUser} = require('./users')
 
 const getMatch =  async(socket)=>{
@@ -94,6 +95,7 @@ const acceptedMatch = async(socket, req)=>{
     try{
         await updateMatchingUser(req, currentMatchingUser, 'accepted')
         await updateUsersStatus(req, currentMatchingUser,socket)
+        console.log(checkIfUserIsOnline(currentMatchingUser._id))
         await updateCouldBeAMatch(socket, req)
         await sendMatches(socket, req)
         await getMatch(socket)
