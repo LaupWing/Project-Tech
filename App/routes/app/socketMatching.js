@@ -33,8 +33,8 @@ const getMatch =  async(socket)=>{
 }
 
 const sendMatches = async(socket, req)=>{
-    console.log(req.user)
-    const onlyMatches = req.user.seen
+    const updatedUser = await User.findById(req.user._id)
+    const onlyMatches = updatedUser.seen
         .filter(seen=>seen.status==='accepted')
     const promisses = onlyMatches.map((user)=>{
         return User.findById(user.userId)
