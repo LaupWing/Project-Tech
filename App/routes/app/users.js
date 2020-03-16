@@ -59,6 +59,9 @@ const updateRead = (msg)=>{
 
 const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     const userIsOnline = checkIfUserIsOnline(user._id)
+    console.log(userIsOnline)
+    console.log(req.user)
+    console.log(activeUsers)
     if(userIsOnline){
         const socketId    = userIsOnline[0].replace('user_', '')
         const findRoom    = userIsOnline[1].rooms
