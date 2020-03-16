@@ -1,11 +1,16 @@
 import Component from './utils/component.js'
 export default class MatchesList extends Component{
-    constructor(eventFunction, mobile){
+    constructor(eventFunction, mobile, socket){
         super()
         this.matchesList     = document.querySelector('.active-list .match-list')
         this.totalNewmatches = document.querySelector('.newMatches')
         this.cb              = eventFunction
         this.mobile          = mobile
+        this.socket          = socket
+    }
+    otherUserAccepted(user){
+        console.log('other user accepted')
+        console.log(user)
     }
     renderList(list){
         if(list.length===0) return

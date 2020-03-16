@@ -49,13 +49,14 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
 const sendMatchWhenOnline = async (user, matchingUser, io)=>{
     const activeUser          = checkIfUserIsOnline(matchingUser._id)
     const updatedMatchingUser = await User.findById(matchingUser._id)
-    const inAcceptedList      = updateMatchingUser.acceptedList.find(user=>user.userId.equals(user._id)) 
-    console.log('------------user-------------')
-    console.log(user)
-    console.log('------------matching user-------------')
-    console.log(updateMatchingUser)
-    console.log('------------updates??????')
-    console.log(inAcceptedList)
+    const inAcceptedList      = updatedMatchingUser.acceptedList.find(u=>u.userId.equals(user._id)) 
+    
+    if(inAcceptedList){
+        console.log(activeUser)
+        const socketId = activeUser[0].replace('user_', '')
+        console.log(socketId)
+        io.to(socketId).emit('other user accepted', user)
+    }
 }
 
 const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{

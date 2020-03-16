@@ -27,6 +27,7 @@ const init = ()=>{
     socket.on('you got a match',         youGotAMatch)
     socket.on('sending match',           matches.renderMatch.bind(matches))
     socket.on('send matchesList',        matchesList.renderList.bind(matchesList))
+    socket.on('other user accepted',     matchesList.otherUserAccepted.bind(matchesList))
     socket.on('user detail',             details.gotUserDetail.bind(details))
     socket.on('initialize chatrooms',    messages.initializeMessages.bind(messages))
     socket.on('send first chat',         messages.renderFirstMessage.bind(messages))
