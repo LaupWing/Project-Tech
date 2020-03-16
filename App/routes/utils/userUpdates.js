@@ -52,10 +52,8 @@ const sendMatchWhenOnline = async (user, matchingUser, io)=>{
     const inAcceptedList      = updatedMatchingUser.acceptedList.find(u=>u.userId.equals(user._id)) 
     
     if(inAcceptedList){
-        console.log(activeUser)
         const socketId = activeUser[0].replace('user_', '')
-        console.log(socketId)
-        io.to(socketId).emit('other user accepted', user)
+        io.to(socketId).emit('other user accepted', {name:user.name})
     }
 }
 
