@@ -46,15 +46,17 @@ const updateUserDenied =async (req, currentMatchingUser)=>{
     }
 }
 
-const sendMatchWhenOnline = ()=>{
-
+const sendMatchWhenOnline = (matchingUser, io)=>{
+    console.log(matchingUser)
 }
 
-const updateMatchingUser = async (req, currentMatchingUser, status)=>{
+const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
     const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))
-    if(checkIfUserIsOnline(currentMatchingUser._id)){
-        console.log(checkIfUserIsOnline(currentMatchingUser._id))
+    if(status === 'accepted'){
+        if(checkIfUserIsOnline(currentMatchingUser._id)){
+            sendMatchWhenOnline(currentMatchingUser, io)
+        }
     }
     if(indexSeen>=0){
         if(matchingUser.seen[indexSeen].status === 'denied'){
