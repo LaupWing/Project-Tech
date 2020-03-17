@@ -76,7 +76,6 @@ router
         }
     })
     .post('/signup',upload.single('image'), async (req,res)=>{
-        console.log(req.body)
         const {
             email,
             password,
