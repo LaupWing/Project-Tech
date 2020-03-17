@@ -16,61 +16,61 @@ const users = [
         gender: 'male',
         gender_preference: 'female'
     },
-    // {
-    //     image: '2.jpg',
-    //     name: 'Kees',
-    //     email: 'kees@hotmail.com',
-    //     password: 'test123',
-    //     age: 40,
-    //     minAge: 18,
-    //     maxAge: 60,
-    //     gender: 'male',
-    //     gender_preference: 'female'
-    // },
-    // {
-    //     image: '3.jpeg',
-    //     name: 'Marjolein',
-    //     email: 'marjolein@hotmail.com',
-    //     password: 'test123',
-    //     age: 18,
-    //     minAge: 18,
-    //     maxAge: 50,
-    //     gender: 'female',
-    //     gender_preference: 'male'
-    // },
-    // {
-    //     image: '4.jpg',
-    //     name: 'Henk',
-    //     email: 'henk@hotmail.com',
-    //     password: 'test123',
-    //     age: 45,
-    //     minAge: 30,
-    //     maxAge: 50,
-    //     gender: 'male',
-    //     gender_preference: 'both'
-    // },
-    // {
-    //     image: '5.jpg',
-    //     name: 'Thierry',
-    //     email: 'thierry@hotmail.com',
-    //     password: 'test123',
-    //     age: 25,
-    //     minAge: 18,
-    //     maxAge: 35,
-    //     gender: 'male',
-    //     gender_preference: 'both'
-    // },
-    // {
-    //     image: 'johny_bravo.png',
-    //     name: 'Johny Bravo',
-    //     email: 'johny@hotmail.com',
-    //     password: 'test123',
-    //     age: 22,
-    //     minAge: 18,
-    //     maxAge: 40,
-    //     gender: 'male',
-    //     gender_preference: 'both'
-    // },
+    {
+        image: '2.jpg',
+        name: 'Kees',
+        email: 'kees@hotmail.com',
+        password: 'test123',
+        age: 40,
+        minAge: 18,
+        maxAge: 60,
+        gender: 'male',
+        gender_preference: 'female'
+    },
+    {
+        image: '3.jpeg',
+        name: 'Marjolein',
+        email: 'marjolein@hotmail.com',
+        password: 'test123',
+        age: 18,
+        minAge: 18,
+        maxAge: 50,
+        gender: 'female',
+        gender_preference: 'male'
+    },
+    {
+        image: '4.jpg',
+        name: 'Henk',
+        email: 'henk@hotmail.com',
+        password: 'test123',
+        age: 45,
+        minAge: 30,
+        maxAge: 50,
+        gender: 'male',
+        gender_preference: 'both'
+    },
+    {
+        image: '5.jpg',
+        name: 'Thierry',
+        email: 'thierry@hotmail.com',
+        password: 'test123',
+        age: 25,
+        minAge: 18,
+        maxAge: 35,
+        gender: 'male',
+        gender_preference: 'both'
+    },
+    {
+        image: 'johny_bravo.png',
+        name: 'Johny Bravo',
+        email: 'johny@hotmail.com',
+        password: 'test123',
+        age: 22,
+        minAge: 18,
+        maxAge: 40,
+        gender: 'male',
+        gender_preference: 'both'
+    },
     {
         image: 'lois.jpg',
         name:'Lois',
@@ -82,39 +82,39 @@ const users = [
         gender: 'female',
         gender_preference: 'both'
     },
-    // {
-    //     image: 'malone.jpg',
-    //     name:'Toasty Malony',
-    //     email: 'toasty@hotmail.com',
-    //     password: 'test123',
-    //     age: 24,
-    //     minAge: 18,
-    //     maxAge: 30,
-    //     gender: 'male',
-    //     gender_preference: 'male'
-    // },
-    // {
-    //     image: 'marge.jpg',
-    //     name: 'Marge Simpson',
-    //     email: 'marge@hotmail.com',
-    //     password: 'test123',
-    //     age: 45,
-    //     minAge: 30,
-    //     maxAge: 50,
-    //     gender: 'female',
-    //     gender_preference: 'male'
-    // },
-    // {
-    //     image: 'misty.png',
-    //     name: 'Misty',
-    //     email: 'misty@hotmail.com',
-    //     password: 'test123',
-    //     age: 18,
-    //     minAge: 18,
-    //     maxAge: 50,
-    //     gender: 'female',
-    //     gender_preference: 'female'
-    // },
+    {
+        image: 'malone.jpg',
+        name:'Toasty Malony',
+        email: 'toasty@hotmail.com',
+        password: 'test123',
+        age: 24,
+        minAge: 18,
+        maxAge: 30,
+        gender: 'male',
+        gender_preference: 'male'
+    },
+    {
+        image: 'marge.jpg',
+        name: 'Marge Simpson',
+        email: 'marge@hotmail.com',
+        password: 'test123',
+        age: 45,
+        minAge: 30,
+        maxAge: 50,
+        gender: 'female',
+        gender_preference: 'male'
+    },
+    {
+        image: 'misty.png',
+        name: 'Misty',
+        email: 'misty@hotmail.com',
+        password: 'test123',
+        age: 18,
+        minAge: 18,
+        maxAge: 50,
+        gender: 'female',
+        gender_preference: 'female'
+    },
 ]
 
 
