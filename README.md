@@ -104,6 +104,7 @@ The application interface on this stage looks quite diffrent depending on what f
 - [ ] Reactive Label
 - [ ] Sending message doesnt gives unread and receiving images makes it read? (its reversed uno)
 - [ ] Make images smaller by resizing it
+- [ ] Update backend wiki
 - [ ] Dont update unread when chat is open
 - [x] Add field for gender preference (server)
 - [x] Server can receive gender preference (server)
