@@ -33,7 +33,7 @@ const getMatch =  async(socket)=>{
 }
 
 const sendMatches = async(socket, req)=>{
-    const updatedUser = await User.findById(req.user._id)
+    const updatedUser = await User.findById(req.session.user._id)
     const onlyMatches = updatedUser.seen
         .filter(seen=>seen.status==='accepted')
     const promisses = onlyMatches.map((user)=>{
@@ -64,13 +64,13 @@ const sendMatches = async(socket, req)=>{
 
 const getUserDetail = async (id, socket, req)=>{
     const user = activeUsers[`user_${socket.id}`].matchedUsers.find(user=>user.id === id)
-    req.user.seen = req.user.seen.map(u=>{
+    req.session.user.seen = req.session.user.seen.map(u=>{
         if(u.userId.equals(user.userId)){
             u.clicked = true
         }
         return u
     })
-    await req.user.save()
+    await req.session.user.save()
     await sendMatches(socket, req)
     const userWithUpdatedId = activeUsers[`user_${socket.id}`].matchedUsers.find(u=>u.userId.equals(user.userId))
     delete user.clicked

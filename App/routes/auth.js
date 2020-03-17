@@ -129,8 +129,8 @@ router
     })
     .get('/logout', auth, async (req,res)=>{
         try{
-            req.user.tokens = req.user.tokens.filter(token=>token.token !== req.token)
-            await req.user.save()
+            req.session.user.tokens = req.session.user.tokens.filter(token=>token.token !== req.token)
+            await req.session.user.save()
             res
                 .clearCookie('dating_token')
                 .redirect('/login')

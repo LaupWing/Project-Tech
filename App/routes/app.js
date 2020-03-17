@@ -13,12 +13,12 @@ router
             },
             styling: 'app.css',
             user:{
-                images: req.user.images,
-                name:   req.user.name,
-                email:  req.user.email,
-                minAge: req.user.minAge,
-                maxAge: req.user.maxAge,
-                age:    req.user.age,
+                images: req.session.user.images,
+                name:   req.session.user.name,
+                email:  req.session.user.email,
+                minAge: req.session.user.minAge,
+                maxAge: req.session.user.maxAge,
+                age:    req.session.user.age,
             },
             script: 'app.js'
         })

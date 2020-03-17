@@ -6,10 +6,10 @@ const updateUsersStatus =async(req, currentMatchingUser, socket)=>{
     const getUpToDateMatchingUser = await User.findById(currentMatchingUser)
 
     const statusChecker = ()=>{
-        if(getUpToDateMatchingUser.acceptedList.find(user=>user.userId.equals(req.user._id))){
+        if(getUpToDateMatchingUser.acceptedList.find(user=>user.userId.equals(req.session.user._id))){
             socket.emit('you got a match', currentMatchingUser)
             return 'accepted'
-        }else if(getUpToDateMatchingUser.deniedList.find(user=>user.userId.equals(req.user._id))){
+        }else if(getUpToDateMatchingUser.deniedList.find(user=>user.userId.equals(req.session.user._id))){
             return 'denied'
         }else{
             return 'pending'
@@ -59,7 +59,7 @@ const sendMatchWhenOnline = async (user, matchingUser, io)=>{
 
 const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{
     const matchingUser = await User.findById(currentMatchingUser._id)
-    const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.user._id))
+    const indexSeen = matchingUser.seen.findIndex(seen=>seen.userId.equals(req.session.user._id))
     if(indexSeen>=0){
         if(matchingUser.seen[indexSeen].status === 'denied'){
             return
@@ -73,7 +73,7 @@ const updateMatchingUser = async (req, currentMatchingUser, status, io)=>{
     }
     if(status === 'accepted'){
         if(checkIfUserIsOnline(currentMatchingUser._id)){
-            sendMatchWhenOnline(req.user,currentMatchingUser, io)
+            sendMatchWhenOnline(req.session.user,currentMatchingUser, io)
         }
     }
 }

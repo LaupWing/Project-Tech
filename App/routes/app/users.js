@@ -10,7 +10,7 @@ const setActiveUser=  async(socket, req)=>{
             couldBeAMatch:   filterForUser,
             currentMatching: null,
             matchedUsers:    null,
-            userId:          req.user._id
+            userId:          req.session.user._id
         }
     }
 }
@@ -70,7 +70,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     //     console.log('_______________________________________________________')
     // }
     // console.log('______________ORIGINAL USER INFORMATION______________')
-    // console.log(req.user)
+    // console.log(req.session.user)
     // console.log('_____________________________________________________')
     // console.log('__________________ALL ACTIVE USERS___________________')
     // console.log(activeUsers)
@@ -79,7 +79,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
     if(userIsOnline){
         const socketId    = userIsOnline[0].replace('user_', '')
         const findRoom    = userIsOnline[1].rooms
-            .find(x=>x.chatRoom.some(x=>x.equals(req.user._id)))
+            .find(x=>x.chatRoom.some(x=>x.equals(req.session.user._id)))
         const chatRoom    = findRoom || await reApplyOtherUser(room, user._id) 
         const updatedRoom = await Messages.findById(chatRoom._id)
 
@@ -130,7 +130,7 @@ const updateUserWhenOnline = async (user, msgObj, io, req, room)=>{
         io.to(socketId).emit('update chatroom in list', {
             chatId:     chatRoom.chatId,
             messages,
-            otherUser:  findRoom ? req.user.name : sanitizeUserData(req.user)
+            otherUser:  findRoom ? req.session.user.name : sanitizeUserData(req.session.user)
         })
     }
 }

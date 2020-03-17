@@ -6,7 +6,7 @@ const {
 
 const filteringRooms = (rooms, req)=>{
     const filtered = rooms.filter(room=>{
-        if(room.messages.length>0 ||room.emptyChat.find(u=>u.userId.equals(req.user._id))){
+        if(room.messages.length>0 ||room.emptyChat.find(u=>u.userId.equals(req.session.user._id))){
             return room
         }
     })
@@ -48,7 +48,7 @@ const formatChatMessages = (messages, req)=>{
         const copy = {
             ...msg._doc
         }
-        if(msg.userSended.equals(req.user._id)){
+        if(msg.userSended.equals(req.session.user._id)){
             copy.userSended = 'you'
         }else{
             copy.userSended = 'otherUser'
@@ -80,7 +80,7 @@ const createChatObject = (room, req)=>{
         chatId:    room.chatId,
         emptyChat: room.emptyChat.map(u=>{
             const copy = {...u._doc}
-            copy.userId.equals(req.user._id) ? copy.userId = 'you' : copy.userId = 'otherUser'
+            copy.userId.equals(req.session.user._id) ? copy.userId = 'you' : copy.userId = 'otherUser'
             return copy
         })
     }
@@ -89,7 +89,7 @@ const createChatObject = (room, req)=>{
 const updateRead = async (room, socket, req)=>{
     const chatRoom    = await Messages.findById(room._id)
     chatRoom.messages = chatRoom.messages.map(msg=>{
-        if(!msg.userSended.equals(req.user._id)){
+        if(!msg.userSended.equals(req.session.user._id)){
             msg.read = true
         }
         return msg

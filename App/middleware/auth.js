@@ -16,9 +16,10 @@ const auth = async (req,res,next)=>{
         if(!user){
             throw new Error()
         }
-        req.user = user
-        delete req.user.password
-        delete req.user.tokens
+        // req.session.user = user
+        req.session.user = user
+        delete req.session.user.password
+        delete req.session.user.tokens
         req.token = token
         next()
     }
