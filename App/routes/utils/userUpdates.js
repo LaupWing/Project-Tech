@@ -2,7 +2,7 @@ const User = require('../../models/user')
 const {checkIfUserIsOnline} = require('../app/users')
 
 const updateUsersStatus =async(req, currentMatchingUser, socket)=>{
-    const {user} = req
+    const {user} = req.session
     const getUpToDateMatchingUser = await User.findById(currentMatchingUser)
 
     const statusChecker = ()=>{
@@ -31,7 +31,7 @@ const updateUsersStatus =async(req, currentMatchingUser, socket)=>{
 }
 
 const updateUserDenied =async (req, currentMatchingUser)=>{
-    const {user} = req
+    const {user} = req.session
     user.seen = user.seen.concat({
         userId: currentMatchingUser._id,
         status: 'denied'
