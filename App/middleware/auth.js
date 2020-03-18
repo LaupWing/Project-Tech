@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
 const auth = async (req,res,next)=>{
-    
     try{
         const cookie = req.get('cookie')
         const token = cookie
@@ -16,7 +15,6 @@ const auth = async (req,res,next)=>{
         if(!user){
             throw new Error()
         }
-        // req.session.user = user
         req.session.user = user
         delete req.session.user.password
         delete req.session.user.tokens
@@ -25,7 +23,6 @@ const auth = async (req,res,next)=>{
     }
     catch(e){
         res.redirect('/login')
-        // res.render('test')
     }
 }
 
