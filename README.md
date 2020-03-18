@@ -27,12 +27,12 @@ Below you can see 2 table contents. One is mend for the README you are currently
         * [Signup](#signup)
 
 ### Table of contents (external)
-* [Backend](http://google.com)
-* [Project Log](http://google.com)
-* [Week 1](http://google.com)
-* [Week 2](http://google.com)
-* [Week 3](http://google.com)
-* [Week 4](http://google.com)
+* [Backend](https://github.com/LaupWing/Project-Tech/wiki/Backend)
+* [Project Log](https://github.com/LaupWing/Project-Tech/wiki)
+* [Week 1](https://github.com/LaupWing/Project-Tech/wiki/Week-1)
+* [Week 2](https://github.com/LaupWing/Project-Tech/wiki/Week-2)
+* [Week 3](https://github.com/LaupWing/Project-Tech/wiki/Week-3)
+* [Week 4](https://github.com/LaupWing/Project-Tech/wiki/Week-4)
 
 ## Run this project on your own pc
 ```pc
