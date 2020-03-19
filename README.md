@@ -100,7 +100,7 @@ The application interface on this stage looks quite diffrent depending on what f
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
 #### Current Match or detail
-The user can switch between seeing who he/she is currently matching with or see the details of either a user or his/her chat.
+The user can switch between seeing who he/she is currently matching with or see the details of either a user or his/her chat. Info is basically the last thing the u user clicked on in the menu, either a chatroom or user detail.
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matching_info.gif?raw=true)
 
@@ -113,7 +113,9 @@ On the mobile version the user has te option to click on the bottom menu. The bo
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/menu_switches_mobile.gif?raw=true)
 
-When the user clicks on a chat with unread messages it will reset the total unread messages on the top. This also is for the matches and for the mobile version.
+When the user clicks on a chat with unread messages it will reset the total unread messages on the top and shows the updated unread or unopened. This also is for the matches.
+
+On the mobiel version the user can instantly see his or her unread messages or unopend matches on the bottom navigation and will only update if the user clicks on one of the unread chatrooms or unopend matches in the menu.
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/menu_open_unread.gif?raw=true)
 
