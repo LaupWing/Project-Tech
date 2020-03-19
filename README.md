@@ -48,7 +48,8 @@ visit localhost:3000 to see the website in action
 ```
 
 ## Visit the live link
-[Click here to visit the websites live link]()
+[Static prototype link](https://laupwing.github.io/Static-Dating-Site/)
+[Final version link](https://dating-app-manager.herokuapp.com/)
 
 ## My App
 My main job for this project is working on the signup and login page. But because I got more time and prior experience with building fullstack applications I added an matching page an also an chat page to this application.
@@ -97,6 +98,8 @@ The application interface on this stage looks quite diffrent depending on what f
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
+
+
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
@@ -105,7 +108,7 @@ The application interface on this stage looks quite diffrent depending on what f
 - [ ] Sending message doesnt gives unread and receiving images makes it read? (its reversed uno)
 - [ ] Make images smaller by resizing it
 - [ ] Update backend wiki
-- [ ] Dont update unread when chat is open
+- [x] Dont update unread when chat is open
 - [x] Add field for gender preference (server)
 - [x] Server can receive gender preference (server)
 - [ ] Connect Cloud Database
