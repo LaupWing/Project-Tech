@@ -130,13 +130,13 @@ Two parts in this application are realtime: Matching, and chat.
 
 **Matching:**
 
-When a user accepts a match and the other user didnt accept or seen this user yet, it will be pending. As soon as the other user accepts the both user will see that it was a match.
+When a user accepts a match and the other user didnt accept or seen this user yet, it will be pending. As soon as the other user accepts the match (that the other user has accepted) both user will see that a popup to let them know they got a match.
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/realtime_matching.gif?raw=true)
 
 **Chatting:**
 
-When one user sends message to a user it will updates the other users his/her chat and saves it in the database in te backend.
+When one user sends message to a user it will updates the other users his/her chat and saves it in the database in te backend. The right messages are from the sender and the left from the receiver. 
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/realtime_chatting.gif?raw=true)
 ## Todos
