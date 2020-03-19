@@ -99,6 +99,11 @@ The application interface on this stage looks quite diffrent depending on what f
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
+#### Current Match or detail
+The user can switch between seeing who he/she is currently matching with or see the details of either a user or his/her chat.
+
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matching_info.png?raw=true)
+
 #### Menu
 In the menu the user can find his/her matches and chats. By navigating through the top navigation the user can switch between matches and his/her messages.
 
@@ -111,6 +116,26 @@ On the mobile version the user has te option to click on the bottom menu. The bo
 When the user clicks on a chat with unread messages it will reset the total unread messages on the top. This also is for the matches and for the mobile version.
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/menu_open_unread.gif?raw=true)
+
+#### Matching
+The application searches for a match according to your preferences (The other user also has to have the preference for you). When the user has decided to accept the match or deny it, the next match will be send to the user.
+
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matches.gif?raw=true)
+
+#### Realtime
+Two parts in this application are realtime: Matching, and chat.
+
+**Matching:**
+
+When a user accepts a match and the other user didnt accept or seen this user yet, it will be pending. As soon as the other user accepts the both user will see that it was a match.
+
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/realtime_matching.gif?raw=true)
+
+**Chatting:**
+
+When one user sends message to a user it will updates the other users his/her chat and saves it in the database in te backend.
+
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/realtime_chatting.gif?raw=true)
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
