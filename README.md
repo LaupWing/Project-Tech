@@ -102,7 +102,7 @@ The application interface on this stage looks quite diffrent depending on what f
 #### Current Match or detail
 The user can switch between seeing who he/she is currently matching with or see the details of either a user or his/her chat.
 
-![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matching_info.png?raw=true)
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matching_info.gif?raw=true)
 
 #### Menu
 In the menu the user can find his/her matches and chats. By navigating through the top navigation the user can switch between matches and his/her messages.
