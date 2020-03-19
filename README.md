@@ -49,6 +49,7 @@ visit localhost:3000 to see the website in action
 
 ## Visit the live link
 [Static prototype link](https://laupwing.github.io/Static-Dating-Site/)
+
 [Final version link](https://dating-app-manager.herokuapp.com/)
 
 ## My App
