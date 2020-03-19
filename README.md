@@ -99,8 +99,10 @@ The application interface on this stage looks quite diffrent depending on what f
 
 ![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/header.png?raw=true)
 
+#### Menu
+In the menu the user can find his/her matches and chats. By navigating through the top navigation the user can switch between matches and his/her messages.
 
-
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/menu_switches.gif?raw=true)
 ## Todos
 - [x] When user accept or denied it needs to be updated for every user at that moment in the socket(realtime update)
 - [x] Dont rerender whole list when one thing changes
