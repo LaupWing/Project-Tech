@@ -120,7 +120,7 @@ When the user clicks on a chat with unread messages it will reset the total unre
 #### Matching
 The application searches for a match according to your preferences (The other user also has to have the preference for you). When the user has decided to accept the match or deny it, the next match will be send to the user.
 
-![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matches.gif?raw=true)
+![header](https://github.com/LaupWing/Project-Tech/blob/master/READMEImages/matching.gif?raw=true)
 
 #### Realtime
 Two parts in this application are realtime: Matching, and chat.
