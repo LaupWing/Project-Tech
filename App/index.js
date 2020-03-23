@@ -28,9 +28,9 @@ app
     .use(bodyParser.json({limit: '50mb'}))
     .use('/static',express.static(path.join(__dirname, 'public')))
     .set('socketio', io)
-    .use(appRoutes)
-    .use(authRoutes)
     .set('view engine', 'pug')
     .set('views', path.join(__dirname,'view'))
+    .use(appRoutes)
+    .use(authRoutes)
 
 server.listen(port, ()=>console.log(`Server is listening to port ${port}`))
